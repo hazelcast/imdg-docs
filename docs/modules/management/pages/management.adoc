@@ -1,0 +1,27 @@
+= Management
+
+This chapter provides information on managing and monitoring your Hazelcast cluster.
+It gives detailed instructions related to gathering statistics, monitoring via JMX protocol and
+managing the cluster with useful utilities.
+
+include::member-statistics.adoc[leveloffset=+1]
+
+include::jmx-api.adoc[leveloffset=+1]
+
+include::jmx-monitoring.adoc[leveloffset=+1]
+
+include::rest-endpoint-groups.adoc[leveloffset=+1]
+
+include::cluster-utilities.adoc[leveloffset=+1]
+
+include::metrics.adoc[leveloffset=+1]
+
+include::diagnostics.adoc[leveloffset=+1]
+
+include::health-check-monitoring.adoc[leveloffset=+1]
+
+include::management-center.adoc[leveloffset=+1]
+
+include::license-info.adoc[leveloffset=+1]
+
+include::instance-tracking.adoc[leveloffset=+1]

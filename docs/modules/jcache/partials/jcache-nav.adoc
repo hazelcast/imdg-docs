@@ -1,0 +1,1 @@
+* xref:jcache:jcache.adoc[Hazelcast JCache]
