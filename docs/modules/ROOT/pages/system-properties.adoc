@@ -70,7 +70,7 @@ The larger the sync window value, the less frequent an asynchronous backup is co
 If a member cannot find any connection to a client in the cluster,
 it cleans up the local resources that are owned by that client.
 
-| `hazelcast.client.max.no.heartbeat.seconds`
+|[[client-max-no]] `hazelcast.client.max.no.heartbeat.seconds`
 |300
 |int
 |Time after which the member assumes the client is dead and closes its connections to the client.
@@ -265,7 +265,7 @@ ignore these conflicts.
 |`hazelcast.enterprise.license.key`
 | null
 | string
-| https://hazelcast.com/products/[Hazelcast IMDG Enterprise^] license key.
+| link:https://hazelcast.com/products/[Hazelcast IMDG Enterprise^] license key.
 
 |`hazelcast.event.queue.capacity`
 | 1000000
@@ -297,6 +297,12 @@ of the outbound write queue of the connection.
 | 600
 | int
 | Maximum wait in seconds during graceful shutdown.
+
+|`hazelcast.hd.global.index.enabled`
+|true
+|bool
+|Specifies whether the global concurrent High-Density Memory Store
+indexes are enabled or not.
 
 |`hazelcast.health.monitoring.delay.seconds`
 |30
@@ -343,6 +349,14 @@ If the free memory checker is disabled (false), acts as if the check is succeede
 |15
 |long
 |Percentage of the free memory space that is required by a hot restart.
+
+|`hazelcast.ignoreXxeProtectionFailures`
+|false
+|bool
+|If enabled and a problem occurs during enabling XML External Entity (XXE) protection, then the problem is ignored and only a warning message is logged.
+
+This property should only be used as a last resort.
+Hazelcast uses the XXE protection by setting respective XML processor properties. These properties are supported in modern XML processors (e.g. the default one available in Java). An old processor on the classpath (e.g. Xerces, Xalan) may miss the support and  throw an exception during enabling the XXE protection. Setting this system property to `true` allows ignoring such Exceptions.
 
 |`hazelcast.index.copy.behavior`
 |COPY_ON_READ
@@ -495,6 +509,13 @@ mutation. Typically it is fine to evict at most a single entry.
 However, when you insert values in a
 loop, each iteration doubles the entry size. In this
 situation more than just a single entry should be evicted.
+
+|`hazelcast.map.eviction.sample.count`
+|15
+|int
+| Count of the IMap entries in the entry set formed by
+random samplings from which Hazelcast chooses to remove the optimal entry
+during an IMap eviction.
 
 |`hazelcast.map.invalidation.batchfrequency.seconds`
 | 10
@@ -671,9 +692,10 @@ if it does not receive backup acks in time with respect to backup configuration 
 its data structure, or the member which owns primary replica of the target partition leaves the cluster.
 
 |`hazelcast.operation.generic.thread.count`
-| -1
+| 2
 | int
-| Number of generic operation handler threads. `-1` means CPU core count / 2.
+| Number of generic operation handler threads for each Hazelcast member.
+Its default value is the maximum of `2` and `processor count / 2`.
 
 |`hazelcast.operation.priority.generic.thread.count`
 | 1
@@ -706,9 +728,10 @@ However, keep in mind that this increases the CPU utilization.
 We recommend you to use backoff with care and if you have a tool for measuring your cluster's performance.
 
 |`hazelcast.operation.thread.count`
-| -1
+| 2
 | int
-| Number of partition based operation handler threads. `-1` means CPU core count.
+| Number of partition based operation handler threads for each Hazelcast member.
+Its default value is the maximum of `2` and count of available processors.
 
 |`hazelcast.partial.member.disconnection.resolution.algorithm.timeout.seconds`
 |5
@@ -736,12 +759,22 @@ of these rounds.
 | int
 | Total partition count.
 
+|`hazelcast.partition.max.parallel.migrations`
+|10
+|int
+|Maximum number of partition migrations to be executed concurrently on a member.
+Member can be either source or target of the migration. Having too much parallelization
+can increase the heap memory usage and overload the network during a partition rebalance.
+Having less parallelization can increase the total migration completion time.
+The default value, `10`, is fine for most of the setups.
+
 |`hazelcast.partition.max.parallel.replications`
-|5
+|10
 |int
 |Maximum number of parallel partition backup replication operations per member.
 When a partition backup ownership changes or a backup inconsistency is detected, the members start to sync their backup partitions.
 This parameter limits the maximum running replication operations in parallel.
+The default value, which is the value of `hazelcast.partition.max.parallel.migrations`, is fine for most of the setups.
 
 |`hazelcast.partition.migration.fragments.enabled`
 | true
@@ -801,7 +834,7 @@ query operations on maps.
 |Type of the query optimizer. For optimizations based on static rules, set the value to `RULES`.
 To disable the optimization, set the value to `NONE`.
 
-| `hazelcast.query.predicate.parallel.evaluation`
+|[[parallel-predicates]] `hazelcast.query.predicate.parallel.evaluation`
 |false
 |bool
 |Each Hazelcast member evaluates query predicates using a single thread by default.
@@ -878,7 +911,7 @@ These operations log a warning and are shown in the Management Center with detai
 | Specifies whether the byte buffers used in the socket should be a direct byte buffer (`true`) or a regular one (`false`).
 When it is set to `true`, Hazelcast internally uses the method `ByteBuffer.allocateDirect` (instead of `ByteBuffer.allocate`) which makes use of
 the off-heap and may skip the memory copying when performing socket I/O operations.
-See https://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html[here^] for more information.
+See link:https://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html[here^] for more information.
 
 |`hazelcast.socket.client.bind`
 |true

@@ -1,0 +1,10 @@
+= How Distributed SQL Works
+
+When an SQL statement is submitted for execution, the SQL service parses and
+optimizes it using Apache Calcite. The result is an executable plan that
+is cached and reused by subsequent executions of the same statement.
+
+The plan contains a tree of query fragments. A query fragment is a tree of
+operators that could be executed on a single member independently. Child
+fragments supply data to parent fragments, possibly over a network, until
+the root fragment is reached. The root fragment returns the query results.

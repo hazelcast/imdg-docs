@@ -1,0 +1,54 @@
+= Distributed Data Structures
+[[distributed-data-structures]]
+
+As mentioned in the <<hazelcast-overview, Overview section>>, Hazelcast offers
+distributed implementations of many common data structures. For each of the client
+languages, Hazelcast mimics as closely as possible the natural interface of the
+structure. So, for example in Java, the map follows `java.util.Map` semantics.
+In the descriptions below, we mention each structure's Java equivalent interface.  All of
+these structures are usable from Java, .NET, C++, Node.js, Python, and Go.
+
+* **Standard utility collections**
+** <<map, Map>> is the distributed implementation of `java.util.Map`.
+It lets you read from and write to a Hazelcast map with methods such as
+`get` and `put`.
+** <<queue, Queue>> is the distributed implementation of `java.util.concurrent.BlockingQueue`.
+You can add an item in one member and remove it from another one.
+** <<ringbuffer, Ringbuffer>> is implemented for reliable eventing system.
+** <<set, Set>> is the distributed and concurrent implementation of `java.util.Set`.
+It does not allow duplicate elements and does not preserve their order.
+** <<list, List>> is similar to Hazelcast Set. The only difference is that it allows
+duplicate elements and preserves their order.
+** <<multimap, Multimap>> is a specialized Hazelcast map. It is a distributed data
+structure where you can store multiple values for a single key.
+** <<replicated-map, Replicated Map>> does not partition data. It does not spread
+data to different cluster members. Instead, it replicates the data to all members.
+** <<cardinality-estimator, Cardinality Estimator>> is a data structure which implements
+Flajolet's HyperLogLog algorithm.
+* **Topic** is the distributed mechanism for publishing messages that are delivered to
+multiple subscribers. It is also known as the publish/subscribe (pub/sub) messaging model.
+See the <<topic, Topic section>> for more information. Hazelcast also has a structure called
+Reliable Topic which uses the same interface of Hazelcast Topic. The difference is that it is
+backed up by the Ringbuffer data structure. See the <<reliable-topic, Reliable Topic section>>.
+* **Concurrency utilities**
+** <<lock, FencedLock>> is the distributed implementation of `java.util.concurrent.locks.Lock`.
+When you use lock, the critical section that Hazelcast Lock guards is guaranteed to be
+executed by only one thread in the entire cluster.
+** <<isemaphore, ISemaphore>> is the distributed implementation of `java.util.concurrent.Semaphore`.
+When performing concurrent activities, semaphores offer permits to control the thread counts.
+** <<iatomiclong, IAtomicLong>> is the distributed implementation of
+`java.util.concurrent.atomic.AtomicLong`. Most of AtomicLong's operations are available.
+However, these operations involve remote calls and hence their performances differ from
+AtomicLong, due to being distributed.
+** <<iatomicreference, IAtomicReference>> is the distributed implementation of
+`java.util.concurrent.atomic.AtomicReference`. When you need to deal with a reference
+in a distributed environment, you can use Hazelcast IAtomicReference.
+** <<flakeidgenerator, FlakeIdGenerator>> is used to generate cluster-wide unique identifiers.
+** <<icountdownlatch, ICountdownLatch>> is the distributed implementation of
+`java.util.concurrent.CountDownLatch`. Hazelcast CountDownLatch is a gate keeper for
+concurrent activities. It enables the threads to wait for other threads to complete
+their operations.
+** <<pn-counter, PN counter>> is a distributed data structure where each Hazelcast instance
+can increment and decrement the counter value and these updates are propagated to all replicas.
+* <<event-journal, Event Journal>> is a distributed data structure that stores the history
+of mutation actions on map or cache.

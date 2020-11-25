@@ -1,4 +1,4 @@
-= Quick Start
+= Quickstart
 [[getting-started]]
 
 This chapter intends to get you started in 5 minutes. The quick start shows how to

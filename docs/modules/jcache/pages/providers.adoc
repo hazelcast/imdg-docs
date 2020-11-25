@@ -14,6 +14,7 @@ or the Member Provider (used by cluster members).
 For more information on cluster topologies and Hazelcast
 clients, see the <<hazelcast-topology, Hazelcast Topology section>>.
 
+[[configuring-jcache-provider]]
 == Configuring JCache Provider
 
 Hazelcast provides three `CachingProvider` implementations:

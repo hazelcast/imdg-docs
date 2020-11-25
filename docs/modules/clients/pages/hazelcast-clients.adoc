@@ -1,0 +1,22 @@
+= Hazelcast Clients
+
+This chapter provides information about Hazelcast's client and language implementations,
+which are listed below:
+
+* <<java-client, Java>>
+* <<c-client, C++>>
+* <<net-client, .NET>>
+* <<memcache-client, Memcache>>
+* <<rest-client, REST>>
+* <<node-js-client, Node.js>>
+* <<go-client, Go>>
+* <<python-client, Python>>
+
+**Feature Comparison for Hazelcast Clients:**
+
+See the https://hazelcast.org/clients-languages/[feature comparison matrix^]
+to learn about the features implemented across the clients and language APIs.
+
+**Code Samples:**
+
+In the following client sections, you will find links to each client's code samples.

@@ -1,0 +1,5 @@
+* xref:events:distributed-events.adoc[]
+** xref:events:cluster-events.adoc[]
+** xref:events:object-events.adoc[]
+** xref:events:event-listeners-for-clients.adoc[]
+** xref:events:global-event-configuration.adoc[]

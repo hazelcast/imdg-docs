@@ -124,7 +124,7 @@ enter `help` to see all available commands and their descriptions.
 
 == JCache Base Classes
 
-In the <<example-jcache-application, Example JCache Application section>>,
+In the xref:setup.adoc#example-jcache-application[Example JCache Application section],
 we have already seen a couple of the base classes and explained how
 those work. The following are quick descriptions of them:
 
@@ -138,8 +138,7 @@ implementation, such as Hazelcast JCache.
 
 The SPI that is implemented to bridge between the JCache API and
 the implementation itself. Hazelcast members and clients use different
-providers chosen as seen in the <<configuring-jcache-provider,
-Configuring JCache Provider section>> which enable the JCache API to
+providers chosen as seen in the xref:providers.adoc#configuring-jcache-provider[Configuring JCache Provider section] which enable the JCache API to
 interact with Hazelcast clusters.
 
 When a `javax.cache.spi.CachingProvider.getCacheManager()` overload
@@ -171,10 +170,8 @@ Hazelcast itself offers a special implementation
 (`com.hazelcast.config.CacheConfig`) of the `Configuration` interface
 which offers more options on the specific Hazelcast properties
 that can be set to configure features like synchronous and asynchronous
-backups counts or selecting the underlying <<setting-in-memory-format,
-in-memory format>> of the cache. For more information on this
-configuration class, see the reference in the <<jcache-programmatic-configuration,
-JCache Programmatic Configuration section>>.
+backups counts or selecting the underlying xref:ROOT:dds.adoc#setting-in-memory-format[in-memory format] of the cache. For more information on this
+configuration class, see the reference in the xref:setup.adoc#jcache-programmatic-configuration[JCache Programmatic Configuration section].
 
 **`javax.cache.Cache`**:
 
@@ -308,7 +305,7 @@ By default, Hazelcast JCache sends the complete changed value
 to the backup partition. Again, this can cause a lot of traffic if
 the object is big. The Hazelcast ICache extension can also prevent this.
 Further information is available at
-<<implementing-backupawareentryprocessor, Implementing BackupAwareEntryProcessor>>.
+xref:jcache:icache.adoc#implementing-backupawareentryprocessor[Implementing BackupAwareEntryProcessor].
 
 An arbitrary number of arguments can be passed to the
 `Cache.invoke()` and `Cache.invokeAll()` methods. All of those

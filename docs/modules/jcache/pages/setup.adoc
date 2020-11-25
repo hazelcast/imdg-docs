@@ -93,6 +93,7 @@ Hazelcast community website (link:https://hazelcast.org/[hazelcast.org^])
 or from the Maven repository search page
 (link:http://search.maven.org[maven.org^]).
 
+[[example-jcache-application]]
 == Example JCache Application
 
 Before moving on to configuration, let's have a look at a

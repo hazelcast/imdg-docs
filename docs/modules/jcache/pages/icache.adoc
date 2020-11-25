@@ -463,13 +463,11 @@ ICache<Object, Object> unwrappedCache = cache.unwrap( ICache.class );
 
 After unwrapping the `Cache` instance into an `ICache` instance, you have
 access to all of the following operations, e.g.,
-<<icache-async-methods, ICache Async Methods>> and <<icache-convenience-methods,
-ICache Convenience Methods>>.
+<<icache-async-methods, ICache Async Methods>> and <<icache-convenience-methods, ICache Convenience Methods>>.
 
 == ICache Configuration
 
-As mentioned in the <<jcache-declarative-configuration, JCache Declarative
-Configuration section>>, the Hazelcast ICache extension offers
+As mentioned in the xref:setup.adoc#jcache-declarative-configuration[JCache Declarative Configuration section], the Hazelcast ICache extension offers
 additional configuration properties over the default JCache configuration.
 These additional properties include internal storage format, backup counts,
 eviction policy and split-brain protection reference.
@@ -531,7 +529,7 @@ The mutating operation is blocked. Its default value is 1.
 backups are executed asynchronously so the mutating operation
 is not blocked and it is done immediately. Its default value is 0.
 * `in-memory-format`: Internal storage format. For more information,
-see the <<setting-in-memory-format, in-memory format section>>.
+see the xref:ROOT:dds.adoc#setting-in-memory-format[in-memory format section].
 Its default value is `BINARY`.
 * `eviction`: Defines the used eviction strategies and sizes for
 the cache. For more information on eviction, see the
@@ -562,8 +560,7 @@ matching eviction candidate. Its default value is `LRU`.
 *** `LFU`: Less Frequently Used - finds the best eviction candidate based
 on the number of hits.
 * `partition-lost-listeners` : Defines listeners for dispatching partition lost events
-for the cache. For more information, see the <<icache-partition-lost-listener,
-ICache Partition Lost Listener section>>.
+for the cache. For more information, see the <<icache-partition-lost-listener, ICache Partition Lost Listener section>>.
 * `split-brain-protection-ref` : Name of the split-brain protection configuration that you want this cache to use.
 * `disable-per-entry-invalidation-events` : Disables invalidation events for
 each entry; but full-flush invalidation events are still enabled. Full-flush
@@ -640,8 +637,7 @@ The JCache specification has an option to configure a single `ExpiryPolicy`
 per cache. Hazelcast ICache extension
 offers the possibility to define a custom `ExpiryPolicy` per key by providing
 a set of method overloads with an `expirePolicy`
-parameter, as in the list of asynchronous methods in the <<icache-async-methods,
-Async Methods section>>. This means that you can pass custom expiry policies to
+parameter, as in the list of asynchronous methods in the <<icache-async-methods, Async Methods section>>. This means that you can pass custom expiry policies to
 a cache operation.
 
 Here is how an `ExpiryPolicy` is set on JCache configuration:
@@ -689,8 +685,7 @@ by `com.hazelcast.cache.ICache` featuring the `ExpiryPolicy` parameter:
 * `getAndReplace(key, value)`:
 ** `getAndReplace(key, value, expirePolicy)`
 
-Asynchronous method overloads are not listed here. See the <<icache-async-methods,
-ICache Async Methods section>> for the list of asynchronous method overloads.
+Asynchronous method overloads are not listed here. See the <<icache-async-methods, ICache Async Methods section>> for the list of asynchronous method overloads.
 
 ICache also offers `setExpiryPolicy(key, expirePolicy)` method to associate certain
 keys with custom expiry policies.
@@ -732,8 +727,7 @@ generators to cache the latest requested data.
 
 Hazelcast JCache eviction supports both types of caches using a slightly
 different approach based on the configured maximum size
-of the cache. For detailed information, see the <<eviction-algorithm,
-Eviction Algorithm section>>.
+of the cache. For detailed information, see the <<eviction-algorithm, Eviction Algorithm section>>.
 
 ==== Configuring Eviction Policies
 
@@ -745,8 +739,7 @@ as `Less Recently Used` and LFU known as `Least Frequently Used` is implemented 
 <<eviction-algorithm, Eviction Algorithm section>>.
 
 Eviction Policies are configured by providing the corresponding abbreviation
-to the configuration as shown in the <<icache-configuration, ICache Configuration
-section>>. As already mentioned, two built-in policies are available:
+to the configuration as shown in the <<icache-configuration, ICache Configuration section>>. As already mentioned, two built-in policies are available:
 
 To configure the use of the LRU (Less Recently Used) policy:
 

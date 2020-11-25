@@ -57,19 +57,3 @@ identifier can then be used to control the behavior of a WAN replication publish
 running. For instance, you can use this identifier in combination with the WAN replication scheme name to pause, stop or
 resume WAN replication for that specific publisher. Or, you can trigger synchronization with a specific target cluster
 and so on.
-
-include::modes.adoc[leveloffset=+1]
-
-include::quick-start.adoc[leveloffset=+1]
-
-include::defining-wan-replication.adoc[leveloffset=+1]
-
-include::configuring-for-map-and-cache.adoc[leveloffset=+1]
-
-include::advanced-features.adoc[leveloffset=+1]
-
-include::tuning.adoc[leveloffset=+1]
-
-include::failures.adoc[leveloffset=+1]
-
-include::rest-api.adoc[leveloffset=+1]

@@ -1,10 +1,10 @@
 name: hazelcast
 title: Hazelcast IMDG
 version: 4.1
-start_page: ROOT:preface.adoc
 asciidoc:
   attributes:
     docBaseUrl: https://docs.hazelcast.org/docs/4.1
     javasource: ROOT:example$
+    page-toclevels: 1
 nav:
 - modules/ROOT/nav.adoc
