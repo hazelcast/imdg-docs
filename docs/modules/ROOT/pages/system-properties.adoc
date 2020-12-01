@@ -130,7 +130,7 @@ Default count is the number of cores multiplied by 20.
 |Output directory of the diagnostic log files.
 
 NOTE: For detailed information on the diagnostic tool,
-along with this and the following diagnostic related system properties, see the <<diagnostics, Diagnostics section>>.
+along with this and the following diagnostic related system properties, see the xref:management:diagnostics.adoc[Diagnostics section].
 
 |`hazelcast.concurrent.window.ms`
 |100
@@ -245,7 +245,7 @@ will try write through and other optimizations even though the system is concurr
 |false
 |bool
 |Enables/disables the Discovery SPI lookup over the old native implementations.
-See <<discovery-spi>> for more information.
+See xref:extending-hazelcast:discovery-spi.adoc[] for more information.
 
 |`hazelcast.discovery.public.ip.enabled`
 | false
@@ -253,7 +253,7 @@ See <<discovery-spi>> for more information.
 | Enable use of public IP address in member discovery with Discovery SPI.
 If you set this property to true in your source cluster, please make sure you have set the public addresses for your
 target members since they will be discovered using their public addresses. Otherwise, they cannot be discovered.
-See the <<public-address, Public Address section>>.
+See the xref:clusters:network-configuration.adoc#public-address[Public Address section].
 
 |`hazelcast.dynamicconfig.ignore.conflicts`
 |
@@ -309,7 +309,7 @@ indexes are enabled or not.
 |int
 |Health monitoring logging interval in seconds. NOTE: For detailed information on
 the health monitoring tool, along with this and the following health monitoring related system properties,
-see the <<health-check-and-monitoring, Health Check and Monitoring section>>.
+see the xref:management:health-check-monitoring.adoc[Health Check and Monitoring section].
 
 |`hazelcast.health.monitoring.level`
 |SILENT
@@ -331,7 +331,7 @@ When *NOISY*, logs are always printed periodically. Set *OFF* to turn off comple
 |`deadline`
 |string
 |Type of the heartbeat failure detector. See the
-<<failure-detector-configuration, Failure Detector Configuration section>>.
+xref:clusters:failure-detector-configuration.adoc[Failure Detector Configuration section].
 
 |`hazelcast.heartbeat.interval.seconds`
 | 5
@@ -362,7 +362,7 @@ Hazelcast uses the XXE protection by setting respective XML processor properties
 |COPY_ON_READ
 | string
 | Defines the behavior for index copying on index read/write.
-See the <<copying-indexes, Copying Indexes section>>.
+See the xref:query:how-distributed-query-works.adoc#copying-indexes[Copying Indexes section].
 
 |`hazelcast.init.cluster.version`
 |
@@ -456,7 +456,7 @@ conditions are right. This can reduce the latency and increase the performance f
 |`hazelcast.jmx`
 | false
 | bool
-| Enable <<monitoring-with-jmx, JMX>> agent.
+| Enable xref:management:jmx-monitoring.adoc[JMX] agent.
 
 |`hazelcast.local.localAddress`
 |
@@ -484,12 +484,12 @@ all log messages.
 |`hazelcast.logging.type`
 | jdk
 | enum
-| Name of <<logging-configuration, logging>> framework type to send logging events.
+| Name of xref:clusters:logging-configuration.adoc[logging] framework type to send logging events.
 
 |`hazelcast.map.entry.filtering.natural.event.types`
 | false
 | bool
-| Notify <<listening-to-map-entries-with-predicates, entry listeners with predicates>> on map entry updates with
+| Notify xref:data-structures:map.adoc#listening-to-map-entries-with-predicates[entry listeners with predicates] on map entry updates with
 events that match entry, update or exit from predicate value space.
 
 |`hazelcast.map.expiry.delay.seconds`
@@ -549,7 +549,7 @@ the maximum size of a key batch for which values are loaded in a single partitio
 |Maximum write-behind queue capacity per member. It is the total of all write-behind queue sizes in a member including backups.
 Its maximum value is `Integer.MAX_VALUE`.
 The value of this property is taken into account only if the `write-coalescing` element of the
-Map Store configuration is `false`. See <<setting-write-behind-persistence, here>> for the description of the `write-coalescing` element.
+Map Store configuration is `false`. See xref:data-structures:map.adoc#setting-write-behind-persistence[here] for the description of the `write-coalescing` element.
 
 |`hazelcast.max.join.merge.target.seconds`
 |20
@@ -610,18 +610,18 @@ of a static prefix, number and cluster name is provided.
 |`hazelcast.merge.first.run.delay.seconds`
 | 300
 | int
-| Initial run delay of <<split-brain-syndrome, split-brain/merge process>> in seconds.
+| Initial run delay of xref:network-partitioning:network-partitioning.adoc#split-brain-syndrome[split-brain/merge process] in seconds.
 
 |`hazelcast.merge.next.run.delay.seconds`
 | 120
 | int
-| Run interval of <<split-brain-syndrome, split-brain/merge process>> in seconds.
+| Run interval of xref:network-partitioning:network-partitioning.adoc#split-brain-syndrome[split-brain/merge process] in seconds.
 
 |`hazelcast.metrics.collection.frequency`
 | 5
 | int
-| Frequency, in seconds, of the <<metrics, metrics>> collection cycle. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Frequency, in seconds, of the xref:management:metrics.adoc[metrics] collection cycle. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.metrics.datastructures.enabled`
 |true
@@ -638,33 +638,33 @@ since currently only this feature consumes the debug metrics.
 |`hazelcast.metrics.enabled`
 | true
 | bool
-| Enables the <<metrics, metrics collection>> if set to `true`, disables it otherwise. Note that the preferred way for
-controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Enables the xref:management:metrics.adoc[metrics collection] if set to `true`, disables it otherwise. Note that the preferred way for
+controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.metrics.mc.enabled`
 | true
 | bool
-| Enables buffering the collected <<metrics, metrics>> for Management Center if set to `true`, disables it otherwise. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Enables buffering the collected xref:management:metrics.adoc[metrics] for Management Center if set to `true`, disables it otherwise. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.metrics.mc.retention`
 | 5
 | int
-| Duration, in seconds, that the <<metrics, metrics>> are retained for Management Center. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Duration, in seconds, that the xref:management:metrics.adoc[metrics] are retained for Management Center. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.metrics.jmx.enabled`
 | true
 | bool
-| Enables exposing the collected <<metrics, metrics>> over JMX if set to `true`, disables it otherwise. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Enables exposing the collected xref:management:metrics.adoc[metrics] over JMX if set to `true`, disables it otherwise. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.network.stats.refresh.interval.seconds`
 |3
 |int
 | Interval, in seconds, at which the network statistics (bytes sent and received)
 are re-calculated and published. It is valid only when
-<<advanced-network-configuration, advanced networking>> is used.
+xref:clusters:advanced-network-configuration.adoc[advanced networking] is used.
 
 |`hazelcast.nio.tcp.spoofing.checks`
 | false
@@ -874,7 +874,7 @@ It's not recommended to rely on the shutdown hook, this is a last-effort measure
 |`hazelcast.slow.operation.detector.enabled`
 |true
 |bool
-|Enables/disables the <<slowoperationdetector, SlowOperationDetector>>.
+|Enables/disables the xref:performance:slowoperationdetector.adoc[SlowOperationDetector].
 
 |`hazelcast.slow.operation.detector.log.purge.interval.seconds`
 |300

@@ -147,7 +147,7 @@ From now on, this Hazelcast example will use `FooXmlSerializer`
 to serialize Foo objects. In this way, you can write an adapter (StreamSerializer) for any
 Serialization framework and plug it into Hazelcast.
 
-NOTE: See the <<serialization-configuration-wrap-up, Serialization Configuration Wrap-Up section>>
+NOTE: See the xref:serialization-configuration.adoc[Serialization Configuration Wrap-Up section]
 for a full description of Hazelcast Serialization configuration elements.
 
 == Implementing ByteArraySerializer
@@ -198,5 +198,5 @@ hazelcast:
 ----
 ====
 
-NOTE: See the <<serialization-configuration-wrap-up, Serialization Configuration Wrap-Up section>>
+NOTE: See the xref:serialization-configuration.adoc[Serialization Configuration Wrap-Up section]
 for a full description of Hazelcast Serialization configuration elements.

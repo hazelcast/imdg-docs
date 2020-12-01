@@ -160,9 +160,9 @@ Continuous query caches have the following configuration elements:
 value is true.
 * `predicate`: Predicate to filter events which are applied to the query cache.
 * `entry-listeners`: Adds listeners (listener classes) for your query cache entries.
-See the xref:distributed-events.adoc#registering-map-listeners[Registering Map Listeners section].
+See the xref:events:distributed-events.adoc#registering-map-listeners[Registering Map Listeners section].
 * `in-memory-format`: Type of the data to be stored in your query cache.
-See the xref:dds.adoc#setting-in-memory-format[in-memory format section].
+See the xref:data-structures:distributed-data-structures.adoc#setting-in-memory-format[in-memory format section].
 Its default value is BINARY.
 * `populate`: Specifies whether the initial population of your query cache is
 enabled. Its default value is true.
@@ -175,9 +175,9 @@ batch to your query cache. Its default value is 1.
 * `buffer-size`: Maximum number of events which can be stored in a partition
 buffer. Its default value is 16.
 * `eviction`: Configuration for the eviction of your query cache. See the
-xref:dds.adoc#configuring-map-eviction[Configuring Map Eviction section].
+xref:data-structures:distributed-data-structures.adoc#configuring-map-eviction[Configuring Map Eviction section].
 * `indexes`: Indexes for your query cache defined by using this element's `<index>`
-sub-elements. See the <<configuring-imap-indexes, Configuring IMap Indexes section>>.
+sub-elements. See the xref:how-distributed-query-works.adoc#configuring-imap-indexes[Configuring IMap Indexes section].
 
 Please take the following configuration considerations and publishing logic into account:
 

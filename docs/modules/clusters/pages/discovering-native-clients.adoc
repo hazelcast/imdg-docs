@@ -2,7 +2,7 @@
 [[discovering-native-clients]]
 
 Hazelcast members and native Java clients can find each other with multicast
-discovery plugin. This plugin is implemented using <<discovery-spi, Hazelcast Discovery SPI>>.
+discovery plugin. This plugin is implemented using xref:extending-hazelcast:discovery-spi.adoc[Hazelcast Discovery SPI].
 You should configure the plugin both at Hazelcast members and Java clients in order to
 use multicast discovery.
 

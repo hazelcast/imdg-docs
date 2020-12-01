@@ -529,7 +529,7 @@ The mutating operation is blocked. Its default value is 1.
 backups are executed asynchronously so the mutating operation
 is not blocked and it is done immediately. Its default value is 0.
 * `in-memory-format`: Internal storage format. For more information,
-see the xref:ROOT:dds.adoc#setting-in-memory-format[in-memory format section].
+see the xref:data-structures:distributed-data-structures.adoc#setting-in-memory-format[in-memory format section].
 Its default value is `BINARY`.
 * `eviction`: Defines the used eviction strategies and sizes for
 the cache. For more information on eviction, see the
@@ -1054,8 +1054,7 @@ RequiresEviction[Boolean] := CurrentPartitionSize >= MaxPartitionSize
 === JCache Near Cache
 
 The Hazelcast JCache implementation supports a local Near Cache for remotely
-stored entries to increase the performance of local read operations. See the <<near-cache,
-Near Cache section>> for a detailed explanation of the Near Cache feature and its configuration.
+stored entries to increase the performance of local read operations. See the xref:performance:near-cache.adoc[Near Cache section] for a detailed explanation of the Near Cache feature and its configuration.
 
 NOTE: Near Cache for JCache is only available for clients, NOT members.
 
@@ -1189,8 +1188,7 @@ a `CachePartitionLostEvent` is not fired for this cache since
 backups for the partitions
 owned by the crashed member are kept on other members.
 
-See the <<listening-for-partition-lost-events,
-Partition Lost Listener section>> for more
+See the xref:events:cluster-events.adoc#listening-for-partition-lost-events[Partition Lost Listener section] for more
 information about partition lost detection and partition lost events.
 
 

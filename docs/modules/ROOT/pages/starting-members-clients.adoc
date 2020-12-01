@@ -43,8 +43,8 @@ per directory. To start a new instance, please unzip Hazelcast ZIP or TAR.GZ
 package in a new directory.
 
 NOTE: You can also use the start scripts to deploy your own library to a
-Hazelcast member. See the <<adding-user-library-to-classpath, Adding User
-Library to CLASSPATH section>>.
+Hazelcast member. See the xref:clusters:deploying-code-from-clients.adoc#adding-user-library-to-classpath[Adding User
+Library to CLASSPATH section].
 
 **Clients:**
 
@@ -118,14 +118,14 @@ and WAN replications. See the https://docs.hazelcast.org/docs/management-center/
 By default, Hazelcast uses multicast to discover other members that can form a cluster.  If you are
 working with other Hazelcast developers on the same network, you may find yourself joining their
 clusters under the default settings.  Hazelcast provides a way to segregate clusters within the same
-network when using multicast. See the <<creating-cluster, Creating Clusters section>>
+network when using multicast. See the xref:clusters:creating-clusters.adoc[Creating Clusters section]
 for more information.  Alternatively, if you do not wish to use the default multicast mechanism,
 you can provide a fixed list of IP addresses that are allowed to join. See
-the <<join, Join configuration section>> for more information.
+the xref:clusters:network-configuration.adoc#join[Join configuration section] for more information.
 
 NOTE: Multicast mechanism is not recommended for production since UDP
 is often blocked in production environments and other discovery mechanisms
-are more definite. See the <<discovery-mechanisms, Discovery Mechanisms section>>.
+are more definite. See the xref:clusters:discovery-mechanisms.adoc[Discovery Mechanisms section].
 
 NOTE: You can also check the video tutorials https://hazelcast.org/getting-started-with-hazelcast[here^].
 

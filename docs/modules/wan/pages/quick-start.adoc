@@ -2,7 +2,7 @@
 
 This section provides information on how you can
 start using WAN Replication with a minimal setup for both
-<<active-passive, Active-Passive>> and <<active-active, Active-Active>> modes.
+xref:modes.adoc#active-passive[Active-Passive] and xref:modes.adoc#active-active[Active-Active] modes.
 
 == Setting Up an Active-Passive Mode
 
@@ -49,7 +49,7 @@ include::{javasource}/wan/MinimalActivePassiveConfiguration.java[tag=wrc]
 Basically, what we did here is defining a WAN Replication configuration (`wan-replication`)
 and configuring our map to use it (`wan-replication-ref`). As mentioned, this is the minimal
 configuration example, which is fine for most use cases. There are more configuration options for
-tuning the WAN Replication; see the <<tuning-wr, Tuning WAN Replication section>>.
+tuning the WAN Replication; see the xref:tuning.adoc[Tuning WAN Replication section].
 
 In the above example, we have configured the map named `replicatedMap` to
 replicate to the target cluster named `london` on a single endpoint, as specified with
@@ -62,11 +62,11 @@ and caches support this feature.
 The `london` cluster might have more members than the one specified in this example, but only
 that endpoint will receive the WAN events. In that case
 and if you want the events to be forwarded to the other cluster members, see the `republishing-enabled`
-element description in the <<configuring-wan-replication-for-imap-and-icache, Configuring for IMap and ICache section>>.
+element description in the xref:configuring-for-map-and-cache.adoc[Configuring for IMap and ICache section].
 
 This example configuration defines a static endpoint to specify the target cluster member, using the `target-endpoints` element or `setTargetEndpoints()` method, respectively.
 You can also use Hazelcast's Discovery SPI for WAN Replication to specify endpoints on various
-cloud infrastructures. See the <<wanbatchreplication-discovery-spi, Using Discovery SPI section>>.
+cloud infrastructures. See the xref:defining-wan-replication.adoc#wanbatchreplication-discovery-spi[Using Discovery SPI section].
 
 == Setting Up an Active-Active Mode
 
@@ -149,9 +149,9 @@ of the cluster in one location should be mentioned on the cluster in the other l
 
 As in the Active-Passive example shown in the previous section, this example configuration
 also uses a static endpoint to specify the target cluster member.
-See the <<wanbatchreplication-discovery-spi, Using Discovery SPI section>> for information
+See the xref:defining-wan-replication.adoc#wanbatchreplication-discovery-spi[Using Discovery SPI section] for information
 on using the Discovery SPI to specify target members.
 
 As mentioned previously, the above configurations are the minimal ones
-to get you started. In case you need to configure some additional aspects of your maps or caches that use WAN Replication, see the <<configuring-wan-replication-for-imap-and-icache, Configuring for IMap and ICache section>>.
+to get you started. In case you need to configure some additional aspects of your maps or caches that use WAN Replication, see the xref:configuring-for-map-and-cache.adoc[Configuring for IMap and ICache section].
 

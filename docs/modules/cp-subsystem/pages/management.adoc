@@ -13,7 +13,7 @@ gradually losing the majority of CP groups and eventually total loss of
 the availability of CP Subsystem. To prevent such situations,
 `CPSubsystemManagementService` offers a set of APIs. In addition, CP Subsystem
 Persistence can be enabled to make CP members persist their local CP state to
-stable storage. Please see <<cp-subsystem-persistence, CP Subsystem Persistence section>>
+stable storage. Please see xref:persistence.adoc[CP Subsystem Persistence section]
 for more details.
 
 CP Subsystem relies on Hazelcast's failure detectors to test reachability of CP

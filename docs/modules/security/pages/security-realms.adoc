@@ -100,7 +100,7 @@ YAML::
 ----
 ====
 
-For more details, see the <<jaas-authentication, JAAS authentication section>>.
+For more details, see the xref:jaas-authentication.adoc[JAAS authentication section].
 
 === LDAP Authentication Type
 
@@ -294,7 +294,7 @@ This option is only used when the admin connection is configured, i.e., when `sy
 
 Detailed logging for LDAP authentication can be enabled by
 configuring a more verbose logger level for the `com.hazelcast.security`
-package as described in the <<security-debugging, Security Debugging section>>.
+package as described in the xref:security-debugging.adoc[Security Debugging section].
 
 ==== TLS Protected LDAP Server Connections
 

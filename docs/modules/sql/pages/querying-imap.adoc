@@ -98,7 +98,7 @@ SELECT * FROM employee
 The SQL service can use `IMap` indexes to speed up the execution of certain queries.
 `SORTED` and `HASH` indexes are supported.
 
-See the <<indexing-queries, Indexing Queries section>> for more information on `IMap`
+See the xref:query:how-distributed-query-works.adoc#indexing-queries[Indexing Queries section] for more information on `IMap`
 index creation.
 
 == High-Density Memory Store
@@ -106,5 +106,5 @@ index creation.
 You can query the `IMap` objects with `InMemoryFormat.NATIVE` if they have
 at least one index.
 
-See <<configuring-with-system-properties, Configuring with System Properties>> for
+See xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties] for
 more information on setting system properties.

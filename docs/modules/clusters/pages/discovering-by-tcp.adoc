@@ -9,7 +9,7 @@ cluster members, but at least one of the listed members has to be active in the 
 when a new member joins.
 
 To configure your Hazelcast to be a full TCP/IP cluster, set the following
-configuration elements. See the <<tcp-ip-element, tcp-ip element section>> for the
+configuration elements. See the xref:clusters:network-configuration.adoc#tcp-ip-element[tcp-ip element section] for the
 full descriptions of the TCP/IP discovery configuration elements.
 
 * Set the `enabled` attribute of the `tcp-ip` element to `true`.
@@ -74,5 +74,5 @@ ports 5701, 5702 and so on.
 By default, Hazelcast binds to all local network interfaces to accept incoming
 traffic. You can change this behavior using the system property `hazelcast.socket.bind.any`.
 If you set this property to `false`, Hazelcast uses the interfaces specified in the `interfaces`
-element (see the <<interfaces, Interfaces Configuration section>>). If no interfaces are
+element (see the xref:network-configuration.adoc#interfaces[Interfaces Configuration section]). If no interfaces are
 provided, then it tries to resolve one interface to bind from the `member` elements.

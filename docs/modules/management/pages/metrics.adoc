@@ -141,7 +141,7 @@ is connected.
 
 There are no diagnostics related settings in the metrics configuration section.
 See the
-<<diagnostics-metrics, Metrics section>> of the Diagnostics for the details.
+xref:diagnostics.adoc#diagnostics-metrics[Metrics section] of the Diagnostics for the details.
 
 === Version Compatibility
 

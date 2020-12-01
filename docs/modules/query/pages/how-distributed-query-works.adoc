@@ -196,7 +196,7 @@ Set<Employee> employees = map.values( Predicates.sql( "active AND age < 30" ) );
 
 NOTE: Hazelcast offers an SQL service that allows to execute SQL queries,
 as opposed to SQL-like predicates in case of `Predicates.sql()`. See the
-<<sql, SQL chapter>> for more information.
+xref:sql:distributed-sql.adoc[SQL chapter] for more information.
 
 === Supported SQL Syntax
 
@@ -313,7 +313,7 @@ as ``double``s.
 It is possible to query nested attributes and arrays in JSON documents.
 The query syntax is the same
 as querying other Hazelcast objects as explained in the
-<<querying-in-collections-and-arrays, Querying in Collections and Arrays section>>.
+xref:querying-collections-and-arrays.adoc[Querying in Collections and Arrays section].
 
 [source,java]
 ----
@@ -360,7 +360,7 @@ to speed up the query operations. Metadata creation
 is on by default. Depending on your application's needs, you may want
 to turn off the metadata creation
 to decrease the put latency and increase the throughput. You can configure
-this using <<metadata-policy, Metadata Policy>>.
+this using xref:data-structures:map.adoc#metadata-policy[Metadata Policy].
 
 NOTE: JSON metadata is stored on-heap even when you use the `NATIVE`
 in-memory format. If you are storing
@@ -378,14 +378,14 @@ them with predicates and giving the size of the pages. Also, you
 can sort the entries by specifying comparators. In this case, the comparator
 should be `Serializable` and the serialization factory implementations you use,
 e.g., `PortableFactory` and `DataSerializableFactory`, should be registered.
-See the <<serialization, Serialization chapter>> on how to register these
+See the xref:serialization:serialization.adoc[Serialization chapter] on how to register these
 factories.
 
 Paging predicates require the objects to be deserialized both on the calling
 side (either a member or client) and the member side from which the collection
 is retrieved. Therefore, you need to register the serialization factories
 you use on all the members and clients on which the paging predicates are used.
-See the <<serialization, Serialization chapter>> on how to register these
+See the xref:serialization:serialization.adoc[Serialization chapter] on how to register these
 factories.
 
 In the example code below:
@@ -461,7 +461,7 @@ partition your data belongs to so that you can send the
 request to the correct partition. One of the ways of doing it is to
 make use of the `PartitionAware` interface when data is
 inserted, thereby controlling the owning partition. See the
-<<partitionaware, PartitionAware section>> for more information and examples.
+xref:performance:data-affinity.adoc#partitionaware[PartitionAware section] for more information and examples.
 
 A concrete example may be a web shop that sells phones and accessories.
 To find all the accessories of a phone,
@@ -610,7 +610,7 @@ example.
 NOTE: Non-primitive types to be indexed should implement *`Comparable`*.
 
 NOTE: If you configure the data structure to use
-<<configuring-high-density-memory-store, High-Density Memory Store>> **and**
+xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High-Density Memory Store] **and**
 indexes, the indexes are automatically stored in the High-Density Memory Store
 as well. This prevents from running into full garbage collections when doing
 a lot of updates to index.
@@ -1154,7 +1154,7 @@ YAML::
 ----
 ====
 
-See <<indexing-in-collections-and-arrays, Indexing in Collections and Arrays section>>
+See xref:querying-collections-and-arrays.adoc#indexing-in-collections-and-arrays[Indexing in Collections and Arrays section]
 for more details.
 
 ==== Bitmap Index Querying
@@ -1209,7 +1209,7 @@ NATIVE in-memory format.
 
 You can also define custom attributes that may be referenced in predicates,
 queries and indexes. Custom attributes can be defined by implementing a
-`ValueExtractor`. See the <<custom-attributes, Custom Attributes section>>
+`ValueExtractor`. See the xref:custom-attributes.adoc[Custom Attributes section]
 for details.
 
 === Using "this" as an Attribute
@@ -1252,7 +1252,7 @@ pool in the following cases:
 to true (since the predicates are evaluated in parallel)
 
 See the <<filtering-with-paging-predicates, Filtering with Paging Predicates section>>
-and <<parallel-predicates, System Properties appendix>> for information on paging
+and xref:ROOT:system-properties.adoc#parallel-predicates[System Properties appendix] for information on paging
 predicates and for description of the above system property.
 
 Below is an example of that declarative configuration.

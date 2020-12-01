@@ -19,7 +19,7 @@ thus offload the current listener thread.
 
 NOTE: In a failover scenario, events are not highly available and may get lost.
 However, you can perform workarounds such as configuring the event queue capacity
-as explained in the <<global-event-configuration, Global Event Configuration section>>.
+as explained in the xref:events:global-event-configuration.adoc[Global Event Configuration section].
 
 Hazelcast offers the following event listeners.
 
@@ -40,8 +40,8 @@ For distributed object events:
 
 For Hazelcast JCache implementation:
 
-* <<cacheentrylistener, Cache Entry Listener>>
-* <<icache-partition-lost-listener, ICache Partition Lost Listener>>
+* xref:jcache:api.adoc#icacheentrylistener[Cache Entry Listener]
+* xref:jcache:icache.adoc#icache-partition-lost-listener[ICache Partition Lost Listener]
 
 For Hazelcast clients:
 

@@ -6,7 +6,7 @@ Hazelcast's Client security includes both authentication and authorization.
 
 The authentication mechanism works in similar way as the cluster member authentication.
 
-To implement the client authentication, you reference a <<security-realms, Security Realm>>
+To implement the client authentication, you reference a xref:security-realms.adoc[Security Realm]
 with the `authentication` section defined in the `<client-authentication/>` element
 of a cluster member configuration.
 
@@ -113,10 +113,10 @@ The default permission policy allows to use comma separated names in the `princi
 attribute configuration.
 
 You can define the instance and principal names as wildcards using the `"*"` character.
-See the <<using-wildcards, Using Wildcards>> section for details.
+See the xref:configuration:using-wildcards.adoc[Using Wildcards] section for details.
 
 The endpoint names can use range characters `"-"` and `"*"` as described
-in the <<interfaces, Interfaces>> section.
+in the xref:clusters:network-configuration.adoc#interfaces[Interfaces] section.
 
 [tabs] 
 ==== 
@@ -812,7 +812,7 @@ cache:
 
 NOTE: The name provided in `cache-permission` must be the Hazelcast distributed
 object name corresponding to the `Cache` as described in
-the <<jcache-hazelcast-instance-integration, JCache - Hazelcast Instance Integration section>>.
+the xref:jcache:hazelcast-integration.adoc[JCache - Hazelcast Instance Integration section].
 
 **User Code Deployment Permission:**
 
@@ -928,10 +928,10 @@ permission definitions to the cluster, but keeps them when it joins. However,
 after the join, when you update the permissions in the other cluster members,
 those updates are also sent to the newly joining member. Therefore, this option
 is suitable for the scenarios where you need to elevate privileges temporarily
-on a single member (preferably a <<enabling-lite-members, lite member>>) for a
+on a single member (preferably a xref:management:cluster-utilities.adoc#enabling-lite-members[lite member]) for a
 limited time period. The clients which want to use these temporary permissions
 have to access the cluster through this single new member, meaning that you need
-to disable <<setting-smart-routing, smart routing>> for such clients.
+to disable xref:clients:java.adoc#setting-smart-routing[smart routing] for such clients.
 +
 Note that, the `create` and `destroy` permissions will not work when using
 the `NONE` option, since the distributed objects need to be created/destroyed on all the members.

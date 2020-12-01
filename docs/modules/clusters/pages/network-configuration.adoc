@@ -246,7 +246,7 @@ networkConfig.setReuseAddress( true );
 
 The `join` configuration element is used to discover Hazelcast members and enable them
 to form a cluster. Hazelcast provides Auto Detection, Multicast, TCP/IP, AWS, Kubernetes, Azure, GCP, Eureka, and more.
-These mechanisms are explained the <<discovery-mechanisms, Discovery Mechanisms section>>.
+These mechanisms are explained the xref:discovery-mechanisms.adoc[Discovery Mechanisms section].
 This section describes all the sub-elements and attributes of `join` element.
 The following are example configurations.
 
@@ -442,7 +442,7 @@ https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes Discovery
 
 The `discovery-strategies` element configures internal or external discovery
 strategies based on the Hazelcast Discovery SPI. For further information, see
-the <<discovery-spi, Discovery SPI section>> and the vendor documentation of
+the xref:extending-hazelcast:discovery-spi.adoc[Discovery SPI section] and the vendor documentation of
 the used discovery strategy.
 
 [[interfaces]]
@@ -598,7 +598,7 @@ See also additional http://docs.oracle.com/javase/1.5.0/docs/guide/net/ipv6_guid
 NOTE: IPv6 support has been switched off by default, since some platforms have issues
 using the IPv6 stack. Some other platforms such as Amazon AWS have no support at all.
 To enable IPv6 support, just set configuration property `hazelcast.prefer.ipv4.stack`
-to *false*. See the <<system-properties, System Properties appendix>> for details.
+to *false*. See the xref:ROOT:system-properties.adoc[System Properties appendix] for details.
 
 [[member-address-provides-spi]]
 == Member Address Provider SPI

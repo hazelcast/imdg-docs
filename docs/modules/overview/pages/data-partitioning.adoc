@@ -47,14 +47,14 @@ Hazelcast distributes partitions' primary and backup replicas equally among the 
 cluster. Backup replicas of the partitions are maintained for redundancy.
 
 NOTE: Your data can have multiple copies on partition primaries and backups, depending on your
-backup count. See the <<backing-up-maps, Backing Up Maps section>>.
+backup count. See the xref:data-structures:map.adoc#backing-up-maps[Backing Up Maps section].
 
 Hazelcast also offers lite members. These members do not own any partition. Lite members are
 intended for use in computationally-heavy task executions and listener registrations. Although
 they do not own any partitions,
 they can access partitions that are owned by other members in the cluster.
 
-NOTE: See the <<enabling-lite-members, Enabling Lite Members section>>.
+NOTE: See the xref:management:cluster-utilities.adoc#enabling-lite-members[Enabling Lite Members section].
 
 [[how-the-data-is-partitioned]]
 == How the Data is Partitioned

@@ -218,7 +218,7 @@ hazelcast:
 ----
 ====
 
-Remember to set the `pool-size` (count of executor threads per member) according to your execution needs. See the <<configuring-executor-service, Configuring Executor Service section>> for the configuration details.
+Remember to set the `pool-size` (count of executor threads per member) according to your execution needs. See the xref:executor-service.adoc#configuring-executor-service[Configuring Executor Service section] for the configuration details.
 
 === ReadOnly Entry Processor
 

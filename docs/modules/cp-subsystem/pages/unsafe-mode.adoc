@@ -5,7 +5,7 @@ When CP Subsystem is not enabled, that means
 _the unsafe mode_. In this mode, they use Hazelcast's partitioning and lazy
 replication mechanisms instead of CP Subsystem's consensus mechanism. For more
 information about the lazy replication mechanism of Hazelcast, see
-the <<consistency-and-replication-model, Consistency and Replication Model chapter>>.
+the xref:consistency-and-replication:consistency.adoc[Consistency and Replication Model chapter].
 
 _The unsafe mode_ provides weaker consistency guarantees compared to when CP
 Subsystem is enabled. For example, when you increment an `IAtomicLong` or

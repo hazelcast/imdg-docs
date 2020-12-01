@@ -82,7 +82,7 @@ corresponding `MapPartitionLostEvent`. If only a single member crashes in the cl
 there is no `MapPartitionLostEvent` fired for this map since backups for the partitions
 owned by the crashed member are kept on other members.
 
-See the <<listening-for-partition-lost-events, Listening for Partition Lost Events section>> for more
+See the xref:cluster-events.adoc#listening-for-partition-lost-events[Listening for Partition Lost Events section] for more
 information about partition lost detection and partition lost events.
 
 [[registering-map-listeners]]

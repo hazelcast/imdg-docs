@@ -11,7 +11,7 @@ There are two different encryption features:
 ** supported by members and clients
 ** TCP-only, i.e., multicast join messages are not encrypted
 +
-More details in the <<tlsssl, TLS/SSL section>>
+More details in the xref:security:tls-ssl.adoc[TLS/SSL section]
 +
 . Symmetric encryption for Hazelcast member protocol
 ** only supported by the members; communication with clients is not encrypted

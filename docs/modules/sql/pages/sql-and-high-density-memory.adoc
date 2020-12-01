@@ -1,7 +1,7 @@
 = SQL on Data Structures Backed by High-Density Memory Store
 
 If you configure the `IMap` data structure to use
-<<configuring-high-density-memory-store, High-Density Memory Store>>, you have to
+xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High-Density Memory Store], you have to
 create at least one global High-Density Memory Store index to run an SQL statement.
 This limitation comes from the fact that off-heap `IMap` data structure is not
 thread-safe, and we use thread-safe concurrent indexes based on the B+ Tree implementation

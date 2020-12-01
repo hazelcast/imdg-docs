@@ -170,7 +170,7 @@ Hazelcast itself offers a special implementation
 (`com.hazelcast.config.CacheConfig`) of the `Configuration` interface
 which offers more options on the specific Hazelcast properties
 that can be set to configure features like synchronous and asynchronous
-backups counts or selecting the underlying xref:ROOT:dds.adoc#setting-in-memory-format[in-memory format] of the cache. For more information on this
+backups counts or selecting the underlying xref:data-structures:distributed-data-structures.adoc#setting-in-memory-format[in-memory format] of the cache. For more information on this
 configuration class, see the reference in the xref:setup.adoc#jcache-programmatic-configuration[JCache Programmatic Configuration section].
 
 **`javax.cache.Cache`**:

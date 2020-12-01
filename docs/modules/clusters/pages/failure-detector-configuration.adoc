@@ -18,7 +18,7 @@ the above ones, but identifies
 the failures on OSI Layer 3 (Network Layer). This detector is by default disabled.
 
 Note that, Hazelcast also offers failure detectors for its Java client.
-See the <<java-client-failure-detectors, Client Failure Detectors section>> for more information.
+See the xref:clients:java.adoc#java-client-failure-detectors[Client Failure Detectors section] for more information.
 
 == Deadline Failure Detector
 

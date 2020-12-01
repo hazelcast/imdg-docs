@@ -20,4 +20,4 @@ Moreover, communication failures don't have to be symmetrical.
 A network failure can interrupt only one side of the channel or
 a suspended process/member may not even observe the rest as crashed.
 That kind of network partitioning can be called as _partial network partitioning_.
-See <<partial-network-partitions, Partial Network Partitions section>> for more info.
+See xref:partial-network-partitions.adoc[Partial Network Partitions section] for more info.

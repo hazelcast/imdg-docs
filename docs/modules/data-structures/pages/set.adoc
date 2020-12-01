@@ -30,7 +30,7 @@ include::{javasource}/dds/set/ExampleSet.java[tag=set]
 ----
 
 Hazelcast Set uses `ItemListener` to listen to events that occur when items are
-added to and removed from the Set. See the <<listening-for-item-events, Listening for Item Events section>>
+added to and removed from the Set. See the xref:events:object-events.adoc#listening-for-item-events[Listening for Item Events section]
 for information on how to create an item listener class and register it.
 
 [[configuring-set]]
@@ -111,7 +111,7 @@ See the <<split-brain-protection-for-iset-and-transactionalset, Split-Brain Prot
 == Split-Brain Protection for ISet and TransactionalSet
 
 ISet & TransactionalSet can be configured to check for a minimum number of
-available members before applying queue operations (see the <<split-brain-protection, Split-Brain Protection section>>).
+available members before applying queue operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
 The following is a list of methods, grouped by the protection types, that support
@@ -178,4 +178,4 @@ hazelcast:
 ====
 
 The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you
-configured under the `split-brain-protection` element as explained in the <<split-brain-protection, Split-Brain Protection section>>.
+configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

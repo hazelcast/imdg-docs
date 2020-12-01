@@ -33,8 +33,7 @@ include::{javasource}/dds/list/ExampleList.java[tag=list]
 ----
 
 Hazelcast List uses `ItemListener` to listen to events that occur when
-items are added to and removed from the List. See the <<listening-for-item-events,
-Listening for Item Events section>> for information on how to create an item listener
+items are added to and removed from the List. See the xref:events:object-events.adoc#listening-for-item-events[Listening for Item Events section] for information on how to create an item listener
 class and register it.
 
 [[configuring-list]]
@@ -115,7 +114,7 @@ See the <<split-brain-protection-for-ilist-and-transactionallist, Split-Brain Pr
 == Split-Brain Protection for IList and TransactionalList
 
 IList & TransactionalList can be configured to check for a minimum
-number of available members before applying queue operations (see the <<split-brain-protection, Split-Brain Protection section>>).
+number of available members before applying queue operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
 The following is a list of methods, grouped by the protection types, that support split-brain protection checks:
@@ -188,4 +187,4 @@ hazelcast:
 ====
 
 The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you
-configured under the `split-brain-protection` element as explained in the <<split-brain-protection, Split-Brain Protection section>>.
+configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

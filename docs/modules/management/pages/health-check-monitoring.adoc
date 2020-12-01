@@ -98,7 +98,7 @@ An example output is given below:
 }
 ```
 
-See the <<managing-cluster-and-member-states, Managing Cluster and Member States section>>
+See the xref:cluster-utilities.adoc#managing-cluster-and-member-states[Managing Cluster and Member States section]
 to learn more about each state of a Hazelcast cluster and member.
 
 [[health-check-script]]
@@ -107,7 +107,7 @@ to learn more about each state of a Hazelcast cluster and member.
 The `healthcheck.sh` script comes with the Hazelcast package. Internally, it uses
 the HTTP-based Health Check endpoint. You will need to enable the endpoint by using the
 `advanced-network` or the `network` configuration element.
-See the <<health-check-and-monitoring, Health Check and Monitoring section>>.
+See the <<health-check-monitoring, Health Check and Monitoring section>>.
 
 You can use the script to check health parameters in the following manner:
 
@@ -223,7 +223,7 @@ operations.running.count=0, operations.pending.invocations.percentage=0.00%, ope
 connection.active.count=2, client.connection.count=1, connection.count=1
 ```
 
-NOTE: See the <<configuring-with-system-properties, Configuring with System Properties section>>
+NOTE: See the xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties section]
 to learn how to set system properties.
 
 == Using Health Check on F5 BIG-IP LTM

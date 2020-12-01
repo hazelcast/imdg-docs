@@ -74,7 +74,7 @@ it has to replicate update operations to all members in the cluster.
 
 Since the replication of updates is performed in an asynchronous manner,
 we recommend you enable back pressure in case your system has high occurrences
-of updates. See the <<back-pressure, Back Pressure section>> to learn how to enable it.
+of updates. See the xref:performance:back-pressure.adoc[Back Pressure section] to learn how to enable it.
 
 Replicated Map has an anti-entropy system that converges values to a
 common one if some of the members are missing replication updates.
@@ -267,7 +267,7 @@ include::{javasource}/dds/replicatedmap/ListeningMember.java[tag=lm]
 == Split-Brain Protection for Replicated Map
 
 Replicated Map can be configured to check for a minimum number of available
-members before applying its operations (see the <<split-brain-protection, Split-Brain Protection section>>).
+members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a
 cluster during a network partition.
 
@@ -324,4 +324,4 @@ hazelcast:
 ====
 
 The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you
-configured under the `split-brain-protection` element as explained in the <<split-brain-protection, Split-Brain Protection section>>.
+configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

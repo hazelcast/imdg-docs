@@ -19,9 +19,9 @@ including but not limited to the following:
 * Target cluster freshly starts with no data
 * Target cluster experiences problems and some operations fail
 * Two sides disconnect and the in-memory buffer of the source
-cluster gets full (the behavior in this case is <<queue-full-behavior, configurable>>)
+cluster gets full (the behavior in this case is xref:tuning.adoc#queue-full-behavior[configurable])
 * The WAN link can't keep up with the burst that the source cluster experiences
-and its in-memory buffer gets full (the behavior in this case is <<queue-full-behavior, configurable>>)
+and its in-memory buffer gets full (the behavior in this case is xref:tuning.adoc#queue-full-behavior[configurable])
 
 To overcome this out-of-sync issue, you have the
 following options to synchronize your WAN replicated clusters:
@@ -385,7 +385,7 @@ The URL for the synchronization REST call - the same as it is for the default sy
 http://{member IP address:port}/hazelcast/rest/wan/sync/map
 ```
 
-See the REST call details <<synchronizing-the-clusters, here>>.
+See the REST call details xref:rest-api.adoc#synchronizing-the-clusters[here].
 
 
 ===== Memory Consumption
@@ -514,7 +514,7 @@ get the actual average for the leaves involved in the synchronization.
 ==== WAN Synchronization Statistics
 
 Both Full and Delta WAN Synchronization processes write statistics into the
-<<diagnostics-2, diagnostics>> subsystem and send them to Hazelcast Management
+xref:management:diagnostics.adoc[diagnostics] subsystem and send them to Hazelcast Management
 Center. Using these statistics you can measure the efficiency of your configuration.
 
 Full WAN Synchronization reports the following:
@@ -560,7 +560,7 @@ Merkle synchronization statistics:
   Maximum records per Merkle tree node: 7
 ----
 
-See the <<diagnostics-2, Diagnostics section>> to learn how to enable
+See the xref:management:diagnostics.adoc[Diagnostics section] to learn how to enable
 diagnostics and locate its log file to see the above statistics.
 
 ==== Dynamically Adding WAN Publishers

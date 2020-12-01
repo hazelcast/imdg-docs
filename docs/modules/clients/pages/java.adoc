@@ -161,7 +161,7 @@ access them through a proxy on the client side.
 
 ==== Using Map with Java Client
 
-You can use any <<map, Distributed Map>> object with the client, as shown below.
+You can use any Distributed Map object with the client, as shown below.
 
 [source,java]
 ----
@@ -173,7 +173,7 @@ map.remove(1);
 ----
 
 Locality is ambiguous for the client, so `addLocalEntryListener` and
-`localKeySet` are not supported. See the <<map, Distributed Map section>>
+`localKeySet` are not supported. See the xref:data-structures:map.adoc[Distributed Map section]
 for more information.
 
 ==== Using MultiMap with Java Client
@@ -192,7 +192,7 @@ Collection<String> values = multiMap.get(1);
 
 `addLocalEntryListener`, `localKeySet` and `getLocalMultiMapStats` are not
 supported because locality is ambiguous for the client.
-See the <<multimap, Distributed MultiMap section>> for more information.
+See the xref:data-structures:multimap.adoc[Distributed MultiMap section] for more information.
 
 ==== Using Queue with Java Client
 
@@ -205,7 +205,7 @@ myQueue.offer("John")
 ----
 
 `getLocalQueueStats` is not supported because locality is ambiguous for the client.
-See the <<queue, Distributed Queue section>> for more information.
+See the xref:data-structures:queue.adoc[Distributed Queue section] for more information.
 
 ==== Using Topic with Java Client
 
@@ -217,15 +217,15 @@ The distributed data structures listed below are also supported by the client.
 Since their logic is the same in both the member side and client side, you can see
 their sections as listed below.
 
-* <<replicated-map, Replicated Map>>
-* <<list, List>>
-* <<set, Set>>
-* <<iatomiclong, IAtomicLong>>
-* <<iatomicreference, IAtomicReference>>
-* <<icountdownlatch, ICountDownLatch>>
-* <<isemaphore, ISemaphore>>
-* <<flakeidgenerator, FlakeIdGenerator>>
-* <<lock, Lock>>
+* xref:data-structures:replicated-map.adoc[Replicated Map]
+* xref:data-structures:list.adoc[List]
+* xref:data-structures:set.adoc[Set]
+* xref:data-structures:iatomiclong.adoc[IAtomicLong]
+* xref:data-structures:iatomicreference.adoc[IAtomicReference]
+* xref:data-structures:icountdownlatch.adoc[ICountDownLatch]
+* xref:data-structures:isemaphore.adoc[ISemaphore]
+* xref:data-structures:flake-id-generator.adoc[FlakeIdGenerator]
+* xref:data-structures:fencedlock.adoc[Lock]
 
 === Using Client Services
 
@@ -235,7 +235,7 @@ Hazelcast provides the services discussed below for some common functionalities 
 
 The distributed executor service is for distributed computing.
 It can be used to execute tasks on the cluster on a designated partition or on all the partitions.
-It can also be used to process entries. See the <<executor-service, Distributed Executor Service section>> for more information.
+It can also be used to process entries. See the xref:computing:executor-service.adoc[Distributed Executor Service section] for more information.
 
 ```
 IExecutorService executorService = client.getExecutorService("default");
@@ -243,7 +243,7 @@ IExecutorService executorService = client.getExecutorService("default");
 
 After getting an instance of `IExecutorService`, you can use the instance as
 the interface with the one provided on the server side. See the
-<<distributed-computing, Distributed Computing chapter>> for detailed usage.
+xref:computing:distributed-computing.adoc[Distributed Computing chapter] for detailed usage.
 
 NOTE: This service is only supported by the Java client.
 
@@ -298,7 +298,7 @@ lifecycleService.shutdown();
 === Defining Client Labels
 
 You can define labels in your Java client, similar to the way it can
-be done for the <<defining-member-attributes, members>>.
+be done for the xref:management:cluster-utilities.adoc[members].
 Through the client labels, you can assign special roles for your clients and
 use these roles to perform some actions specific to those client connections.
 
@@ -368,7 +368,7 @@ each distributed data structure in this Reference Manual.
 === Client Transactions
 
 Transactional distributed objects are supported on the client side.
-See the <<transactions, Transactions chapter>> on how to use them.
+See the xref:transactions:transactions.adoc[Transactions chapter] on how to use them.
 
 === Async Start and Reconnect Modes
 
@@ -708,7 +708,7 @@ Its default value is *localhost*.
 
 IMPORTANT:  If you have multiple members on a single machine and you are using
 <<java-client-operation-modes, unisocket clients>>, we recommend you to set explicit
-<<port, ports>> for each member. Then you should provide those ports in your client configuration
+xref:clusters:network-configuration.adoc#port[ports] for each member. Then you should provide those ports in your client configuration
 when you give the member addresses (using the `address` configuration element or
 `addAddress` method as exemplified above). This provides faster connections between clients and members. Otherwise,
 all the load coming from your clients may go through a single member.
@@ -828,7 +828,7 @@ Its default value is `true` (smart client mode).
 
 Note that you need to disable smart routing (`false`) for the clients which
 want to use temporary permissions defined in a member.
-See the <<handling-permissions-when-a-new-member-joins, Handling Permissions section>>.
+See the xref:security:native-client-security.adoc#handling-permissions-when-a-new-member-joins[Handling Permissions section].
 
 ==== Enabling Redo Operation
 
@@ -968,7 +968,7 @@ socketInterceptorConfig.setProperty("kerberos-config-file","kerb.conf");
 socketInterceptorConfig.setClassName(MyClientSocketInterceptor.class.getName());
 ----
 
-NOTE: See the <<socket-interceptor, Socket Interceptor section>> for more information.
+NOTE: See the xref:security:socket-interceptor.adoc[Socket Interceptor section] for more information.
 
 ==== Configuring Network Socket Options
 
@@ -1003,13 +1003,13 @@ socketOptions.setBufferSize(32)
 You can use TLS/SSL to secure the connection between the client and the members.
 If you want TLS/SSL enabled for the client-cluster connection, you should set `SSLConfig`.
 Once set, the connection (socket) is established out of an TLS/SSL factory defined either by
-a factory class name or factory implementation. See the <<tlsssl, TLS/SSL section>>.
+a factory class name or factory implementation. See the xref:security:tls-ssl.adoc[TLS/SSL section].
 
-As explained in the <<tlsssl, TLS/SSL section>>, Hazelcast members have keyStores used to
+As explained in the TLS/SSL section, Hazelcast members have keyStores used to
 identify themselves (to other members) and Hazelcast clients have trustStore used to
 define which members they can trust. The clients also have their keyStores and
 members have their trustStores so that the members can
-know which clients they can trust: see the <<mutual-authentication, Mutual Authentication section>>.
+know which clients they can trust: see the xref:security:tls-ssl.adoc#mutual-authentication[Mutual Authentication section].
 
 ==== Configuring Hazelcast Cloud
 
@@ -1072,7 +1072,7 @@ See this Hazelcast Cloud https://hazelcast.com/products/cloud/[web page^]
 for more information on Hazelcast Cloud.
 
 NOTE: Since this is a REST based discovery, you need to enable the REST listener service.
-See the <<using-the-rest-endpoint-groups, Using the REST Endpoint Groups section>> on how to enable REST endpoints.
+See the xref:management:rest-endpoint-groups.adoc[Using the REST Endpoint Groups section] on how to enable REST endpoints.
 
 [NOTE]
 ====
@@ -1150,7 +1150,7 @@ Programmatic Configuration:
 include::{javasource}/clients/ExampleClientAwsConfig.java[tag=clientaws]
 ----
 
-See the <<aws-element, aws element section>> for the descriptions of
+See the xref:clusters:network-configuration.adoc#aws-element[aws element section] for the descriptions of
 the above AWS configuration elements except `use-public-ip`.
 
 If the `use-public-ip` element is set to `true`, the private addresses of cluster members
@@ -1236,7 +1236,7 @@ You can add the following types of event listeners:
 The Hazelcast distributed map supports a local Near Cache for remotely stored entries to
 increase the performance of local read operations. Since the client always requests data from
 the cluster members, it can be helpful in some use cases to configure a Near Cache on the client side.
-See the <<near-cache, Near Cache section>> for a detailed explanation of the Near Cache feature and its configuration.
+See the xref:performance:near-cache.adoc[Near Cache section] for a detailed explanation of the Near Cache feature and its configuration.
 
 === Configuring Client Cluster
 
@@ -1259,7 +1259,7 @@ See the {docBaseUrl}/javadoc/com/hazelcast/client/config/ClientSecurityConfig.ht
 === Client Serialization Configuration
 
 For the client side serialization, use the Hazelcast configuration.
-See the <<serialization, Serialization chapter>>.
+See the xref:serialization:serialization.adoc[Serialization chapter].
 
 [[classloader]]
 === Configuring ClassLoader
@@ -1285,7 +1285,7 @@ include::{javasource}/clients/ExampleRTClient.java[tag=rtclient]
 
 Note that, when you create a Reliable Topic structure on your client, a Ringbuffer
 (with the same name as the Reliable Topic) is automatically created on the member side,
-with its default configuration. See the <<ringbuffer, Configuring Ringbuffer section>> for the defaults.
+with its default configuration. See the xref:data-structures:ringbuffer.adoc[Configuring Ringbuffer section] for the defaults.
 You can edit that configuration according to your needs.
 
 You can configure a Reliable Topic structure on the client side also declaratively.
@@ -1971,7 +1971,7 @@ a cluster member is suspected, because it has not sent any response back to clie
 
 NOTE: The value of `hazelcast.client.heartbeat.interval` should be smaller than
 that of `hazelcast.client.heartbeat.timeout`. In addition, the value of system property
-<<client-max-no, hazelcast.client.max.no.heartbeat.seconds>>, which is set on the member side,
+xref:ROOT:system-properties.adoc#client-max-no[`hazelcast.client.max.no.heartbeat.seconds`], which is set on the member side,
 should be larger than that of `hazelcast.client.heartbeat.interval`.
 
 The following is a declarative example showing how you can configure the Deadline Failure Detector
@@ -2040,8 +2040,8 @@ linker when loading libs from untrusted paths.
 * ICMP Echo Requests must not be blocked by the receiving hosts.
 
 The details of these requirements are explained in the
-<<requirements-and-linuxunix-configuration, Requirements section>> of
-Hazelcast members' <<ping-failure-detector, Ping Failure Detector>>.
+xref:clusters:failure-detector-configuration.adoc#requirements-and-linuxunix-configuration[Requirements section] of
+Hazelcast members' xref:clusters:failure-detector-configuration.adoc#ping-failure-detector[Ping Failure Detector].
 
 If any of the above criteria isn't met, then `isReachable` will always
 fallback on TCP Echo attempts on port 7.
@@ -2122,7 +2122,7 @@ In the above example configuration, the Ping Failure Detector attempts 2 pings,
 one every second, and waits up to 1 second for each to complete.
 If there is no successful ping after 2 seconds, the member gets suspected.
 
-To enforce the <<requirements-and-linuxunix-configuration, Requirements>>,
+To enforce the xref:clusters:failure-detector-configuration.adoc#requirements-and-linuxunix-configuration[Requirements],
 the property `echo-fail-fast-on-startup` can also be set to `true`, in which case Hazelcast fails to start if any of the requirements
 isn't met.
 
@@ -2156,7 +2156,7 @@ regardless of the other detectors.
 
 There are some advanced client configuration properties to tune some aspects of Hazelcast Client.
 You can set them as property name and value pairs through declarative configuration,
-programmatic configuration, or JVM system property. See the <<system-properties, System Properties appendix>>
+programmatic configuration, or JVM system property. See the xref:ROOT:system-properties.adoc[System Properties appendix]
 to learn how to set these properties.
 
 NOTE: When you want to reconfigure a system property, you need to restart the clients for
@@ -2189,13 +2189,13 @@ will try write through and other optimizations even though the system is concurr
 |false
 |bool
 |Enables/disables the Discovery SPI lookup over the old native implementations.
-See <<discovery-spi>> for more information.
+See xref:extending-hazelcast:discovery-spi.adoc[Discovery SPI] for more information.
 
 |`hazelcast.discovery.public.ip.enabled`
 |false
 |bool
 |Enables the discovery joiner to use public IPs from `DiscoveredNode`.
-See <<discovery-spi>> for more information.
+See xref:extending-hazelcast:discovery-spi.adoc[Discovery SPI] for more information.
 
 |`hazelcast.client.event.queue.capacity`
 |1000000
@@ -2278,8 +2278,8 @@ Hazelcast throws `HazelcastOverloadException`.
 |`hazelcast.client.metrics.collection.frequency`
 | 5
 | int
-| Frequency, in seconds, of the <<metrics, metrics>> collection cycle. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Frequency, in seconds, of the xref:management:metrics.adoc[metrics] collection cycle. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.client.metrics.debug.enabled`
 | false
@@ -2290,14 +2290,14 @@ Note that this is meant to be enabled only if diagnostics is enabled, since curr
 |`hazelcast.client.metrics.enabled`
 | true
 | bool
-| Enables the <<metrics, metrics collection>> if set to `true`, disables it otherwise. Note that the preferred way for
-controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Enables the xref:management:metrics.adoc[metrics collection] if set to `true`, disables it otherwise. Note that the preferred way for
+controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.client.metrics.jmx.enabled`
 | true
 | bool
-| Enables exposing the collected <<metrics, metrics>> over JMX if set to `true`, disables it otherwise. Note that
-the preferred way for controlling this setting is <<metrics-configuration, Metrics Configuration>>.
+| Enables exposing the collected xref:management:metrics.adoc[metrics] over JMX if set to `true`, disables it otherwise. Note that
+the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
 
 |`hazelcast.client.operation.backup.timeout.millis`
 |5000
@@ -2422,5 +2422,5 @@ You still can combine it with time-to-live-seconds.
 Keep in mind that you should have already enabled the High-Density Memory Store
 usage for your client, using the `<native-memory>` element in the client's configuration.
 
-See the <<high-density-memory-store, High-Density Memory Store section>>
+See the xref:storage:high-density-memory.adoc[High-Density Memory Store section]
 for more information on Hazelcast's High-Density Memory Store feature.

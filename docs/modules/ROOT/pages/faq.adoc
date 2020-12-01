@@ -17,12 +17,12 @@ accessed via `HazelcastInstance.getCPSubsytem()` which provides CP data stru
 ** With lazy replication, when the primary replica receives an update operation for a key,
 it executes the update locally and propagates it to backup replicas. It marks each update
 with a logical timestamp so that backups apply them in the correct order and converge to the
-same state with the primary. Backup replicas can be used to scale reads (see the <<enabling-backup-reads, Enabling Backup Reads section>>)
+same state with the primary. Backup replicas can be used to scale reads (see the xref:data-structures:map.adoc#enabling-backup-reads[Enabling Backup Reads section])
 with no strong consistency but monotonic reads guarantee.
 ** It employs additional measurements to maintain consistency in a best-effort manner.
 ** Hazelcast, as an AP product, does not provide the exactly-once guarantee. In general,
 Hazelcast tends to be an at-least-once solution.
-** See the <<consistency-and-replication-model, Consistency and Replication Model chapter>>
+** See the xref:consistency-and-replication:consistency.adoc[Consistency and Replication Model chapter]
 for more information.
 
 * CP Hazelcast IMDG Guarantees:
@@ -31,8 +31,8 @@ You can enable CP Subsystem and use it with the strong consistency guarantee.
 ** Its data structures are CP with respect to the CAP principle, i.e., they always
 maintain linearizability and prefer consistency over availability during network partitions.
 ** Besides network partitions, CP Subsystem withstands server and client failures.
-** It provides a good degree of fault tolerance at run-time, and <<cp-subsystem-persistence, CP Subsystem Persistence>> enables more robustness.
-** See the <<cp-subsystem, CP Subsystem chapter>> for more information.
+** It provides a good degree of fault tolerance at run-time, and xref:cp-subsystem:persistence.adocp[CP Subsystem Persistence] enables more robustness.
+** See the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem chapter] for more information.
 
 
 '''
@@ -64,7 +64,7 @@ It is not recommended for production since UDP is often blocked in production en
 
 Once members are discovered, all the communication between them is via TCP/IP.
 
-NOTE: See the <<discovery-mechanisms, Discovery Mechanisms section>> for detailed information.
+NOTE: See the xref:clusters:discovery-mechanisms.adoc[Discovery Mechanisms section] for detailed information.
 
 '''
 **What happens when a member goes down?**
@@ -245,7 +245,7 @@ Also, you should consider using Near Caches in clients to lower the network traf
 And you should use the Hazelcast releases with the NIO implementation (which starts with Hazelcast 3.2).
 
 Also, you should configure the clients attentively.
-See the <<hazelcast-clients, Clients section>> for configuration notes.
+See the xref:clients:hazelcast-clients.adoc[Clients section] for configuration notes.
 
 '''
 **Difference between Lite Member and Smart Client?**
@@ -253,7 +253,7 @@ See the <<hazelcast-clients, Clients section>> for configuration notes.
 Lite member supports task execution (distributed executor service), smart client does not.
 Also, Lite Member is highly coupled with cluster, smart client is not.
 Starting with Hazelcast 3.9, you can also promote lite members to data members.
-See the <<enabling-lite-members, Lite Members section>> for more information.
+See the xref:management:cluster-utilities.adoc#enabling-lite-members[Lite Members section] for more information.
 
 '''
 **How do you give support?**
@@ -283,16 +283,16 @@ In addition to monitoring the overall state of a cluster, you can analyze and br
 you can update map configurations and you can take thread dumps from members.
 
 You can also use Hazelcast's HTTP based health check implementation and health monitoring utility.
-See the <<health-check-and-monitoring, Health Check and Monitoring section>>.
-There is also a <<diagnostics, diagnostocs tool>> where you can see detailed logs enhanced with diagnostic plugins.
+See the xref:management:health-check-monitoring.adoc[Health Check and Monitoring section].
+There is also a xref:management:diagnostics.adoc[diagnostics tool] where you can see detailed logs enhanced with diagnostic plugins.
 
-Moreover, JMX monitoring is also provided. See the <<monitoring-with-jmx, Monitoring with JMX section>> for details.
+Moreover, JMX monitoring is also provided. See the xref:management:jmx-monitoring.adoc[Monitoring with JMX section] for details.
 
 '''
 **How can I see debug level logs?**
 
 By changing the log level to "Debug". Below are example lines for **log4j** logging framework.
-See the <<logging-configuration, Logging Configuration section>> to learn how to set logging types.
+See the xref:clusters:logging-configuration.adoc[Logging Configuration section] to learn how to set logging types.
 
 First, set the logging type as follows.
 
@@ -421,7 +421,7 @@ Please keep in mind that two code snippets shown above are inherently racy.
 If member failures occur in the cluster after the safety condition check passes, termination of the local member can lead to data loss.
 For safety of the data, graceful shutdown API is highly recommended.
 
-NOTE: See the <<safety-checking-cluster-members, Safety Checking Cluster Members section>> for more information.
+NOTE: See the xref:management:cluster-utilities.adoc#safety-checking-cluster-members[Safety Checking Cluster Members section] for more information.
 
 
 '''
@@ -443,7 +443,7 @@ The only disadvantage when using Near Cache is that it may cause stale reads.
 **Is Hazelcast secure?**
 
 Hazelcast supports symmetric encryption, transport layer security/secure sockets layer (TLS/SSL) and
-Java Authentication and Authorization Service (JAAS). See the <<security, Security chapter>> for more information.
+Java Authentication and Authorization Service (JAAS). See the xref:security:security.adoc[Security chapter] for more information.
 
 
 '''
@@ -451,7 +451,7 @@ Java Authentication and Authorization Service (JAAS). See the <<security, Securi
 
 Hazelcast allows you to set some socket options such as `SO_KEEPALIVE`, `SO_SNDBUF` and
 `SO_RCVBUF` using Hazelcast configuration properties. See the `hazelcast.socket.*` properties explained in
-the <<system-properties, System Properties appendix>>.
+the xref:ROOT:system-properties.adoc[System Properties appendix].
 
 
 '''

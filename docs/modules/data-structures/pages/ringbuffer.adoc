@@ -346,8 +346,7 @@ Ringbuffer can be configured to check for a minimum number of available members 
 applying Ringbuffer operations. This is a check to avoid performing successful Ringbuffer
 operations on all parts of a cluster during a network partition and can be configured
 using the element `split-brain-protection-ref`. You should set this element's value as the quorum's name,
-which you configured under the `split-brain-protection` element as explained in the <<split-brain-protection,
-Split-Brain Protection section>>. Following is an example snippet:
+which you configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]. Following is an example snippet:
 
 [tabs] 
 ==== 
@@ -411,8 +410,7 @@ s.toCompletableFuture().join();
 ----
 
 In the above case, three strings are added to the Ringbuffer using the policy
-`OverflowPolicy.OVERWRITE`. See the <<setting-ringbuffer-overflow-policy, Overflow
-Policy section>> for more information.
+`OverflowPolicy.OVERWRITE`. See the <<setting-ringbuffer-overflow-policy, Overflow Policy section>> for more information.
 
 [[reading-batched-items]]
 == Reading Batched Items

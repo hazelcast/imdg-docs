@@ -33,7 +33,7 @@ The task handler is a descriptor class holding information for the scheduled fut
 
 The handler is always available after scheduling and can be stored in a plain string format `com.hazelcast.scheduledexecutor.ScheduledTaskHandler.toUrn()` and re-constructed back from that String `com.hazelcast.scheduledexecutor.ScheduledTaskHandler.of()`. If the handler is lost, you can still find a task under a given scheduler by using the Scheduler's `com.hazelcast.scheduledexecutor.IScheduledExecutorService.getAllScheduledFutures()`.
 
-Last but not least, similar to <<executor-service, executor service>>, the scheduled executor service allows Stateful tasks to be scheduled. Stateful tasks, are tasks that require any kind of state during their runtime, which must also be durable along with the task in the event of a lost partition.
+Last but not least, similar to xref:executor-service.adoc[executor service], the scheduled executor service allows Stateful tasks to be scheduled. Stateful tasks, are tasks that require any kind of state during their runtime, which must also be durable along with the task in the event of a lost partition.
 
 Stateful tasks can be created by implementing the `com.hazelcast.scheduledexecutor.StatefulTask` interface, providing implementation details for saving the state and loading it back. If a partition is lost, then the re-scheduled task loads the previously saved state before its execution.
 
@@ -134,7 +134,7 @@ long totalTaskRuns = stats.getTotalRuns(); // = 1
 
 == Split-Brain Protection for IScheduled Executor Service
 
-IScheduledExecutorService can be configured to check for a minimum number of available members before applying its operations (see the <<split-brain-protection, Split-Brain Protection section>>). This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
+IScheduledExecutorService can be configured to check for a minimum number of available members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]). This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
 The following is a list of methods, grouped by the operations, that support split-brain protection checks:
 
@@ -186,4 +186,4 @@ hazelcast:
 ----
 ====
 
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured under the `split-brain-protection` element as explained in the <<split-brain-protection, Split-Brain Protection section>>.
+The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

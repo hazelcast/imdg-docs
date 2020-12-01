@@ -9,8 +9,7 @@ standard configuration files:
 * `hazelcast-default.xml`: Default declarative XML configuration file for Hazelcast.
 The configuration for the distributed data structures in this XML file should
 be fine for most of the Hazelcast users. If not, you can tailor this XML file according
-to your needs by adding/removing/modifying properties. Also see the <<setting-up-clusters,
-Setting Up Clusters chapter>> for the network related configurations.
+to your needs by adding/removing/modifying properties. Also see the xref:clusters:setting-up-clusters.adoc[Setting Up Clusters chapter] for the network related configurations.
 * `hazelcast-default.yaml`: Default YAML configuration file identical to `hazelcast.xml` in content.
 * `hazelcast-full-example.xml`: Configuration file which includes all Hazelcast configuration
 elements and attributes with their descriptions. It is the "superset" of `hazelcast.xml`.
@@ -21,13 +20,13 @@ Hazelcast configuration file.
 `hazelcast-full-example.xml` in content.
 * `hazelcast-client-full-example.xml`: Complete Hazelcast Java client example configuration
 file which includes all configuration elements and attributes with their descriptions. Read
-more about Java client configuration <<configuring-java-client, here>>.
+more about Java client configuration xref:clients:java.adoc#configuring-java-client[here].
 * `hazelcast-client-full-example.yaml`: YAML configuration file identical to
 `hazelcast-client-full-example.xml` in content.
 * `hazelcast-client-failover-full-example.xml`: Complete Hazelcast client failover example
 configuration file which includes all Hazelcast client failover configuration elements and
 attributes with their descriptions. Read about Blue-Green Deployment and Disaster Recovery
-<<blue-green-deployment-and-disaster-recovery, here>>.
+xref:clients:java.adoc#blue-green-deployment-and-disaster-recovery[here].
 * `hazelcast-client-failover-full-example.yaml`: YAML configuration file identical to
 `hazelcast-client-failover-full-example.xml` in content.
 
@@ -310,7 +309,7 @@ hazelcast:
     - ${environment}-network-config.yaml
 ----
 
-NOTE: See the <<using-variables, Using Variables section>> to learn how you can set
+NOTE: See the xref:using-variables.adoc[Using Variables section] to learn how you can set
 the configuration elements with variables.
 
 [[configuring-declaratively-yaml]]

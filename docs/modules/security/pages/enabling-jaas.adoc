@@ -47,6 +47,6 @@ include::{javasource}/security/EnablingSecurity.java[tag=es]
 ----
 ====
 
-Also, see the <<setting-the-license-key, Setting License Key section>>
+Also, see the xref:installation:using-enterprise-edition.adoc#setting-the-license-key[Setting License Key section]
 for information on how to set your [blue]#Hazelcast IMDG Enterprise#
 license.

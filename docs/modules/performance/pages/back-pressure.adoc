@@ -74,4 +74,4 @@ Please note that back off timeout and controlling the number of
 pending async backups (sync window) is not supported on the client side.
 
 
-NOTE: See the <<system-properties, System Properties appendix>> to learn how to configure the system properties.
+NOTE: See the xref:ROOT:system-properties.adoc[System Properties appendix] to learn how to configure the system properties.

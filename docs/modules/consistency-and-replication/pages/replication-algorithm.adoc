@@ -9,11 +9,11 @@ accessed via `HazelcastInstance.getCPSubsytem()` which provides *CP* data struct
 
 NOTE: The replication algorithm and consistency model explained below apply
 to AP data structures only. For CP subsystem and CP data structures,
-see the <<cp-subsystem, CP Subsystem>> section.
+see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] section.
 
 For AP data structures, Hazelcast employs the combination of primary-copy and
 configurable lazy replication techniques. As briefly described in
-the <<data-partitioning, Data Partitioning section>>, each data entry is mapped to
+the xref:overview:data-partitioning.adoc[Data Partitioning section], each data entry is mapped to
 a single Hazelcast partition and put into replicas of that partition. One of
 the replicas is elected as the primary replica, which is responsible for
 performing operations on that partition. When you read or
@@ -29,7 +29,7 @@ an update operation for a key, it executes the update locally and
 propagates it to backup replicas. It marks each update with
 a logical timestamp so that backups apply them in the correct order and
 converge to the same state with the primary. Backup replicas can be used to
-scale reads (see the <<enabling-backup-reads, Enabling Backup Reads section>>) with
+scale reads (see the xref:data-structures:map.adoc#enabling-backup-reads[Enabling Backup Reads section]) with
 no strong consistency but monotonic reads guarantee.
 
 Hazelcast offers features such as _SplitBrainProtection_, _ILock_ and _AtomicLong_.
@@ -39,7 +39,7 @@ being a complete CP solution. Therefore, we recommend these features to be used 
 efficiency purposes in general, instead of correctness. For instance, they can be used to
 prevent to run a resource-extensive computation multiple times, which would not
 create any correctness problem if runs more than once. See the
-<<best-effort-consistency, Best-Effort Consistency>> and <<split-brain-syndrome, Network Partitioning>> sections
+<<best-effort-consistency, Best-Effort Consistency>> and xref:network-partitioning:network-partitioning.adoc[Network Partitioning] sections
 for more information.
 
 == Best-Effort Consistency

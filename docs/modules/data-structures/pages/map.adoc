@@ -57,14 +57,14 @@ image:ROOT:1Node.png[Map Entries in a Single Member]
 NOTE: Please note that some of the partitions do not contain any data entries since
 we only have 120 objects and the partition count is 271 by default. This count is
 configurable and can be changed using the system property `hazelcast.partition.count`.
-See the <<system-properties, System Properties appendix>>.
+See the xref:ROOT:system-properties.adoc[System Properties appendix].
 
 [[creating-a-member-for-map-backup]]
 == Creating A Member for Map Backup
 
 Now let's create a second member by running the above code again. This creates a
 cluster with two members. This is also where backups of entries are created - remember
-the backup partitions mentioned in the <<hazelcast-overview, Hazelcast Overview section>>.
+the backup partitions mentioned in the xref:overview:hazelcast-overview.adoc[Hazelcast Overview section].
 The following illustration shows two members and how the data and its backup is distributed.
 
 image:ROOT:2Nodes.png[Map Entries with Backups in Two Members]
@@ -184,7 +184,7 @@ hazelcast:
 ----
 ====
 
-See <<consistency-and-replication-model, Consistency and Replication Model>> for more detail.
+See xref:consistency-and-replication:consistency.adoc[Consistency and Replication Model] for more detail.
 
 NOTE: Backups increase memory usage since they are also kept in memory.
 
@@ -252,7 +252,7 @@ Hazelcast supports policy-based eviction for distributed maps. Currently support
 LRU (Least Recently Used) and LFU (Least Frequently Used).
 
 Hazelcast Map uses the same eviction mechanism as the JCache implementation.
-See the <<eviction-algorithm, Eviction Algorithm section>> for details.
+See the xref:jcache:icache.adoc#eviction-algorithm[Eviction Algorithm section] for details.
 
 [[understanding-map-eviction]]
 === Understanding Map Eviction
@@ -685,7 +685,7 @@ data will be stored in the memory. You have the following format options:
 binary format. You can use this option if you mostly perform regular map
 operations, such as `put` and `get`.
 * `OBJECT`: The data is stored in deserialized form. This configuration is
-good for maps where <<entry-processor, entry processing>> and <<how-distributed-query-works, queries>> form the majority of all
+good for maps where xref:computing:entry-processor.adoc[entry processing] and xref:query:how-distributed-query-works.adoc[queries] form the majority of all
 operations and the objects are complex, making the serialization cost comparatively
 high. By storing objects, entry processing does not contain the deserialization
 cost. Note that when you use `OBJECT` as the in-memory format, the key is still
@@ -761,18 +761,18 @@ hazelcast:
 ====
 
 Keep in mind that you should have already enabled the High-Density Memory Store
-usage for your cluster. See the <<configuring-high-density-memory-store, Configuring High-Density Memory Store section>>.
+usage for your cluster. See the xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[Configuring High-Density Memory Store section].
 
 You can also benefit from the persistent memory technologies such as
 Intel(R) Optane(TM) DC to be used by the High-Density Memory Store. See the
-<<using-persistent-memory, Using Persistent Memory section>>.
+xref:storage:high-density-memory.adoc#using-persistent-memory[Using Persistent Memory section].
 
 [[required-configuration-changes-when-using-native]]
 === Required Configuration Changes When Using NATIVE
 
 Note that the eviction mechanism is different for `NATIVE` in-memory format.
 The new eviction algorithm for map with High-Density Memory Store is similar
-to that of JCache with High-Density Memory Store and is described <<eviction-algorithm, here>>.
+to that of JCache with High-Density Memory Store and is described xref:jcache:icache.adoc#eviction-algorithm[here].
 
 [tabs] 
 ==== 
@@ -809,14 +809,14 @@ hazelcast:
 * Near Cache eviction policy `ENTRY_COUNT` cannot be used for
 `max-size-policy`.
 
-NOTE: See the <<high-density-memory-store, High-Density Memory Store section>>
+NOTE: See the xref:storage:high-density-memory.adoc[High-Density Memory Store section]
 for more information.
 
 == Metadata Policy
 
 Hazelcast IMap offers automatic preprocessing of various data types on the
 update time to make queries faster. It is currently supported only by the
-<<querying-json-strings, HazelcastJsonValue>> type. When metadata creation
+xref:query:how-distributed-query-works.adoc#querying-json-strings[HazelcastJsonValue] type. When metadata creation
 is on, IMap creates additional metadata about the objects of supported types
 and uses this metadata during the querying. It does not affect the latency
 and throughput of the object of any type except the supported types.
@@ -883,7 +883,7 @@ method loads that entry from the data store. This loaded entry is placed
 into the map and will stay there until it is removed or evicted.
 
 All loads can be listened via `EntryLoadedListener`. See the
-<<listening-for-map-events, Listening for Map Events section>>
+xref:events:object-events.adoc#listening-for-map-events[Listening for Map Events section]
 to learn how you can catch entry-based events.
 
 When a `MapStore` implementation is provided, an entry is also put into a
@@ -996,7 +996,7 @@ reached per-node maximum write-behind-queue capacity, subsequent put operations
 will fail with `ReachedMaxSizeException`. This exception is thrown to prevent
 uncontrolled grow of write-behind queues. You can set per-node maximum capacity
 using the system property `hazelcast.map.write.behind.queue.capacity`. See the
-<<system-properties, System Properties appendix>> for information on this property
+xref:ROOT:system-properties.adoc[System Properties appendix] for information on this property
 and how to set the system properties.
 
 
@@ -1121,7 +1121,7 @@ See https://github.com/hazelcast/hazelcast-code-samples/blob/master/hazelcast-in
 === Storing Entries to Multiple Maps
 
 A configuration can be applied to more than one map using wildcards
-(see <<using-wildcards, Using Wildcards>>), meaning that the configuration is
+(see xref:configuration:using-wildcards.adoc[Using Wildcards]), meaning that the configuration is
 shared among the maps. But `MapStore` does not know which entries to store
 when there is one configuration applied to multiple maps.
 
@@ -1169,7 +1169,7 @@ has two values: `LAZY` and `EAGER`. If `InitialLoadMode` is set to
 `EAGER`, all the data is loaded while the map is created and everything becomes
 ready to use. Also, if you add indices to your map with the
 {docBaseUrl}/javadoc/com/hazelcast/config/IndexConfig.html[IndexConfig^]
-class or the <<indexing-queries, `addIndex`>> method, then
+class or the xref:query:how-distributed-query-works.adoc#indexing-queries[`addIndex`] method, then
 `InitialLoadMode` is overridden and `MapStoreConfig` behaves as if `EAGER` mode is on.
 
 Here is the `MapLoader` initialization flow:
@@ -1417,7 +1417,7 @@ persistence mode is configured, before the value is removed from the memory, th
 
 The Hazelcast distributed map supports a local Near Cache for
 remotely stored entries to increase the performance of local
-read operations. See the <<near-cache, Near Cache section>> for a
+read operations. See the xref:performance:near-cache.adoc[Near Cache section] for a
 detailed explanation of the Near Cache feature and its configuration.
 
 [[locking-maps]]
@@ -1512,7 +1512,7 @@ In Hazelcast, use `IExecutorService` to submit a task to a key owner,
 or to a member or members. This is the recommended way to perform task executions,
 rather than using pessimistic or optimistic locking techniques. `IExecutorService`
 has fewer network hops and less data over wire, and tasks are executed very near to the data.
-See the <<data-affinity, Data Affinity section>>.
+See the xref:performance:data-affinity.adoc[Data Affinity section].
 
 [[solving-the-aba-problem]]
 === Solving the ABA Problem
@@ -1537,7 +1537,7 @@ strategy with the map `replace` method.
 
 Locks can be configured to check the number of currently present members
 before applying a locking operation. If the check fails, the lock operation
-fails with a `SplitBrainProtectionException` (see the <<split-brain-protection, Split-Brain Protection section>>).
+fails with a `SplitBrainProtectionException` (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 As pessimistic locking uses lock operations internally, it also uses the configured
 lock split-brain protection. This means that you can configure a lock split-brain protection with the same name or a
 pattern that matches the map name. Note that the split-brain protection for IMap locking actions can be
@@ -1665,14 +1665,14 @@ System.out.println ( "value           : " + entry.getValue() );
 [[map-listener]]
 == Map Listener
 
-See the <<listening-for-map-events, Listening for Map Events section>>.
+See the xref:events:object-events.adoc#listening-for-map-events[Listening for Map Events section].
 
 [[listening-to-map-entries-with-predicates]]
 == Listening to Map Entries with Predicates
 
 You can listen to the modifications performed on specific map entries.
 You can think of it as an entry listener with predicates. See the
-<<listening-for-map-events, Listening for Map Events section>> for
+xref:events:object-events.adoc#listening-for-map-events[Listening for Map Events section] for
 information on how to add entry listeners to a map.
 
 NOTE: The default backwards-compatible event publishing strategy only publishes
@@ -1747,7 +1747,7 @@ entryAdded:EntryEvent {Address[192.168.178.10]:5702} key=1,oldValue=null,
 value=Person{name= smith }, event=ADDED, by Member [192.168.178.10]:5702
 ```
 
-NOTE: See the <<continuous-query-cache, Continuous Query Cache section>>
+NOTE: See the xref:query:continuous-query-cache.adoc[Continuous Query Cache section]
 for more information.
 
 [[removing-map-entries-in-bulk-with-predicates]]
@@ -1815,7 +1815,7 @@ especially when the parameters are chosen by a user of your application.
 
 To prevent this, you can configure a maximum result size limit for query based operations.
 This is not a limit like `SELECT * FROM map LIMIT 100`, which you can achieve by a
-<<filtering-with-paging-predicates, Paging Predicate>>. A maximum result size limit
+xref:query:how-distributed-query-works.adoc#filtering-with-paging-predicates[Paging Predicate]. A maximum result size limit
 for query based operations is meant to be a last line of defense to prevent your members
 from retrieving more data than they can handle.
 
@@ -1865,5 +1865,5 @@ If a query exceeds this number of elements, a QueryResultSizeExceededException i
 * `hazelcast.query.max.local.partition.limit.for.precheck`: Maximum value of local partitions
 to trigger local pre-check for `Predicates#alwaysTrue()` query operations on maps.
 
-See the <<system-properties, System Properties appendix>> to see the full descriptions
+See the xref:ROOT:system-properties.adoc[System Properties appendix] to see the full descriptions
 of these properties and how to set them.

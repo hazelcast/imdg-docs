@@ -40,9 +40,9 @@ The benefits are:
 * simplified API
 * utilization of existing indexes.
 
-See the <<aggregations, Aggregations section>> for examples. If you
+See the xref:aggregations.adoc[Aggregations section] for examples. If you
 need a more powerful tool like MapReduce, then there is Hazelcast Jet.
-See its reference <<hazelcast-jet, here>> and https://jet.hazelcast.org/[website^]
+See its reference xref:ROOT:hazelcast-jet.adoc[here] and https://jet.hazelcast.org/[website^]
 for more information.
 
 == Jet Compared with New Aggregations

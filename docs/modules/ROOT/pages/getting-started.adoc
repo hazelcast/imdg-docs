@@ -7,7 +7,7 @@ a client application in your preferred language and monitor
 the cluster using Hazelcast Management Center.
 
 For a comprehensive overview of what Hazelcast IMDG actually is
-see <<what-is-hazelcast-imdg>>.
+see xref:overview:what-is-imdg.adoc[].
 
 == Installing
 
@@ -24,7 +24,7 @@ $ brew install hazelcast
 ----
 
 Currently, the CLI way is meant for development purposes, not for a production usage.
-For production or if you prefer other ways, take a look at <<installing-hazelcast-imdg>>.
+For production or if you prefer other ways, take a look at xref:installation:installing-upgrading.adoc[].
 
 == Creating a Cluster
 
@@ -231,7 +231,7 @@ func mapSampleRun() {
 
 For comprehensive information on the clients, see the following sections:
 
-* <<java-client, Java client>>
+* xref:clients:java.adoc[Java client]
 * https://github.com/hazelcast/hazelcast-cpp-client[C++ client]
 * https://github.com/hazelcast/hazelcast-csharp-client[C# client]
 * https://github.com/hazelcast/hazelcast-nodejs-client[Node.js client]
@@ -268,9 +268,9 @@ In this chapter, you have learnt starting a Hazelcast IMDG cluster,
 inserting data to it via clients and monitoring
 it through Management Center. Now, you may want to perform the following:
 
-* Form a cluster not just on your local machine: see xref:deploy:setting_up-clusters.adoc[Setting Up Clusters].
-* Start using our distributed data structures: see xref:reference:distributed_data-structures.adoc[Distributed Data Structures].
-* Learn how to configure Hazelcast IMDG: see xref:reference:understanding-configuration.adoc[Understanding Configuration].
+* Form a cluster not just on your local machine: see xref:clusters:setting-up-clusters.adoc[Setting Up Clusters].
+* Start using our distributed data structures: see xref:data-structures:distributed-data-structures.adoc[Distributed Data Structures].
+* Learn how to configure Hazelcast IMDG: see xref:configuration:understanding-configuration.adoc[Understanding Configuration].
 
 You can always reach out via https://slack.hazelcast.com/[Slack^],
 https://groups.google.com/forum/#!forum/hazelcast[Mail Group^] or http://www.stackoverflow.com[StackOverflow^].

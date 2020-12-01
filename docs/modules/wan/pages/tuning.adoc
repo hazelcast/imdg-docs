@@ -532,7 +532,7 @@ Collecting of WAN event batches and processing the responses from the target end
 This executor is shared between the other parts of the Hazelcast system and all of the WAN replication publishers will use
 the same executor. In some cases, you might want to create a dedicated executor for all WAN replication publishers.
 The name of this executor is `hz:wan`. Below is an example of a concrete, dedicated executor for WAN replication.
-See the <<configuring-executor-service, Configuring Executor Service section>> for more information on
+See the xref:computing:executor-service.adoc#configuring-executor-service[Configuring Executor Service section] for more information on
 the configuration options of the executor.
 
 [tabs] 
@@ -586,7 +586,7 @@ WAN sync can help bring those clusters in-sync.
 The benefit of the `ACK_ON_RECEIPT` value is that now the source cluster can
 send a new batch sooner, without waiting for the previous batch to be processed fully.
 
-NOTE: WAN synchronization strategies (neither the default nor the <<delta-wan-synchronization>>)
+NOTE: WAN synchronization strategies (neither the default nor the xref:advanced-features.adoc#delta-wan-synchronization[])
 don't synchronize the deletions since they are not yet tracked under WAN.
 
 The `max-concurrent-invocations` element controls the maximum number of

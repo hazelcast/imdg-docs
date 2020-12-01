@@ -2,7 +2,7 @@
 [[iatomiclong]]
 
 NOTE: `IAtomicLong` is a member of CP Subsystem API.
-For detailed information, see the <<cp-subsystem, CP Subsystem>> chapter.
+For detailed information, see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] chapter.
 
 Hazelcast `IAtomicLong` is the distributed implementation of
 `java.util.concurrent.atomic.AtomicLong`. It offers most of AtomicLong's operations

@@ -17,7 +17,7 @@ In the Java Executor framework, you implement tasks two ways: Callable or Runnab
 * Runnable: If you do not need to return a value, implement the task as `java.util.concurrent.Runnable`.
 
 
-Note that, the distributed executor service (`IExecutorService`) is intended to run processing where the data is hosted: on the server members. In general, you cannot run a Java Runnable or Callable on the clients as the clients may not be Java. Also, the clients do not host any data, so they would have to fetch what data they need from the servers potentially. If you want something to run on all or some clients connected to your cluster, you could implement this using the publish/subscribe mechanism; a payload could be sent to an <<topic, `ITopic`>> with the necessary execution parameters, and clients listening can act on the message.
+Note that, the distributed executor service (`IExecutorService`) is intended to run processing where the data is hosted: on the server members. In general, you cannot run a Java Runnable or Callable on the clients as the clients may not be Java. Also, the clients do not host any data, so they would have to fetch what data they need from the servers potentially. If you want something to run on all or some clients connected to your cluster, you could implement this using the publish/subscribe mechanism; a payload could be sent to an xref:data-structures:topic.adoc[`ITopic` with the necessary execution parameters, and clients listening can act on the message.
 
 == Implementing a Callable Task
 
@@ -57,7 +57,7 @@ include::{javasource}/distributedcomputing/MasterMember.java[tag=mm]
 
 Please note that the `Echo` callable in the above example also implements a Serializable interface, since it may be sent to another member to be processed.
 
-NOTE: When a task is deserialized, HazelcastInstance needs to be accessed. To do this, the task should implement `HazelcastInstanceAware` interface. See the <<implementing-hazelcastinstanceaware, HazelcastInstanceAware Interface section>> for more information.
+NOTE: When a task is deserialized, HazelcastInstance needs to be accessed. To do this, the task should implement `HazelcastInstanceAware` interface. See the xref:serialization:implementing-hazelcastinstanceaware.adoc[HazelcastInstanceAware Interface section] for more information.
 
 == Implementing a Runnable Task
 
@@ -291,7 +291,7 @@ Executor service configuration has the following elements:
 
 == Split-Brain Protection for IExecutorService
 
-IExecutorService can be configured to check for a minimum number of available members before applying its operations (see the <<split-brain-protection, Split-Brain Protection section>>). This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
+IExecutorService can be configured to check for a minimum number of available members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]). This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
 The following is a list of methods, grouped by the operations, that support split-brain protection checks:
 
@@ -342,4 +342,4 @@ hazelcast:
 ----
 ====
 
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured under the `split-brain-protection` element as explained in the <<split-brain-protection, Split-Brain Protection section>>.
+The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

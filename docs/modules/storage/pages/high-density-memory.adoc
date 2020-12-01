@@ -32,11 +32,11 @@ next to the heap in a native memory region.
 High-Density Memory Store is currently provided for the following Hazelcast
 features and implementations:
 
-* <<using-high-density-memory-store-with-map, Map>>
-* <<icache-configuration, JCache Implementation>>
-* <<near-cache, Near Cache>>
-* <<hot-restart-persistence, Hot Restart Persistence>>
-* <<using-high-density-memory-store-with-java-client, Java Client>>, when using the Near Cache for client
+* xref:data-structures:map.adoc#using-high-density-memory-store-with-map[Map]
+* xref:jcache:icache.adoc#icache-configuration[JCache Implementation]
+* xref:performance:near-cache.adoc[Near Cache]
+* xref:storage:hot-restart-persistence.adoc[Hot Restart Persistence]
+* xref:clients:java.adoc#using-high-density-memory-store-with-java-client[Java Client], when using the Near Cache for client
 * https://github.com/hazelcast/hazelcast-wm#using-high-density-memory-store[Web Session Replications^]
 * https://github.com/hazelcast/hazelcast-hibernate[Hibernate 2nd Level Caching^]
 * Paging and Partition Predicates
@@ -156,7 +156,7 @@ hazelcast:
 
 NOTE: You can check whether there is enough free physical memory for the
 requested number of bytes using the system property `hazelcast.hidensity.check.freememory`.
-See the <<system-properties, System Properties appendix>> on how to use Hazelcast
+See the xref:ROOT:system-properties.adoc[System Properties appendix] on how to use Hazelcast
 system properties.
 
 [[using-persistent-memory]]
@@ -164,7 +164,7 @@ system properties.
 
 NOTE: The High-Density Memory Store uses the persistent memory in its volatile mode,
 which means all data is lost after the instance restarts. For durability, please check
-the <<hot-restart-persistence, Hot Restart Persistence>> feature.
+the xref:hot-restart-persistence.adoc[Hot Restart Persistence] feature.
 
 To support larger and more affordable storage for data structures like IMap,
 ICache and Near Cache, Hazelcast provides integration with persistent memory

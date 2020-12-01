@@ -24,5 +24,5 @@ example Hazelcast configuration when integrated with Spring:
 </hz:hazelcast>
 ----
 
-See the <<integration-with-spring, Integration with Spring section>> for
+See the xref:integrated-clustering:spring.adoc[Integration with Spring section] for
 more information on Hazelcast-Spring integration.

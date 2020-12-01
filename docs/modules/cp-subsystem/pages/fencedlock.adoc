@@ -7,7 +7,7 @@ consensus algorithm. It offers linearizability during crash-stop failures and
 network partitions. If a network partition occurs, it remains available on at
 most one side of the partition.
 
-`FencedLock` works on top of CP sessions. Please see <<cp-sessions, CP Sessions>>
+`FencedLock` works on top of CP sessions. Please see xref:sessions.adoc[CP Sessions]
 section for more information about CP sessions.
 
 By default, `FencedLock` is reentrant. Once a caller acquires the lock, it can
@@ -18,7 +18,7 @@ You can also set a custom reentrancy limit. When the reentrancy limit is
 already reached, `FencedLock` does not block a lock call. Instead, it fails
 with `LockAcquireLimitReachedException` or a specified return value. Please
 check the locking methods to see details about the behavior and
-<<fencedlock-configuration, FencedLock Configuration section>> for
+xref:configuration.adoc#fencedlock-configuration[FencedLock Configuration section] for
 the configuration.
 
 Distributed locks are unfortunately *not equivalent* to single-node mutexes

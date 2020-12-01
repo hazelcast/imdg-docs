@@ -1,7 +1,7 @@
 = Global Serializer
 
 The global serializer is identical to
-<<custom-serialization, custom serializers>> from the implementation perspective.
+xref:custom-serialization.adoc[custom serializers] from the implementation perspective.
 The global serializer is registered as a fallback serializer to handle all other objects if a serializer cannot be located for them.
 
 By default, the global serializer does not handle `java.io.Serializable` and `java.io.Externalizable` instances.
@@ -9,7 +9,7 @@ However, you can configure it to be responsible for those instances.
 
 A custom serializer should be registered for a specific class type.
 The global serializer handles all class types if all the steps in searching for
-a serializer fail as described in <<serialization-interface-types, Serialization Interface Types>>.
+a serializer fail as described in xref:interface-types.adoc[Serialization Interface Types].
 
 The following are some use cases:
 
@@ -19,7 +19,7 @@ The following are some use cases:
 `overrideJavaSerialization` option of the global serializer configuration.
 
 Any custom serializer can be used as the global serializer.
-See the <<custom-serialization, Custom Serialization section>> for implementation details.
+See the xref:custom-serialization.adoc[Custom Serialization section] for implementation details.
 
 NOTE: To function properly, Hazelcast needs the Java serializable objects to be handled correctly.
 If the global serializer is configured to handle the Java serialization, the global serializer must

@@ -49,7 +49,7 @@ Map<Integer, String> customers = hazelcastInstance.getMap( "customers" );
 As to the configuration of distributed object, Hazelcast uses the default settings
 from the file `hazelcast.xml` that comes with your Hazelcast download. Of course,
 you can provide an explicit configuration in this XML or programmatically according
-to your needs. See the <<understanding-configuration, Understanding Configuration section>>.
+to your needs. See the xref:configuration:understanding-configuration.adoc[Understanding Configuration section].
 
 Note that, most of Hazelcast's distributed objects are created lazily, i.e., a distributed object
 is created once the first operation accesses it.

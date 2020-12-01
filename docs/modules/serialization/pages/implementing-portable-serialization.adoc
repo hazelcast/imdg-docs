@@ -247,5 +247,5 @@ a deserialization of a Portable `DistributedObject` if it gets an ID to be looke
 HazelcastInstance is set after deserialization, so you first need to store the ID and
 then retrieve the `DistributedObject` using the `setHazelcastInstance` method.
 
-NOTE: See the <<serialization-configuration-wrap-up, Serialization Configuration Wrap-Up section>>
+NOTE: See the xref:serialization-configuration.adoc[Serialization Configuration Wrap-Up section]
 for a full description of Hazelcast Serialization configuration elements.

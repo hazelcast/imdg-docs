@@ -285,7 +285,7 @@ You can specify the aforementioned out-of-the-box strategies or your custom
 partitioning strategy.
 
 You can also use other system property configuring options as explained in the
-<<configuring-with-system-properties, Configuring with System Properties section>>.
+xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties section].
 
 The per map and global (cluster) partitioning strategies are supported on the member side.
 Hazelcast IMDG Java clients only support the global strategy and it is configured

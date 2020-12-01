@@ -41,7 +41,7 @@ execute the Bron–Kerbosch algorithm and figure out the largest set of fully-co
 we need to gather those local failure detection data from all members. When partial network
 partitioning resolution mechanism is enabled, all members send their local failure detections
 (suspicions about other members) inside the usual heartbeat message.
-(See the <<failure-detector-configuration, Failure Detector Configuration section>>
+(See the xref:clusters:failure-detector-configuration.adoc[Failure Detector Configuration section]
 for more info about failure detectors.) The master (oldest) member in the cluster gathers all this
 information and executes the maximum clique algorithm and then decides the smallest set of Hazelcast members,
 if any, to kick from the cluster so that the remaining members are fully-connected to each other again.

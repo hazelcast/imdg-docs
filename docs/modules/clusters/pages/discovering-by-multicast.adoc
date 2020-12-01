@@ -7,7 +7,7 @@ concrete addresses of the other members, as they just multicast to all the other
 for listening. Whether multicast is possible or allowed depends on your environment.
 
 To set your Hazelcast to multicast auto-discovery, set the following configuration
-elements. See the <<multicast-element, multicast element section>> for the full
+elements. See the xref:clusters:network-configuration.adoc#multicast-element[multicast element section] for the full
 description of the multicast discovery configuration elements.
 
 * Set the `enabled` attribute of the `multicast` element to `true`.
@@ -73,4 +73,4 @@ might give up too early and create their own cluster.
 
 NOTE: Multicast auto-discovery is not supported for Hazelcast native clients yet.
 However, we offer Multicast Discovery Plugin for this purpose. See the
-<<discovering-native-clients, Discovering Native Clients section>>.
+xref:discovering-native-clients.adoc[Discovering Native Clients section].

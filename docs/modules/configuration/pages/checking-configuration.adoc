@@ -2,7 +2,7 @@
 [[checking-configuration]]
 
 When you start a Hazelcast member without passing a `Config` object, as explained
-in the <<configuring-programmatically, Configuring Programmatically section>>,
+in the xref:configuring-programmatically.adoc[Configuring Programmatically section],
 Hazelcast checks the member's configuration as follows:
 
 * First, it looks for the `hazelcast.config` system property. If it is set, its

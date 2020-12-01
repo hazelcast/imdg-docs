@@ -2,7 +2,7 @@
 [[isemaphore]]
 
 NOTE: `ISemaphore` is a member of CP Subsystem API.
-For detailed information, see the <<cp-subsystem, CP Subsystem>> chapter.
+For detailed information, see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] chapter.
 
 Hazelcast ISemaphore is the distributed implementation of `java.util.concurrent.Semaphore`.
 
@@ -15,7 +15,7 @@ becomes available. When the execution is completed, the permit is released.
 
 TIP: `ISemaphore` with a single permit may be considered as a lock. Unlike the locks,
 when semaphores are used, any thread can release the permit depending on the configuration,
-and semaphores can have multiple permits. For more information, see the <<semaphore-configuration, Semaphore Configuration section>>.
+and semaphores can have multiple permits. For more information, see the xref:cp-subsystem:configuration.adoc#semaphore-configuration[Semaphore Configuration section].
 
 WARNING: Hazelcast ISemaphore does not support fairness at all times. There are some edge cases
 where the fairness is not honored, e.g., when the permit becomes available

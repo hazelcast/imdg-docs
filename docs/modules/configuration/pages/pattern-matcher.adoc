@@ -2,7 +2,7 @@
 [[configuration-pattern-matcher]]
 
 You can give a custom strategy to match an item name to a configuration pattern. By
-default Hazelcast uses a simplified wildcard matching. See <<using-wildcards, Using Wildcards section>>
+default Hazelcast uses a simplified wildcard matching. See xref:using-wildcards.adoc[Using Wildcards section]
 for this.
 A custom configuration pattern matcher can be given by using either member or client `config`
 objects, as shown below:

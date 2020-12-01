@@ -24,7 +24,7 @@ Hazelcast members if the new CP discovery round fails for any of
 the aforementioned reasons, because Hazelcast members are likely to contain
 data for AP data structures and their termination can cause data loss. Hence,
 you need to observe the cluster and check if the CP discovery process
-completes successfully on the CP Subsystem reset. See the <<cp-subsystem-management-apis, CP Subsystem Management APIs section>>
+completes successfully on the CP Subsystem reset. See the xref:management.adoc#cp-subsystem-management-apis[CP Subsystem Management APIs section]
 for more details.
 
 You can use the `CPSubsystemManagementService.awaitUntilDiscoveryCompleted(timeout, timeUnit)`

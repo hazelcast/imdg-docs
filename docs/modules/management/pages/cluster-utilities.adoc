@@ -51,7 +51,7 @@ You can use the script `cluster.sh`, which comes with the Hazelcast package, to
 get/change the state of your cluster, to shutdown your cluster and
 to force your cluster to clean its persisted data and make a fresh start.
 The latter is the Force Start operation of Hazelcast's Hot Restart Persistence feature.
-See the <<force-start, Force Start section>>.
+See the xref:storage:hot-restart-persistence.adoc#force-start[Force Start section].
 
 NOTE: The script `cluster.sh` uses `curl` command and `curl` must be installed to be able to use the script.
 
@@ -87,12 +87,12 @@ you should use this parameter to provide the IP address of a member to this scri
 |`-c` or `--clustername`
 |`dev`
 |Defines the name of a cluster which is used for a simple authentication.
-See the <<creating-cluster, Creating Clusters section>>.
+See the xref:clusters:creating-clusters.adoc[Creating Clusters section].
 
 |`-P` or `--password`
 |`dev-pass`
 |Defines the password of a cluster (valid only for Hazelcast releases older than 3.8.2).
-See the <<creating-cluster, Creating Clusters section>>.
+See the xref:clusters:creating-clusters.adoc[Creating Clusters section].
 
 |`-v` or `--version`
 |_no argument expected_
@@ -200,7 +200,7 @@ The following also gets the cluster state, using the alternative parameter names
 
 **Changing the cluster version:**
 
-See the <<rolling-member-upgrades, Rolling Member Upgrades chapter>> to learn more about the cases when you should change the cluster version.
+See the xref:installation:rolling-upgrades.adoc[Rolling Member Upgrades chapter] to learn more about the cases when you should change the cluster version.
 
 To change the cluster version to `X.Y`, use the following command:
 
@@ -248,10 +248,10 @@ the script <<using-the-script-cluster-sh, `cluster.sh`>>, you can also use REST 
 The following are the operations you can perform.
 
 NOTE: Some of the REST calls listed below need their REST endpoint groups to be enabled.
-See the <<using-the-rest-endpoint-groups, Using the REST Endpoint Groups section>> on how to enable them.
+See the xref:rest-endpoint-groups.adoc[Using the REST Endpoint Groups section] on how to enable them.
 
 Also note that the value of `$\{PASSWORD}` in the following calls is checked only if
-the security is <<enabling-jaas-security, enabled>> in Hazelcast IMDG, i.e., if you have Hazelcast IMDG Enterprise Edition.
+the security is xref:security:enabling-jaas.adoc[enabled] in Hazelcast IMDG, i.e., if you have Hazelcast IMDG Enterprise Edition.
 If the security is disabled, the `$\{PASSWORD}` can be left empty.
 
 [cols="5a"]
@@ -474,7 +474,7 @@ public class ExampleGetMemberEventsAndSets {
 }
 ----
 
-NOTE: See the <<listening-for-member-events, Membership Listener section>>
+NOTE: See the xref:events:cluster-events.adoc#listening-for-member-events[Membership Listener section]
 for more information on membership events.
 
 == Managing Cluster and Member States
@@ -526,7 +526,7 @@ when the cluster state changes to `ACTIVE`, re-partitioning starts and
 unassigned partition replicas are assigned to the active members.
 ** All other operations in the cluster, except migration, continue without restrictions.
 ** You cannot change the state of a cluster to `FROZEN` when migration/replication tasks are being performed.
-** You can make use of `FROZEN` state along with the <<hot-restart-persistence, Hot Restart Persistence>>
+** You can make use of `FROZEN` state along with the xref:storage:hot-restart-persistence.adoc[Hot Restart Persistence]
 feature. You can change the cluster state to `FROZEN`, then restart some of your members using
 the Hot Restart feature. The data on the restarting members will not be accessible but
 you will be able to access to the data that is stored in other members.
@@ -539,7 +539,7 @@ removed from the partition table if cluster state moves back to `ACTIVE`.
 ** This state rejects ALL operations immediately EXCEPT the read-only operations like
 `map.get()` and `cache.get()`, replication and cluster heartbeat tasks.
 ** You cannot change the state of a cluster to `PASSIVE` when migration/replication tasks are being performed.
-** You can make use of `PASSIVE` state along with the <<hot-restart-persistence, Hot Restart Persistence>>
+** You can make use of `PASSIVE` state along with the xref:storage:hot-restart-persistence.adoc[Hot Restart Persistence]
 feature. See the {docBaseUrl}/javadoc/com/hazelcast/cluster/Cluster.html#shutdown--[Cluster Shutdown API^]
 for more info.
 * **`IN_TRANSITION`**:
@@ -643,7 +643,7 @@ public class ExampleMemberAttributes {
 
 For another example, you can tag some members with a filter so that
 a member in the cluster can load classes from those tagged members.
-See the <<member-user-code-deployment, User Code Deployment section>> for more information.
+See the xref:clusters:deploying-code-on-member.adoc[User Code Deployment section] for more information.
 
 You can also define your member attributes through declarative configuration and
 start your member afterwards. Here is how you can use the declarative approach:

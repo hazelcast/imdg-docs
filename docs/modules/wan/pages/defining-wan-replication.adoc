@@ -16,12 +16,12 @@ You can use only one of these (not both) when defining a single WAN publisher.
 The examples in this section uses Hazelcast's built-in WAN replication implementation.
 This implementation meets most of your WAN replication needs and is configured using the
 `batch-publisher` element, which you will see in the below examples. Hazelcast also allows you
-to build your own implementation; see the <<defining-custom-wr, Advanced Features section>>
+to build your own implementation; see the xref:advanced-features.adoc#defining-custom-wr[Advanced Features section]
 for details in case you need more custom configurations.
 
 The default settings for WAN Replication configuration suit most use cases. If, however, you have specific needs or if you
 would like to fine-tune the behavior of WAN Replication for your application, see the
-<<tuning-wr, Fine-Tuning WAN Replication section>>.
+xref:tuning.adoc[Fine-Tuning WAN Replication section].
 
 Let's see how we configure a simple WAN replication using the static endpoints and Discovery SPI, and
 then let's see the configuration details of Hazelcast's built-in WAN replication implementation.
@@ -110,7 +110,7 @@ Please notice that the WAN Replication configuration is referenced in map and ca
 
 The default settings for WAN Replication will suit most use cases. If, however, you have specific needs or if you
 would like to fine-tune the behavior of WAN Replication for your application, please refer to the
-<<tuning-wr, Fine-Tuning WAN Replication>> section for more information.
+xref:tuning.adoc[Fine-Tuning WAN Replication section] section for more information.
 
 [[wanbatchreplication-discovery-spi]]
 == Using the Discovery SPI
@@ -130,7 +130,7 @@ https://github.com/hazelcast/hazelcast-gcp[Hazelcast GCP discovery plugin^], or 
 You can store the list of IP addresses in those infrastructures and use these plugins
 to read from that list.
 
-For more advanced cases, you can provide your own <<discovery-spi, Discovery SPI>> implementation with custom logic for
+For more advanced cases, you can provide your own xref:extending-hazelcast:discovery-spi.adoc[Discovery SPI] implementation with custom logic for
 determining the WAN target endpoints such as looking up the endpoints in some service registry or even
 reading the endpoint addresses from a file.
 
@@ -330,8 +330,8 @@ class (in the programmatic configuration) when defining a WAN replication publis
 
 The WAN batch publisher transmits WAN events (map and cache updates) between clusters in batches. It waits until:
 
-* a pre-defined number of replication events are generated, (see the <<batch-size, Batch Size section>>)
-* or a pre-defined amount of time is passed (see the <<batch-maximum-delay, Batch Maximum Delay section>>).
+* a pre-defined number of replication events are generated, (see the xref:tuning.adoc#batch-size[Batch Size section])
+* or a pre-defined amount of time is passed (see the xref:tuning.adoc#batch-maximum-delay[Batch Maximum Delay section]).
 
 Here is a declarative example on using and configuring `batch-publisher`:
 
@@ -419,7 +419,7 @@ It is optional to set this attribute. If this ID is not specified, the `cluster-
 It is enough to specify some of the member IP/ports available in the target cluster, i.e., you don’t need to
 provide the IP/ports of all members in there. WAN does not perform the discovery of other members in the target cluster;
 it only expects that the IP addresses you provide are available.
-* `sync`: Configuration for the WAN sync mechanism. See the <<synchronizing-wan-clusters, Synchronizing WAN Clusters section>>.
+* `sync`: Configuration for the WAN sync mechanism. See the xref:advanced-features.adoc#synchronizing-wan-clusters[Synchronizing WAN Clusters section].
 * `discovery-strategies`: Set its `enabled` attribute to true for discovery in various cloud infrastructures.
 You can define multiple discovery strategies using the `discovery-strategy` sub-element and its elements.
 See the <<wanbatchreplication-discovery-spi, Using the Discovery SPI section>> for this and the below elements.

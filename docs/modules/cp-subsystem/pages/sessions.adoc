@@ -22,7 +22,7 @@ A session is closed when the caller does not touch the session during a
 predefined duration. In this case, the caller is assumed to be crashed and all
 its resources are released automatically. This duration is specified in
 `CPSubsystemConfig.getSessionTimeToLiveSeconds()`. See
-the <<cp-subsystem-configuration, CP Subsystem Configuration section>> for
+the xref:configuration.adoc[CP Subsystem Configuration section] for
 recommendations to choose a reasonable session time-to-live duration.
 
 Sessions offer a trade-off between liveliness and safety. If you set a very
@@ -35,5 +35,5 @@ time-to-live duration. If a session owner is known to be crashed, its session
 could be closed manually via
 `CPSessionManagementService.forceCloseSession(String, long)`.
 
-See the <<cp-subsystem-configuration, CP Subsystem Configuration section>> for
+See the xref:configuration.adoc[CP Subsystem Configuration section] for
 more details.

@@ -21,7 +21,7 @@ HazelcastInstance hazelcast = Hazelcast.newHazelcastInstance( config );
 NOTE: The `Config` must not be modified after the Hazelcast instance is started.
 In other words, all configuration must be completed before creating the `HazelcastInstance`.
 Certain additional configuration elements can be added at runtime as described in the
-<<dynamically-adding-data-structure-configuration-on-a-cluster, Dynamically Adding Data Structure Configuration on a Cluster section>>.
+xref:dynamic-data-structure-configuration.adoc[Dynamically Adding Data Structure Configuration on a Cluster section].
 
 You can also create a named Hazelcast member. In this case, you should set `instanceName`
 of `Config` object as shown below:

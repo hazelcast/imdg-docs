@@ -64,13 +64,13 @@ discard the differences.
 
 `MapStore` and `QueueStore` do not participate in transactions.
 Hazelcast suppresses exceptions thrown by the store in a transaction.
-See the <<providing-xa-transactions, XA Transactions section>> for
+See the xref:providing-xa-transactions.adoc[XA Transactions section] for
 further information.
 
 == ONE_PHASE vs. TWO_PHASE
 
-As discussed in <<creating-a-transaction-interface, Creating a Transaction
-Interface>>, when you choose ONE_PHASE as the transaction type, Hazelcast
+As discussed in xref:creating-a-transaction-interface.adoc[Creating a Transaction
+Interface], when you choose ONE_PHASE as the transaction type, Hazelcast
 tracks all changes you make locally in a commit log, i.e., a list of
 changes. In this case, all the other members are asked to agree that the
 commit can succeed and once they agree, Hazelcast starts to write the changes.

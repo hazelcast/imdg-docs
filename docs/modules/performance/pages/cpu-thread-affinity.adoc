@@ -39,7 +39,7 @@ You can also combine those, e.g., `1,2,[5-7],[10,12,16]:2`.
 Note that, the syntax for CPU thread affinity shown above not only determines
 the mapping of CPUs to threads, it also determines the thread count.
 If you use CPU thread affinity, e.g., `hazelcast.io.input.thread.affinity`,
-then `hazelcast.io.input.thread.count` is ignored. See <<io-threading>> for more
+then `hazelcast.io.input.thread.count` is ignored. See xref:threading-model.adoc#io-threading[] for more
 information on specifying explicit thread counts.
 
 If you don't configure affinity for a category of threads, it means they can run on any CPU.

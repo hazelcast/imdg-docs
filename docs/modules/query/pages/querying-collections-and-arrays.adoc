@@ -62,7 +62,7 @@ collection’s elements must be of the same concrete type within that collection
 attribute.
 
 Consider custom attribute extractors if it is impossible or undesirable to reduce
-the variety of types to a single type. See the <<custom-attributes, Custom Attributes section>>
+the variety of types to a single type. See the xref:custom-attributes.adoc[Custom Attributes section]
 for information on them.
 ====
 

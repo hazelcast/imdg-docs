@@ -94,5 +94,5 @@ Subsystem. For instance, a new CP group cannot be created. In this case,
 the only solution is to wipe-out the whole CP Subsystem state by performing
 a force-reset via `CPSubsystemManagementService.reset()`.
 
-See <<cp-subsystem-management-apis, CP Subsystem Management APIs section>> for
+See xref:management.adoc#cp-subsystem-management-apis[CP Subsystem Management APIs section] for
 more details.

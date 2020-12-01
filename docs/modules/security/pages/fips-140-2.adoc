@@ -24,7 +24,7 @@ version to learn how to enable the FIPS mode. Usually it means changing the
 list of security providers in the `java.security` JRE configuration file.
 
 Hazelcast is only responsible for enabling the OpenSSL native library into
-FIPS mode (see the <<integrating-openssl-boringssl, Integrating OpenSSL section>>).
+FIPS mode (see the xref:security:integrating-openssl.adoc[Integrating OpenSSL section]).
 If the Hazelcast cluster configuration enables TLS communication using the
 native OpenSSL library, you have to enable its FIPS mode in the Hazelcast
 `OpenSSLEngineFactory` configuration.

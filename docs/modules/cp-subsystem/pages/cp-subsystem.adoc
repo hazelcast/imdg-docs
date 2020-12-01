@@ -2,10 +2,10 @@
 
 WARNING: **CP Subsystem operates in _the unsafe mode_ by default without
 the strong consistency guarantee.** See the
-<<cp-subsystem-unsafe-mode, CP Subsystem Unsafe Mode>> section for more
+xref:unsafe-mode.adoc[CP Subsystem Unsafe Mode] section for more
 information. You should set a positive number to the CP member count
 configuration to enable CP Subsystem and use it with the strong consistency
-guarantee. See the <<cp-subsystem-configuration, CP Subsystem Configuration>>
+guarantee. See the xref:configuration.adoc[CP Subsystem Configuration]
 section for details.
 
 CP Subsystem is a component of a Hazelcast cluster that builds a strongly
@@ -91,7 +91,7 @@ or semaphore acquire request, and then periodically commits session heartbeats
 to this CP group in order to indicate its liveliness. It means that if CP
 locks and semaphores are distributed to multiple CP groups, there will be
 a session management overhead on each CP group. See
-the <<cp-sessions, CP Sessions section>> for more details. For these reasons,
+the xref:sessions.adoc[CP Sessions section] for more details. For these reasons,
 we recommend developers to use a minimal number of CP groups. For most use
 cases, _the DEFAULT CP group_ should be sufficient to maintain all CP data
 structure instances. Custom CP groups is recommended only when you benchmark
@@ -105,11 +105,11 @@ for gradually losing majority of CP groups and eventually cause the total loss
 of availability of CP Subsystem. To prevent such situations, crashed CP members
 can be removed from CP Subsystem and replaced in CP groups with other available
 CP members. This flexibility provides a good degree of fault tolerance at
-run-time. See the <<cp-subsystem-configuration, CP Subsystem Configuration section>>
-and <<cp-subsystem-management, CP Subsystem Management section>> for more
+run-time. See the xref:configuration.adoc[CP Subsystem Configuration section]
+and xref:management.adoc[CP Subsystem Management section] for more
 details. Moreover, CP Subsystem Persistence enables more robustness. When it is
 enabled, CP members persist their local state to stable storage and can restore
-their state after crashes. See the <<cp-subsystem-persistence, CP Subsystem Persistence section>>
+their state after crashes. See the xref:persistence.adoc[CP Subsystem Persistence section]
 for more details.
 
 **API Code Sample:**

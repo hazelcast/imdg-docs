@@ -47,8 +47,7 @@ include::{javasource}/dds/ExampleCardinalityEstimator.java[tag=ces]
 == Split-Brain Protection for Cardinality Estimator
 
 Cardinality Estimator can be configured to check for a minimum number of
-available members before applying its operations (see the <<split-brain-protection,
-Split-Brain Protection section>>). This is a check to avoid performing successful queue
+available members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]). This is a check to avoid performing successful queue
 operations on all parts of a cluster during a network partition.
 
 The following is a list of methods, grouped by the protection types, that support
@@ -98,7 +97,7 @@ hazelcast:
 
 The value of `split-brain-protection-ref` should be the split-brain protection configuration name
 which you configured under the `split-brain-protection` element as explained in the
-<<split-brain-protection, Split-Brain Protection section>>.
+xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
 
 **Configuring Merge Policy**
 

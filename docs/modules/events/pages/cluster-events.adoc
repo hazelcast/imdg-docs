@@ -550,5 +550,5 @@ Spring::
 ====
 
 NOTE: You can also add event listeners to a Hazelcast client. See the
-<<configuring-client-listeners, Client Listenerconfig section>> for the
+xref:clients:java.adoc#configuring-client-listeners[Client Listenerconfig section] for the
 related information.

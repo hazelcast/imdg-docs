@@ -55,5 +55,5 @@ or
 
 You will see Hazelcast system properties mentioned throughout this Reference Manual
 as required in some of the chapters and sections. All Hazelcast system properties
-are listed in the <<system-properties, System Properties appendix>> with their
+are listed in the xref:ROOT:system-properties.adoc[System Properties appendix] with their
 descriptions, default values and property types as a reference for you.

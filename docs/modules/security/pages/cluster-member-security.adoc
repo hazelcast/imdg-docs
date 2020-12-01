@@ -1,7 +1,7 @@
 = Cluster Member Security
 
 Hazelcast supports the standard Java Security (JAAS) based authentication
-between the cluster members. A <<security-realms, Security Realm>> can
+between the cluster members. A xref:security:security-realms.adoc[Security Realm] can
 be referenced by `<member-authentication/>` element to define authentication
 between the member and identity of the current member.
 

@@ -2,7 +2,7 @@
 [[lock]]
 
 NOTE: `FencedLock` is a member of CP Subsystem API.
-For detailed information, see the <<cp-subsystem, CP Subsystem>> chapter.
+For detailed information, see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] chapter.
 
 `FencedLock` is a linearizable and distributed implementation of
 `java.util.concurrent.locks.Lock`, meaning that if you lock using a `FencedLock`,
@@ -10,7 +10,7 @@ the critical section that it guards is guaranteed to be executed by only one thr
 in the entire cluster. Even though locks are great for synchronization, they can lead
 to problems if not used properly. Also note that Hazelcast Lock does not support fairness.
 
-NOTE: For detailed information and configuration, see the <<fencedlock, FencedLock section>>
+NOTE: For detailed information and configuration, see the xref:cp-subsystem:fencedlock.adoc[FencedLock section]
 under the CP Subsystem chapter.
 
 [[using-try-catch-blocks-with-locks]]

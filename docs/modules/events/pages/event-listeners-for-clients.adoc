@@ -4,20 +4,20 @@ You can add event listeners to Hazelcast clients.
 You can configure the following listeners to listen to the events
 on the client side:
 
-* <<listening-for-lifecycle-events, Lifecycle Listener>>: Notifies
+* xref:cluster-events.adoc#listening-for-lifecycle-events[Lifecycle Listener]: Notifies
 when the client is starting, started, shutting down and shutdown.
-* <<listening-for-member-events, Membership Listener>>: Notifies when
+* xref:cluster-events.adoc#listening-for-member-events[Membership Listener]: Notifies when
 a member joins to/leaves the cluster to which the client is connected,
 or when an attribute is changed in a member.
-* <<listening-for-distributed-object-events, Distributed Object Listener>>:
+* xref:cluster-events.adoc#listening-for-distributed-object-events[Distributed Object Listener]:
 Notifies when a distributed object is created or destroyed throughout
 the cluster to which the client is connected. Also notifies for the events
 happening in the distributed data structures, e.g., entry, item and message
 listeners.
 
 For Hazelcast Java client example code/configuration snippets, see the
-sections of the current chapter, i.e., <<distributed-events, Distributed Events>>.
-See also the <<configuring-client-listeners, Configuring Client Listeners section>>
+sections of the current chapter, i.e., xref:distributed-events.adoc[Distributed Events].
+See also the xref:clients:java.adoc#configuring-client-listeners[Configuring Client Listeners section]
 for more information.
 
 Follow the below links to learn how to configure the event listeners on other

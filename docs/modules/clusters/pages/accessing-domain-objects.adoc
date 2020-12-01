@@ -29,7 +29,7 @@ back without the class of the domain object on the classpath. Here is a read exa
          });
 ----
 
-An alternative approach introduced in the previous Hazelcast IMDG releases is the <<member-user-code-deployment, User Code Deployment>>
+An alternative approach introduced in the previous Hazelcast IMDG releases is the xref:clusters:deploying-code-on-member.adoc[User Code Deployment]
 feature to deploy the classes from the client to the cluster.
 However, it has a restriction: you can not upload
 a new version of your class to the cluster if you use the portable versioning support.

@@ -1,6 +1,6 @@
 = Implementing DataSerializable
 
-As mentioned in <<implementing-java-serializable-and-externalizable, Implementing Java Serializable & Externalizable>>,
+As mentioned in xref:implementing-java-serializable.adoc[Implementing Java Serializable & Externalizable],
 Java serialization is an easy mechanism.
 However, it does not control how fields are serialized or deserialized.
 Moreover, Java serialization can lead to excessive CPU loads since it keeps track of
@@ -69,7 +69,7 @@ NOTE: `DataSerializable` is a good option if serialization is only needed for in
 
 NOTE: `DataSerializable` is not supported by non-Java clients as it uses Java reflection.
 If you need non-Java clients, please use <<identifieddataserializable, IdentifiedDataSerializable>> or
-<<implementing-portable-serialization, Portable>>.
+xref:implementing-portable-serialization.adoc[Portable].
 
 == IdentifiedDataSerializable
 
@@ -211,7 +211,7 @@ hazelcast:
 ----
 ====
 
-NOTE: See the <<serialization-configuration-wrap-up, Serialization Configuration Wrap-Up section>>
+NOTE: See the xref:serialization-configuration.adoc[Serialization Configuration Wrap-Up section]
 for a full description of Hazelcast Serialization configuration.
 
 When using a client/server deployment, you also need to register the implemented factory on

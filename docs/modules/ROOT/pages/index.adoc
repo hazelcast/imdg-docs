@@ -17,7 +17,7 @@ programming language, it has the following clients and programming language APIs
 * Go
 
 We recommend you to learn the basics of Hazelcast IMDG using this manual first. Then,
-you can always get the client related resources/links in the <<hazelcast-clients, Clients chapter>>.
+you can always get the client related resources/links in the xref:clients:hazelcast-clients.adoc[Clients chapter].
 
 [[hazelcast-imdg-editions]]
 == Editions
@@ -44,7 +44,7 @@ Hazelcast IMDG and Hazelcast Reference Manual are free and provided under the Ap
 Version 2.0. Hazelcast IMDG Pro and Enterprise are commercially
 licensed by Hazelcast, Inc.
 
-For more detailed information on licensing, see the <<license-questions, License Questions appendix>>.
+For more detailed information on licensing, see the xref:ROOT:licenses.adoc#license-questions[License Questions appendix].
 
 [[trademarks]]
 == Trademarks

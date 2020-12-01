@@ -63,7 +63,7 @@ cluster membership manager. These functions take advantage of the heartbeat
 and other failure-detector information configured on
 the Hazelcast members.
 
-For more information, see the <<consistency-and-replication-model, Consistency and Replication Model chapter>>.
+For more information, see the xref:consistency-and-replication:consistency.adoc[Consistency and Replication Model chapter].
 
 == Configuring Split-Brain Protection
 
@@ -132,7 +132,7 @@ include::{javasource}/networkpartitioning/MemberCountSplitBrainProtection.java[t
 === Probabilistic Split-Brain Protection Function
 
 The probabilistic split-brain protection function uses a private instance of
-<<phi-accrual-failure-detector, Phi Accrual Cluster Failure Detector>> which is
+xref:clusters:failure-detector-configuration.adoc#phi-accrual-failure-detector[Phi Accrual Cluster Failure Detector] which is
 updated with member heartbeats and its parameters can be fine-tuned to
 determine the count of live members in the cluster, independently of
 the cluster's membership manager.

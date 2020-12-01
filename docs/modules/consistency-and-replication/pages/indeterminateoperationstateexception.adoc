@@ -1,6 +1,6 @@
 = IndeterminateOperationStateException
 
-As described in <<invocation-lifecycle, Invocation Lifecycle>> section,
+As described in xref:invocation-lifecycle.adoc[Invocation Lifecycle] section,
 for partition-based *mutating* invocations, such as `map.put()`,
 a caller waits with a timeout for the operation that is executed on
 corresponding partition's primary replica and backup replicas, based on

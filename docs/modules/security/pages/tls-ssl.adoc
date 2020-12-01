@@ -1,7 +1,7 @@
 = TLS/SSL
 [[tlsssl]]
 
-NOTE: You cannot use TLS/SSL when <<encryption, Hazelcast Encryption>>
+NOTE: You cannot use TLS/SSL when xref:encryption.adoc[Hazelcast Encryption]
 is enabled.
 
 You can use the SSL (Secure Sockets Layer)

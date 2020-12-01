@@ -513,7 +513,7 @@ config.getMapConfig("mostlyReadMapWithHighDensityNearCache")
 ====
 
 Keep in mind that you should have already enabled the High-Density Memory Store usage for your cluster.
-See the <<configuring-high-density-memory-store, Configuring High-Density Memory Store section>>.
+See the xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[Configuring High-Density Memory Store section].
 
 Note that a map and its Near Cache can independently use High-Density Memory Store.
 For example, if your map does not use High-Density Memory Store, its Near Cache can still use it.

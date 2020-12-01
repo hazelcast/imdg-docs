@@ -7,19 +7,19 @@ setup according to the license type you own.
 
 * **Pro license**: In addition to the open source edition of Hazelcast,
 Pro features are the following:
-** <<cp-subsystem-persistence>>
-** <<deploying-on-pivotal-cloud-foundry, Deploying in VMware Tanzu>>
-** <<deploying-in-kubernetes, Deploying in Openshift container platform>>
+** xref:cp-subsystem:persistence.adoc[]
+** xref:deploying-in-vmware-tanzu.adoc[Deploying in VMware Tanzu]
+** xref:deploying-in-kubernetes.adoc[Deploying in Openshift container platform]
 * **Enterprise license**: In addition to the open source and Pro editions of
 Hazelcast, Enterprise features are the following:
-** <<security, Security suite>>
-** <<wan-replication>>
-** <<clustered-jmx-and-rest-via-management-center, Clustered REST>>
-** <<clustered-jmx-and-rest-via-management-center, Clustered JMX>>
-** <<hazelcast-striim-hot-cache, Striim Hot Cache>>
-** <<rolling-member-upgrades, Rolling Upgrades>>
-** <<high-density-memory-store>>
-** <<hot-restart-persistence>>
+** xref:security:security.adoc[Security suite]
+** xref:wan:wan.adoc[]
+** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered REST]
+** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered JMX]
+** xref:ROOT:striim-cdc.adoc[Striim Hot Cache]
+** xref:rolling-upgrades.adoc[Rolling Upgrades]
+** xref:storage:high-density-memory.adoc[]
+** xref:storage:hot-restart-persistence.adoc[]
 
 See also https://hazelcast.com/product-features/imdg-comparison/[here^] for a
 more detailed feature comparison between the editions.
@@ -96,7 +96,7 @@ JVM System Property::
 ----
 ====
 
-For monitoring information such as expiration date of your license key see <<license-info>>.
+For monitoring information such as expiration date of your license key see xref:management:license-info.adoc[].
 
 [[license-key-format]]
 == License Key Format

@@ -6,7 +6,7 @@ stored map entries. The computation is performed in a fully distributed manner,
 so no data other than the computed function value is transferred to a caller,
 making the computation fast.
 
-NOTE: If the xref:dds.adoc#setting-in-memory-format[in-memory format] of your data is `NATIVE`,
+NOTE: If the xref:data-structures:distributed-data-structures.adoc#setting-in-memory-format[in-memory format] of your data is `NATIVE`,
 aggregations always run on the partition threads. If the data is of type `BINARY`
 or `OBJECT`, they also mostly run on the partition threads, however, they may run on
 the separate query threads to avoid blocking partition threads (if there are no ongoing migrations).
