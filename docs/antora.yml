@@ -6,6 +6,6 @@ asciidoc:
     docBaseUrl: https://docs.hazelcast.org/docs/4.1
     javasource: ROOT:example$
     page-toclevels: 1
-    page-ghissue: https://github.com/JakeSCahill/docs-poc/issues/new
+    page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new
 nav:
 - modules/ROOT/nav.adoc
