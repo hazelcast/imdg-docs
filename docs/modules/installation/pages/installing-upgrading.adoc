@@ -16,8 +16,8 @@ for the embedded mode when Hazelcast IMDG is tightly coupled with the applicatio
 A separate section is dedicated for
 xref:deploying-in-cloud.adoc[deployments into cloud], which includes the following:
 
-* xref:deploying-in-cloud.adoc#deploying-hazelcast-cloud[]
-* xref:deploying-in-cloud.adoc#deploying-on-amazon-ec2[]
-* xref:deploying-in-cloud.adoc#deploying-on-microsoft-azure[]
-* xref:deploying-in-cloud.adoc#deploying-on-gcp[]
-* xref:deploying-in-cloud.adoc#deploying-on-pivotal-cloud-foundry[]
+* xref:deploying-in-cloud.adoc[]
+* xref:deploying-in-cloud.adoc#deploying-on-amazon-ec2[Deploying on Amazon Web Services]
+* xref:deploying-in-cloud.adoc#deploying-on-microsoft-azure[Deploying on Microsoft Azure]
+* xref:deploying-in-cloud.adoc#deploying-on-gcp[Deploying on Google Cloud Platform]
+* xref:deploying-in-vmware-tanzu.adoc[]
