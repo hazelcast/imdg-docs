@@ -41,7 +41,7 @@ You can enable logging to see the status of the Hazelcast client created by the 
 For this, you need to add the following line to the `server.sh` file
 on the machine where Striim is running:
 
-[source]
+[source, properties]
 ----
 -Dhazelcast.logging.type=log4j
 ----
@@ -51,7 +51,7 @@ The `server.sh` file is typically located at the `/opt/striim/bin` directory.
 You can also set the logging level by adding the following
 line to the `log4j.server.properties` file:
 
-[source]
+[source, properties]
 ----
 log4j.logger.com.hazelcast=debug
 ----
@@ -80,7 +80,7 @@ See https://www.striim.com/docs/en/console-commands.html[here^]
 for the usage of this command.
 . While in the console, run the following command:
 +
-[source]
+[source, bash]
 ----
 set loglevel = {com.webaction.proc.HazelcastWriter_1_0:debug};
 ----
