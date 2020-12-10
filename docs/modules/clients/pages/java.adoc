@@ -35,7 +35,7 @@ Hazelcast IMDG:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast</artifactId>
-    <version>{page-component-version}</version>
+    <version>{page-component-display-version}</version>
 </dependency>
 ----
 
