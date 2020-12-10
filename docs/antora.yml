@@ -1,10 +1,10 @@
 name: hazelcast
 title: Hazelcast IMDG
 version: latest
-display_version: '4.1'
+display_version: 4.1
 asciidoc:
   attributes:
-    docBaseUrl: https://docs.hazelcast.org/docs/4.1
+    docBaseUrl: https://docs.hazelcast.org/docs/{version}
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new
