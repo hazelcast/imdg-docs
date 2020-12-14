@@ -1,6 +1,6 @@
 name: imdg
 title: Hazelcast IMDG
-version: latest
+version: latest-dev
 display_version: 4.1
 asciidoc:
   attributes:
