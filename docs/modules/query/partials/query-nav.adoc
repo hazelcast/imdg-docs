@@ -1,7 +1,0 @@
-* xref:query:distributed-query.adoc[]
-** xref:query:how-distributed-query-works.adoc[]
-** xref:query:custom-attributes.adoc[]
-** xref:query:aggregations.adoc[]
-** xref:query:projections.adoc[]
-** xref:query:continuous-query-cache.adoc[]
-** xref:query:mapreduce-deprecation-and-removal.adoc[]

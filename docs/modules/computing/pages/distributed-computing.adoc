@@ -1,4 +1,0 @@
-= Distributed Computing
-[[distributed-computing]]
-
-This chapter explains Hazelcast's executor service, durable/scheduled executor services and entry processor implementations.

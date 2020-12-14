@@ -1,0 +1,7 @@
+name: imdg
+title: Hazelcast IMDG
+version: 3.10
+asciidoc:
+  attributes:
+    docs-url: http://docs.hazelcast.org/docs/{version}/manual/single_html/index.html
+    page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new

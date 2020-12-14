@@ -1,4 +1,0 @@
-* xref:storage:storage.adoc[]
-** xref:storage:high-density-memory.adoc[]
-** xref:storage:sizing-practices.adoc[]
-** xref:storage:hot-restart-persistence.adoc[]
