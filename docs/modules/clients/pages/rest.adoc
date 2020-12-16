@@ -125,7 +125,7 @@ Also, if the call contains the MIME type, Hazelcast stores this information, too
 
 An example `POST` call is shown below.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
@@ -133,7 +133,7 @@ $ curl -v -H "Content-Type: text/plain" -d "bar"
 
 It returns the following response if successful:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Length: 0
@@ -141,7 +141,7 @@ It returns the following response if successful:
 
 If your `POST` call has a trailing slash, Hazelcast will strip it so that it is not appended to the key string. So if you send this `POST` call:
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo/
@@ -149,7 +149,7 @@ $ curl -v -H "Content-Type: text/plain" -d "bar"
 
 The `POST` call will instead be processed as below:
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
@@ -182,7 +182,7 @@ This `GET` call returned a value, its length and also the MIME type
 
 It returns the following if there is no mapping for the given key:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 204 No Content
 < Content-Length: 0
@@ -194,7 +194,7 @@ Similarly to the `POST` call, Hazelcast will strip the trailing slash from your 
 
 You can use a `DELETE` call to remove an entry. An example `DELETE` call is shown below with its response.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
 ----
@@ -206,12 +206,12 @@ $ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapNam
 
 If you leave the key empty as follows, the `DELETE` call deletes all entries from the map.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName
 ----
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Length: 0
@@ -221,7 +221,7 @@ $ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapNam
 
 You can use a `POST` call to create an item on the queue. An example is shown below.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -H "Content-Type: text/plain" -d "foo"
     http://<member IP address>:<port>/hazelcast/rest/queues/myEvents
@@ -231,7 +231,7 @@ The above call is equivalent to `HazelcastInstance.getQueue("myEvents").offer("f
 
 It returns the following if successful:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Length: 0
@@ -239,7 +239,7 @@ It returns the following if successful:
 
 It returns the following if the queue is full and the item is not able to be offered to the queue:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 503 Service Unavailable
 < Content-Length: 0
@@ -252,7 +252,7 @@ Note that you should state the poll timeout while polling for queue events by an
 
 An example is shown below (**10** being the timeout value).
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -X DELETE \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/10
 ----
@@ -260,7 +260,7 @@ $ curl -v -X DELETE \http://<member IP address>:<port>/hazelcast/rest/queues/myE
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").poll(10, SECONDS);`.
 Below is the response.
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Type: text/plain
@@ -271,7 +271,7 @@ foo
 When the timeout is reached, the response is `No Content` success, i.e.,
 there is no item on the queue to be returned.
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 204 No Content
 < Content-Length: 0
@@ -279,7 +279,7 @@ there is no item on the queue to be returned.
 
 === Getting the size of the queue for REST Client
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v -X GET \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/size
 ----
@@ -287,7 +287,7 @@ $ curl -v -X GET \http://<member IP address>:<port>/hazelcast/rest/queues/myEven
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").size();`.
 Below is an example response.
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Type: text/plain
@@ -300,14 +300,14 @@ Below is an example response.
 Besides the above operations, you can check the status of your cluster,
 an example of which is shown below.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v http://<member IP address>:<port>/hazelcast/rest/cluster
 ----
 
 The response is as follows:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 
@@ -345,14 +345,14 @@ The response is as follows:
 Additionally, you can check the name of any instance of your cluster.
 An example is shown below.
 
-[source,plain]
+[source,shell]
 ----
 $ curl -v http://<member IP address>:<port>/hazelcast/rest/instance
 ----
 
 The response is as follows:
 
-[source,plain]
+[source,shell]
 ----
 < HTTP/1.1 200 OK
 < Content-Length: 27

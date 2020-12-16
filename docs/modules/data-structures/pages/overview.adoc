@@ -70,7 +70,7 @@ include::{javasource}/MapMember.java[tag=mapmember]
 
 If you start the `Member` above, the output is as shown below:
 
-[source,plain]
+[source,shell]
 ----
 q1.size: 1 q2.size:1
 q1.size: 0 q2.size:0

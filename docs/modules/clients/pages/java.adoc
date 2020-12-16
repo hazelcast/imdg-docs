@@ -1473,7 +1473,7 @@ Its default value is 20000.
 
 A pseudo-code is as follows:
 
-[source,plain]
+[source,shell]
 ----
  begin_time = getCurrentTime()
  current_backoff_millis = INITIAL_BACKOFF_MILLIS

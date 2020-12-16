@@ -78,7 +78,7 @@ hazelcast:
 
 Assume that your cluster members are as shown below.
 
-[source,plain]
+[source,shell]
 ----
 Members [5] {
   Member [10.20.17.1:5701]

@@ -525,7 +525,7 @@ Full WAN Synchronization reports the following:
 
 Here is an example output:
 
-[source,plain]
+[source,shell]
 ----
 Synchronization statistics:
   Synchronization UUID: 8af2f9e7-3f9f-4c31-b594-47c421bfb33c
@@ -546,7 +546,7 @@ Delta WAN Synchronization reports the following:
 
 Here is an example output:
 
-[source,plain]
+[source,shell]
 ----
 Merkle synchronization statistics:
   Synchronization UUID: f49a25ba-dc57-4547-817b-bea67ff7f0fe
