@@ -4,7 +4,6 @@ version: latest-dev
 display_version: 4.1
 asciidoc:
   attributes:
-    docBaseUrl: https://docs.hazelcast.org/docs/{version}
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new
