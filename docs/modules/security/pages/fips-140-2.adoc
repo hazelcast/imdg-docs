@@ -145,7 +145,7 @@ do the following changes:
 * Put `IBMJCEFIPS` as the first security provider. It will be the first provider
 to be selected when a JCA API call is made without specifying an explicit security provider.
 +
-[source,plain]
+[source,shell]
 ----
 security.provider.1=com.ibm.crypto.fips.provider.IBMJCEFIPS
 ----
@@ -154,7 +154,7 @@ And re-number the original set of security providers by increasing the priority
 of provider by one, i.e., the old `security.provider.1` becomes `security.provider.2` and so on.
 * Add the new security properties (related to handling TLS protected communication):
 +
-[source,plain]
+[source,shell]
 ----
 ssl.SocketFactory.provider=com.ibm.jsse2.SSLSocketFactoryImpl
 ssl.ServerSocketFactory.provider=com.ibm.jsse2.SSLServerSocketFactoryImpl

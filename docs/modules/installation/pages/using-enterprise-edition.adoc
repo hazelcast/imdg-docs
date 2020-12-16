@@ -90,7 +90,7 @@ Spring XML::
 
 JVM System Property::
 +
-[source,plain]
+[source,shell]
 ----
 -Dhazelcast.enterprise.license.key=Your Enterprise License Key
 ----

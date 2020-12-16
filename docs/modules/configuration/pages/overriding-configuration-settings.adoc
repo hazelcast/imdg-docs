@@ -39,7 +39,7 @@ the following on the command line:
 Using Environment Variable:: 
 + 
 -- 
-[source,plain]
+[source,shell]
 ----
 export HZ_CLUSTERNAME=dev
 ----
@@ -47,7 +47,7 @@ export HZ_CLUSTERNAME=dev
 
 Using System Property::
 +
-[source,plain]
+[source,shell]
 ----
 java -Dhz.cluster-name=value
 ----
@@ -91,7 +91,7 @@ hazelcast:
 If you want to use the environment variables, the above
 would be represented as a set of the following environment variables:
 
-[source,plain]
+[source,shell]
 ----
 HZ_CLUSTERNAME=dev
 HZ_NETWORK_PORT_AUTOINCREMENT=true
@@ -111,7 +111,7 @@ If you want to use the environment variables, the above YAML
 configuration would be represented as a set of the following system
 properties:
 
-[source,plain]
+[source,shell]
 ----
 hz.cluster-name=dev
 hz.network.port.auto-increment=true

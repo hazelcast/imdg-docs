@@ -266,7 +266,7 @@ It should return the `200` status code, meaning that the member can be safely us
 Otherwise, it returns the `503` status code indicating the member is not available yet.
 Only HTTP GET request method is supported.
 +
-[source,plain]
+[source,shell]
 ----
 curl http://127.0.0.1:${PORT}/hazelcast/health/ready
 ----
@@ -274,7 +274,7 @@ curl http://127.0.0.1:${PORT}/hazelcast/health/ready
 +
 To get the state of the cluster, use the following command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/state
 ----
@@ -283,7 +283,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/res
 +
 To change the state of the cluster to `frozen`, use the following command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}&${STATE}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/changeState
 ----
@@ -292,7 +292,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}&${STATE}" http://127.0.0.1:${PORT}/haze
 +
 To shutdown the cluster, use the following command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}"  http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/clusterShutdown
 ----
@@ -301,7 +301,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}"  http://127.0.0.1:${PORT}/hazelcast/re
 +
 To get the current cluster version, use the following `curl` command:
 +
-[source,plain]
+[source,shell]
 ----
 $ curl http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
   {"status":"success","version":"3.9"}
@@ -312,7 +312,7 @@ $ curl http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
 +
 To partial start the cluster when Hot Restart is enabled, use the following command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/partialStart/
 ----
@@ -321,7 +321,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/res
 +
 To force start the cluster when Hot Restart is enabled, use the following command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/forceStart/
 ----
@@ -335,7 +335,7 @@ and <<using-the-script-cluster-sh, `cluster.sh`>> sections.
 +
 To initiate the Hot Backup, use the following `curl` command:
 +
-[source,plain]
+[source,shell]
 ----
 curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/hotBackup
 ----
@@ -345,7 +345,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/res
 To upgrade the cluster version, after having upgraded all members of your cluster to
 a new minor version, use the following `curl` command:
 +
-[source,plain]
+[source,shell]
 ----
 $ curl --data "${CLUSTERNAME}&$\{PASSWORD}&${CLUSTER_VERSION}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
 ----
@@ -353,7 +353,7 @@ $ curl --data "${CLUSTERNAME}&$\{PASSWORD}&${CLUSTER_VERSION}" http://127.0.0.1:
 For example, assuming the default cluster name and password, issue the following command to any member
 of the cluster to upgrade from cluster version 3.8 to 3.9:
 +
-[source,plain]
+[source,shell]
 ----
 $ curl --data "dev&dev-pass&3.9" http://127.0.0.1:5701/hazelcast/rest/management/cluster/version
   {"status":"success","version":"3.9"}
