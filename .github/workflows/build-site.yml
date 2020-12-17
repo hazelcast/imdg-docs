@@ -1,0 +1,22 @@
+# This workflow will take the contents of the content branches and build a documentation site
+
+name: Build site
+
+on:
+  push:
+    branches: [ latest, latest-dev, archive ]
+
+jobs:
+  dispatch:
+    strategy:
+      matrix:
+        repo: ['Actions-tester-jake/docs-poc']
+    runs-on: ubuntu-latest
+    steps:
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: ${{ matrix.repo }}
+        event-type: build-site
+    - run: echo "Sent build event"
