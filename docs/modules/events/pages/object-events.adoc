@@ -62,7 +62,7 @@ NOTE: Please note that the method `IMap.clear()` does not fire an
 NOTE: Listeners have to offload all blocking operations to another thread (pool).
 
 
-=== Listening for Lost Map Partitions
+== Listening for Lost Map Partitions
 
 You can listen to `MapPartitionLostEvent` instances by registering an implementation
 of `MapPartitionLostListener`, which is also a sub-interface of `MapListener`.
@@ -86,7 +86,7 @@ See the xref:cluster-events.adoc#listening-for-partition-lost-events[Listening f
 information about partition lost detection and partition lost events.
 
 [[registering-map-listeners]]
-==== Registering Map Listeners
+=== Registering Map Listeners
 
 After you create your listener class, you can configure your cluster
 to include map listeners using the method `addEntryListener` (as you
@@ -168,7 +168,7 @@ Spring::
 ----
 ====
 
-==== Map Listener Attributes
+=== Map Listener Attributes
 
 As you see, there are attributes of the map listeners in the above
 examples: `include-value` and `local`. The attribute `include-value`
@@ -179,7 +179,7 @@ The attribute `local` is also a boolean attribute that is optional, and
 if you set it to `true`, you can listen to the map on the local member.
 Its default value is `false`.
 
-=== Listening for MultiMap Events
+== Listening for MultiMap Events
 
 You can listen to entry-based events in the MultiMap using `EntryListener`.
 The following is an example entry listener implementation for MultiMap.
@@ -189,7 +189,7 @@ The following is an example entry listener implementation for MultiMap.
 include::{javasource}/distributedevents/ExampleEntryListener.java[tag=mm]
 ----
 
-==== Registering MultiMap Listeners
+=== Registering MultiMap Listeners
 
 After you create your listener class, you can configure your cluster to
 include MultiMap listeners using the method `addEntryListener`. Below
@@ -271,7 +271,7 @@ Spring::
 ----
 ====
 
-==== MultiMap Listener Attributes
+=== MultiMap Listener Attributes
 
 As you see, there are attributes of the MultiMap listeners in the above
 examples: `include-value` and `local`. The attribute `include-value` is
@@ -283,7 +283,7 @@ if you set it to `true`, you can listen to the MultiMap on the local member.
 Its default value is `false`.
 
 
-=== Listening for Item Events
+== Listening for Item Events
 
 The Item Listener is used by the Hazelcast `IQueue`, `ISet` and `IList` interfaces.
 
@@ -313,7 +313,7 @@ NOTE: You can use `ICollection` when creating any of the collection
 (queue, set and list) data structures, as shown above. You can also
 use `IQueue`, `ISet` or `IList` instead of `ICollection`.
 
-==== Registering Item Listeners
+=== Registering Item Listeners
 
 After you create your class, you can configure your cluster to include
 item listeners. Below is an example using the method `addItemListener`
@@ -394,7 +394,7 @@ Spring::
 ----
 ====
 
-==== Item Listener Attributes
+=== Item Listener Attributes
 
 As you see, there is an attribute in the above examples: `include-value`.
 It is a boolean attribute that is optional, and if you set it to `true`,
@@ -405,7 +405,7 @@ above examples. It is also a boolean attribute that is optional, and
 if you set it to `true`, you can listen to the items on the local member.
 Its default value is `false`.
 
-=== Listening for Topic Messages
+== Listening for Topic Messages
 
 The Message Listener is used by the `ITopic` interface. It notifies
 when a message is received for the registered topic.
@@ -427,7 +427,7 @@ public class ExampleMessageListener implements MessageListener<MyEvent> {
 }
 ----
 
-==== Registering Message Listeners
+=== Registering Message Listeners
 
 After you create your class, you can configure your cluster to include
 message listeners. Below is an example using the method `addMessageListener`.
