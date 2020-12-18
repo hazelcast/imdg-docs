@@ -10,7 +10,7 @@ jobs:
   dispatch:
     strategy:
       matrix:
-        repo: ['Actions-tester-jake/docs-poc']
+        repo: ['JakeSCahill/docs-poc']
     runs-on: ubuntu-latest
     steps:
     - name: Repository Dispatch
