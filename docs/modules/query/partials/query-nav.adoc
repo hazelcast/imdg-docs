@@ -1,5 +1,6 @@
 * xref:query:distributed-query.adoc[]
 ** xref:query:how-distributed-query-works.adoc[]
+** xref:query:querying-collections-and-arrays.adoc[]
 ** xref:query:custom-attributes.adoc[]
 ** xref:query:aggregations.adoc[]
 ** xref:query:projections.adoc[]
