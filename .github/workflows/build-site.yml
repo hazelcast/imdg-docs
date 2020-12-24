@@ -4,7 +4,7 @@ name: Build site
 
 on:
   push:
-    branches: [ latest, latest-dev, archive ]
+    branches: [ master, "4.1", archive ]
 
 jobs:
   dispatch:
