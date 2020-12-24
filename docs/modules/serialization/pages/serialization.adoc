@@ -1,0 +1,27 @@
+= Serialization
+
+Hazelcast needs to serialize the Java objects that you put into Hazelcast because
+Hazelcast is a distributed system. The data and its replicas are
+stored in different partitions on multiple cluster members.
+The data you need may not be present on the local member, and in that case,
+Hazelcast retrieves that data from another member. This requires serialization.
+
+Serialization is used in the following cases:
+
+* Adding key/value objects to a map
+* Putting items in a queue/set/list
+* Sending a runnable using an executor service
+* Processing an entry within a map
+* Locking an object
+* Sending a message to a topic
+
+Hazelcast optimizes the serialization for the basic types and their array types.
+You cannot override this behavior.
+
+The following are the default types:
+
+* `Byte`, `Boolean`, `Character`, `Short`, `Integer`, `Long`, `Float`, `Double`, `String`
+* `byte[]`, `boolean[]`, `char[]`, `short[]`, `int[]`, `long[]`, `float[]`, `double[]`, `String[]`
+* `java.util.Date`, `java.math.BigInteger`, `java.math.BigDecimal`, `java.lang.Class`
+
+Hazelcast optimizes all of the above object types. You do not need to worry about their (de)serializations.

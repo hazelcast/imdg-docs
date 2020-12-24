@@ -1,0 +1,54 @@
+= Data Types
+
+The SQL service supports a set of SQL data types. Every data type is mapped to a Java
+class that represents the type's value.
+
+[cols="1,1", options="header"]
+.SQL Data Types
+|===
+| Type Name
+| Java Class
+
+|`BOOLEAN`
+|`java.lang.Boolean`
+
+|`VARCHAR`
+|`java.lang.String`
+
+|`TINYINT`
+|`java.lang.Byte`
+
+|`SMALLINT`
+|`java.lang.Short`
+
+|`INTEGER`
+|`java.lang.Integer`
+
+|`BIGINT`
+|`java.lang.Long`
+
+|`DECIMAL`
+|`java.math.BigDecimal`
+
+|`REAL`
+|`java.lang.Float`
+
+|`DOUBLE`
+|`java.lang.Double`
+
+|`DATE`
+|`java.time.LocalDate`
+
+|`TIME`
+|`java.time.LocalTime`
+
+|`TIMESTAMP`
+|`java.time.LocalDateTime`
+
+|`TIMESTAMP_WITH_TIME_ZONE`
+|`java.time.OffsetDateTime`
+
+|`OBJECT`
+|Any Java class
+
+|===

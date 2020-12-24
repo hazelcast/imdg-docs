@@ -1,0 +1,120 @@
+= Using Pro and Enterprise editions
+[[setting-the-license-key]]
+
+Hazelcast IMDG offers two commercially licensed editions: **Pro** and **Enterprise**.
+The supported features differ in your Hazelcast
+setup according to the license type you own.
+
+* **Pro license**: In addition to the open source edition of Hazelcast,
+Pro features are the following:
+** xref:cp-subsystem:persistence.adoc[]
+** xref:deploying-in-vmware-tanzu.adoc[Deploying in VMware Tanzu]
+** xref:deploying-in-kubernetes.adoc[Deploying in Openshift container platform]
+* **Enterprise license**: In addition to the open source and Pro editions of
+Hazelcast, Enterprise features are the following:
+** xref:security:security.adoc[Security suite]
+** xref:wan:wan.adoc[]
+** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered REST]
+** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered JMX]
+** xref:ROOT:striim-cdc.adoc[Striim Hot Cache]
+** xref:rolling-upgrades.adoc[Rolling Upgrades]
+** xref:storage:high-density-memory.adoc[]
+** xref:storage:hot-restart-persistence.adoc[]
+
+See also https://hazelcast.com/product-features/imdg-comparison/[here^] for a
+more detailed feature comparison between the editions.
+
+== Setting Up License Key
+
+NOTE: Hazelcast IMDG Pro and Enterprise license keys are required only for members.
+You do not need to set a license key for your Java clients for which you
+want to use the Pro and Enterprise features.
+
+To use Hazelcast IMDG Pro or Enterprise, you need to set the provided license
+key using one of the configuration methods shown below.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+
+[source,xml]
+----
+<!-- Add the below line to any place you like in the file `hazelcast-default.xml`. -->
+
+<hazelcast>
+    ...
+    <license-key>Your Enterprise License Key</license-key>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+--
+[source,yaml]
+----
+# Add the below line to any place you like in the file `hazelcast-default.yaml`.
+
+hazelcast:
+  ...
+  license-key: Your Hazelcast Enterprise or Enterprise HD License Key
+  ...
+----
+--
+Java::
++
+--
+[source,java]
+----
+// Programmatic configuration.
+
+Config config = new Config();
+config.setLicenseKey( "Your Enterprise License Key" );
+----
+--
+Spring XML::
++
+--
+[source,xml]
+----
+<hz:config>
+    ...
+    <hz:license-key>Your Enterprise License Key</hz:license-key>
+    ...
+</hz:config>
+----
+--
+
+JVM System Property::
++
+[source,shell]
+----
+-Dhazelcast.enterprise.license.key=Your Enterprise License Key
+----
+====
+
+For monitoring information such as expiration date of your license key see xref:management:license-info.adoc[].
+
+[[license-key-format]]
+== License Key Format
+
+License keys have the following format:
+
+```
+<Name of the Hazelcast edition>#<Count of the Members>#<License key>
+```
+
+The strings before the `<License key>` is the human readable part. You
+can use your license key with or without this human readable part. So,
+both the following example license keys are valid:
+
+```
+HazelcastEnterpriseHD#2Nodes#1q2w3e4r5t
+```
+
+```
+1q2w3e4r5t
+```

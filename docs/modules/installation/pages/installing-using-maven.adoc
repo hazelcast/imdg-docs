@@ -1,0 +1,67 @@
+= Maven
+[[installing-using-maven]]
+
+NOTE: As a prerequisite, make sure you have Java installed on your system.
+If you're using JDK 11 or later, see xref:running-in-modular-java.adoc[].
+For the list of supported Java versions, see xref:supported-jvms.adoc[].
+
+You can find Hazelcast in standard Maven repositories. If your
+project uses Maven, you do not need to add
+additional repositories to your `pom.xml` or add
+`hazelcast-{page-component-display-version}.jar` file into your
+classpath (Maven does that for you). Just add the following
+lines to your `pom.xml`:
+
+[tabs] 
+==== 
+Hazelcast Open Source Edition:: 
++ 
+-- 
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-all</artifactId>
+        <version>{page-component-display-version}</version>
+    </dependency>
+</dependencies>
+----
+--
+
+Hazelcast Enterprise Edition::
++
+[source,xml]
+----
+<!-- You need to define following repository: -->
+<repository>
+    <id>Hazelcast Private Release Repository</id>
+    <url>https://repository.hazelcast.com/release/</url>
+</repository>
+<!-- Optional repository if you want to use latest snapshots -->
+<repository>
+    <id>Hazelcast Private Snapshot Repository</id>
+    <url>https://repository.hazelcast.com/snapshot/</url>
+</repository>
+
+<!-- You also need to define following dependencies: -->
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-enterprise-all</artifactId>
+    <version>{page-component-display-version}</version>
+</dependency>
+<!-- Optional dependency for including JavaDoc -->
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-enterprise-all</artifactId>
+    <version>{page-component-display-version}</version>
+    <classifier>javadoc</classifier>
+</dependency>
+---- 
+====
+
+Above dependency (`hazelcast-all`) includes both member and Java
+client libraries of Hazelcast IMDG. A separate Java client module
+and dependency do not exist. See xref:ROOT:migration-guides.adoc#removal-of-hazelcast-client-module[here]
+for the details.

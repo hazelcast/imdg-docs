@@ -1,0 +1,4 @@
+= Lite Members
+
+You cannot start SQL queries on lite members. This limitation will be removed in
+future releases.

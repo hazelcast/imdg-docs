@@ -1,0 +1,22 @@
+= Hazelcast Clients
+
+This chapter provides information about Hazelcast's client and language implementations,
+which are listed below:
+
+* xref:java.adoc[Java]
+* xref:cplusplus.adoc[C++]
+* xref:dotnet.adoc[.NET]
+* xref:memcache.adoc[Memcache]
+* xref:rest.adoc[REST]
+* xref:nodejs.adoc[Node.js]
+* xref:go.adoc[Go]
+* xref:python.adoc[Python]
+
+**Feature Comparison for Hazelcast Clients:**
+
+See the https://hazelcast.org/clients-languages/[feature comparison matrix^]
+to learn about the features implemented across the clients and language APIs.
+
+**Code Samples:**
+
+In the following client sections, you will find links to each client's code samples.

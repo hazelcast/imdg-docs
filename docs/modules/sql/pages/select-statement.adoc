@@ -1,0 +1,23 @@
+= SELECT
+
+== Synopsis
+
+[source,sql]
+----
+SELECT [ * | expression [ [ AS ] expression_alias ] [, ...] ]
+FROM table_name [ [ AS ] table_alias ]
+[WHERE condition]
+----
+
+== Description
+
+The `SELECT` command retrieves rows from a table. A row is a sequence of expressions defined after the `SELECT` keyword.
+Expressions may have optional aliases.
+
+`table_name` refers to a single `IMap` data structure. A table may have an optional alias.
+
+An optional `WHERE` clause defines a `condition`, that is any expression that evaluates to a result of type boolean.
+Any row that doesn't satisfy the condition is eliminated from the result.
+
+The following features are *not supported* and are planned for future releases:
+`ORDER BY`, `LIMIT`/`OFFSET`, `GROUP BY`/`HAVING`, `JOIN`, set operators (`UNION`, `INTERSECT`, `MINUS`), subqueries.

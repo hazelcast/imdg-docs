@@ -1,0 +1,54 @@
+= SQL
+
+The SQL service provided by Hazelcast allows you to query data stored in `IMap` declaratively.
+
+WARNING: The SQL feature is currently in beta. The compatibility between versions
+is not guaranteed. API might change between versions without notice.
+
+== Example: How to Query an IMap using SQL
+
+Consider that we have a map called `emp` that contains values of type `Employee`:
+
+[source,java]
+----
+public class Employee implements Serializable {
+    private String name;
+    private int age;
+
+    public Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+----
+
+The following code prints names of the employees whose age is less than 30:
+
+[source,java]
+----
+try (SqlResult result = hazelcastInstance.getSql().execute("SELECT name FROM emp WHERE age < ?", 30)) {
+    for (SqlRow row : result) {
+        String name = row.getObject(0);
+
+        System.out.println(name);
+    }
+}
+----
+
+You can run the same code snippet from a member or a client.
+
+
+
+
+
+
+
+
