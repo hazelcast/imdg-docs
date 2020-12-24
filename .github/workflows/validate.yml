@@ -4,7 +4,7 @@ name: Validate site
 
 on:
   pull_request:
-    branches: [master, "4.1", archive]
+    branches: [master, v*, archive]
 
 jobs:
   build:
