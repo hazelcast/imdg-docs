@@ -1,65 +1,47 @@
-=== Hazelcast IMDG Reference Manual
+= Hazelcast IMDG Documentation
+// Settings:
+ifdef::env-github[]
+:warning-caption: :warning:
+endif::[]
+// URLs:
+:url-org: https://github.com/JakeSCahill
+:url-contribute: https://github.com/JakeSCahill/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
+:url-ui: {url-org}/hazelcast-docs-ui
+:url-playbook: {url-org}/hazelcast-docs
 
+This repository contains the Antora components for the Hazelcast IMDG documentation.
 
-==== Building the Documentation
+The documentation source files are marked up with AsciiDoc.
 
-Following command is used to build the document in the repo's root folder.
+== Docs Structure
 
-----
-./gradlew build
-----
+This section describes some important information about how this repository is structured:
 
+- The component name, version, and start page are configured in each branch's `antora.yml` file.
+- The navigation for all modules is stored in the ROOT module's `nav.adoc` file.
+- Production branches use the *vX.Y* naming pattern (for example, v4.1), and the `master` branch contains the latest content.
+- The {url-playbook}[docs site playbook] instructs Antora to automatically aggregate content in the `master` branch as well as any branch names that start with *v*.
 
-==== Where Are the Generated Documents
+== Contributing
 
-The resulting documents can be found in `build/asciidoc/`.
+If you want to add a change or contribute new content, see our {url-contribute}[contributing guide].
 
-==== How to Produce Different Output Formats
+To let us know about something that you'd like us to change, consider {url-org}/hazelcast-reference-manual/issues/new[creating an issue].
 
-In the file `build.gradle`, you will see the "backends" tag:
+== GitHub Actions
 
-----
-backends = [ 'html5', /*'pdf',*/ /* 'multipage_html5',*/ /*'epub3'*/ ]
-----
+To automate some elements of the build process, this repository includes the following GitHub Actions:
 
-In this line, you can comment out (using `/\*` and `*/`) the formats that you do not want the generator to produce.
+.GitHub Actions
+[cols="m,a,a"]
+|===
+|File |Description |Triggers
 
-==== How to Add a New Chapter
+|validate-site.yml
+|Validates that the build process completes without errors and checks that all internal links are working
+|On a pull request to the `master` branch as well as any branch names that start with *v*
 
-In the file `build.gradle`, you will see the "sources" tag:
-
-----
-sources {
-    include 'index.adoc'
-}
-----
-
-The file `index.adoc` is the one which includes the chapters in the given order and also some parameters. It is located in the folder `src/docs/asciidocs/`.
-
-When you want to add a new chapter, just create a text file (the extension of the file must be `adoc`) in the folder `src/docs/asciidocs/` and add the name of the file to `index.adoc`.
-
-==== How to Add Tabbed Source Code Block
-
-Here is an example 2-tabbed block; XML and Java:
-
-```
-[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
-.XML
-----
-<XML code here>
-----
-
-[source,java,indent=0,subs="verbatim,attributes",role="secondary"]
-.Java
-----
-<Java code here>
-----
-```
-
-You can add more tabs simply by adding the "secondary" role snippet
-as much as you want.
-
-==== AsciiDoc?
-
-
-You can refer to https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/ when writing content in AsciiDoc language.
+|build-site.yml
+|Builds the documentation site and commits the result to the `develop branch` of the `hazelcast-docs` repository
+|On a push to the `master` branch as well as any branch names that start with *v*
+|===

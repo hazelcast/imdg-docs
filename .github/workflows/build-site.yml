@@ -4,13 +4,13 @@ name: Build site
 
 on:
   push:
-    branches: [ latest, latest-dev, archive ]
+    branches: [ master, v*, archive ]
 
 jobs:
   dispatch:
     strategy:
       matrix:
-        repo: ['JakeSCahill/docs-poc']
+        repo: ['JakeSCahill/hazelcast-docs']
     runs-on: ubuntu-latest
     steps:
     - name: Repository Dispatch

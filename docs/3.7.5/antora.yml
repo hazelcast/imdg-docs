@@ -3,4 +3,4 @@ title: Hazelcast IMDG
 version: 3.7.5
 asciidoc:
   attributes:    
-    page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new
+    page-ghissue: https://github.com/JakeSCahill/hazelcast-docs/issues/new
