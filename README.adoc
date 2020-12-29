@@ -5,9 +5,9 @@ ifdef::env-github[]
 endif::[]
 // URLs:
 :url-org: https://github.com/JakeSCahill
-:url-contribute: https://github.com/JakeSCahill/docs-poc/blob/develop/.github/CONTRIBUTING.adoc
-:url-ui: {url-org}/docs-poc-ui
-:url-playbook: {url-org}/docs-poc
+:url-contribute: https://github.com/JakeSCahill/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
+:url-ui: {url-org}/hazelcast-docs-ui
+:url-playbook: {url-org}/hazelcast-docs
 
 This repository contains the Antora components for the Hazelcast IMDG documentation.
 
@@ -42,6 +42,6 @@ To automate some elements of the build process, this repository includes the fol
 |On a pull request to the `master` branch as well as any branch names that start with *v*
 
 |build-site.yml
-|Builds the documentation site and commits the result to the `develop branch` of the `docs-poc` repository
+|Builds the documentation site and commits the result to the `develop branch` of the `hazelcast-docs` repository
 |On a push to the `master` branch as well as any branch names that start with *v*
 |===

@@ -10,7 +10,7 @@ jobs:
   dispatch:
     strategy:
       matrix:
-        repo: ['JakeSCahill/docs-poc']
+        repo: ['JakeSCahill/hazelcast-docs']
     runs-on: ubuntu-latest
     steps:
     - name: Repository Dispatch
