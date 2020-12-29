@@ -11,67 +11,46 @@ NOTE: See the https://docs.hazelcast.org/docs/rn/[Release Notes^] for the new fe
 
 |Chapter|Description
 
-|xref:overview:hazelcast-overview.adoc[]
-|The whole chapter content has been reviewed and enhanced along
-with outline improvements.
-
-|xref:configuration:understanding-configuration.adoc[]
-| Added xref:configuration:overriding-configuration-settings.adoc[] as a new section.
-
-|xref:clusters:setting-up-clusters.adoc[]
-| Added xref:clusters:accessing-domain-objects.adoc[Accessing Domain Objects without Domain Classes] as a new section.
-
+|<<hazelcast-overview>>
 |
-| Added xref:clusters:discovery-mechanisms.adoc#auto-detection[] as a new section.
 
-| xref:data-structures:distributed-data-structures.adoc[]
-| Added xref:data-structures:map.adoc#managing-the-lifecycle-of-a-maploader[Managing the Lifecycle of a MapLoader] as a new section.
-
-|xref:sql:distributed-sql.adoc[]
-| Added as a new chapter explaining the SQL service
-provided by Hazelcast.
-
-|xref:hazelcast-jet.adoc[]
-|The whole chapter content has been reviewed and enhanced along
-with outline improvements.
-
-|xref:cp-subsystem:cp-subsystem.adoc[]
-| Added xref:cp-subsystem:listeners.adoc[] as a new section.
-
-|xref:clients:hazelcast-clients.adoc[]
-| Added a note related to non-stop clients (with Near Cache) to the
-xref:clients:java.adoc#java-client-connection-strategy[Java Client Connection Strategy section].
-
-| xref:management:management.adoc[]
-| Added xref:management:management-center.adoc#limiting-source-addresses[Limiting Source Addresses] as a new section to
-explain how to restrict the source IP addresses for Management Center.
-
+|<<understanding-configuration>>
 |
-| Added xref:management:cluster-utilities.adoc#hazelcast-command-line-tool[Hazelcast Command Line Tool] as a new section.
 
+|<<setting-up-clusters>>
+|Added <<node-aware-partition-grouping>> as a new section.
+
+| <<distributed-data-structures>>
+| Added <<fine-tuning-map-eviction>> as a new section.
+
+|<<distributed-query>>
 |
-| Added xref:management:instance-tracking.adoc[Instance Tracking] as a new section.
 
-|xref:security:security.adoc[]
-|Added xref:security:security-realms.adoc#kerberos-authentication-type[Kerberos Authentication Type] and
-xref:security:security-realms.adoc#security-realms-on-the-client-side[Security Realms on the Client Side] as new sections.
-
+|<<sql>>
 |
-| Added xref:security:default-authentication.adoc[] as a new section.
 
+|<<cp-subsystem>>
+|
+
+|<<hazelcast-clients>>
 | 
-| Added xref:security:logging-auditable-events.adoc[Logging Auditable Events] as a new section.
 
-|xref:wan:wan.adoc[]
-|The whole chapter content has been reviewed and enhanced along
-with outline improvements.
+| <<management>>
+| 
 
-|xref:network-partitioning:network-partitioning.adoc[]
-| Added xref:network-partitioning:partial-network-partitions.adoc[Partial Network Partitions]
-as a new section.
+|<<security>>
+| Added the description for `config-permission`.
 
-|xref:system-properties.adoc[System Properties]
-|Added the descriptions for the following new system properties:
+| <<performance>>
+|
 
-* ``
+|<<wan-replication>>
+|
+
+|<<network-partitioning>>
+|
+
+|<<system-properties, System Properties>>
+|
+
 |===
