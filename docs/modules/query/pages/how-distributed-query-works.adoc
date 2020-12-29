@@ -1193,13 +1193,49 @@ if you expect "mostly correct" results, i.e., if it is not a problem when
 some entries returned in the query result set do not match the initial query
 criteria. This is the fastest option since there is no copying.
 
-You can set one these options using the system property
+You can set one of these options using the system property
 `hazelcast.index.copy.behavior`. The following values, which are explained
 in the above paragraphs, can be set:
 
 * `COPY_ON_READ` (the default value)
 * `COPY_ON_WRITE`
 * `NEVER`
+
+The following is an example configuration snippet:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <cluster-name>dev</cluster-name>
+    ...
+    <properties>
+        <property name="hazelcast.index.copy.behavior">NEVER</property>
+    </properties>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  cluster-name: dev
+  ...
+  properties:
+    hazelcast.index.copy.behavior: NEVER
+  ...
+----
+====
+
+See also the xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties section]
+for reference.
 
 NOTE: Usage of this system property is supported for BINARY and OBJECT
 in-memory formats. Only in Hazelcast 3.8.7, it is also supported for

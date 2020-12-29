@@ -33,7 +33,7 @@ public class ListeningClients {
         });
 
         //this will trigger `clientConnected` event
-        HazelcastInstance client = HazelcastClient.newHazelcastClient();
+        HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
         
         final Collection<Client> connectedClients = clientService.getConnectedClients();
 

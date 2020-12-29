@@ -1,7 +1,7 @@
 = Kubernetes/OpenShift Deployment
 [[deploying-in-kubernetes]]
 
-Hazelcast provides a few methods to simplify deploying Hazelcast cluster into Kubernetes-based environments.
+Hazelcast provides a few methods to simplify deploying Hazelcast cluster into Kubernetes-based environments. For production-grade Kubernetes deployment, use Helm chart or Kubernetes/OpenShift Operator.
 
 == Quick Start
 

@@ -19,6 +19,10 @@ This implementation meets most of your WAN replication needs and is configured u
 to build your own implementation; see the xref:advanced-features.adoc#defining-custom-wr[Advanced Features section]
 for details in case you need more custom configurations.
 
+Please see also the xref:clusters:advanced-network-configuration.adoc#setting-up-wan-endpoints-configuration[Setting Up WAN Endpoints Configuration section]
+for the examples that use advanced network configuration to set up, for example, security features such as
+TLS and mutual authentication for your WAN replicated clusters.
+
 The default settings for WAN Replication configuration suit most use cases. If, however, you have specific needs or if you
 would like to fine-tune the behavior of WAN Replication for your application, see the
 xref:tuning.adoc[Fine-Tuning WAN Replication section].
@@ -51,6 +55,7 @@ XML::
     <wan-replication name="london-wan-rep">
         <batch-publisher>
             <cluster-name>london</cluster-name>
+            <publisher-id>londonID</publisher-id>
             <target-endpoints>10.3.5.1:5701, 10.3.5.2:5701</target-endpoints>
         </batch-publisher>
     </wan-replication>
@@ -78,8 +83,9 @@ hazelcast:
   wan-replication:
     london-wan-rep:
       batch-publisher:
-        cluster-name: london
-        target-endpoints: 10.3.5.1:5701, 10.3.5.2:5701
+        londonID:
+          cluster-name: london
+          target-endpoints: 10.3.5.1:5701, 10.3.5.2:5701
   map:
     replicatedMap:
       wan-replication-ref:
@@ -155,6 +161,7 @@ XML::
     <wan-replication name="london-wan-rep">
         <batch-publisher>
             <cluster-name>london</cluster-name>
+            <publisher-id>londonID</publisher-id>
             <discovery-strategies>
                 <discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">
                     <properties>
@@ -197,22 +204,23 @@ hazelcast:
   wan-replication:
     london-wan-rep:
       batch-publisher:
-        cluster-name: london
-        discovery-strategies:
-          discovery-strategy:
-            - enabled: true
-              class: com.hazelcast.aws.AwsDiscoveryStrategy
-              properties:
-                access-key: test-access-key
-                secret-key: test-secret-key
-                region: test-region
-                iam-role: test-iam-role
-                host-header: ec2.test-host-header
-                security-group-name: test-security-group-name
-                tag-key: test-tag-key
-                tag-value: test-tag-value
-                connection-timeout-seconds: 10
-                hz-port: 5701
+        londonID:
+          cluster-name: london
+          discovery-strategies:
+            discovery-strategy:
+              - enabled: true
+                class: com.hazelcast.aws.AwsDiscoveryStrategy
+                properties:
+                  access-key: test-access-key
+                  secret-key: test-secret-key
+                  region: test-region
+                  iam-role: test-iam-role
+                  host-header: ec2.test-host-header
+                  security-group-name: test-security-group-name
+                  tag-key: test-tag-key
+                  tag-value: test-tag-value
+                  connection-timeout-seconds: 10
+                  hz-port: 5701
 ----
 --
 
@@ -246,6 +254,7 @@ XML::
     <wan-replication name="london-wan-rep">
         <batch-publisher>
             <cluster-name>london</cluster-name>
+            <publisher-id>londonID</publisher-id>
             <use-endpoint-private-address>false</use-endpoint-private-address>
             <aws enabled="true">
                 <access-key>my-access-key</access-key>
@@ -281,17 +290,18 @@ hazelcast:
   wan-replication:
     london-wan-rep:
       batch-publisher:
-        cluster-name: london
-        use-endpoint-private-address: false
-        aws:
-          enabled: true
-            access-key: my-access-key
-            secret-key: my-secret-key
-            region: us-west-1
-            security-group-name: hazelcast-sg
-            tag-key: type
-            tag-value: hz-members
-            hz-port: 5701
+        londonID:
+          cluster-name: london
+          use-endpoint-private-address: false
+          aws:
+            enabled: true
+              access-key: my-access-key
+              secret-key: my-secret-key
+              region: us-west-1
+              security-group-name: hazelcast-sg
+              tag-key: type
+              tag-value: hz-members
+              hz-port: 5701
   map:
     replicatedMap:
       wan-replication-ref:
