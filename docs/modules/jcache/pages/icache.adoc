@@ -27,7 +27,8 @@ read from and write to ICache.
 
 A `CacheManager`, started either as a client or as an embedded member,
 can be configured to start a new Hazelcast instance or reuse an already
-existing one to connect to a Hazelcast cluster. To achieve this, request a `CacheManager` by passing a `java.net.URI` instance to `CachingProvider.getCacheManager()`. The `java.net.URI` instance must point to a Hazelcast configuration, e.g., `hazelcast.xml`. In addition to the above, the same can be achieved by passing Hazelcast-specific properties to `CachingProvider.getCacheManager(URI, ClassLoader, Properties)` as detailed in the sections that follow.
+existing one to connect to a Hazelcast cluster. To achieve this, request a `CacheManager` by passing a `java.net.URI` instance to `CachingProvider.getCacheManager()`. The `java.net.URI` instance must point to a Hazelcast configuration, e.g., `hazelcast.xml`.
+In addition to the above, the same can be achieved by passing Hazelcast-specific properties to `CachingProvider.getCacheManager(URI, ClassLoader, Properties)` as detailed in the sections that follow.
 
 === Examples
 
@@ -112,7 +113,7 @@ CacheManager cacheManager = caching.getCacheManager(new URI("classpath:com/domai
 ----
 Properties properties = HazelcastCachingProvider.propertiesByLocation("classpath:com/domain/aaa-hazelcast.xml");
 CachingProvider caching = Caching.getCachingProvider();
-CacheManager cacheManager = caching.getCacheManager(new URI("any-uri-will-do"), null, properties);
+CacheManager cacheManager = caching.getCacheManager(null, null, properties);
 ----
 
 Note that if the Hazelcast configuration file does specify an
@@ -383,6 +384,7 @@ The following example shows it for a client-side instance:
 ----
 HazelcastInstance client-instance = HazelcastClient.newHazelcastClient();
 // the line below by default returns the client-side CachingProvider
+CachingProvider cachingProvider = Caching.getCachingProvider();
 // obtain a CacheManager backed by the named client instance
 CacheManager cacheManager = cachingProvider.getCacheManager(null, null, HazelcastCachingProvider.propertiesByInstanceName("client-instance"));
 ----
