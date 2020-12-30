@@ -22,12 +22,6 @@ This section describes some important information about how this repository is s
 - Production branches use the *vX.Y* naming pattern (for example, v4.1), and the `master` branch contains the latest content.
 - The {url-playbook}[docs site playbook] instructs Antora to automatically aggregate content in the `master` branch as well as any branch names that start with *v*.
 
-== Contributing
-
-If you want to add a change or contribute new content, see our {url-contribute}[contributing guide].
-
-To let us know about something that you'd like us to change, consider {url-org}/hazelcast-reference-manual/issues/new[creating an issue].
-
 == GitHub Actions
 
 To automate some elements of the build process, this repository includes the following GitHub Actions:
@@ -45,3 +39,9 @@ To automate some elements of the build process, this repository includes the fol
 |Builds the documentation site and commits the result to the `develop branch` of the `hazelcast-docs` repository
 |On a push to the `master` branch as well as any branch names that start with *v*
 |===
+
+== Contributing
+
+If you want to add a change or contribute new content, see our {url-contribute}[contributing guide].
+
+To let us know about something that you'd like us to change, consider {url-org}/hazelcast-reference-manual/issues/new[creating an issue].
