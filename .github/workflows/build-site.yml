@@ -1,6 +1,6 @@
-# This workflow will take the contents of the content branches and build a documentation site
+# This workflow will take the contents of the content branches and build the staging documentation site
 
-name: Build site
+name: Build staging site
 
 on:
   push:
@@ -8,15 +8,7 @@ on:
 
 jobs:
   dispatch:
-    strategy:
-      matrix:
-        repo: ['JakeSCahill/hazelcast-docs']
     runs-on: ubuntu-latest
     steps:
-    - name: Repository Dispatch
-      uses: peter-evans/repository-dispatch@v1
-      with:
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        repository: ${{ matrix.repo }}
-        event-type: build-site
-    - run: echo "Sent build event"
+    - name: Trigger build
+      run: curl -X POST -d {} https://api.netlify.com/build_hooks/5ff5f73d35901d0be496fe5d
