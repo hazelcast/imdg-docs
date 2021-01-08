@@ -97,7 +97,7 @@ public class MapSample {
 C++::
 +
 --
-[source,c++]
+[source,cpp]
 ----
 //Installation notes: Download the latest C++ library from
 //https://hazelcast.org/imdg/clients-languages/cplusplus/
@@ -127,7 +127,7 @@ int main() {
 C#::
 +
 --
-[source,java]
+[source,cs]
 ----
 //Installation notes: Run the following command at the NuGet package manager console
 //Install-Package Hazelcast.Net -Pre
