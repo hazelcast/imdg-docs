@@ -18,7 +18,7 @@ Hazelcast Open Source Edition::
 + 
 -- 
 
-[source,xml]
+[source,xml,subs="attributes+"]
 ----
 <dependencies>
     <dependency>
@@ -32,7 +32,7 @@ Hazelcast Open Source Edition::
 
 Hazelcast Enterprise Edition::
 +
-[source,xml]
+[source,xml,subs="attributes+"]
 ----
 <!-- You need to define following repository: -->
 <repository>

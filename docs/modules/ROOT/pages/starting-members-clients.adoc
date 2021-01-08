@@ -63,17 +63,17 @@ HazelcastInstance hzclient = HazelcastClient.newHazelcastClient();
 C++::
 +
 --
-[source,c++]
+[source,cpp]
 ----
 hazelcast::client::ClientConfig config;
 hazelcast::client::HazelcastClient hzclient(config);
 ----
 --
 
-C#::
+C Sharp::
 +
 --
-[source,c++]
+[source,cs]
 ----
 var cfg = new ClientConfig();
 var hzclient = HazelcastClient.NewHazelcastClient(cfg);
