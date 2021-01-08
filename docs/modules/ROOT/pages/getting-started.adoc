@@ -124,7 +124,7 @@ int main() {
 ----
 --
 
-C#::
+C Sharp::
 +
 --
 [source,cs]

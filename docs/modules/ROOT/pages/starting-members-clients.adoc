@@ -70,7 +70,7 @@ hazelcast::client::HazelcastClient hzclient(config);
 ----
 --
 
-C#::
+C Sharp::
 +
 --
 [source,cs]
