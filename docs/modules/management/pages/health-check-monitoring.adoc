@@ -112,7 +112,7 @@ See the <<health-check-monitoring, Health Check and Monitoring section>>.
 You can use the script to check health parameters in the following manner:
 
 ```
-$ ./healthcheck.sh <parameters>
+./healthcheck.sh <parameters>
 ```
 
 The following parameters can be used:
@@ -172,7 +172,7 @@ it is in the healthy state, the following output is expected:
 
 
 ```
-$ ./healthcheck.sh -a 127.0.0.1 -p 5701 -o node-state
+./healthcheck.sh -a 127.0.0.1 -p 5701 -o node-state
 ACTIVE
 ```
 
@@ -181,7 +181,7 @@ ACTIVE
 Assuming there is no member running under the address `127.0.0.1:5701`, the following output is expected:
 
 ```
-$ ./healthcheck.sh -a 127.0.0.1 -p 5701 -o cluster-safe
+./healthcheck.sh -a 127.0.0.1 -p 5701 -o cluster-safe
 Error while checking health of hazelcast cluster on ip 127.0.0.1 on port 5701.
 Please check that cluster is running and that health check is enabled in REST API configuration.
 ```
