@@ -54,15 +54,15 @@ Complete command line example:
 
 [source,sh]
 ----
-$ git clone https://github.com/jsr107/jsr107tck
+git clone https://github.com/jsr107/jsr107tck
 (clones JSR107 TCK repository to local directory jsr107tck)
 
-$ cd jsr107tck
+cd jsr107tck
 
-$ git checkout 1.1.1
+git checkout 1.1.1
 (checkout 1.1.1 tag)
 
-$ mvn -Dimplementation-groupId=com.hazelcast -Dimplementation-artifactId=hazelcast \
+mvn -Dimplementation-groupId=com.hazelcast -Dimplementation-artifactId=hazelcast \
      -Dimplementation-version=3.10 \
      -DCacheManagerImpl=com.hazelcast.cache.impl.HazelcastServerCacheManager \
      -DCacheImpl=com.hazelcast.cache.ICache -DCacheEntryImpl=com.hazelcast.cache.impl.CacheEntry \

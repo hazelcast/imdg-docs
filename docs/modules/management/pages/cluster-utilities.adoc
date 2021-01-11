@@ -21,25 +21,25 @@ To install and start using the tool, follow these steps:
 . Run the following commands in the extracted IMDG directory:
 +
 ```
-$ cd hazelcast-command-line/distro
-$ make
+cd hazelcast-command-line/distro
+make
 ```
 . When the `make` command finishes, run the following commands:
 +
 ```
-$ cd build/dist/bin
-$ ./hz
+cd build/dist/bin
+./hz
 ```
 
 You are now ready to use the tool.
 
 * **Starting a standalone Hazelcast member with the default configuration:**
 +
-`$ ./hz start`
+`./hz start`
 *
 * **Starting Hazelcast Management Center:**
 +
-`$ ./hz mc start`
+`./hz mc start`
 
 Please see the tool's https://github.com/hazelcast/hazelcast-command-line[documentation^]
 for all the other usages.
@@ -303,7 +303,7 @@ To get the current cluster version, use the following `curl` command:
 +
 [source,shell]
 ----
-$ curl http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
+curl http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
   {"status":"success","version":"3.9"}
 ----
 |**IMDG Enterprise commands**
@@ -347,7 +347,7 @@ a new minor version, use the following `curl` command:
 +
 [source,shell]
 ----
-$ curl --data "${CLUSTERNAME}&$\{PASSWORD}&${CLUSTER_VERSION}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
+curl --data "${CLUSTERNAME}&$\{PASSWORD}&${CLUSTER_VERSION}" http://127.0.0.1:${PORT}/hazelcast/rest/management/cluster/version
 ----
 +
 For example, assuming the default cluster name and password, issue the following command to any member
@@ -355,7 +355,7 @@ of the cluster to upgrade from cluster version 3.8 to 3.9:
 +
 [source,shell]
 ----
-$ curl --data "dev&dev-pass&3.9" http://127.0.0.1:5701/hazelcast/rest/management/cluster/version
+curl --data "dev&dev-pass&3.9" http://127.0.0.1:5701/hazelcast/rest/management/cluster/version
   {"status":"success","version":"3.9"}
 ----
 +
