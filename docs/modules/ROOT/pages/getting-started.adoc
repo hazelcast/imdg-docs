@@ -19,8 +19,8 @@ Assuming you have the https://brew.sh/[Homebrew^] package manager, run the follo
 
 [source,bash,subs="attributes+"]
 ----
-$ brew tap hazelcast/hz
-$ brew install hazelcast
+brew tap hazelcast/hz
+brew install hazelcast
 ----
 
 Currently, the CLI way is meant for development purposes, not for a production usage.
@@ -33,7 +33,7 @@ to start a standalone Hazelcast member:
 
 [source,bash,subs="attributes+"]
 ----
-$ hz start
+hz start
 ----
 
 Now you have a 1-member cluster. To add one more member to the cluster,

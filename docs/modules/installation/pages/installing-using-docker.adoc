@@ -17,7 +17,7 @@ hazelcast::
 
 [source,shell]
 ----
-$ docker run hazelcast/hazelcast:$HAZELCAST_VERSION
+docker run hazelcast/hazelcast:$HAZELCAST_VERSION
 ----
 --
 
@@ -26,7 +26,7 @@ hazelcast-enterprise::
 --
 [source,shell]
 ----
-$ docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> hazelcast/hazelcast-enterprise:$HAZELCAST_VERSION
+docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> hazelcast/hazelcast-enterprise:$HAZELCAST_VERSION
 ----
 --
 
@@ -36,7 +36,7 @@ hazelcast-enterprise-4-rhel8::
 ----
 # You must be logged into Red Hat Container Registry
 
-$ docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> registry.connect.redhat.com/hazelcast/hazelcast-enterprise-4-rhel8:$HAZELCAST_VERSION
+docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> registry.connect.redhat.com/hazelcast/hazelcast-enterprise-4-rhel8:$HAZELCAST_VERSION
 ----
 ====
 
