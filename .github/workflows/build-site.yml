@@ -1,4 +1,4 @@
-# This workflow will take the contents of the content branches and build the staging documentation site
+# This workflow will take the contents of the content branches and build the production documentation site
 
 name: Build production site
 
