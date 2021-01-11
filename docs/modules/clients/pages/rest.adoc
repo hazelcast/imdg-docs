@@ -127,7 +127,7 @@ An example `POST` call is shown below.
 
 [source,shell]
 ----
-$ curl -v -H "Content-Type: text/plain" -d "bar"
+curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
 ----
 
@@ -143,7 +143,7 @@ If your `POST` call has a trailing slash, Hazelcast will strip it so that it is 
 
 [source,shell]
 ----
-$ curl -v -H "Content-Type: text/plain" -d "bar"
+curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo/
 ----
 
@@ -151,7 +151,7 @@ The `POST` call will instead be processed as below:
 
 [source,shell]
 ----
-$ curl -v -H "Content-Type: text/plain" -d "bar"
+curl -v -H "Content-Type: text/plain" -d "bar"
     http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
 ----
 
@@ -165,7 +165,7 @@ You can also retrieve this entry from another member of your cluster, such as
 An example of a `GET` call is shown below.
 
 ```
-$ curl -X GET http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
+curl -X GET http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
 ```
 
 It returns the following response if there is a corresponding value:
@@ -196,7 +196,7 @@ You can use a `DELETE` call to remove an entry. An example `DELETE` call is show
 
 [source,shell]
 ----
-$ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
+curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName/foo
 ----
 
 ```
@@ -208,7 +208,7 @@ If you leave the key empty as follows, the `DELETE` call deletes all entries fro
 
 [source,shell]
 ----
-$ curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName
+curl -v -X DELETE http://<member IP address>:<port>/hazelcast/rest/maps/mapName
 ----
 
 [source,shell]
@@ -223,7 +223,7 @@ You can use a `POST` call to create an item on the queue. An example is shown be
 
 [source,shell]
 ----
-$ curl -v -H "Content-Type: text/plain" -d "foo"
+curl -v -H "Content-Type: text/plain" -d "foo"
     http://<member IP address>:<port>/hazelcast/rest/queues/myEvents
 ----
 
@@ -254,7 +254,7 @@ An example is shown below (**10** being the timeout value).
 
 [source,shell]
 ----
-$ curl -v -X DELETE \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/10
+curl -v -X DELETE \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/10
 ----
 
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").poll(10, SECONDS);`.
@@ -281,7 +281,7 @@ there is no item on the queue to be returned.
 
 [source,shell]
 ----
-$ curl -v -X GET \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/size
+curl -v -X GET \http://<member IP address>:<port>/hazelcast/rest/queues/myEvents/size
 ----
 
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").size();`.
@@ -302,7 +302,7 @@ an example of which is shown below.
 
 [source,shell]
 ----
-$ curl -v http://<member IP address>:<port>/hazelcast/rest/cluster
+curl -v http://<member IP address>:<port>/hazelcast/rest/cluster
 ----
 
 The response is as follows:
@@ -347,7 +347,7 @@ An example is shown below.
 
 [source,shell]
 ----
-$ curl -v http://<member IP address>:<port>/hazelcast/rest/instance
+curl -v http://<member IP address>:<port>/hazelcast/rest/instance
 ----
 
 The response is as follows:
