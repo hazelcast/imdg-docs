@@ -17,8 +17,5 @@ jobs:
       with:
         node-version: 10
     - run: |
-        git config --global user.name 'JakeSCahill'
-        git config --global user.email '45230295+JakeSCahill@users.noreply.github.com'
         npm i
-        npm run-script build-local
         npm run-script check-links-local
