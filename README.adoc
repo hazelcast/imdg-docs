@@ -32,7 +32,7 @@ To automate some elements of the build process, this repository includes the fol
 |File |Description |Triggers
 
 |validate-site.yml
-|Validates that the build process completes without errors and checks that all internal links are working
+|Validates that all internal links are working
 |On a pull request to the `master` branch as well as any branch names that start with *v*
 
 |build-staging.yml
