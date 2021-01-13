@@ -1,4 +1,4 @@
-# This workflow will check if the incoming pull request builds a valid documentation site
+# This workflow will check if the incoming pull request includes any broken links
 
 name: Check for dead links
 
