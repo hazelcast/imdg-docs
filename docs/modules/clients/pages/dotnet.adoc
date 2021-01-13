@@ -7,5 +7,5 @@ The API is very similar to the Java native client.
 
 See Hazelcast .NET client's own GitHub https://github.com/hazelcast/hazelcast-csharp-client[repo^]
 for information on configuring and starting the client.
-You can also find https://github.com/hazelcast/hazelcast-csharp-client/tree/master/Hazelcast.Examples[code samples^]
+You can also find https://github.com/hazelcast/hazelcast-csharp-client/tree/master/src/Hazelcast.Net.Examples[code samples^]
 for this client in this repo.

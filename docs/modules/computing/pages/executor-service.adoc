@@ -7,7 +7,8 @@ The default implementation of this framework (`ThreadPoolExecutor`) is designed 
 
 
 '''
-NOTE: Note that you may want to use https://jet.hazelcast.org/[Hazelcast Jet^] if you want to process batch or real-time streaming data. See the https://jet.hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^] and https://jet.hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^] use cases for Hazelcast Jet.
+NOTE: Note that you may want to use https://jet.hazelcast.org/[Hazelcast Jet^] if you want to process batch or real-time streaming data. See the https://hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^]
+and https://hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^] use cases for Hazelcast Jet.
 
 With `IExecutorService`, you can execute tasks asynchronously and perform other useful tasks. If your task execution takes longer than expected, you can cancel the task execution. Tasks should be `Serializable` since they are distributed.
 

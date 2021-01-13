@@ -367,7 +367,7 @@ Its default value is 224.2.2.3.
 * `multicast-port`: The multicast socket port that the Hazelcast member listens to and
 sends discovery messages through. Its default value is 54327.
 * `multicast-time-to-live`: Time-to-live value for multicast packets sent out to control
-the scope of multicasts. See more information http://www.tldp.org/HOWTO/Multicast-HOWTO-2.html[here].
+the scope of multicasts. See more information, see http://www.tldp.org/HOWTO/Multicast-HOWTO-2.html[The Linux Documentation Project^].
 * `multicast-timeout-seconds`: Only when the members are starting up, this timeout (in seconds)
 specifies the period during which a member waits for a multicast response from another member.
 For example, if you set it as 60 seconds, each member waits for 60 seconds until a leader
