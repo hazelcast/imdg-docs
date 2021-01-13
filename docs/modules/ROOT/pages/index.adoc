@@ -74,8 +74,6 @@ See the following resources:
 
 * https://hazelcast.atlassian.net/wiki/display/COM/Developing%2Bwith%2BGit[Developing with Git^]:
 Document that explains the branch mechanism of Hazelcast and how to request changes.
-* https://hazelcast.atlassian.net/wiki/display/COM/Hazelcast%2BContributor+Agreement[Hazelcast Contributor Agreement form^]: Form that each contributing developer needs to fill and send back
-to Hazelcast.
 * https://github.com/hazelcast/hazelcast[Hazelcast on GitHub^]: Hazelcast repository where the
 code is developed, issues and pull requests are managed.
 
