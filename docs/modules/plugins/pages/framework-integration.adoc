@@ -77,7 +77,7 @@ See the following resources for more details:
 
 == Micronaut
 
-Hazelcast can be used as a caching provider in the https://micronaut.io/[Micronaut] framework.
+Hazelcast can be used as a caching provider in the https://micronaut.io/[Micronaut^] framework.
 See the following resources for more details:
 
 * https://micronaut-projects.github.io/micronaut-cache/snapshot/guide/#hazelcast[Micronaut: Hazelcast Support^]

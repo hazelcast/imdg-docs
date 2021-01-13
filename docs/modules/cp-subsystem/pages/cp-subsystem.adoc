@@ -13,8 +13,8 @@ consistent layer for a set of distributed data structures. Its APIs can be used
 for implementing distributed coordination use cases, such as leader election,
 distributed locking, synchronization, and metadata management. It is accessed
 via `HazelcastInstance.getCPSubsystem()`. Its data structures are _CP_ with
-respect to the http://awoc.wolski.fi/dlib/big-data/Brewer_podc_keynote_2000.pdf[_CAP_ principle],
-i.e., they always maintain https://aphyr.com/posts/313-strong-consistency-models[linearizability]
+respect to the http://awoc.wolski.fi/dlib/big-data/Brewer_podc_keynote_2000.pdf[_CAP_ principle^],
+i.e., they always maintain https://aphyr.com/posts/313-strong-consistency-models[linearizability^]
 and prefer consistency over availability during network partitions. Besides
 network partitions, CP Subsystem withstands server and client failures.
 
@@ -28,7 +28,7 @@ These members are called _CP members_ and they can also contain data for
 the other regular _AP_ Hazelcast data structures, such as `IMap`, `ISet`.
 
 Data structures in CP Subsystem run in _CP groups_. Each CP group elects its
-own Raft leader and runs the https://raft.github.io/[Raft consensus algorithm]
+own Raft leader and runs the https://raft.github.io/[Raft consensus algorithm^]
 independently. CP Subsystem runs 2 CP groups by default:
 
 * The first one is _the METADATA CP group_ which is an internal CP group

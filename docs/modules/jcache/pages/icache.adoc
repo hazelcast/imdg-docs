@@ -16,12 +16,9 @@ NOTE: ICache data structure can also be used by
 https://jet.hazelcast.org/[Hazelcast Jet^] for Real-Time Stream Processing
 (by enabling the Event Journal on your cache) and Fast Batch Processing.
 Hazelcast Jet uses ICache as a source (reads data from ICache) and as a sink
-(writes data to ICache). See the https://jet.hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^]
-and https://jet.hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^]
-use cases for Hazelcast Jet. See also
-https://docs.hazelcast.org/docs/jet/latest/manual/index.html#connector-imdg[here^] in the
-Hazelcast Jet Reference Manual to learn how Jet uses ICache, i.e., how it can
-read from and write to ICache.
+(writes data to ICache). See the https://hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^]
+and https://hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^]
+use cases for Hazelcast Jet. See also https://jet-start.sh/docs/api/data-structures#icache[how Jet reads from and writes to ICache]^.
 
 == Scoping to Join Clusters
 
