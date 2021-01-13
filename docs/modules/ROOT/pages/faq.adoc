@@ -458,12 +458,12 @@ the xref:ROOT:system-properties.adoc[System Properties appendix].
 **Client disconnections during idle time?**
 
 In Hazelcast, socket connections are created with the `SO_KEEPALIVE` option enabled by default.
-In most operating systems, default keep-alive time is 2 hours.
+In most operating systems, the default keep-alive time is 2 hours.
 If you have a firewall between clients and servers which is configured to reset idle connections/sessions,
 make sure that the firewall's idle timeout is greater than the TCP keep-alive defined in the OS.
 
 See http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/usingkeepalive.html[Using TCP keepalive under Linux^] and
-http://technet.microsoft.com/en-us/library/cc957549.aspx[Microsoft TechNet^] for additional information.
+https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957549%28v%3Dtechnet.10%29[Microsoft Windows^] for additional information.
 
 '''
 **OOME: Unable to create new native thread?**

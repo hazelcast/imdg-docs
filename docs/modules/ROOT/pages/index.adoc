@@ -72,10 +72,9 @@ features, enhancements and fixes performed for each Hazelcast IMDG release.
 You can contribute to the Hazelcast IMDG code, report a bug, or request an enhancement.
 See the following resources:
 
-* https://hazelcast.atlassian.net/wiki/display/COM/Developing+with+Git[Developing with Git^]:
+* https://hazelcast.atlassian.net/wiki/display/COM/Developing%2Bwith%2BGit[Developing with Git^]:
 Document that explains the branch mechanism of Hazelcast and how to request changes.
-* https://hazelcast.atlassian.net/wiki/display/COM/Hazelcast+Contributor+Agreement[Hazelcast
-Contributor Agreement form^]: Form that each contributing developer needs to fill and send back
+* https://hazelcast.atlassian.net/wiki/display/COM/Hazelcast%2BContributor+Agreement[Hazelcast Contributor Agreement form^]: Form that each contributing developer needs to fill and send back
 to Hazelcast.
 * https://github.com/hazelcast/hazelcast[Hazelcast on GitHub^]: Hazelcast repository where the
 code is developed, issues and pull requests are managed.
