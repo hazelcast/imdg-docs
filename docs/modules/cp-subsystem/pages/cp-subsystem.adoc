@@ -13,8 +13,8 @@ consistent layer for a set of distributed data structures. Its APIs can be used
 for implementing distributed coordination use cases, such as leader election,
 distributed locking, synchronization, and metadata management. It is accessed
 via `HazelcastInstance.getCPSubsystem()`. Its data structures are _CP_ with
-respect to the http://awoc.wolski.fi/dlib/big-data/Brewer_podc_keynote_2000.pdf[_CAP_ principle],
-i.e., they always maintain https://aphyr.com/posts/313-strong-consistency-models[linearizability]
+respect to the http://awoc.wolski.fi/dlib/big-data/Brewer_podc_keynote_2000.pdf[_CAP_ principle^],
+i.e., they always maintain https://aphyr.com/posts/313-strong-consistency-models[linearizability^]
 and prefer consistency over availability during network partitions. Besides
 network partitions, CP Subsystem withstands server and client failures.
 

@@ -420,9 +420,6 @@ NOTE: Spring managed properties/fields are marked as `transient`.
 
 == Adding Caching to Spring
 
-**Code Sample**: See the sample application for
-https://github.com/hazelcast/hazelcast-code-samples/tree/master/hazelcast-integration/spring-cache-manager[Spring Cache^].
-
 As of version 3.1, Spring Framework provides support for adding caching
 into an existing Spring application. Spring 3.2 and later versions support
 JCache compliant caching providers. You can also use JCache caching
@@ -603,9 +600,6 @@ See the https://github.com/hazelcast/hazelcast-hibernate#configuring-regionfacto
 in the Hazelcast Hibernate GitHub repository for more information.
 
 == Configuring Hazelcast Transaction Manager
-
-**Code Sample**: See the https://github.com/hazelcast/hazelcast-code-samples/tree/master/hazelcast-integration/spring-transaction-manager[sample application^]
-for Hazelcast Transaction Manager in our code samples repository.
 
 You can get rid of the boilerplate code to begin, commit or rollback
 transactions by using https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spring/transaction/HazelcastTransactionManager.html[HazelcastTransactionManager^]
