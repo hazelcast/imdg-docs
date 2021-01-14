@@ -6,7 +6,7 @@ An operation is considered as slow when it takes more computation time than the 
 
 The `SlowOperationDetector` stores the fully qualified classname of the operation and its stacktrace as well as
 operation details, start time and duration of each slow invocation. All collected data is available in
-the https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html#monitoring-members[Management Center^].
+the {mc-docs}#monitoring-members[Management Center^].
 
 The `SlowOperationDetector` is configured via the following system properties.
 

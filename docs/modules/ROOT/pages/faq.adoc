@@ -277,7 +277,7 @@ Yes. But please note that Hazelcast's main design focus is multi-member clusters
 '''
 **How can I monitor Hazelcast?**
 
-https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html[Hazelcast Management Center^] is what you use to
+{mc-docs}[Hazelcast Management Center^] is what you use to
 monitor and manage the members running Hazelcast.
 In addition to monitoring the overall state of a cluster, you can analyze and browse data structures in detail,
 you can update map configurations and you can take thread dumps from members.
@@ -371,7 +371,7 @@ a JMX client application or using a JMX monitoring tool (like JConsole).
 ** You can set the property `hazelcast.shutdownhook.policy` to `GRACEFUL` and then shutdown by using `kill -15 <PID>`.
 Your member will be gracefully shutdown.
 ** You can use the "Shutdown Member" button in the member view of
-https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html#monitoring-members[Hazelcast Management Center^].
+{mc-docs}#monitoring-members[Hazelcast Management Center^].
 
 If you use systemd's `systemctl` utility, i.e., `systemctl stop service_name`, a SIGTERM signal is sent.
 After 90 seconds of waiting it is followed by a SIGKILL signal by default.
@@ -463,7 +463,7 @@ If you have a firewall between clients and servers which is configured to reset 
 make sure that the firewall's idle timeout is greater than the TCP keep-alive defined in the OS.
 
 See http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/usingkeepalive.html[Using TCP keepalive under Linux^] and
-http://technet.microsoft.com/en-us/library/cc957549.aspx[Microsoft TechNet^] for additional information.
+https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957549%28v%3Dtechnet.10%29[Microsoft Windows^] for additional information.
 
 '''
 **OOME: Unable to create new native thread?**

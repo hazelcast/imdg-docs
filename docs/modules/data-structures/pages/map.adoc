@@ -10,8 +10,8 @@ known get and put methods.
 NOTE: IMap data structure can also be used by https://jet.hazelcast.org/[Hazelcast Jet^]
 for Real-Time Stream Processing (by enabling the Event Journal on your map) and
 Fast Batch Processing. Hazelcast Jet uses IMap as a source (reads data from IMap) and as a sink
-(writes data to IMap). See the https://jet.hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^]
-and https://jet.hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^]
+(writes data to IMap). See the https://hazelcast.org/use-cases/fast-batch-processing/[Fast Batch Processing^]
+and https://hazelcast.org/use-cases/real-time-stream-processing/[Real-Time Stream Processing^]
 use cases for Hazelcast Jet. See also https://jet-start.sh/docs/api/sources-sinks#imap[here^]
 in the Hazelcast Jet Programming Guide to learn how Jet uses IMap, i.e., how it can read from and write to IMap.
 
@@ -1606,7 +1606,7 @@ It returns information such as primary and backup entry count, last update
 time and locked entry count. If you need the cluster-wide map statistics, you can
 get the local map statistics from all members of the cluster and combine them.
 Alternatively, you can see the map statistics on the
-https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html#managing-maps[Hazelcast Management Center^].
+{mc-docs}#managing-maps[Hazelcast Management Center^].
 
 To be able to retrieve the map statistics, the `statistics-enabled`
 element under the map configuration should be set as `true`, which is the default value:
