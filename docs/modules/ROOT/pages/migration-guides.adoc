@@ -468,7 +468,7 @@ public static class PortableNameExtractor implements ValueExtractor<ValueReader,
 MapReduce API has been removed, which was deprecated
 since Hazelcast IMDG 3.8. Instead, you can use the
 xref:query:aggregations.adoc[] on top of Query infrastructure and the
-https://docs.hazelcast.org/docs/jet/latest/manual/[Hazelcast Jet^]
+{jet-docs}[Hazelcast Jet^]
 distributed computing platform as its successors and replacements.
 
 See the following table for the before(MapReduce)/after(Hazelcast Jet)
