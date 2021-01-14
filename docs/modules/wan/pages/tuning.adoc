@@ -234,7 +234,7 @@ wanConfig.addWanPublisherConfig(publisherConfig);
 
 Note that you can clear a member's WAN replication event queue.
 It can be initiated through Management Center's
-https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html#monitoring-wan-replication[Clear Queues action^] or
+{mc-docs}#monitoring-wan-replication[Clear Queues action^] or
 Hazelcast’s REST API. Below is the URL for its REST call:
 
 ```
