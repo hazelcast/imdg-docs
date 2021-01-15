@@ -6,6 +6,6 @@ asciidoc:
   attributes:
     javasource: ROOT:example$
     page-toclevels: 1
-    page-ghissue: https://github.com/JakeSCahill/hazelcast-reference-manual/issues/new
+    page-ghissue: https://github.com/hazelcast/hazelcast-reference-manual/issues/new
 nav:
 - modules/ROOT/nav.adoc
