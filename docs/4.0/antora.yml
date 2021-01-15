@@ -4,4 +4,4 @@ version: 4.0
 display_version: '4.0'
 asciidoc:
   attributes:    
-    page-ghissue: https://github.com/JakeSCahill/hazelcast-docs/issues/new
+    page-ghissue: https://github.com/hazelcast/hazelcast-docs/issues/new
