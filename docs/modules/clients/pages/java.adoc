@@ -1501,7 +1501,7 @@ diverted to another cluster on demand or when the intended cluster becomes unava
 
 Using the blue-green system, the clients can connect to another cluster automatically
 when they are blacklisted from their currently connected cluster.
-See the {mc-docs}#changing-cluster-client-filtering[Hazelcast Management Center Reference Manual^] for information on blacklisting the clients.
+See xref:management-center:monitor-imdg:monitor-clients.adoc#changing-cluster-client-filtering[] for information on blacklisting the clients.
 
 === Blue-Green Mechanism
 
