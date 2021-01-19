@@ -562,7 +562,7 @@ context.refresh();
 ----
 
 For more information about Spring Cache, see
-http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/cache.html[Spring Cache Abstraction^].
+https://spring.io/guides/gs/caching/[Spring Cache Abstraction^].
 
 == Configuring Hibernate Second Level Cache
 

@@ -77,7 +77,7 @@ your members, for example, from 3.13 to 3.15 in a single rolling upgrade session
 
 You have the following options to upgrade the cluster version:
 
-* Using {mc-docs}#rolling-upgrade[Management Center].
+* Using xref:management-center:monitor-imdg:cluster-administration.adoc#rolling-upgrade[Management Center].
 * Using the xref:management:cluster-utilities.adoc#using-the-script-cluster-sh[cluster.sh] script.
 * Allow the cluster to <<enabling-auto-upgrading, auto-upgrade>>.
 
