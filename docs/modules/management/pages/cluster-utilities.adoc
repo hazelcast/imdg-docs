@@ -128,9 +128,9 @@ The script `cluster.sh` is self-documented; you can see the parameter descriptio
 the command `./cluster.sh -h` or `./cluster.sh --help`.
 
 NOTE: You can perform the above operations using the Hot Restart tab of Hazelcast Management Center or
-using the REST API. See the {mc-docs}#hot-restart[Hot Restart^]
+using the REST API. See the xref:management-center:monitor-imdg:cluster-administration.adoc#hot-restart[Hot Restart]
 and <<using-rest-api-for-cluster-management, Using REST API for Cluster Management>> sections
-in the Hazelcast Management Center Reference Manual.
+in the Hazelcast Management Center documentation.
 
 === Example Usages for cluster.sh
 
@@ -242,8 +242,7 @@ NOTE: Currently, this script is not supported on the Windows platforms.
 
 == Using REST API for Cluster Management
 
-Besides the Management Center's Hot Restart
-{mc-docs}#hot-restart[tab^] and
+Besides the Management Center's xref:management-center:monitor-imdg:cluster-administration.adoc#hot-restart[Hot Restart tab] and
 the script <<using-the-script-cluster-sh, `cluster.sh`>>, you can also use REST API to manage your cluster's state.
 The following are the operations you can perform.
 
@@ -328,7 +327,7 @@ curl --data "${CLUSTERNAME}&$\{PASSWORD}" http://127.0.0.1:${PORT}/hazelcast/res
 +
 NOTE: You can also perform the above operations (partialStart and forceStart) using
 the Hot Restart tab of Hazelcast Management Center or using the script `cluster.sh`.
-See the {mc-docs}#hot-restart[Hot Restart^]
+See the xref:management-center:monitor-imdg:cluster-administration.adoc#hot-restart[Hot Restart]
 and <<using-the-script-cluster-sh, `cluster.sh`>> sections.
 +
 * _Initiating Hot Backup:_
@@ -360,7 +359,7 @@ curl --data "dev&dev-pass&3.9" http://127.0.0.1:5701/hazelcast/rest/management/c
 ----
 +
 NOTE: You can also perform the above cluster version operations using Hazelcast Management Center
-or using the script `cluster.sh`. See the {mc-docs}#rolling-upgrade[Rolling Member Upgrades^]
+or using the script `cluster.sh`. See the xref:management-center:monitor-imdg:cluster-administration.adoc#rolling-upgrade[Rolling Member Upgrades]
 and <<using-the-script-cluster-sh, `cluster.sh`>> sections.
 |===
 
