@@ -260,7 +260,7 @@ the defaults should work fine. If using Docker for members, find out the Docker 
 of cluster rather than the default of localhost.
 
 For comprehensive information on Management Center, see its
-{mc-docs}[documentation^].
+xref:management-center::index.adoc[documentation].
 
 == What's Next?
 
