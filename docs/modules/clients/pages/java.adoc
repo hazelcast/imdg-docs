@@ -2348,14 +2348,14 @@ the client tries to connect to the members in the given order.
 |If set to `true`, it enables collecting the client statistics and sending them to the cluster.
 When it is `true` you can monitor the clients that are connected to your Hazelcast cluster,
 using Hazelcast Management Center. See the
-{mc-docs}#monitoring-clients[Monitoring Clients section^]
+xref:management-center:monitor-imdg:monitor-clients.adoc[Monitoring Clients section]
 in the Hazelcast Management Center Reference Manual for more information.
 
 |`hazelcast.client.statistics.period.seconds`
 |3
 |int
 |Period in seconds the client statistics are collected and sent to the cluster.
-See the {mc-docs}#monitoring-clients[Monitoring Clients section^]
+See the xref:management-center:monitor-imdg:monitor-clients.adoc[Monitoring Clients section]
 in the Hazelcast Management Center Reference Manual for more information on the client statistics.
 |===
 
