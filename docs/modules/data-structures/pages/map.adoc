@@ -869,7 +869,7 @@ mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
 ----
 
 [[loading-and-storing-persistent-data]]
-=== Loading and Storing Persistent Data
+== Loading and Storing Persistent Data
 
 Hazelcast allows you to load and store the distributed map entries
 from/to a persistent data store such as a relational database. To do this,
