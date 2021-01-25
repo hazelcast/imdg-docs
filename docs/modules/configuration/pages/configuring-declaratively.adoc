@@ -2,8 +2,8 @@
 [[configuring-declaratively]]
 
 This is the configuration option where you use an XML or a YAML configuration
-file. When you download and unzip `hazelcast-{page-component-display-version}
-.zip`, you see the following files present in the  `/bin` folder, which are
+file. When you download and unzip `hazelcast-{page-component-display-version}.zip`,
+you see the following files present in the  `/bin` folder, which are
 standard configuration files:
 
 * `hazelcast-default.xml`: Default declarative XML configuration file for Hazelcast.
@@ -46,10 +46,10 @@ XML::
     <network>
         <port auto-increment="true" port-count="100">5701</port>
         <outbound-ports>
-        <!--
-        Allowed port range when connecting to other members.
-        0 or * means the port provided by the system.
-        -->
+            <!--
+            Allowed port range when connecting to other members.
+            0 or * means the port provided by the system.
+            -->
             <ports>0</ports>
         </outbound-ports>
         <join>
@@ -436,4 +436,4 @@ hazelcast:
 
 You can refer to the full example YAML configuration files placed in the `/bin` folder
 of the downloadable `hazelcast-{page-component-display-version}.zip` after unzipping it. Please see the
-complete list of the full example YAML configurations <<configuring-declaratively, here>>.
+complete list of the full example YAML configurations link:https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.yaml[here^].
