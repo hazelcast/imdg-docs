@@ -6,7 +6,7 @@ The table below lists the system properties with their descriptions in alphabeti
 NOTE: When you want to reconfigure a system property,
 you need to restart the members for which the property is modified.
 
-[cols="2,1,1,6a"]
+[cols="4,1,1,4a"]
 .System Properties
 |===
 |Property Name

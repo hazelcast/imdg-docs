@@ -4,12 +4,20 @@
 NOTE: Currently, installation using CLI is intended for development purposes.
 For production setups please use the other installation options explained later in this chapter.
 
-To install Hazelcast via command line interface, run the following commands:
+To install Hazelcast via command line interface, run the following commands (assuming you have the https://brew.sh/[Homebrew^] package manager):
 
 [source,shell]
 ----
 brew tap hazelcast/hz
 brew install hazelcast
+----
+
+Then, you can use the following command on your terminal/command line
+to start a standalone Hazelcast member:
+
+[source,bash,subs="attributes+"]
+----
+hz start
 ----
 
 For more information visit the GitHub repository

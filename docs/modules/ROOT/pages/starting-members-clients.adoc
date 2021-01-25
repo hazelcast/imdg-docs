@@ -56,7 +56,7 @@ Java::
 [source,java]
 ----
 ClientConfig clientConfig = new ClientConfig();
-HazelcastInstance hzclient = HazelcastClient.newHazelcastClient();
+HazelcastInstance hzclient = HazelcastClient.newHazelcastClient(clientConfig);
 ----
 --
 

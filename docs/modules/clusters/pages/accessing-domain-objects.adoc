@@ -19,14 +19,14 @@ back without the class of the domain object on the classpath. Here is a read exa
 
 [source,java]
 ----
-    map.executeOnKey(key, (EntryProcessor<Object, Object, Object>) entry -> {
-             Object value = entry.getValue();
-             GenericRecord genericRecord = (GenericRecord) value;
+map.executeOnKey(key, (EntryProcessor<Object, Object, Object>) entry -> {
+    Object value = entry.getValue();
+    GenericRecord genericRecord = (GenericRecord) value;
 
-             int id = genericRecord.readInt("id");
+    int id = genericRecord.readInt("id");
 
-             return null;
-         });
+    return null;
+});
 ----
 
 An alternative approach introduced in the previous Hazelcast IMDG releases is the xref:clusters:deploying-code-on-member.adoc[User Code Deployment]
