@@ -126,7 +126,7 @@ the xref:clusters:network-configuration.adoc#join[Join configuration section] fo
 NOTE: If you prefer to use this mechanism, make sure that your network is enclosed and secure.
 See the xref:clusters:discovery-mechanisms.adoc[Discovery Mechanisms section].
 
-NOTE: You can also check the video tutorials https://hazelcast.org/imdg/get-started/[here^].
+NOTE: You can also check the video tutorials https://hazelcast.org/imdg/get-started[here^].
 
 == Example Application
 

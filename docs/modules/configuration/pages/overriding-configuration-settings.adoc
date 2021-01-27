@@ -55,9 +55,9 @@ java -Dhz.cluster-name=value
 
 Recognized and unrecognized configuration entries will be logged when Hazelcast starts.
 
-When overriding the configuration provided in a custom file,
-remember to overwrite the whole configuration sections at once;
-if you don't, the remaining entries will be set to their default values.
+When overriding configuration provided in a custom file, remember to overwrite
+all the configuration sections at once; if you don't, remaining entries are set to
+their default values.
 
 NOTE: The above mechanism exists mostly for the sake of trivial
 environment specific configuration changes, and should not be treated
@@ -70,7 +70,7 @@ NOTE: All entries need to mirror YAML configuration structure which differs slig
 In order to make Hazelcast recognize environment variables
 as valid configuration entries, they need to obey the following rules:
 
-* Each configuration entry needs to start with `HZ_` or `HZ_CLIENT_`.
+* Each configuration entry needs to start with `HZ_` or `HZCLIENT_`.
 * A new configuration level should be introduced with an underscore (`_`).
 * Dashes (`-`) should be removed.
 * Variable names should be in upper case.

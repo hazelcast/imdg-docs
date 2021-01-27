@@ -1,6 +1,6 @@
 = High-Density Memory Store
 
-[navy]*Hazelcast IMDG Enterprise HD*
+[blue]*Hazelcast IMDG Enterprise Feature*
 
 By default, data structures in Hazelcast store data on heap in
 serialized form for highest data compaction; yet, these data structures
@@ -119,7 +119,7 @@ XML::
         <min-block-size>16</min-block-size>
         <page-size>4194304</page-size>
         <metadata-space-percentage>12.5</metadata-space-percentage>
-        <persistent-memory enabled="true" mode="MOUNTED">
+        <persistent-memory>
             <directories>
                 <directory numa-node="0">/mnt/pmem0</directory>
                 <directory numa-node="1">/mnt/pmem1</directory>
@@ -146,13 +146,11 @@ hazelcast:
     page-size: 4194304
     metadata-space-percentage: 12.5
     persistent-memory:
-      enabled: true
-      mode: MOUNTED
-      directories:
-        - directory: /mnt/pmem0
-          numa-node: 0
-        - directory: /mnt/pmem1
-          numa-node: 1
+        directories:
+            - directory: /mnt/pmem0
+              numa-node: 0
+            - directory: /mnt/pmem1
+              numa-node: 1
 ----
 ====
 

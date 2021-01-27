@@ -1,6 +1,6 @@
 = CP Subsystem Persistence
 
-[navy]*Hazelcast IMDG Enterprise*
+[blue]*Hazelcast IMDG Pro and Enterprise Feature*
 
 == CP Subsystem Persistence Overview
 
