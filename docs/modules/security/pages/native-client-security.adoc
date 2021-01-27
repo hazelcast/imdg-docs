@@ -411,6 +411,43 @@ multimap:
 ----
 ====
 
+**Replicated Map Permission:**
+
+Actions: all, create, destroy, put, read, remove, listen, lock, index, intercept
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+
+[source,xml]
+----
+<replicatedmap-permission name="name" principal="principal">
+    <endpoints>
+        ...
+    </endpoints>
+    <actions>
+        ...
+     </actions>
+</replicatedmap-permission>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+replicatedmap:
+  - name: name
+    principal: principal
+    endpoints:
+      - ..
+    actions:
+      - ..
+----
+====
+
 **Topic Permission:**
 
 Actions: create, destroy, publish, listen
@@ -846,6 +883,40 @@ user-code-deployment:
   endpoints:
     - ..
   actions:
+    - ..
+----
+====
+
+**Configuration Permission:**
+
+This permission defines which
+client principals/endpoints are allowed to perform
+xref:configuration:dynamic-data-structure-configuration.adoc[dynamic configuration changes],
+i.e., adding data structure configurations at runtime.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+
+[source,xml]
+----
+<config-permission principal="principal">
+    <endpoints>
+        <endpoint>...</endpoint>
+    </endpoints>
+</config-permission>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+config:
+  principal: principal
+  endpoints:
     - ..
 ----
 ====

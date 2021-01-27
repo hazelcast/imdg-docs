@@ -12,6 +12,11 @@ A single asterisk (*) can be placed anywhere inside the configuration name.
 For instance, a map named `com.hazelcast.test.mymap` can be configured using
 one of the following configurations:
 
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
 [source,xml]
 ----
 <hazelcast>
@@ -40,10 +45,38 @@ one of the following configurations:
     ...
 </hazelcast>
 ----
+--
+
+YAML::
++
+--
+[source,xml]
+----
+hazelcast:
+  map:
+    com.hazelcast.test.*:
+      ...
+    com.hazel*:
+     ...
+    "*.test.mymap":
+      ...
+    com.*test.mymap:
+      ...
+----
+--
+====
+
+Notice that when the "*" character prefixes a value, the whole value should
+be in quotes when you use the YAML configuration.
 
 A queue named `com.hazelcast.test.myqueue` can be configured using one
 of the following configurations:
 
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
 [source,xml]
 ----
 <hazelcast>
@@ -60,6 +93,23 @@ of the following configurations:
     ...
 </hazelcast>
 ----
+--
+
+YAML::
++
+--
+[source,xml]
+----
+hazelcast:
+  queue:
+    "*hazelcast.test.myqueue":
+    ...
+    com.hazelcast.*.myqueue:
+    ...
+----
+--
+====
+
 
 [NOTE]
 ====

@@ -395,8 +395,8 @@ predicate has a filter
 to retrieve the objects with an "age" greater than or equal to 18.
 * Then a `PagingPredicate` is constructed in which the page size is 5,
 so that there are five objects in each page.
-The first time the values are called creates the first page.
-* It gets subsequent pages with the `nextPage()`
+The first time the `values()` method is called, the first page is fetched.
+* Finally, the subsequent page is fetched by calling the `nextPage()`
 method of `PagingPredicate` and querying the map again with the
 updated `PagingPredicate`.
 
@@ -416,8 +416,8 @@ values = map.values( pagingPredicate );
 ----
 
 If a comparator is not specified for `PagingPredicate`, but you want
-to get a collection of keys or values page by page, this collection must
-be an instance of `Comparable` (i.e., it must implement `java.lang.Comparable`).
+to get a collection of keys or values page by page, keys or values must
+be instances of `Comparable` (i.e., they must implement `java.lang.Comparable`).
 Otherwise, the `java.lang.IllegalArgument` exception is thrown.
 
 You can also access a specific page more
@@ -427,7 +427,7 @@ once instead of reaching the hundredth page one by one using the `nextPage()` me
 Note that this feature tires the memory and see the
 https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/query/PagingPredicate.html[PagingPredicate Javadoc^].
 
-Paging Predicate, also known as Order & Limit, is not supported in
+NOTE: Paging Predicate, also known as Order & Limit, is not supported in
 Transactional Context.
 
 == Filtering with Partition Predicate
@@ -614,6 +614,26 @@ xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High
 indexes, the indexes are automatically stored in the High-Density Memory Store
 as well. This prevents from running into full garbage collections when doing
 a lot of updates to index.
+
+=== Global and Partitioned Indexes
+
+The on-heap indexes are always **global**, i.e., one index covers all ``IMap``s entries stored on the partitions
+owned by a cluster member. Such indexes are beneficial for lookup and range queries because only one lookup
+operation is needed to execute a query. A drawback of global indexes is a potentially high contention on the
+index concurrent data structure that might cause performance degradation.
+
+xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High-Density Memory Store] supports **partitioned** indexes. Each partition
+owned by a cluster member has its own index. All operations on the partitioned index are performed on the
+partitioned thread, thus eliminating the contention issue of the global indexes. However, lookup and range
+queries have to perform lookup operations on every partition and combine the results. Normally, these partition and
+combine executions yield poorer performance results compared to the global indexes.
+
+Global concurrent indexes (based on our own off-heap B+ Tree implementation)
+bring all the benefits of global indexes to `IMap` backed by High-Density Memory Store.
+
+The global High-Density Memory Store indexes are enabled by default and controlled
+by the `hazelcast.hd.global.index.enabled` property. You can disable these indexes by setting
+this property to `false.`
 
 === Composite Indexes
 

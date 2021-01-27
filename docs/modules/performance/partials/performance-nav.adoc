@@ -8,3 +8,4 @@
 ** xref:performance:slowoperationdetector.adoc[]
 ** xref:performance:near-cache.adoc[]
 ** xref:performance:caching-deserialized-values.adoc[]
+** xref:performance:best-practices.adoc[]

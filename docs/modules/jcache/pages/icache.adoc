@@ -24,8 +24,13 @@ use cases for Hazelcast Jet. See also https://jet-start.sh/docs/api/data-structu
 
 A `CacheManager`, started either as a client or as an embedded member,
 can be configured to start a new Hazelcast instance or reuse an already
-existing one to connect to a Hazelcast cluster. To achieve this, request a `CacheManager` by passing a `java.net.URI` instance to `CachingProvider.getCacheManager()`. The `java.net.URI` instance must point to a Hazelcast configuration, e.g., `hazelcast.xml`.
-In addition to the above, the same can be achieved by passing Hazelcast-specific properties to `CachingProvider.getCacheManager(URI, ClassLoader, Properties)` as detailed in the sections that follow.
+existing one to connect to a Hazelcast cluster. To achieve this, request
+a `CacheManager` by passing a `java.net.URI` instance to `CachingProvider.getCacheManager()`.
+The `java.net.URI` instance must point to a Hazelcast configuration, e.g., `hazelcast.xml`.
+In addition to the above,
+the same can be achieved by passing Hazelcast-specific properties to
+`CachingProvider.getCacheManager(URI, ClassLoader, Properties)` as detailed in the
+sections that follow.
 
 === Examples
 
@@ -110,7 +115,7 @@ CacheManager cacheManager = caching.getCacheManager(new URI("classpath:com/domai
 ----
 Properties properties = HazelcastCachingProvider.propertiesByLocation("classpath:com/domain/aaa-hazelcast.xml");
 CachingProvider caching = Caching.getCachingProvider();
-CacheManager cacheManager = caching.getCacheManager(null, null, properties);
+CacheManager cacheManager = caching.getCacheManager(new URI("any-uri-will-do"), null, properties);
 ----
 
 Note that if the Hazelcast configuration file does specify an
@@ -273,22 +278,6 @@ properties.setProperty( HazelcastCachingProvider.HAZELCAST_INSTANCE_NAME,
 URI cacheManagerName = new URI( "my-cache-manager" );
 CacheManager cacheManager = cachingProvider
     .getCacheManager( cacheManagerName, null, properties );
-----
-
-Here is an example of Named Instance Scope with specified name passed as `URI`
-of the `CacheManager`:
-
-[source,java]
-----
-Config config = new Config();
-config.setInstanceName( "my-named-hazelcast-instance" );
-// Create a named HazelcastInstance
-Hazelcast.newHazelcastInstance( config );
-
-CachingProvider cachingProvider = Caching.getCachingProvider();
-URI cacheManagerName = new URI( "my-named-hazelcast-instance" );
-CacheManager cacheManager = cachingProvider
-    .getCacheManager( cacheManagerName, null);
 ----
 
 Here is an example of Named Instance Scope with auto-generated name:
