@@ -353,7 +353,7 @@ The `join` element has the following sub-elements and attributes.
 
 The `auto-detection` element includes the following parameters:
 
-* `enabled`: Enables Hazelcast Auto Detection, `true` by default.
+* `enabled`: Enables xref:discovering-by-auto-detection.adoc[Hazelcast Auto Detection], `true` by default.
 
 [[multicast-element]]
 === multicast element
@@ -377,8 +377,7 @@ join to the cluster, its join request is rejected if it is not a trusted member.
 give an IP addresses range using the wildcard (\*) on the last digit of IP address,
 e.g., 192.168.1.* or 192.168.1.100-110.
 
-NOTE: Multicast mechanism is not recommended for production since UDP is often blocked
-in production environments and other join mechanisms are more definite.
+NOTE: If you prefer to use the multicast mechanism, make sure that your network is enclosed and secure. See the xref:discovery-mechanisms.adoc#multicast[Multicast section].
 
 [[tcp-ip-element]]
 === tcp-ip element

@@ -1494,7 +1494,7 @@ and for each connection we have a connection timeout; see the
 [[blue-green-deployment-and-disaster-recovery]]
 ==== Implementing Blue-Green Deployment using Client Filtering
 
-[blue]*Hazelcast IMDG Enterprise*
+[blue]*Hazelcast IMDG Enterprise Feature*
 
 Hazelcast provides disaster recovery for the client-cluster connections and
 can use the well-known blue-green mechanism, so that a Java client is automatically

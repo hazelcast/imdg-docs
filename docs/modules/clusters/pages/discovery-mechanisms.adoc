@@ -33,12 +33,16 @@ xref:discovering-by-tcp.adoc[Discovering Members by TCP section for configuratio
 [[multicast]]
 == Multicast
 
-Multicast mechanism is not recommended for production since UDP is often
-blocked in production environments and other discovery mechanisms are more definite.
-
 With this mechanism, Hazelcast allows cluster members to find each other
-using multicast communication. See the
+using the multicast communication. See the
 xref:discovering-by-multicast.adoc[Discovering Members by Multicast section].
+
+If you prefer to use this mechanism, make sure that your network is secure.
+Since multicast packets are being broadcasted, any member from anywhere can join
+the cluster with the appropriate cluster name, so you have less control on the cluster.
+
+Note also that if User Datagram Protocol (UDP) is blocked, as it is for most of the production environments,
+discovering with multicast does not work.
 
 [[aws-cloud-discovery]]
 == AWS Cloud Discovery

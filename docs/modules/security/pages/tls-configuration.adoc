@@ -1,4 +1,5 @@
-= Other TLS related configuration
+= Other TLS Related configurations
+[[other-tls-related-configuration]]
 
 == TLS/SSL for Hazelcast Management Center
 

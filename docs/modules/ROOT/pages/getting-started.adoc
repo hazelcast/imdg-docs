@@ -15,13 +15,41 @@ You can use the Hazelcast
 https://github.com/hazelcast/hazelcast-command-line[Command Line Interface (CLI)^]
 to install and start Hazelcast IMDG.
 
-Assuming you have the https://brew.sh/[Homebrew^] package manager, run the following commands:
+Run the following commands to install Hazelcast CLI:
 
-[source,bash,subs="attributes+"]
+[tabs] 
+==== 
+Homebrew:: 
++ 
+-- 
+[source,bash]
 ----
 brew tap hazelcast/hz
 brew install hazelcast
 ----
+--
+
+Debian::
++
+[source,bash]
+----
+$ wget -qO - https://repository.hazelcast.com/api/gpg/key/public | sudo apt-key add -
+$ echo "deb https://repository.hazelcast.com/debian stable main" | sudo tee -a /etc/apt/sources.list
+$ sudo apt update && sudo apt install hazelcast
+----
+
+RPM::
++
+[source,bash]
+----
+$ wget https://repository.hazelcast.com/rpm/hazelcast-rpm.repo -O hazelcast-rpm.repo
+$ sudo mv hazelcast-rpm.repo /etc/yum.repos.d/
+$ sudo yum install hazelcast
+----
+====
+
+After the installation of Hazelcast CLI, the package managers
+will display the installation directory and usage information.
 
 Currently, the CLI way is meant for development purposes, not for a production usage.
 For production or if you prefer other ways, take a look at xref:installation:installing-upgrading.adoc[].
@@ -101,22 +129,21 @@ C++::
 ----
 //Installation notes: Download the latest C++ library from
 //https://hazelcast.org/imdg/clients-languages/cplusplus/
-//and see https://github.com/hazelcast/hazelcast-cpp-client#13-downloading-and-installing]
-//for installation instructions.
+//and see https://github.com/hazelcast/hazelcast-cpp-client for installation instructions.
 
-#include 
+#include <hazelcast/client/hazelcast_client.h>
 
 using namespace hazelcast::client;
 int main() {
     // Start the client and connect to the cluster
-    HazelcastClient hz;
+    hazelcast_client hz;
     // Create a Distributed Map in the cluster
-    IMap map = hz.getMap("my-distributed-map");
-    //Standard Put and Get
-    map.put("1", "John");
-    map.put("2", "Mary");
-    map.put("3", "Jane");
-    // Shutdown the client
+    auto map = hz.get_map("my-distributed-map").get();
+    //Standard put and get
+    map->put<std::string, std::string>("1", "John").get();
+    map->put<std::string, std::string>("2", "Mary").get();
+    map->put<std::string, std::string>("3", "Jane").get();
+    // Shutdown the client. Disconnects from cluster and releases the resources.
     hz.shutdown();
 
     return 0;
@@ -161,23 +188,27 @@ Node.js::
 --
 [source,javascript]
 ----
-//Installation notes: Run the following command
-//npm install hazelcast-client
+// Installation notes: Run the following command
+// npm install hazelcast-client
 
-var Client = require('hazelcast-client').Client;
-// Start the client and connect to the cluster
-Client.newHazelcastClient().then(function (hz) {
-    var map;
-    // Create a Distributed Map in the cluster
-    hz.getMap('my-distributed-map').then(function (mp) {
-        map = mp;
+const { Client } = require('hazelcast-client');
+
+(async () => {
+    try {
+        // Start the client and connect to the cluster
+        const hz = await Client.newHazelcastClient();
+        // Create a Distributed Map in the cluster
+        const map = await hz.getMap('my-distributed-map');
         // Standard Put and Get
-        return map.put('1', 'John');
-    });
+        await map.put('1', 'John');
+        await map.put('2', 'Mary');
+        await map.put('3', 'Jane');
         // Shutdown the client
-        hz.shutdown();
-    });
-});
+        await hz.shutdown();
+    } catch (err) {
+        console.error('Error occurred:', err);
+    }
+})();
 ----
 --
 
