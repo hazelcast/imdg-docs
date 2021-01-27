@@ -5,4 +5,3 @@
 ** xref:query:aggregations.adoc[]
 ** xref:query:projections.adoc[]
 ** xref:query:continuous-query-cache.adoc[]
-** xref:query:mapreduce-deprecation-and-removal.adoc[]
