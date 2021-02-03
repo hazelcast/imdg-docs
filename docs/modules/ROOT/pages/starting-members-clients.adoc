@@ -162,7 +162,7 @@ Here, you can see the size of your cluster (`size`) and member list
 version (`ver`). The member list version is incremented when changes
 happen to the cluster, e.g., a member leaving from or joining to the cluster.
 +
-* Now, add the `hazelcast-client-`*`{page-component-display-version}`*`.jar` library to your classpath.
+* Now, add the `hazelcast-client-`*`{page-component-version}`*`.jar` library to your classpath.
 This is required to use a Hazelcast client.
 * The following code starts a Hazelcast Client, connects to our cluster,
 and prints the size of the `customers` map.
