@@ -55,7 +55,7 @@ interface. To communicate with the REST interface there are two options; one is
 to access REST endpoint URL directly or using the `cp-subsystem.sh` shell
 script, which comes with the Hazelcast package.
 
-NOTE: The `cp-cluster.sh` script uses `curl` command, and `curl` must be
+NOTE: The `cp-subsystem.sh` script uses `curl` command, and `curl` must be
 installed to be able to use the script.
 
 * **Get Local CP Member:**
