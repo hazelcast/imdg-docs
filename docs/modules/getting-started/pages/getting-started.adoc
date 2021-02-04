@@ -1,0 +1,4 @@
+= Getting Started
+[[getting-started]]
+
+This chapter explains how to install Hazelcast and start a Hazelcast member and client. It describes the executable files in the download package and also provides the fundamentals for configuring Hazelcast and its deployment options.

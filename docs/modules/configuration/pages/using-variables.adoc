@@ -1,0 +1,68 @@
+= Using Variables
+[[using-variables]]
+
+In your Hazelcast and/or Hazelcast Client declarative configuration, you can use
+variables to set the values of the elements. This is valid when you set a system
+property programmatically or you use the command line interface. You can use a variable
+in the declarative configuration to access the values of the system properties you set.
+
+For example, see the following command that sets two system properties.
+
+```
+-Dcluster.name=dev
+```
+
+Let's get the values of these system properties in the declarative configuration of Hazelcast, as shown below.
+
+In the XML configuration:
+
+[source,xml]
+----
+<hazelcast>
+    <group>
+        <name>${group.name}</name>
+    </group>
+</hazelcast>
+----
+
+In the YAML configuration:
+
+[source,yaml]
+----
+hazelcast:
+  group:
+    name: ${group.name}
+----
+
+This also applies to the declarative configuration of Hazelcast Java Client, as shown below.
+
+[source,xml]
+----
+<hazelcast-client>
+    <group>
+        <name>${group.name}</name>
+    </group>
+</hazelcast-client>
+----
+
+[source,yaml]
+----
+hazelcast-client:
+  group:
+    name: ${group.name}
+----
+
+If you do not want to rely on the system properties, you can use the `XmlConfigBuilder` or `YamlConfigBuilder` and explicitly
+set a `Properties` instance, as shown below.
+
+[source,java]
+----
+Properties properties = new Properties();
+
+// fill the properties, e.g., from database/LDAP, etc.
+
+XmlConfigBuilder builder = new XmlConfigBuilder();
+builder.setProperties(properties);
+Config config = builder.build();
+HazelcastInstance hz = Hazelcast.newHazelcastInstance(config);
+----

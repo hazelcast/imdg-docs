@@ -1,44 +1,51 @@
-=== Hazelcast IMDG Reference Manual
+= Hazelcast IMDG Documentation
+// Settings:
+ifdef::env-github[]
+:warning-caption: :warning:
+endif::[]
+// URLs:
+:url-org: https://github.com/hazelcast
+:url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
+:url-ui: {url-org}/hazelcast-docs-ui
+:url-playbook: {url-org}/hazelcast-docs
 
+This repository contains the Antora components for the Hazelcast IMDG documentation.
 
-==== Building the Documentation
+The documentation source files are marked up with AsciiDoc.
 
-Following command is used to build the document in the repo's root folder.
+== Docs Structure
 
-----
-./gradlew build
-----
+This section describes some important information about how this repository is structured:
 
+- The component name, version, and start page are configured in each branch's `antora.yml` file.
+- The navigation for all modules is stored in the ROOT module's `nav.adoc` file.
+- Production branches use the *vX.Y* naming pattern (for example, v4.1), and the `master` branch contains the latest content.
+- The {url-playbook}[docs site playbook] instructs Antora to automatically aggregate content in the `master` branch as well as any branch names that start with *v*.
 
-==== Where Are the Generated Documents
+== GitHub Actions
 
-The resulting documents can be found in `build/asciidoc/`.
+To automate some elements of the build process, this repository includes the following GitHub Actions:
 
-==== How to Produce Different Output Formats
+.GitHub Actions
+[cols="m,a,a"]
+|===
+|File |Description |Triggers
 
-In the file `build.gradle`, you will see the "backends" tag:
+|validate-site.yml
+|Validates that all internal and external links are working
+|On a pull request to the `master` branch as well as any branch names that start with *v*
 
-----
-backends = [ 'html5', /*'pdf',*/ /* 'multipage_html5',*/ /*'epub3'*/ ]
-----
+|build-staging.yml
+|Builds the staging documentation site by sending a build hook to Netlify (the hosting platform that we use)
+|On a pull request or a push to the `master` branch as well as any branch names that start with *v*
 
-In this line, you can comment out (using `/\*` and `*/`) the formats that you do not want the generator to produce.
+|build-site.yml
+|Builds the production documentation site by sending a build hook to Netlify (the hosting platform that we use)
+|On a push to the `master` branch as well as any branch names that start with *v*
+|===
 
-==== How to Add a New Chapter
+== Contributing
 
-In the file `build.gradle`, you will see the "sources" tag:
+If you want to add a change or contribute new content, see our {url-contribute}[contributing guide].
 
-----
-sources {
-    include 'index.adoc'
-}
-----
-
-The file `index.adoc` is the one which includes the chapters in the given order and also some parameters. It is located in the folder `src/docs/asciidocs/`.
-
-When you want to add a new chapter, just create a text file (the extension of the file must be `adoc`) in the folder `src/docs/asciidocs/` and add the name of the file to `index.adoc`.
-
-==== AsciiDoc?
-
-
-You can refer to https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/ when writing content in AsciiDoc language.
+To let us know about something that you'd like us to change, consider {url-org}/hazelcast-reference-manual/issues/new[creating an issue].

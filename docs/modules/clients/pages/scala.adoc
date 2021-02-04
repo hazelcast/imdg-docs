@@ -1,0 +1,5 @@
+= Scala Client
+
+The API for Hazelcast Scala is based on Scala 2.11 and Hazelcast 3.6/3.7/3.8 releases. However, these are not hard dependencies provided that you include the relevant Hazelcast dependencies.
+
+See Hazelcast Scala's GitHub https://github.com/hazelcast/hazelcast-scala[repo^] for its documentation.

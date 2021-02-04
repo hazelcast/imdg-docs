@@ -1,0 +1,121 @@
+= Deploying User Codes on Clients
+[[client-user-code-deployment-beta]]
+
+You can also deploy your code from the client side for the following
+situations:
+
+. You have objects that run on the cluster via the clients such as
+`Runnable`, `Callable` and `EntryProcessor`.
+. You have new user domain objects which need to be deployed into the cluster.
+
+When this feature is enabled on the client, the client will deploy the classes
+to the members when connecting. This way, when a client adds a new class, the
+members do not require a restart to include it in their classpath.
+
+You can also use the client permission policy to specify which clients
+are permitted to use User Code Deployment. See the xref:security:native-client-security.adoc#permissions[Permissions section].
+
+[[configuring-client-user-code-deployment]]
+== Configuring Client User Code Deployment
+
+Client User Code Deployment feature is not enabled by default. You can
+configure this feature declaratively or programmatically.
+
+Following are example configuration snippets:
+
+**Declarative Configuration:**
+
+In your `hazelcast-client.xml`:
+
+[source,xml]
+----
+<hazelcast>
+    ...
+    <user-code-deployment enabled="true">
+        <jarPaths>
+            <jarPath>/User/example/example.jar</jarPath>
+            <jarPath>example.jar</jarPath> <!--from class path -->
+            <jarPath>https://com.example.com/example.jar</jarPath>
+            <jarPath>file://Users/example/example.jar</jarPath>
+        </jarPaths>
+        <classNames>
+            <!-- for the classes available in client class path -->
+            <className>example.ClassName</className>
+            <className>example.ClassName2</className>
+        </classNames>
+    </user-code-deployment>
+    ...
+</hazelcast>
+----
+
+**Programmatic Configuration:**
+
+[source,java]
+----
+include::{javasource}/ClientUCD.java[tag=clientucd]
+----
+
+[[client-user-code-deployment-note]]
+=== Important to Know
+
+Note that User Code Deployment should also be enabled on the members to use this feature.
+
+[source,java]
+----
+Config config = new Config();
+UserCodeDeploymentConfig userCodeDeploymentConfig = config.getUserCodeDeploymentConfig();
+userCodeDeploymentConfig.setEnabled( true );
+----
+
+See the <<member-user-code-deployment-beta, Member User Code Deployment section>> for more information on enabling it on the member side and its configuration properties.
+
+For the property `class-cache-mode`, Client User Code Deployment supports only the `ETERNAL` mode, regardless of the configuration set on the member side (which can be `ETERNAL` and `OFF`).
+
+For the property, `provider-mode`, Client User Code Deployment supports only the `LOCAL_AND_CACHED_CLASSES` mode, regardless of the configuration set on the member side (which can be `LOCAL_AND_CACHED_CLASSES`, `LOCAL_CLASSES_ONLY` and `OFF`).
+
+The remaining properties, which are `blacklist-prefixes`, `whitelist-prefixes` and `provider-filter` configured on the member side, effect the client user code deployment's behavior too. For example, assuming that you provide `com.foo` as a blacklist prefix on the member side, the member discards the classes with the prefix `com.foo` loaded by the client.
+
+=== Adding User Library to CLASSPATH
+
+When you want to use a Hazelcast feature in a non-Java client, you need to make
+sure that the Hazelcast member recognizes it. For this, you can use the `/user-lib`
+directory that comes with the Hazelcast package and deploy your own library to the member.
+Let's say you use Hazelcast Node.js client and want to use an entry processor.
+This processor should be `IdentifiedDataSerializable` or `Portable` in the Node.js client.
+You need to implement the Java equivalents of the processor and its factory on the member side,
+and put these compiled class or JAR files into the `/user-lib` directory. Then you can run
+the `start.sh` script which adds them to the classpath.
+
+The following is an example code which can be the Java equivalent of
+entry processor in the Node.js client:
+
+[source,java]
+----
+include::{javasource}/settingupclusters/IdentifiedEntryProcessor.java[tag=iep]
+----
+
+You can implement the above processor's factory as follows:
+
+[source,java]
+----
+include::{javasource}/settingupclusters/IdentifiedFactory.java[tag=if]
+----
+
+And the following is the configuration for the above factory:
+
+[source,xml]
+----
+<hazelcast>
+    <serialization>
+        <data-serializable-factories>
+            <data-serializable-factory factory-id="5">
+                IdentifiedFactory
+            </data-serializable-factory>
+        </data-serializable-factories>
+    </serialization>
+</hazelcast>
+----
+
+Then, you can start your Hazelcast member by using the start scripts
+(`start.sh` or `start.bat`) in the `/bin` directory. The start scripts
+automatically adds your class and JAR files to the classpath.

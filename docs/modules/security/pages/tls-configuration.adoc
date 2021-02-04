@@ -1,0 +1,119 @@
+= Other TLS Related configurations
+[[other-tls-related-configuration]]
+
+== TLS/SSL for Hazelcast Management Center
+
+In order to use a secured communication between the Hazelcast cluster and Management Center,
+you have to configure Management Center as explained in the
+xref:management-center::connecting-members.adoc[Connecting Hazelcast members to Management Center section] in the Hazelcast
+Management Center documentation.
+
+== Configuring Cipher Suites
+
+To get the best performance, the correct https://en.wikipedia.org/wiki/Cipher_suite[cipher suites^]
+need to be configured.
+Each cipher suite has different performance and security characteristics and depending on the
+hardware and selected cipher suite, the overhead of TLS can range from dramatic to almost
+negligible.
+
+The cipher suites are configured using the `ciphersuites` property as shown below:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+
+[source,xml]
+----
+<hazelcast>
+    ...
+    <network>
+        <ssl enabled="true">
+            <factory-class-name>...</factory-class-name>
+            <properties>
+                <property name="keyStore">upload/hazelcast.keystore</property>
+                <property name="ciphersuites">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                                      TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA</property>
+           </properties>
+       </ssl>
+    </network>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  network:
+    ssl:
+      enabled: true
+      factory-class-name: ...
+      properties:
+        keyStore: upload/hazelcast.keystore
+        ciphersuites: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                                      TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+----
+====
+
+The `ciphersuites` property accepts a comma separated list (spaces, enters, tabs are
+filtered out) of cipher suites in the order
+of preference.
+
+You can configure a member and client with different cipher suites; but there should be
+at least one shared cipher suite.
+
+One of the cipher suites that gave very low overhead but still provides solid security
+is `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`.
+However in our measurements this cipher suite only performs well using OpenSSL; using
+the regular Java TLS integration, it performs
+badly. So keep that in mind when configuring a client using regular SSL and a member
+using OpenSSL.
+
+Please check with your security expert to determine which cipher suites are appropriate
+and run performance tests to see which ones perform
+well in your environment.
+
+If you don't configure the cipher suites, then both client and/or member determine a cipher
+suite by themselves during the TLS/SSL
+handshake. This can lead to suboptimal performance and lower security than required.
+
+== Other Ways of Configuring Properties
+
+You can set all the properties presented in this section using the `javax.net.ssl` prefix,
+e.g., `javax.net.ssl.keyStore`
+and `javax.net.ssl.keyStorePassword`.
+
+Also note that these properties can be specified using the related Java system properties and
+also Java's `-D` command line
+option. This is very useful if you require a more flexible configuration, e.g., when doing
+performance tests.
+
+See below examples equivalent to each other:
+
+```
+System.setProperty("javax.net.ssl.trustStore", "/user/home/hazelcast.ts");
+```
+
+Or,
+
+```
+-Djavax.net.ssl.trustStore=/user/home/hazelcast.ts
+```
+
+Another two examples equivalent to each other:
+
+
+```
+System.setProperty("javax.net.ssl.ciphersuites", "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA");
+```
+
+Or,
+
+
+```
+-Djavax.net.ssl.ciphersuites=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+```

@@ -1,0 +1,97 @@
+= High-Density Memory Store
+
+[blue]*Hazelcast IMDG Enterprise Feature*
+
+By default, data structures in Hazelcast store data on heap in
+serialized form for highest data compaction; yet, these data structures
+are still subject to Java Garbage Collection (GC). Modern hardware has
+much more available memory. If you want to make use of that hardware and
+scale up by specifying higher heap sizes, GC becomes an increasing problem:
+the application faces long GC pauses that make the application unresponsive.
+Also, you may get out of memory errors if you fill your whole heap. Garbage
+collection, which is the automatic process that manages the application's
+runtime memory, often forces you into configurations where multiple JVMs
+with small heaps (sizes of 2-4GB per member) run on a single physical hardware
+device to avoid garbage collection pauses. This results in oversized clusters
+to hold the data and leads to performance level requirements.
+
+In [navy]*Hazelcast IMDG Enterprise HD*, the High-Density Memory Store is
+Hazelcast's new enterprise in-memory storage solution. It solves garbage
+collection limitations so that applications can exploit hardware memory
+more efficiently without the need of oversized clusters. High-Density
+Memory Store is designed as a pluggable memory manager which enables multiple
+memory stores for different data structures. These memory stores are all
+accessible by a common access layer that scales up to massive amounts of the main
+memory on a single JVM by minimizing the GC pressure. High-Density Memory
+Store enables predictable application scaling and boosts performance and
+latency while minimizing garbage collection pauses.
+
+This foundation includes, but is not limited to, storing keys and values
+next to the heap in a native memory region.
+
+High-Density Memory Store is currently provided for the following Hazelcast
+features and implementations:
+
+* xref:data-structures:map.adoc#using-high-density-memory-store-with-map[Map]
+* xref:jcache:icache.adoc#icache-configuration[JCache Implementation]
+* xref:performance:near-cache.adoc[Near Cache]
+* xref:storage:hot-restart-persistence.adoc[Hot Restart Persistence]
+* xref:clients:java.adoc#using-high-density-memory-store-with-java-client[Java Client], when using the Near Cache for client
+* https://github.com/hazelcast/hazelcast-wm#using-high-density-memory-store[Web Session Replications^]
+* https://github.com/hazelcast/hazelcast-hibernate[Hibernate 2nd Level Caching^]
+* Paging and Partition Predicates
+
+== Configuring High-Density Memory Store
+
+To use the High-Density memory storage, the native memory usage
+must be enabled using the programmatic or declarative configuration.
+Also, you can configure its size, memory allocator type, minimum
+block size, page size and metadata space percentage.
+
+The following are the configuration element descriptions:
+
+* **size:** Size of the total native memory to allocate in megabytes. Its default value is **512 MB**.
+* **allocator type**: Type of the memory allocator. Available values are as follows:
+** **STANDARD**: This option is used internally by Hazelcast's POOLED allocator type or for debugging/testing purposes.
+*** With this option, the memory is allocated or deallocated using your operating system's default memory manager.
+*** It uses GNU C Library's standard `malloc()` and `free()` methods which are subject to contention on multithreaded/multicore systems.
+*** Memory operations may become slower when you perform a lot of small allocations and deallocations.
+*** It may cause large memory fragmentations, unless you use a method in the background that emphasizes fragmentation avoidance, such as `jemalloc()`. Note that a large memory fragmentation can trigger the Linux Out of Memory Killer if there is no swap space enabled in your system. Even if the swap space is enabled, the killer can be again triggered if there is not enough swap space left.
+*** If you still want to use the operating system's default memory management, you can set the allocator type to STANDARD in your native memory configuration.
+** **POOLED**: This is the default option, Hazelcast's own pooling memory allocator.
+*** With this option, memory blocks are managed using internal memory pools.
+*** It allocates memory blocks, each of which has a 4MB page size by default, and splits them into chunks or merges them to create larger chunks when required. Sizing of these chunks follows the https://en.wikipedia.org/wiki/Buddy_memory_allocation[buddy memory allocation] algorithm, i.e. power-of-two sizing.
+*** It never frees memory blocks back to the operating system. It marks disposed memory blocks as available to be used later, meaning that these blocks are reusable.
+*** Memory allocation and deallocation operations (except the ones requiring larger sizes than the page size) do not interact with the operating system mostly.
+*** For memory allocation, it tries to find the requested memory size inside the internal memory pools. If it cannot be found, then it interacts with the operating system.
+* **minimum block size:** Minimum size of the blocks in bytes to split and fragment a page block to assign to an allocation request. It is used only by the **POOLED** memory allocator. Its default value is **16 bytes**.
+* **page size:** Size of the page in bytes to allocate memory as a block. It is used only by the **POOLED** memory allocator. Its default value is `1 << 22` = **4194304 Bytes**, about **4 MB**.
+* **metadata space percentage:** Defines the percentage of the allocated native memory that is used for internal memory structures by the High-Density Memory for tracking the used and available memory blocks. It is used only by the **POOLED** memory allocator. Its default value is **12.5**. Please note that when the memory runs out, you get a `NativeOutOfMemoryException`;  if your store has a big size of entries, you should consider increasing this percentage.
+
+The following is the programmatic configuration example.
+
+[source,java]
+----
+include::{javasource}/storage/SampleHDConfiguration.java[tag=hdconf]
+----
+
+The following is the declarative configuration example.
+
+[source,xml]
+----
+<hazelcast>
+    ...
+    <native-memory allocator-type="POOLED" enabled="true">
+        <size unit="MEGABYTES" value="512"/>
+        <min-block-size>16</min-block-size>
+        <page-size>4194304</page-size>
+        <metadata-space-percentage>12.5</metadata-space-percentage>
+    </native-memory>
+    ...
+</hazelcast>
+----
+
+NOTE: You can check whether there is enough free physical memory for the
+requested number of bytes using the system property `hazelcast.hidensity.check.freememory`.
+See the xref:ROOT:system-properties.adoc[System Properties appendix] on how to use Hazelcast
+system properties.
