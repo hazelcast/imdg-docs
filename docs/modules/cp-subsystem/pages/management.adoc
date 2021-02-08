@@ -264,7 +264,7 @@ WARNING: This method is **NOT** idempotent and multiple invocations can break th
 .Java API
 [source,java]
 ----
-include::{javasource}/cp/CpSubsystemAPI.java[tag=reset]
+include::{javasource}/cp/CpSubsystemAPI.java[tag=restart]
 ----
 +
 .REST API
