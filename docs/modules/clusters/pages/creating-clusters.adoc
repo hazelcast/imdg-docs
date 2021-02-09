@@ -1,43 +1,44 @@
-= Creating Clusters
-[[creating-cluster]]
+= Creating Cluster Groups
+[[creating-cluster-groups]]
 
-You can create clusters using the `cluster-name` configuration
-element.
+You can create cluster groups. To do this, use the `group` configuration element.
 
-You can separate and group your clusters in a simple way by specifying cluster names.
-Example groupings can be by *development*, *production*, *test*, *app*, etc.
-The following is an example declarative configuration.
+You can separate your clusters in a simple way by specifying group names. Example groupings can be by *development*, *production*, *test*, *app*, etc. The following is an example declarative configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
-    <cluster-name>production</cluster-name>
+    <group>
+        <name>production</name>
+    </group>
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  cluster-name: production
-----
-====
-
-You can also define the cluster configuration programmatically.
-A JVM can host multiple Hazelcast instances. Each Hazelcast instance can only
-participate in one group. Each Hazelcast instance only joins to its own group
-and does not interact with other groups. The following code example creates
-three separate Hazelcast instances--`h1` belongs to the `production` cluster,
-while `h2` and `h3` belong to the `development` cluster.
+You can also define the cluster groups using the programmatic configuration. A JVM can host multiple Hazelcast instances. Each Hazelcast instance can only participate in one group. Each Hazelcast instance only joins to its own group and does not interact with other groups. The following code example creates three separate Hazelcast instances--`h1` belongs to the `production` cluster, while `h2` and `h3` belong to the `development` cluster.
 
 [source,java]
 ----
 include::{javasource}/GroupingClusters.java[tag=groupingclusters]
 ----
+
+[[cluster-groups-before-hazelcast-382]]
+== Cluster Groups before Hazelcast 3.8.2
+
+If you have a Hazelcast release older than 3.8.2, you need to provide also a group password along with the group name. The following are the configuration examples with the password element:
+
+[source,xml]
+----
+<hazelcast>
+    <group>
+        <name>production</name>
+        <password>prod-pass</password>
+    </group>
+</hazelcast>
+----
+
+[source,java]
+----
+include::{javasource}/GroupingClusters2.java[tag=groupingclusters]
+----
+
+NOTE: Starting with 3.8.2, members no longer perform a password check during the cluster join process. Starting with 3.11, members no longer perform a password check when a client connects to the cluster.

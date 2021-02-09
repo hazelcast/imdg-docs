@@ -133,11 +133,6 @@ Replicated Map can be configured programmatically or declaratively.
 You can declare your Replicated Map configuration in the Hazelcast configuration
 file `hazelcast.xml`. See the following example:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -151,28 +146,11 @@ XML::
                 com.hazelcast.examples.EntryListener
             </entry-listener>
        </entry-listeners>
-       <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+       <quorum-ref>quorumname</quorum-ref>
     </replicatedmap>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  replicatedmap:
-    default:
-      in-memory-format: BINARY
-      async-fillup: true
-      statistics-enabled: true
-      entry-listeners:
-        - class-name: com.hazelcast.examples.EntryListener
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
 
 Replicated Map has the following configuration elements:
 
@@ -186,14 +164,14 @@ replication is completed.
 * `statistics-enabled`: Specifies whether the statistics gathering is enabled
 for your Replicated Map. If set to `false`, you cannot collect statistics in your
 implementation (using `getLocalReplicatedMapStats()`) and also
-xref:management-center:monitor-imdg:monitor-dds.adoc#monitoring-replicated-maps[Hazelcast Management Center]
+{mc-docs}#monitoring-replicated-maps[Hazelcast Management Center^]
 will not show them. Its default value is `true`.
 * `entry-listener`: Full canonical classname of the `EntryListener` implementation.
 ** `entry-listener#include-value`: Specifies whether the event includes the value or not.
 Sometimes the key is enough to react on an event. In those situations, setting this value
 to `false` saves a deserialization cycle. Its default value is `true`.
 ** `entry-listener#local`: Not used for Replicated Map since listeners are always local.
-* `split-brain-protection-ref`: Name of quorum configuration that you want this Replicated Map to use.
+* `quorum-ref`: Name of quorum configuration that you want this Replicated Map to use.
 See the <<split-brain-protection-for-replicated-map, Split-Brain Protection for Replicated Map section>>.
 
 **Programmatic Configuration:**
@@ -271,7 +249,7 @@ members before applying its operations (see the xref:network-partitioning:split-
 This is a check to avoid performing successful queue operations on all parts of a
 cluster during a network partition.
 
-The following is a list of methods, grouped by the protection types, that support split-brain
+The following is a list of methods, grouped by quorum type, that support split-brain
 protection checks:
 
 * WRITE, READ_WRITE:
@@ -292,36 +270,18 @@ protection checks:
 **Configuring Split-Brain Protection**
 
 Split-brain protection for Replicated Map can be configured programmatically
-using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/ReplicatedMapConfig.html[setSplitBrainProtectionName()^],
-or declaratively using the element `split-brain-protection-ref`. Following is an example declarative configuration:
+using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/ReplicatedMapConfig.html[setQuorumName()^],
+or declaratively using the element `quorum-ref`. Following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <replicatedmap name="default">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </replicatedmap>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  replicatedmap:
-    default:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you
-configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
+The value of `quorum-ref` should be the quorum configuration name which you configured under the `quorum` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

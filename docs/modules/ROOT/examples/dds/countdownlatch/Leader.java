@@ -1,6 +1,6 @@
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.cp.ICountDownLatch;
+import com.hazelcast.core.ICountDownLatch;
 
 //tag::leader[]
 public class Leader {

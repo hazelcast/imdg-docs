@@ -1,4 +1,5 @@
 * xref:extending-hazelcast:extending-hazelcast.adoc[]
+** xref:extending-hazelcast:user-defined-services.adoc[]
 ** xref:extending-hazelcast:operationparker.adoc[]
 ** xref:extending-hazelcast:discovery-spi.adoc[]
 ** xref:extending-hazelcast:config-properties-spi.adoc[]

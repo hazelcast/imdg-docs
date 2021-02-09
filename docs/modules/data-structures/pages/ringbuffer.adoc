@@ -297,7 +297,10 @@ hazelcast:
 
 The following are the explanations for the Ringbuffer store configuration elements:
 
-* `class-name: Name of the Ringbuffer store factory class.
+* `class-name: Name of the class implementing the `RingbufferStore` interface.
+* `factory-class-name`: Name of the class implementing the `RingbufferStoreFactory` interface. This interface allows a factory class to be registered instead of a class implementing the `RingbufferStore` interface.
+
+Either the `class-name` or the `factory-class-name` element should be used.
 
 [[configuring-ringbuffer-in-memory-format]]
 == Configuring Ringbuffer In-Memory Format
@@ -342,41 +345,20 @@ hazelcast:
 [[configuring-split-brain-protection-for-ringbuffer]]
 == Configuring Split-Brain Protection for Ringbuffer
 
-Ringbuffer can be configured to check for a minimum number of available members before
-applying Ringbuffer operations. This is a check to avoid performing successful Ringbuffer
-operations on all parts of a cluster during a network partition and can be configured
-using the element `split-brain-protection-ref`. You should set this element's value as the quorum's name,
-which you configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]. Following is an example snippet:
+Ringbuffer can be configured to check for a minimum number of available members before applying Ringbuffer operations. This is a check to avoid performing successful Ringbuffer operations on all parts of a cluster during a network partition and can be configured using the element `quorum-ref`. You should set this element's value as the quorum's name, which you configured under the `quorum` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]. Following is an example snippet:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <ringbuffer name="rb">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </ringbuffer>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ringbuffer:
-    rb:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The following is a list of methods, grouped by the protection types, that support split-brain protection checks:
+The following is a list of methods, grouped by quorum type, that support split-brain protection checks:
 
 * WRITE, READ_WRITE:
 ** `add`
@@ -515,29 +497,31 @@ use either `CompletableFuture#get()` or `CompletableFuture#join()`.
 
 See the following example code.
 
-[source,,java]
+[source,java]
 ----
-CompletionStage<Long> f = ringbuffer.addAsync(item, OverflowPolicy.FAIL);
-f.toCompletableFuture().get();
+ICompletableFuture f = ringbuffer.addAsync(item, OverflowPolicy.FAIL);
+f.get();
 ----
 
-However, you can also use `CompletionStage` API to add subsequent dependent computation
-stages which will be executed when the operation  has completed. This way the thread used for
-the call is not blocked until the response is returned.
+However, you can also use `ICompletableFuture` to get notified when the operation has completed. The advantage of `ICompletableFuture` is that the thread used for the call is not blocked till the response is returned.
 
 See the below code as an example of when you want to
 get notified when a batch of reads has completed.
 
 [source,java]
 ----
-CompletionStage<ReadResultSet<String>> stage = rb.readManyAsync(sequence, min, max, someFilter);
-stage.whenCompleteAsync((response, throwable) -> {
-    if (throwable == null) {
+ICompletableFuture<ReadResultSet<String>> f = rb.readManyAsync(sequence, min, max, someFilter);
+f.andThen(new ExecutionCallback<ReadResultSet<String>>() {
+    @Override
+    public void onResponse(ReadResultSet<String> response) {
          for (String s : response) {
              System.out.println("Received:" + s);
          }
-    } else {
-        throwable.printStackTrace();
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        t.printStackTrace();
     }
 });
 ----
@@ -548,11 +532,6 @@ stage.whenCompleteAsync((response, throwable) -> {
 The following shows the declarative configuration of a Ringbuffer called `rb`.
 The configuration is modeled after the Ringbuffer defaults.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -563,28 +542,11 @@ XML::
         <async-backup-count>0</async-backup-count>
         <time-to-live-seconds>0</time-to-live-seconds>
         <in-memory-format>BINARY</in-memory-format>
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </ringbuffer>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ringbuffer:
-    rb:
-      capacity: 10000
-      backup-count: 1
-      async-backup-count: 0
-      time-to-live-seconds: 0
-      in-memory-format: BINARY
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
 
 You can also configure a Ringbuffer programmatically. The following is a programmatic
 version of the above declarative configuration.

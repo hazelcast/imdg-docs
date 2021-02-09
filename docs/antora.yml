@@ -1,12 +1,11 @@
 name: imdg
 title: Hazelcast IMDG
-version: 4.2-SNAPSHOT
-prerelease: true
+version: 3.12.12
 asciidoc:
   attributes:
     javasource: ROOT:example$
     page-toclevels: 1
-    page-ghissue: https://github.com/hazelcast/hazelcast-reference-manual/issues/new
+    page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
     javadocBaseUrl: https://docs.hazelcast.org/docs/
 nav:
 - modules/ROOT/nav.adoc

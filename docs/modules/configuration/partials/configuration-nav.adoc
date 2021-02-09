@@ -3,7 +3,6 @@
 ** xref:configuration:configuring-programmatically.adoc[]
 ** xref:configuration:configuring-with-system-properties.adoc[]
 ** xref:configuration:configuring-within-spring.adoc[]
-** xref:configuration:overriding-configuration-settings.adoc[]
 ** xref:configuration:dynamic-data-structure-configuration.adoc[]
 ** xref:configuration:checking-configuration.adoc[]
 ** xref:configuration:pattern-matcher.adoc[]

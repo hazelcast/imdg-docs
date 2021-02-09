@@ -2,6 +2,8 @@
 ** xref:query:how-distributed-query-works.adoc[]
 ** xref:query:querying-collections-and-arrays.adoc[]
 ** xref:query:custom-attributes.adoc[]
+** xref:query:mapreduce.adoc[]
+** xref:query:aggregators.adoc[]
 ** xref:query:aggregations.adoc[]
 ** xref:query:projections.adoc[]
 ** xref:query:continuous-query-cache.adoc[]

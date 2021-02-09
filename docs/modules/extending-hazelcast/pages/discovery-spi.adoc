@@ -278,11 +278,6 @@ members, therefore we read the file on request.
 To actually use the new `DiscoveryStrategy` implementation we need to
 configure it like in the following example:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -293,6 +288,11 @@ XML::
     </properties>
     <network>
         <join>
+            <!-- deactivating other discoveries -->
+            <multicast enabled="false"/>
+            <tcp-ip enabled="false" />
+            <aws enabled="false"/>
+
             <!-- activate our discovery strategy -->
             <discovery-strategies>
 
@@ -309,25 +309,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  properties:
-    hazelcast.discovery.enabled: true
-  network:
-    join:
-      discovery-strategies:
-        discovery-strategy:
-          - class: com.hazelcast.examples.spi.discovery.HostsDiscoveryStrategy
-            enabled: true
-            properties:
-              site-domain: cluster.local
-----
-====
 
 To find out further details, please have a look at the
 https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spi/discovery/package-summary.html[Discovery SPI Javadoc].

@@ -8,7 +8,7 @@ public class ListConfiguration {
         CollectionConfig collectionList = config.getListConfig("MyList");
         collectionList.setBackupCount(1)
                 .setMaxSize(10)
-                .setSplitBrainProtectionName("splitbrainprotectionname");
+                .setQuorumName("quorumname");
         //end::lc[]
     }
 }

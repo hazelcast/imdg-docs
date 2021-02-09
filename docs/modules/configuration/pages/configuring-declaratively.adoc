@@ -2,7 +2,7 @@
 [[configuring-declaratively]]
 
 This is the configuration option where you use an XML or a YAML configuration
-file. When you download and unzip `hazelcast-{page-component-version}.zip`,
+file. When you download and unzip `hazelcast-{page-component-display-version}.zip`,
 you see the following files present in the  `/bin` folder, which are
 standard configuration files:
 
@@ -32,24 +32,21 @@ xref:clients:java.adoc#blue-green-deployment-and-disaster-recovery[here].
 
 A part of the default XML/YAML configurations is shown as an example below.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <cluster-name>dev</cluster-name>
-    <management-center scripting-enabled="false" />
+    <group>
+        <name>dev</name>
+    </group>
+    <management-center enabled="false">http://localhost:8080/mancenter</management-center>
     <network>
         <port auto-increment="true" port-count="100">5701</port>
         <outbound-ports>
-            <!--
-            Allowed port range when connecting to other members.
-            0 or * means the port provided by the system.
-            -->
+        <!--
+        Allowed port range when connecting to other members.
+        0 or * means the port provided by the system.
+        -->
             <ports>0</ports>
         </outbound-ports>
         <join>
@@ -71,17 +68,19 @@ XML::
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
+The identical part of the configuration extracted from `hazelcast.yaml` is shown as below.
+
 [source,yaml]
 ----
 hazelcast:
   ...
-  cluster-name: dev
+  group:
+    name: dev
+    password: dev-pass
   management-center:
-    scripting-enabled: false
+    enabled: false
+    url: http://localhost:8080/hazelcast-mancenter
   network:
     port:
       auto-increment: true
@@ -106,29 +105,25 @@ hazelcast:
       time-to-live-seconds: 0
     ...
 ----
-====
 
 [[composing-declarative-configuration]]
 == Composing Declarative Configuration
 
-You can compose the declarative configuration of your Hazelcast member or
-Hazelcast client from multiple declarative
-configuration snippets. In order to compose a declarative configuration, you
-can `import` different
-declarative configuration files. Composing configuration files is supported both
-in XML and YAML configurations with the
+You can compose the declarative configuration of your Hazelcast member or Hazelcast client from multiple declarative
+configuration snippets. In order to compose a declarative configuration, you can `import` different
+declarative configuration files. Composing configuration files is supported both in XML and YAML configurations with the
 limitation that only configuration files written in the same language can be composed.
 
-Let's say you want to compose the declarative configuration for Hazelcast out of two
-XML configurations: `development-cluster-config.xml` and `development-network-config.xml`.
-These two configurations are shown below.
+Let's say you want to compose the declarative configuration for Hazelcast out of two XML configurations: `development-group-config.xml` and `development-network-config.xml`. These two configurations are shown below.
 
-`development-cluster-config.xml`:
+`development-group-config.xml`:
 
 [source,xml]
 ----
 <hazelcast>
-    <cluster-name>dev</cluster-name>
+    <group>
+        <name>dev</name>
+    </group>
 </hazelcast>
 ----
 
@@ -149,8 +144,7 @@ These two configurations are shown below.
 </hazelcast>
 ----
 
-To get your example Hazelcast declarative configuration out of the above two,
-use the `<import/>` element as shown below.
+To get your example Hazelcast declarative configuration out of the above two, use the `<import/>` element as shown below.
 
 [source,xml]
 ----
@@ -162,12 +156,13 @@ use the `<import/>` element as shown below.
 
 The above example using the YAML configuration files looks like the following:
 
-`development-cluster-config.yaml`:
+`development-group-config.yaml`:
 
 [source,yaml]
 ----
 hazelcast:
-  cluster-name: dev
+  group:
+    name: dev
 ----
 
 `development-network-config.yaml`:
@@ -198,16 +193,17 @@ hazelcast:
 ----
 
 
-This feature also applies to the declarative configuration of Hazelcast client.
-See the following examples.
+This feature also applies to the declarative configuration of Hazelcast client. See the following examples.
 
 
-`client-cluster-config.xml`:
+`client-group-config.xml`:
 
 [source,xml]
 ----
 <hazelcast-client>
-    <cluster-name>dev</cluster-name>
+    <group>
+        <name>dev</name>
+    </group>
 </hazelcast-client>
 ----
 
@@ -224,26 +220,26 @@ See the following examples.
 </hazelcast-client>
 ----
 
-To get a Hazelcast client declarative configuration from the above two examples,
-use the `<import/>` element as shown below.
+To get a Hazelcast client declarative configuration from the above two examples, use the `<import/>` element as shown below.
 
 [source,xml]
 ----
 <hazelcast-client>
-    <import resource="client-cluster-config.xml"/>
+    <import resource="client-group-config.xml"/>
     <import resource="client-network-config.xml"/>
-</hazelcast-client>
+</hazelcast>
 ----
 
 The same client configuration using the YAML language is shown below.
 
 
-`client-cluster-config.yaml`:
+`client-group-config.yaml`:
 
 [source,yaml]
 ----
 hazelcast-client:
-  cluster-name: dev
+  group:
+    name: dev
 ----
 
 `client-network-config.yaml`:
@@ -262,7 +258,7 @@ Composing a Hazelcast client declarative configuration by importing the above tw
 ----
 hazelcast-client:
   import:
-    - client-cluster-config.yaml
+    - client-group-config.yaml
     - client-network-config.yaml
 ----
 
@@ -276,7 +272,7 @@ Resources from the classpath and file system may also be used to compose a decla
 [source,xml]
 ----
 <hazelcast>
-    <import resource="file:///etc/hazelcast/development-cluster-config.xml"/> <!-- loaded from filesystem -->
+    <import resource="file:///etc/hazelcast/development-group-config.xml"/> <!-- loaded from filesystem -->
     <import resource="classpath:development-network-config.xml"/>  <!-- loaded from classpath -->
 </hazelcast>
 ----
@@ -286,7 +282,7 @@ Resources from the classpath and file system may also be used to compose a decla
 hazelcast:
   import:
     # loaded from filesystem
-    - file:///etc/hazelcast/development-cluster-config.yaml
+    - file:///etc/hazelcast/development-group-config.yaml
     # loaded from classpath
     - classpath:development-network-config.yaml
 ----
@@ -296,7 +292,7 @@ Importing resources with variables in their names is also supported. See the fol
 [source,xml]
 ----
 <hazelcast>
-    <import resource="${environment}-cluster-config.xml"/>
+    <import resource="${environment}-group-config.xml"/>
     <import resource="${environment}-network-config.xml"/>
 </hazelcast>
 ----
@@ -305,7 +301,7 @@ Importing resources with variables in their names is also supported. See the fol
 ----
 hazelcast:
   import:
-    - ${environment}-cluster-config.yaml
+    - ${environment}-group-config.yaml
     - ${environment}-network-config.yaml
 ----
 
@@ -435,5 +431,5 @@ hazelcast:
 ----
 
 You can refer to the full example YAML configuration files placed in the `/bin` folder
-of the downloadable `hazelcast-{page-component-version}.zip` after unzipping it. Please see the
+of the downloadable `hazelcast-{page-component-display-version}.zip` after unzipping it. Please see the
 complete list of the full example YAML configurations link:https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.yaml[here^].

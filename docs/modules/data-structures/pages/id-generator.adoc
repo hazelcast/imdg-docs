@@ -1,0 +1,140 @@
+= ID Generator
+[[idgenerator]]
+
+Hazelcast IdGenerator is used to generate cluster-wide unique identifiers. Generated identifiers are long type primitive values between 0 and `Long.MAX_VALUE`.
+
+NOTE: ***Feature is deprecated.*** The implementation can produce duplicate IDs in case of a network split, even with split-brain protection enabled (during short window while split-brain is detected). Please use FlakeIdGenerator for an alternative implementation which does not suffer from the issue. See also the <<migrating-to-flakeidgenerator, Migration guide>> at the end of this section.
+
+[[generating-cluster-wide-flake-ids]]
+== Generating Cluster-Wide IDs
+
+ID generation occurs almost at the speed of `AtomicLong.incrementAndGet()`. A group of 10,000 identifiers is allocated for each cluster member. In the background, this allocation takes place with an `IAtomicLong` incremented by 10,000. Once a cluster member generates IDs (allocation is done), `IdGenerator` increments a local counter. If a cluster member uses all IDs in the group, it gets another 10000 IDs. This way, only one time of network traffic is needed, meaning that 9,999 identifiers are generated in memory instead of over the network. This is fast.
+
+Let's write an example identifier generator.
+
+[source,java]
+----
+include::{javasource}/dds/ExampleIdGenerator.java[tag=idg]
+----
+
+Let's run the above code two times. The output is similar to the following:
+
+```
+Members [1] {
+  Member [127.0.0.1]:5701 this
+}
+Id: 1
+Id: 2
+Id: 3
+```
+
+
+```
+Members [2] {
+  Member [127.0.0.1]:5701
+  Member [127.0.0.1]:5702 this
+}
+Id: 10001
+Id: 10002
+Id: 10003
+```
+
+== Unique IDs and Duplicate IDs
+
+You can see that the generated IDs are unique and counting upwards. If you see duplicated identifiers, it means your instances could not form a cluster.
+
+
+NOTE: Generated IDs are unique during the life cycle of the cluster. If the entire cluster is restarted, IDs start from 0, again or you can initialize to a value using the `init()` method of IdGenerator.
+
+NOTE: IdGenerator has one synchronous backup and no asynchronous backups. Its backup count is not configurable.
+
+== Migrating to FlakeIdGenerator
+
+The Flake ID generator provides similar features with more safety guarantees during network splits. The two generators are completely different implementations, but both types of generator generate roughly ordered IDs. So in order to ensure uniqueness of the generated IDs, we can force the Flake ID generator to start at least where the old generator ended. This is likely the case, because the values from Flake ID generator are quite large compared to values from the old generator. Consider and perform the following:
+
+* Make sure the version of your Hazelcast cluster and of all clients is at least 3.10.
+* If the current ID from old `IdGenerator` is higher than the ID from `FlakeIdGenerator`, you need to configure ID offset. See https://github.com/hazelcast/hazelcast-code-samples/blob/master/distributed-primitives/flake-id-generator/src/main/java/FlakeIdMigrationSample.java[FlakeIdMigrationSample] for mor details.
+* Replace all calls to `HazelcastInstance.getIdGenerator()` with `HazelcastInstance.getFlakeIdGenerator()`. If you use Spring configuration, replace `<id-generator>` with `<flake-id-generator>`
+
+[[flakeidgenerator]]
+== Flake ID Generator
+
+Hazelcast Flake ID Generator is used to generate cluster-wide unique identifiers. Generated identifiers are `long` primitive values and are k-ordered (roughly ordered). IDs are in the range from 0 to Long.MAX_VALUE.
+
+[[generating-cluster-wide-flake-ids]]
+=== Generating Cluster-Wide IDs
+
+The IDs contain timestamp component and a node ID component, which is assigned when the member joins the cluster. This allows the IDs to be ordered and unique without any coordination between the members, which makes the generator safe even in split-brain scenarios (for limitations in this case, see the <<node-id-assignment, Node ID assignment section>> below).
+
+Timestamp component is in milliseconds since 1.1.2018, 0:00 UTC and has 41 bits. This caps the useful lifespan of the generator to little less than 70 years (until ~2088). The sequence component is 6 bits. If more than 64 IDs are requested in single millisecond, IDs gracefully overflow to the next millisecond and uniqueness is guaranteed in this case. The implementation does not allow overflowing by more than 15 seconds, if IDs are requested at higher rate, the call blocks. Note, however, that clients are able to generate even faster because each call goes to a different (random) member and the 64 IDs/ms limit is for single member.
+
+[[flakeidgenerator-performance]]
+== Performance
+
+Operation on member is always local, if the member has valid node ID, otherwise it's remote.
+On the client, the `newId()` method goes to a random member and gets a batch of IDs,
+which is then returned locally for a limited time. The pre-fetch size and the validity
+time can be configured for each client and member.
+
+[[flakeidgenerator-example]]
+=== Example
+
+Let's write an example identifier generator.
+
+[source,java]
+----
+include::{javasource}/dds/ExampleFlakeIdGenerator.java[tag=fid]
+----
+
+[[node-id-assignment]]
+== Node ID Assignment
+
+Flake IDs require a unique node ID to be assigned to each member, from which point the
+member can generate unique IDs without any coordination. Hazelcast uses the member list
+version from the moment when the member joined the cluster as a unique node ID.
+
+The join algorithm is specifically designed to ensure that member list join version is unique
+for each member in the cluster. This ensures that IDs are unique even during network splits,
+with one caveat: at most one member is allowed to join the cluster during a network split.
+If two members join different subclusters, they are likely to get the same node ID. This is
+resolved when the cluster heals, but until then, they can generate duplicate IDs.
+
+[[node-id-overflow]]
+=== Node ID Overflow
+
+Node ID component of the ID has 16 bits. Members with the member list join version higher
+than 2^16 won't be able to generate IDs, but functionality is preserved by forwarding to another member.
+It is possible to generate IDs on any member or client as long as there is at least one
+member with join version smaller than 2^16 in the cluster. The remedy is to restart the cluster:
+the node ID component will be reset and assigned starting from zero again. Uniqueness after the
+restart will be preserved thanks to the timestamp component.
+
+== Configuring Flake ID Generator
+
+Following is an example declarative configuration snippet:
+
+[source,xml]
+----
+<hazelcast>
+    ...
+    <flake-id-generator name="default">
+        <prefetch-count>100</prefetch-count>
+        <prefetch-validity-millis>600000</prefetch-validity-millis>
+        <id-offset>0</id-offset>
+        <node-id-offset>0</node-id-offset>
+        <statistics-enabled>true</statistics-enabled>
+    </flake-id-generator>
+    ...
+</hazelcast>
+----
+
+The following are the descriptions of configuration elements and attributes:
+
+* `name`: Name of your Flake ID Generator. It is a required attribute.
+* `prefetch-count`: Count of IDs which are pre-fetched on the background when one call to FlakeIdGenerator.newId() is made. Its value must be in the range 1 -100,000. Its default value is 100. This setting pertains only to `newId()` calls made on the member that configured it.
+* `prefetch-validity-millis`: Specifies for how long the pre-fetched IDs can be used. After this time elapses, a new batch of IDs are fetched. Time unit is milliseconds. Its default value is 600,000 milliseconds (10 minutes). The IDs contain a timestamp component, which ensures a rough global ordering of them. If an ID is assigned to an object that was created later, it will be out of order. If ordering is not important, set this value to 0. This setting pertains only to `newId()` calls made on the member that configured it.
+* `id-offset`: Specifies the offset that is added to the returned IDs. Its default value is 0. Setting might be useful when migrating from ID Generator. The default value works for all green-field projects. For example, assume the largest ID returned from ID Generator is 150. And, Flake ID Generator now returns 100. If you set this element to 50 and stop using the ID Generator, the next ID from Flake ID Generator will be 151 or larger and no duplicate IDs will be generated. In real-life, the IDs are much larger. You also need to add a reserve to the offset because the IDs from Flake ID Generator are only roughly ordered. Recommended reserve is 2^38, that is 274877906944. Negative values are allowed to increase the lifespan of the generator, however keep in mind that the generated IDs might also be negative.
+* `node-id-offset`: Specifies the offset that is added to the node ID assigned to cluster member for this generator. Might be useful in A/B deployment scenarios where you have cluster A which you want to upgrade. You create cluster B and for some time both will generate IDs and you want to have them unique. In this case, configure node ID offset for generators on cluster B.
+* `statistics-enabled`: Specifies whether the statistics gathering is enabled for your Flake ID Generator. If set to `false`, you cannot collect statistics in your implementation (using `getLocalFlakeIdGeneratorStats()`) and also
+https://docs.hazelcast.org/docs/management-center/latest/manual/html/index.html#monitoring-flake-id-generators[Hazelcast Management Center^]
+will not show them. Its default value is `true`.

@@ -1,8 +1,8 @@
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.map.IMap;
-import com.hazelcast.map.LocalMapStats;
-import com.hazelcast.nearcache.NearCacheStats;
+import com.hazelcast.core.IMap;
+import com.hazelcast.monitor.LocalMapStats;
+import com.hazelcast.monitor.NearCacheStats;
 
 public class ExampleNearCacheStats {
 

@@ -14,18 +14,15 @@ you need to restart the members for which the property is modified.
 | Type
 | Description
 
-|`hazelcast.aggregation.accumulation.parallel.evaluation`
-|true
-|bool
-|Specifies whether to run the aggregation accumulation for multiple entries in parallel.
-Each Hazelcast IMDG member executes the accumulation stage of an
-aggregation using a single thread by default. In most cases it is useful to do it in parallel.
+|`hazelcast.application.validation.token`
+|
+|string
+|This property can be used to verify that Hazelcast members only join when their application level configuration is the same.
 
 |`hazelcast.backpressure.backoff.timeout.millis`
 |60000
 |int
-|Controls the maximum timeout in milliseconds to wait for an invocation space to be available.
-The value needs to be equal to or larger than 0.
+|Controls the maximum timeout in milliseconds to wait for an invocation space to be available. The value needs to be equal to or larger than 0.
 
 |`hazelcast.backpressure.enabled`
 |false
@@ -40,8 +37,7 @@ The value needs to be equal to or larger than 0.
 |`hazelcast.backpressure.syncwindow`
 |1000
 |string
-|Used when back pressure is enabled.
-The larger the sync window value, the less frequent an asynchronous backup is converted to a sync backup.
+|Used when back pressure is enabled. The larger the sync window value, the less frequent a asynchronous backup is converted to a sync backup.
 
 |`hazelcast.cache.invalidation.batch.enabled`
 |true
@@ -58,61 +54,27 @@ The larger the sync window value, the less frequent an asynchronous backup is co
 |int
 |Defines cache invalidation event batch sending frequency in seconds.
 
-| `hazelcast.client.cleanup.period.millis`
-| 10000
-| int
-| Period, in milliseconds, to check if a client is still part of the cluster.
-
-| `hazelcast.client.cleanup.timeout.millis`
-| 120000
-| int
-| Timeout duration to decide if a client is still part of the cluster.
-If a member cannot find any connection to a client in the cluster,
-it cleans up the local resources that are owned by that client.
-
-|[[client-max-no]] `hazelcast.client.max.no.heartbeat.seconds`
-|300
-|int
-|Time after which the member assumes the client is dead and closes its connections to the client.
-
-|`hazelcast.client.protocol.max.message.bytes`
-| 1024
-|int
-| Client protocol message size limit (in bytes) for unverified connections. I.e. maximal length of the client authentication message.
-
-|`hazelcast.clientengine.blocking.thread.count`
-|-1
-|int
-| Number of threads that the client engine has available for
-processing requests that are blocking, e.g., transactions. When
-not set, it is set as the value of core size * 20.
-
 |`hazelcast.clientengine.query.thread.count`
 |
 |int
-| Number of threads to process query requests coming from the clients.
-Default count is the number of cores multiplied by 1.
+| Number of threads to process query requests coming from the clients. Default count is the number of cores multiplied by 1.
+
+|`hazelcast.client.endpoint.remove.delay.seconds`
+| 60
+|int
+| Time, in seconds, after which the client connection is removed or the owner member of a client is removed from the cluster, in case of a client disconnection. Normally, the disconnection cleans all resources of a client, i.e., listeners are removed and locks/transactions are released. Using this property, the client has a window to connect back and prevent cleaning up its resources.
 
 |`hazelcast.clientengine.thread.count`
 |
 |int
-|Maximum number of threads to process non-partition-aware client requests, like `map.size()`, executor tasks, etc.
-Default count is the number of cores multiplied by 20.
+|Maximum number of threads to process non-partition-aware client requests, like `map.size()`, executor tasks, etc. Default count is the number of cores multiplied by 20.
 
-|`hazelcast.connect.all.wait.seconds`
-| 120
-| int
-| Timeout to connect all other cluster members when a member is joining to a cluster.
+|`hazelcast.diagnostics.directory`
+|`user.dir`
+|string
+|Output directory of the diagnostic log files.
 
-|`hazelcast.connection.monitor.interval`
-| 100
-| int
-| Minimum interval in milliseconds to consider a connection error as critical.
-
-|`hazelcast.connection.monitor.max.faults`
-| 3
-| int
-| Maximum I/O error count before disconnecting from a member.
+NOTE: For detailed information on the diagnostic tool, along with this and the following diagnostic related system properties, see the <<diagnostics, Diagnostics section>>.
 
 |`hazelcast.cluster.version.auto.upgrade.enabled`
 | false
@@ -123,26 +85,6 @@ Default count is the number of cores multiplied by 20.
 | 1
 | int
 | When set to a value greater than 1, automatic upgrading waits to reach that cluster size to proceed.
-
-|`hazelcast.diagnostics.directory`
-|`user.dir`
-|string
-|Output directory of the diagnostic log files.
-
-NOTE: For detailed information on the diagnostic tool,
-along with this and the following diagnostic related system properties, see the xref:management:diagnostics.adoc[Diagnostics section].
-
-|`hazelcast.concurrent.window.ms`
-|100
-|int
-|Property needed for concurrency detection so that write through can be done correctly.
-This property sets the time window, in milliseconds, between the concurrency detection
-and its notification. Normally in a concurrent system, the window
-keeps sliding forward so it always remains concurrent.
-Setting it too high effectively disables the optimization because once
-a concurrency is detected it will keep that way. Setting it too low
-could lead to suboptimal performance because the system
-will try write through and other optimizations even though the system is concurrent.
 
 |`hazelcast.diagnostics.enabled`
 |false
@@ -157,8 +99,7 @@ will try write through and other optimizations even though the system is concurr
 |`hazelcast.diagnostics.invocation.sample.period.seconds`
 |0
 |long
-|Frequency of scanning all the pending invocations in seconds.
-0 means the `Invocations` plugin for diagnostics tool is disabled.
+|Frequency of scanning all the pending invocations in seconds. 0 means the `Invocations` plugin for diagnostics tool is disabled.
 
 |`hazelcast.diagnostics.invocation.slow.threshold.seconds`
 |5
@@ -175,56 +116,58 @@ will try write through and other optimizations even though the system is concurr
 |int
 | Size of each diagnostic file to be rolled.
 
+|`hazelcast.diagnostics.member-heartbeat.seconds`
+|10
+|long
+|Period for which the MemberHeartbeats plugin of the diagnostics tool runs. 0 means this plugin is disabled.
+
 |`hazelcast.diagnostics.member-heartbeat.max-deviation-percentage`
 |100
 |int
 |Maximum allowed deviation for a member-to-member heartbeats.
-
-|`hazelcast.diagnostics.member-heartbeat.seconds`
-|10
-|long
-|Period for which the MemberHeartbeats plugin of the diagnostics tool runs.
-0 means this plugin is disabled.
-
 
 |`hazelcast.diagnostics.memberinfo.period.second`
 |60
 |long
 |Frequency, in seconds, at which the cluster information is dumped to the diagnostics log file.
 
+|`hazelcast.diagnostics.metric.level`
+|Mandatory
+|string
+|Level of the comprehensive logs presented
+by the <<diagnostics, diagnostics tool>> related to
+what is happening in your Hazelcast system. Available
+values are `Mandatory`, `Info` and `Debug`.
+
 |`hazelcast.diagnostics.metrics.period.seconds`
 |60
 |long
 |Frequency, in seconds, at which the Metrics plugin dumps information to the diagnostics log file.
+
+|`hazelcast.diagnostics.operation-heartbeat.seconds`
+|10
+|long
+|Period, in seconds, for which the OperationHeartbeats plugin of the diagnostics tool runs. 0 means this plugin is disabled.
 
 |`hazelcast.diagnostics.operation-heartbeat.max-deviation-percentage`
 |33
 |int
 |Maximum allowed deviation for a member-to-member operation heartbeats.
 
-|`hazelcast.diagnostics.operation-heartbeat.seconds`
-|10
-|long
-|Period, in seconds, for which the OperationHeartbeats plugin of the diagnostics tool runs.
-0 means this plugin is disabled.
-
 |`hazelcast.diagnostics.pending.invocations.period.seconds`
 |0
 |long
-|Period, in seconds, for which the PendingInvocations plugin of the diagnostics tool runs.
-0 means this plugin is disabled.
+|Period, in seconds, for which the PendingInvocations plugin of the diagnostics tool runs. 0 means this plugin is disabled.
 
 |`hazelcast.diagnostics.slowoperations.period.seconds`
 |60
 |long
-| Period, in seconds, for which the SlowOperations plugin of the diagnostics tool runs.
-0 means this plugin is disabled.
+| Period, in seconds, for which the SlowOperations plugin of the diagnostics tool runs. 0 means this plugin is disabled.
 
 |`hazelcast.diagnostics.storeLatency.period.seconds`
 |0
 |long
-|Period, in seconds, for which the StoreLatency plugin of the diagnostics tool runs.
-0 means this plugin is disabled.
+|Period, in seconds, for which the StoreLatency plugin of the diagnostics tool runs. 0 means this plugin is disabled.
 
 |`hazelcast.diagnostics.storeLatency.reset.period.seconds`
 |0
@@ -241,31 +184,45 @@ will try write through and other optimizations even though the system is concurr
 |bool
 |Specifies whether the SystemLog plugin collects information about partition migrations.
 
-|`hazelcast.discovery.enabled`
+|`hazelcast.executionservice.taskscheduler.remove.oncancel`
+| false
+| bool
+| Controls whether the task scheduler removes tasks immediately upon cancellation. This is disabled by default, because it can cause severe delays on the other operations. By default all cancelled tasks are eventually get removed by the scheduler workers.
+
+|[[client-max-no]]`hazelcast.client.max.no.heartbeat.seconds`
+|300
+|int
+|Time after which the member assumes the client is dead and closes its connections to the client.
+
+|`hazelcast.compatibility.3.6.client`
 |false
 |bool
-|Enables/disables the Discovery SPI lookup over the old native implementations.
-See xref:extending-hazelcast:discovery-spi.adoc[] for more information.
+|When this property is true, if the server cannot determine the connected client version, it assumes that it has the version 3.6.x. This property is especially needed if you are using ICache (or JCache).
+
+|`hazelcast.connect.all.wait.seconds`
+| 120
+| int
+| Timeout to connect all other cluster members when a member is joining to a cluster.
+
+|`hazelcast.connection.monitor.interval`
+| 100
+| int
+| Minimum interval in milliseconds to consider a connection error as critical.
+
+|`hazelcast.connection.monitor.max.faults`
+| 3
+| int
+| Maximum IO error count before disconnecting from a member.
 
 |`hazelcast.discovery.public.ip.enabled`
 | false
 | bool
-| Enable use of public IP address in member discovery with Discovery SPI.
-If you set this property to true in your source cluster, please make sure you have set the public addresses for your
-target members since they will be discovered using their public addresses. Otherwise, they cannot be discovered.
-See the xref:clusters:network-configuration.adoc#public-address[Public Address section].
-
-|`hazelcast.dynamicconfig.ignore.conflicts`
-|
-|bool
-| Specifies whether you want IMDG to ignore the configuration conflicts while registering a
-new dynamic configuration. Set to `true` and restart your cluster with this property to
-ignore these conflicts.
+| Enable use of public IP address in member discovery with Discovery SPI. If you set this property to true in your source cluster, please make sure you have set the public addresses for your target members since they will be discovered using their public addresses. Otherwise, they cannot be discovered. See the <<public-address, Public Address section>>.
 
 |`hazelcast.enterprise.license.key`
 | null
 | string
-| link:https://hazelcast.com/products/[Hazelcast IMDG Enterprise^] license key.
+| http://www.hazelcast.com/products.jsp[Hazelcast IMDG Enterprise] license key.
 
 |`hazelcast.event.queue.capacity`
 | 1000000
@@ -277,17 +234,6 @@ ignore these conflicts.
 | int
 | Timeout to enqueue events to event queue.
 
-|`hazelcast.event.sync.timeout.millis`
-|5000
-|int
-| To prevent overloading of the outbound connections,
-once in a while an event is made synchronous by wrapping it in a
-dummy operation and waiting for a dummy response. This causes
-the outbound write queue of the connection to get drained.
-This timeout configures the maximum amount of waiting time for this response.
-Setting it to a too low value can lead to an uncontrolled growth
-of the outbound write queue of the connection.
-
 |`hazelcast.event.thread.count`
 | 5
 | int
@@ -298,24 +244,20 @@ of the outbound write queue of the connection.
 | int
 | Maximum wait in seconds during graceful shutdown.
 
-|`hazelcast.hd.global.index.enabled`
-|true
+|`hazelcast.http.healthcheck.enabled`
+|false
 |bool
-|Specifies whether the global concurrent High-Density Memory Store
-indexes are enabled or not.
+|Enable/disable Hazelcast's HTTP based health check implementation.  When it is enabled, you can retrieve information about your cluster's health status (member state, cluster state, cluster size, etc.) by launching `+http://<your member's host IP>:5701/hazelcast/health+`. This property is deprecated. See the <<health-check-and-monitoring, Health Check and Monitoring section>>.
 
 |`hazelcast.health.monitoring.delay.seconds`
 |30
 |int
-|Health monitoring logging interval in seconds. NOTE: For detailed information on
-the health monitoring tool, along with this and the following health monitoring related system properties,
-see the xref:management:health-check-monitoring.adoc[Health Check and Monitoring section].
+|Health monitoring logging interval in seconds. NOTE: For detailed information on the health monitoring tool, along with this and the following health monitoring related system properties, see the <<health-check-and-monitoring, Health Check and Monitoring section>>.
 
 |`hazelcast.health.monitoring.level`
 |SILENT
 |string
-|Health monitoring log level. When *SILENT*, logs are printed only when values exceed some predefined threshold.
-When *NOISY*, logs are always printed periodically. Set *OFF* to turn off completely.
+|Health monitoring log level. When *SILENT*, logs are printed only when values exceed some predefined threshold. When *NOISY*, logs are always printed periodically. Set *OFF* to turn off completely.
 
 |`hazelcast.health.monitoring.threshold.cpu.percentage`
 |70
@@ -327,12 +269,6 @@ When *NOISY*, logs are always printed periodically. Set *OFF* to turn off comple
 |int
 |When the health monitoring level is *SILENT*, logs are printed only when the memory usage exceeds this threshold.
 
-|`hazelcast.heartbeat.failuredetector.type`
-|`deadline`
-|string
-|Type of the heartbeat failure detector. See the
-xref:clusters:failure-detector-configuration.adoc[Failure Detector Configuration section].
-
 |`hazelcast.heartbeat.interval.seconds`
 | 5
 | int
@@ -341,38 +277,62 @@ xref:clusters:failure-detector-configuration.adoc[Failure Detector Configuration
 |`hazelcast.hidensity.check.freememory`
 |true
 |bool
-|If enabled and is able to fetch memory statistics via Java's `OperatingSystemMXBean`,
-it checks whether there is enough free physical memory for the requested number of bytes.
-If the free memory checker is disabled (false), acts as if the check is succeeded.
+|If enabled and is able to fetch memory statistics via Java's `OperatingSystemMXBean`, it checks whether there is enough free physical memory for the requested number of bytes. If the free memory checker is disabled (false), acts as if the check is succeeded.
 
-|`hazelcast.hotrestart.free.native.memory.percentage`
-|15
-|long
-|Percentage of the free memory space that is required by a hot restart.
+|`hazelcast.icmp.echo.fail.fast.on.startup`|
+ true
+| bool
+| Specifies whether ICMP Echo Request mode for ping detector is enforced. If OS is not supported, or not configured correctly, as explained in <<requirements-and-linuxunix-configuration, Requirements and Linux/Unix Configuration>>, Hazelcast fails to start.
+
+|`hazelcast.icmp.enabled`
+| false
+| bool
+| Specifies whether ICMP ping is enabled or not.
+
+|`hazelcast.icmp.interval`
+| 1000
+| int
+| Interval between ping attempts in milliseconds. Default and minimum allowed value is 1 second.
+
+|[[max-attempts]]`hazelcast.icmp.max.attempts`
+| 3
+| int
+| Maximum ping attempts before suspecting a member.
+
+|`hazelcast.icmp.parallel.mode`
+| true
+| bool
+| Specifies whether <<ping-failure-detector, Ping Failure Detector>> works in parallel with the other detectors.
+
+|`hazelcast.icmp.timeout`
+| 1000
+| int
+| ICMP timeout in milliseconds. This cannot be more than the value of `hazelcast.icmp.interval` property; it should always be smaller.
+
+|`hazelcast.icmp.ttl`
+| 0
+| int
+| ICMP TTL (maximum numbers of hops to try).
 
 |`hazelcast.ignoreXxeProtectionFailures`
 |false
 |bool
-|If enabled and when a problem occurs during enabling XML External Entity (XXE) protection, then the problem is ignored and only a warning message is logged.
+|If enabled and when a problem occurs during enabling the
+XML External Entity (XXE) protection, then the problem is
+ignored and only a warning message is logged.
 
 This property should only be used as a last resort.
-Hazelcast uses the XXE protection by setting respective XML processor properties. These properties are supported in modern XML processors, e.g., the default one available in Java. An old processor on the classpath, such as Xerces and Xalan, may miss the support and  throw an exception during enabling the XXE protection. Setting this system property to `true` allows ignoring such exceptions.
+Hazelcast uses the XXE protection by setting respective XML processor properties.
+These properties are supported in modern XML processors, e.g.,
+the default one available in Java. An old processor, such as Xerces or Xalan,
+on the classpath may miss the support and throw an exception during
+enabling the XXE protection. Setting this system property to
+`true` allows ignoring such exceptions.
 
 |`hazelcast.index.copy.behavior`
 |COPY_ON_READ
 | string
-| Defines the behavior for index copying on index read/write.
-See the xref:query:how-distributed-query-works.adoc#copying-indexes[Copying Indexes section].
-
-|`hazelcast.init.cluster.version`
-|
-|string
-|Used to override the cluster version to use while an IMDG instance is not
-member of a cluster yet. The cluster version assumed before joining
-a cluster may affect the serialization format of the cluster discovery.
-The default is to use the member's codebase version. You may
-need to override it for your member to join a cluster running on a
-previous cluster version.
+| Defines the behavior for index copying on index read/write. See the <<copying-indexes, Copying Indexes section>>.
 
 |`hazelcast.initial.min.cluster.size`
 | 0
@@ -385,20 +345,19 @@ previous cluster version.
 | Initial time in seconds to wait before member to start completely.
 
 |`hazelcast.internal.map.expiration.cleanup.operation.count`
-|N/A
+|3
 |int
-|Count of scannable partitions in each run of the background expiration task. No default value exists. It is
-dynamically calculated against the partition count or partition thread count.
+|This is a property which is used internally and subject to change in the future releases.
 
 |`hazelcast.internal.map.expiration.cleanup.percentage`
 |10
 |int
-|Scannable percentage of the entries in the maps' partitions in each run of the background expiration task.
+|This is a property which is used internally and subject to change in the future releases.
 
 |`hazelcast.internal.map.expiration.task.period.seconds`
 |5
 |int
-|Interval, in seconds, at which the background expiration task is going to run.
+|This is a property which is used internally and subject to change in the future releases.
 
 |`hazelcast.invalidation.max.tolerated.miss.count`
 |10
@@ -409,17 +368,6 @@ dynamically calculated against the partition count or partition thread count.
 |60
 |int
 |Period for which the cluster members are scanned to compare generated invalidation events with the received ones from Near Cache.
-
-|`hazelcast.invocation.max.retry.count`
-|
-|int
-| Maximum number of retries for an invocation. After threshold is reached,
-the invocation is assumed as failed.
-
-|`hazelcast.invocation.retry.pause.millis`
-|
-|int
-|Pause time between each retry cycle of an invocation in milliseconds.
 
 |`hazelcast.io.balancer.interval.seconds`
 |20
@@ -439,14 +387,7 @@ the invocation is assumed as failed.
 |`hazelcast.io.thread.count`
 | 3
 | int
-| Number of threads performing socket input and socket output.
-If, for example, the default value (3) is used, it means there are 3 threads performing input and 3 threads performing output (6 threads in total).
-
-|`hazelcast.io.write.through`
-|true
-|bool
-|Optimization that allows sending of packets over the network to be done on the calling thread if the
-conditions are right. This can reduce the latency and increase the performance for low threaded environments.
+| Number of threads performing socket input and socket output. If, for example, the default value (3) is used, it means there are 3 threads performing input and 3 threads performing output (6 threads in total).
 
 |`hazelcast.jcache.provider.type`
 |
@@ -456,13 +397,18 @@ conditions are right. This can reduce the latency and increase the performance f
 |`hazelcast.jmx`
 | false
 | bool
-| Enable xref:management:jmx-monitoring.adoc[JMX] agent.
+| Enable <<monitoring-with-jmx, JMX>> agent.
+
+|`hazelcast.legacy.memberlist.format.enabled`
+| false
+| bool
+| Enables the legacy (for the releases before Hazelcast 3.9) member list format which is printed in the logs. The new format is introduced starting with Hazelcast 3.9 and includes member list version. Any change in the cluster, such as a member leaving or joining, increments the member list version.
+See the <<starting-the-member-and-client, Starting the Member and Client section>>.
 
 |`hazelcast.local.localAddress`
 |
 | string
-| It is an overrider property for the default server socket listener's IP address.
-If this property is set, then this is the address where the server socket is bound to.
+| It is an overrider property for the default server socket listener's IP address. If this property is set, then this is the address where the server socket is bound to.
 
 |`hazelcast.local.publicAddress`
 |
@@ -472,50 +418,22 @@ If this property is set, then this is the address where the server socket is bou
 |`hazelcast.lock.max.lease.time.seconds`
 |Long.MAX_VALUE
 | long
-| All locks which are acquired without an explicit lease time use this value (in seconds) as the lease time.
-When you want to set an explicit lease time for your locks, you cannot set it to a longer time than this value.
-
-|`hazelcast.logging.details.enabled`
-|true
-|bool
-|Specifies whether the cluster name, IP and version should be included in
-all log messages.
+| All locks which are acquired without an explicit lease time use this value (in seconds) as the lease time. When you want to set an explicit lease time for your locks, you cannot set it to a longer time than this value.
 
 |`hazelcast.logging.type`
 | jdk
 | enum
-| Name of xref:clusters:logging-configuration.adoc[logging] framework type to send logging events.
+| Name of <<logging-configuration, logging>> framework type to send logging events.
 
 |`hazelcast.map.entry.filtering.natural.event.types`
 | false
 | bool
-| Notify xref:data-structures:map.adoc#listening-to-map-entries-with-predicates[entry listeners with predicates] on map entry updates with
-events that match entry, update or exit from predicate value space.
+| Notify <<listening-to-map-entries-with-predicates, entry listeners with predicates>> on map entry updates with events that match entry, update or exit from predicate value space.
 
 |`hazelcast.map.expiry.delay.seconds`
 |10
 |int
-|Delays expiration of backup map entries by the defined amount.
-This may be useful to prevent some cases where an entry might be observed
-on the primary replica (partition owner) but not on the backup replica.
-For instance, when running an entry processor on both primary and backup replicas.
-
-|`hazelcast.map.eviction.batch.size`
-|1
-|int
-|Maximum number of IMap entries Hazelcast will evict during a
-single eviction cycle. Eviction cycle is triggered by a map
-mutation. Typically it is fine to evict at most a single entry.
-However, when you insert values in a
-loop, each iteration doubles the entry size. In this
-situation more than just a single entry should be evicted.
-
-|`hazelcast.map.eviction.sample.count`
-|15
-|int
-| Count of the IMap entries in the entry set formed by
-random samplings from which Hazelcast chooses to remove the optimal entry
-during an IMap eviction.
+|Useful to deal with some possible edge cases. For example, when using EntryProcessor, without this delay, you may see an EntryProcessor running on owner partition found a key but EntryBackupProcessor did not find it on backup. As a result of this, when backup promotes to owner, you may end up with an unprocessed key.
 
 |`hazelcast.map.invalidation.batchfrequency.seconds`
 | 10
@@ -535,10 +453,9 @@ during an IMap eviction.
 |`hazelcast.map.load.chunk.size`
 | 1000
 | int
-| Maximum size of the key batch sent to the partition owners for value loading and
-the maximum size of a key batch for which values are loaded in a single partition.
+| Maximum size of the key batch sent to the partition owners for value loading and the maximum size of a key batch for which values are loaded in a single partition.
 
-|`hazelcast.map.replica.scheduled.task.delay.seconds`
+|`hazelcast.map.replica.wait.seconds.for.scheduled.tasks`
 | 10
 | int
 | Scheduler delay for map tasks those are executed on backup members.
@@ -546,10 +463,22 @@ the maximum size of a key batch for which values are loaded in a single partitio
 |`hazelcast.map.write.behind.queue.capacity`
 |50000
 |string
-|Maximum write-behind queue capacity per member. It is the total of all write-behind queue sizes in a member including backups.
-Its maximum value is `Integer.MAX_VALUE`.
-The value of this property is taken into account only if the `write-coalescing` element of the
-Map Store configuration is `false`. See xref:data-structures:map.adoc#setting-write-behind-persistence[here] for the description of the `write-coalescing` element.
+|Maximum write-behind queue capacity per member. It is the total of all write-behind queue sizes in a member including backups. Its maximum value is `Integer.MAX_VALUE`. The value of this property is taken into account only if the `write-coalescing` element of the Map Store configuration is `false`. See <<setting-write-behind-persistence, here>> for the description of the `write-coalescing` element.
+
+|`hazelcast.master.confirmation.interval.seconds`
+| 30
+| int
+| Interval at which members send master confirmation. This property is deprecated as of this (3.10) release.
+
+|`hazelcast.mastership.claim.member.list.version.increment`
+|25
+|int
+| Hazelcast master member (oldewst in the cluster) increments the member list version for each joining member. Then, these member list versions are used to identify the joined members with unique integers. For this algorithm to work under network partitioning scenarios, without generating duplicate member list join versions for different members, a mastership-claiming member increments the member list version as specified by this parameter, multiplied by its position in the member list. The value of the parameter must be bigger than the cluster size.
+
+|`hazelcast.mastership.claim.timeout.seconds`
+| 120
+| int
+| Timeout which defines when master candidate gives up waiting for response to its mastership claim. After timeout happens, non-responding member is removed from the member list.
 
 |`hazelcast.max.join.merge.target.seconds`
 |20
@@ -566,188 +495,92 @@ Map Store configuration is `false`. See xref:data-structures:map.adoc#setting-wr
 | int
 | Maximum timeout of heartbeat in seconds for a member to assume it is dead.
 
-CAUTION: Setting this value too low may cause members to be evicted from the cluster when
-they are under heavy load: they will be unable to send heartbeat operations in time, so other members will assume that it is dead.
+CAUTION: Setting this value too low may cause members to be evicted from the cluster when they are under heavy load: they will be unable to send heartbeat operations in time, so other members will assume that it is dead.
+
+|`hazelcast.max.no.master.confirmation.seconds`
+| 150
+| int
+| Max timeout of master confirmation from other members. This property is deprecated as of this (3.10) release.
 
 |`hazelcast.max.wait.seconds.before.join`
 | 20
 | int
 | Maximum wait time before join operation.
-This is an upper limit on the cluster's pre-join phase duration. The pre-join
-phase starts when the master receives the first join request, and ends after
-no new members have tried to join for `hazelcast.wait.seconds.before.join`
-seconds, or after this upper limit elapsed (whichever comes first). Once the
-pre-join phase ends, the master moves into the join phase, during which it
-will only admit members that have already tried joining during the pre-join
-phase and are still trying to. Once the join phase is complete, the master
-will again start admitting new members.
-
-|`hazelcast.mc.executor.thread.count`
-|int
-|2
-|Number of threads that the Management Center service has available
-for processing the operations sent from the connected Management Center instance.
 
 |`hazelcast.mc.max.visible.slow.operations.count`
 |10
 |int
 |Management Center maximum visible slow operations count.
 
+|`hazelcast.mc.url.change.enabled`
+| true
+| bool
+| Specifies whether the URL for Management Center is enabled. This property is deprecated. See the <<using-the-rest-endpoint-groups, Using the REST Endpoint Groups section>>.
+
 |`hazelcast.member.list.publish.interval.seconds`
 | 60
 | int
 | Interval at which master member publishes a member list.
 
-|`hazelcast.member.naming.moby.enabled`
-| true
+|`hazelcast.memcache.enabled`
+| false
 | bool
-| Defines whether the Moby naming should be used for generating instance
-names when they are not provided by user. Moby name is a short human-readable
-name consisting of a randomly chosen adjective and the surname of a famous person.
-If set to `true`, a Moby name is generated. Otherwise, a name that is concatenation
-of a static prefix, number and cluster name is provided.
+| Enable <<memcache-client, Memcache>> client request listener service. This property is deprecated. See the <<memcache-client, Memcache Client section>>.
 
 |`hazelcast.merge.first.run.delay.seconds`
 | 300
 | int
-| Initial run delay of xref:network-partitioning:network-partitioning.adoc#split-brain-syndrome[split-brain/merge process] in seconds.
+| Initial run delay of <<split-brain-syndrome, split-brain/merge process>> in seconds.
 
 |`hazelcast.merge.next.run.delay.seconds`
 | 120
 | int
-| Run interval of xref:network-partitioning:network-partitioning.adoc#split-brain-syndrome[split-brain/merge process] in seconds.
+| Run interval of <<split-brain-syndrome, split-brain/merge process>> in seconds.
 
-|`hazelcast.metrics.collection.frequency`
-| 5
-| int
-| Frequency, in seconds, of the xref:management:metrics.adoc[metrics] collection cycle. Note that
-the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
-
-|`hazelcast.metrics.datastructures.enabled`
-|true
-|bool
-| Specifies whether collecting metrics from the distributed data structures is enabled.
-
-|`hazelcast.metrics.debug.enabled`
-| false
-| bool
-| Enables collecting debug metrics if set to `true`, disables it otherwise.
-Note that this is meant to be enabled only if diagnostics feature is enabled,
-since currently only this feature consumes the debug metrics.
-
-|`hazelcast.metrics.enabled`
-| true
-| bool
-| Enables the xref:management:metrics.adoc[metrics collection] if set to `true`, disables it otherwise. Note that the preferred way for
-controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
-
-|`hazelcast.metrics.mc.enabled`
-| true
-| bool
-| Enables buffering the collected xref:management:metrics.adoc[metrics] for Management Center if set to `true`, disables it otherwise. Note that
-the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
-
-|`hazelcast.metrics.mc.retention`
-| 5
-| int
-| Duration, in seconds, that the xref:management:metrics.adoc[metrics] are retained for Management Center. Note that
-the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
-
-|`hazelcast.metrics.jmx.enabled`
-| true
-| bool
-| Enables exposing the collected xref:management:metrics.adoc[metrics] over JMX if set to `true`, disables it otherwise. Note that
-the preferred way for controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
-
-|`hazelcast.network.stats.refresh.interval.seconds`
-|3
+|`hazelcast.migration.min.delay.on.member.removed.seconds`
+|5
 |int
-| Interval, in seconds, at which the network statistics (bytes sent and received)
-are re-calculated and published. It is valid only when
-xref:clusters:advanced-network-configuration.adoc[advanced networking] is used.
+|Minimum delay (in seconds) between detection of a member that has left and start of the rebalancing process.
+
+|`hazelcast.multicast.group`
+|224.2.2.3
+|string
+|IP address of a multicast group. If not set, configuration is read from the default Hazelcast configuration, which has the value 224.2.2.3.
 
 |`hazelcast.nio.tcp.spoofing.checks`
 | false
 | bool
-| Controls whether more strict checks upon BIND requests towards a cluster member are applied.
-The checks mainly validate the remote BIND request against the remote address as found in the socket.
-By default they are disabled, to avoid connectivity issues when deployed under NAT'ed infrastructure.
+| Controls whether more strict checks upon BIND requests towards a cluster member are applied. The checks mainly validate the remote BIND request against the remote address as found in the socket. By default they are disabled, to avoid connectivity issues when deployed under NAT'ed infrastructure.
 
 |`hazelcast.operation.backup.timeout.millis`
 |5000
 |int
-|Maximum time a caller to wait for backup responses of an operation.
-After this timeout, operation response is returned to the caller even no backup response is received.
+|Maximum time a caller to wait for backup responses of an operation. After this timeout, operation response is returned to the caller even no backup response is received.
+
+|`hazelcast.operation.fail.on.indeterminate.state`
+| false
+| bool
+| When enabled, an operation fails with `IndeterminateOperationStateException`, if it does not receive backup acks in time with respect to backup configuration of its data structure, or the member which owns primary replica of the target partition leaves the cluster.
 
 |`hazelcast.operation.call.timeout.millis`
 | 60000
 | int
 | Timeout to wait for a response when a remote call is sent, in milliseconds.
 
-|`hazelcast.operation.fail.on.indeterminate.state`
-| false
-| bool
-| When enabled, an operation fails with `IndeterminateOperationStateException`,
-if it does not receive backup acks in time with respect to backup configuration of
-its data structure, or the member which owns primary replica of the target partition leaves the cluster.
-
 |`hazelcast.operation.generic.thread.count`
-| 2
+| -1
 | int
-| Number of generic operation handler threads for each Hazelcast member.
-Its default value is the maximum of `2` and `processor count / 2`.
-
-|`hazelcast.operation.priority.generic.thread.count`
-| 1
-| int
-| Number of priority generic operation handler threads per member.
-Having at least 1 priority generic operation thread helps to improve
-cluster stability since a lot of cluster operations are generic priority
-operations and they should get executed as soon as possible. If there is
-a dedicated generic operation thread then these operations don't get delayed
-because the generic threads are busy executing regular user operations.
-So unless memory consumption is an issue, make sure there is at least 1 thread.
-
-|`hazelcast.operation.response.thread.count`
-|2
-|int
-| Number of threads the process responses.
-The default value gives stable and good performance.
-If set to 0, the response threads are bypassed and the
-response handling is done on the IO threads. Under certain
-conditions this can give a higher throughput.
+| Number of generic operation handler threads. `-1` means CPU core count / 2.
 
 |`hazelcast.operation.responsequeue.idlestrategy`
 |block
 |string
-|Specifies whether the response thread for internal operations on the member side are blocked or not.
-If you use `block` (the default value) the thread is blocked and need to be notified which can cause
-a reduction in the performance. If you use `backoff` there is no blocking.
-By enabling the backoff mode and depending on your use case, you can get a 5-10% performance improvement.
-However, keep in mind that this increases the CPU utilization.
-We recommend you to use backoff with care and if you have a tool for measuring your cluster's performance.
+|Specifies whether the response thread for internal operations on the member side are blocked or not. If you use `block` (the default value) the thread is blocked and need to be notified which can cause a reduction in the performance. If you use `backoff` there is no blocking. By enabling the backoff mode and depending on your use case, you can get a 5-10% performance improvement. However, keep in mind that this increases the CPU utilization. We recommend you to use backoff with care and if you have a tool for measuring your cluster's performance.
 
 |`hazelcast.operation.thread.count`
-| 2
+| -1
 | int
-| Number of partition based operation handler threads for each Hazelcast member.
-Its default value is the maximum of `2` and count of available processors.
-
-|`hazelcast.partial.member.disconnection.resolution.algorithm.timeout.seconds`
-|5
-|int
-|Timeout, in seconds, to stop the execution of resolution algorithm when needed,
-in the case of lots of possible random network disconnections especially
-in the large clusters.
-
-|`hazelcast.partial.member.disconnection.resolution.heartbeat.count`
-|0
-|int
-|When the master (oldest member in the cluster) receives a heartbeat
-problem report from another member, it first waits for a number
-of heartbeat rounds to allow other members
-to report their problems, if there is any. This property sets the number
-of these rounds.
+| Number of partition based operation handler threads. `-1` means CPU core count.
 
 |`hazelcast.partition.backup.sync.interval`
 |30
@@ -759,30 +592,15 @@ of these rounds.
 | int
 | Total partition count.
 
-|`hazelcast.partition.max.parallel.migrations`
-|10
-|int
-|Maximum number of partition migrations to be executed concurrently on a member.
-Member can be either source or target of the migration. Having too much parallelization
-can increase the heap memory usage and overload the network during a partition rebalance.
-Having less parallelization can increase the total migration completion time.
-The default value, `10`, is fine for most of the setups.
-
 |`hazelcast.partition.max.parallel.replications`
-|10
+|5
 |int
-|Maximum number of parallel partition backup replication operations per member.
-When a partition backup ownership changes or a backup inconsistency is detected, the members start to sync their backup partitions.
-This parameter limits the maximum running replication operations in parallel.
-The default value, which is the value of `hazelcast.partition.max.parallel.migrations`, is fine for most of the setups.
+|Maximum number of parallel partition backup replication operations per member. When a partition backup ownership changes or a backup inconsistency is detected, the members start to sync their backup partitions. This parameter limits the maximum running replication operations in parallel.
 
 |`hazelcast.partition.migration.fragments.enabled`
 | true
 | bool
-| When enabled, which is the default behavior, partitions are migrated/replicated in small fragments instead of one big chunk.
-Migrating partitions in fragments reduces pressure on the memory and network
-since smaller packets are created in the memory and sent through the network.
-Note that it can increase the migration time to complete.
+| When enabled, which is the default behavior, partitions are migrated/replicated in small fragments instead of one big chunk. Migrating partitions in fragments reduces pressure on the memory and network, since smaller packets are created in the memory and sent through the network. Note that it can increase the migration time to complete.
 
 |`hazelcast.partition.migration.interval`
 | 0
@@ -792,10 +610,7 @@ Note that it can increase the migration time to complete.
 |`hazelcast.partition.migration.stale.read.disabled`
 | false
 | bool
-| Hazelcast allows read operations to be performed while a partition is being migrated.
-This can lead to stale reads for some scenarios.
-You can disable stale read operations by setting this system property's value to "true".
-Its default value is "false", meaning that stale reads are allowed.
+| Hazelcast allows read operations to be performed while a partition is being migrated. This can lead to stale reads for some scenarios. You can disable stale read operations by setting this system property's value to "true". Its default value is "false", meaning that stale reads are allowed.
 
 |`hazelcast.partition.migration.timeout`
 | 300
@@ -812,10 +627,25 @@ Its default value is "false", meaning that stale reads are allowed.
 |string
 |Class name implementing `com.hazelcast.core.PartitioningStrategy`, which defines key to partition mapping.
 
-|`hazelcast.phone.home.enabled`
-| true
-| bool
-| Enable or disable the sending of phone home data to Hazelcast's phone home server.
+|`hazelcast.performance.monitor.max.rolled.file.count`
+|10
+|int
+|The PerformanceMonitor uses a rolling file approach to prevent eating too much disk space. This property sets the maximum number of rolling files to keep on disk.
+
+|`hazelcast.performance.monitor.max.rolled.file.size.mb`
+|10
+|int
+|The performance monitor uses a rolling file approach to prevent eating too much disk space. This property sets the maximum size in MB for a single file. Every HazelcastInstance gets its own history of log files.
+
+|`hazelcast.performance.monitoring.enabled`
+|
+|bool
+|Enable the performance monitor, a tool which allows you to see internal performance metrics. These metrics are written to a dedicated log file.
+
+|`hazelcast.performance.monitor.delay.seconds`
+|
+|int
+| The period between successive entries in the performance monitor's log file.
 
 |`hazelcast.prefer.ipv4.stack`
 | true
@@ -825,56 +655,42 @@ Its default value is "false", meaning that stale reads are allowed.
 |`hazelcast.query.max.local.partition.limit.for.precheck`
 |3
 |int
-|Maximum value of local partitions to trigger local pre-check for `Predicates#alwaysTrue()`
-query operations on maps.
+|Maximum value of local partitions to trigger local pre-check for TruePredicate query operations on maps.
 
 |`hazelcast.query.optimizer.type`
 |RULES
 |String
-|Type of the query optimizer. For optimizations based on static rules, set the value to `RULES`.
-To disable the optimization, set the value to `NONE`.
+|Type of the query optimizer. For optimizations based on static rules, set the value to `RULES`. To disable the optimization, set the value to `NONE`.
 
-|[[parallel-predicates]] `hazelcast.query.predicate.parallel.evaluation`
+|[[parallel-predicates]]`hazelcast.query.predicate.parallel.evaluation`
 |false
 |bool
-|Each Hazelcast member evaluates query predicates using a single thread by default.
-In most cases, the overhead of inter-thread communications overweight can benefit from parallel execution.
-When you have a large dataset and/or slow predicate, you may benefit from parallel predicate evaluations.
-Set to `true` if you are using slow predicates or have > 100,000s entries per member.
+|Each Hazelcast member evaluates query predicates using a single thread by default. In most cases, the overhead of inter-thread communications overweight can benefit from parallel execution. When you have a large dataset and/or slow predicate, you may benefit from parallel predicate evaluations. Set to `true` if you are using slow predicates or have > 100,000s entries per member.
 
 |`hazelcast.query.result.size.limit`
 |-1
 |int
-|Result size limit for query operations on maps.
-This value defines the maximum number of returned elements for a single query result.
-If a query exceeds this number of elements, a QueryResultSizeExceededException is thrown.
-Its default value is -1, meaning it is disabled.
+|Result size limit for query operations on maps. This value defines the maximum number of returned elements for a single query result. If a query exceeds this number of elements, a QueryResultSizeExceededException is thrown. Its default value is -1, meaning it is disabled.
 
-|`hazelcast.serialization.version`
-|
-|long
-|Version of the Hazelcast serialization. Accepted values are between 1 and
-the highest supported serialization version.
+|`hazelcast.rest.enabled`
+| false
+| bool
+| Enable <<rest-client, REST>> client request listener service. This property is deprecated. See the <<using-the-rest-endpoint-groups, Using the REST Endpoint Groups section>>.
 
 |`hazelcast.shutdownhook.enabled`
 | true
 | bool
-| Enable Hazelcast shutdownhook thread.
-When this is enabled, this thread terminates the Hazelcast instance without waiting to shutdown gracefully.
+| Enable Hazelcast shutdownhook thread. When this is enabled, this thread terminates the Hazelcast instance without waiting to shutdown gracefully.
 
 |`hazelcast.shutdownhook.policy`
 |TERMINATE
 |string
-| Specifies the behavior when JVM is exiting while the Hazelcast instance is still running.
-It has two values: TERMINATE and GRACEFUL. The former one terminates the Hazelcast instance immediately.
-The latter, GRACEFUL, initiates the graceful shutdown which can significantly slow down the JVM exit process, but it tries to retain data safety.
-Note that you should always shutdown Hazelcast explicitly via using the method `HazelcastInstance.shutdown()`.
-It's not recommended to rely on the shutdown hook, this is a last-effort measure.
+| Specifies the behavior when JVM is exiting while the Hazelcast instance is still running. It has two values: TERMINATE and GRACEFUL. The former one terminates the Hazelcast instance immediately. The latter, GRACEFUL, initiates the graceful shutdown which can significantly slow down the JVM exit process, but it tries to retain data safety. Note that you should always shutdown Hazelcast explicitly via using the method `HazelcastInstance.shutdown()`. It's not recommended to rely on the shutdown hook, this is a last-effort measure.
 
 |`hazelcast.slow.operation.detector.enabled`
 |true
 |bool
-|Enables/disables the xref:performance:slowoperationdetector.adoc[SlowOperationDetector].
+|Enables/disables the <<slowoperationdetector, SlowOperationDetector>>.
 
 |`hazelcast.slow.operation.detector.log.purge.interval.seconds`
 |300
@@ -884,21 +700,17 @@ It's not recommended to rely on the shutdown hook, this is a last-effort measure
 |`hazelcast.slow.operation.detector.log.retention.seconds`
 |3600
 |int
-|Defines the retention time of invocations in slow operation logs.
-If an invocation is older than this value, it is purged from the log to prevent unlimited memory usage.
-When all invocations are purged from a log, the log itself is deleted.
+|Defines the retention time of invocations in slow operation logs. If an invocation is older than this value, it is purged from the log to prevent unlimited memory usage. When all invocations are purged from a log, the log itself is deleted.
 
 |`hazelcast.slow.operation.detector.stacktrace.logging.enabled`
 |false
 |bool
-|Defines if the stacktraces of slow operations are logged in the log file.
-Stack traces are always reported to the Management Center, but by default, they are not printed to keep the log size small.
+|Defines if the stacktraces of slow operations are logged in the log file. Stack traces are always reported to the Management Center, but by default, they are not printed to keep the log size small.
 
 |`hazelcast.slow.operation.detector.threshold.millis`
 |10000
 |int
-|Defines a threshold above which a running operation in `OperationService` is considered to be slow.
-These operations log a warning and are shown in the Management Center with detailed information, e.g., stacktrace.
+|Defines a threshold above which a running operation in `OperationService` is considered to be slow. These operations log a warning and are shown in the Management Center with detailed information, e.g., stacktrace.
 
 |`hazelcast.socket.bind.any`
 | true
@@ -908,16 +720,12 @@ These operations log a warning and are shown in the Management Center with detai
 |`hazelcast.socket.buffer.direct`
 | false
 | bool
-| Specifies whether the byte buffers used in the socket should be a direct byte buffer (`true`) or a regular one (`false`).
-When it is set to `true`, Hazelcast internally uses the method `ByteBuffer.allocateDirect` (instead of `ByteBuffer.allocate`) which makes use of
-the off-heap and may skip the memory copying when performing socket I/O operations.
-See link:https://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html[here^] for more information.
+| Specifies whether the byte buffers used in the socket should be a direct byte buffer (`true`) or a regular one (`false`). When it is set to `true`, Hazelcast internally uses the method `ByteBuffer.allocateDirect` (instead of `ByteBuffer.allocate`) which makes use of the off-heap and may skip the memory copying when performing socket I/O operations. See https://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html[here] for more information.
 
 |`hazelcast.socket.client.bind`
 |true
 |bool
-|Bind client socket to an interface when connecting to a remote server socket.
-When set to `false`, client socket is not bound to any interface.
+|Bind client socket to an interface when connecting to a remote server socket. When set to `false`, client socket is not bound to any interface.
 
 |`hazelcast.socket.client.bind.any`
 | true
@@ -927,23 +735,17 @@ When set to `false`, client socket is not bound to any interface.
 |`hazelcast.socket.client.receive.buffer.size`
 |-1
 |int
-|Hazelcast creates all connections with receive buffer size set according to the `hazelcast.socket.receive.buffer.size`.
-When it detects a connection opened by a client, then it adjusts the receive buffer size according to this property.
-It is in kilobytes and its default value is -1.
+|Hazelcast creates all connections with receive buffer size set according to the `hazelcast.socket.receive.buffer.size`. When it detects a connection opened by a client, then it adjusts the receive buffer size according to this property. It is in kilobytes and its default value is -1.
 
 |`hazelcast.socket.client.send.buffer.size`
 |-1
 |int
-|Hazelcast creates all connections with send buffer size set according to the `hazelcast.socket.send.buffer.size`.
-When it detects a connection opened by a client, then it adjusts the send buffer size according to this property.
-It is in kilobytes and its  default value is -1.
+|Hazelcast creates all connections with send buffer size set according to the `hazelcast.socket.send.buffer.size`. When it detects a connection opened by a client, then it adjusts the send buffer size according to this property. It is in kilobytes and its  default value is -1.
 
 |`hazelcast.socket.connect.timeout.seconds`
 |0
 |int
-|Socket connection timeout in seconds. `Socket.connect()` is blocked until
-either connection is established or connection is refused or this timeout passes.
-Default is 0, means infinite.
+|Socket connection timeout in seconds. `Socket.connect()` is blocked until either connection is established or connection is refused or this timeout passes. Default is 0, means infinite.
 
 |`hazelcast.socket.keep.alive`
 | true
@@ -963,9 +765,7 @@ Default is 0, means infinite.
 |`hazelcast.socket.receive.buffer.size`
 | 128
 | int
-| Socket receive buffer (`SO_RCVBUF`) size in KB.
-If you have a very fast network, e.g., 10gbit) and/or you have large entries, then you may benefit from increasing sender/receiver buffer sizes.
-Use this property and the next one below tune the size.
+| Socket receive buffer (`SO_RCVBUF`) size in KB. If you have a very fast network, e.g., 10gbit) and/or you have large entries, then you may benefit from increasing sender/receiver buffer sizes. Use this property and the next one below tune the size.
 
 |`hazelcast.socket.send.buffer.size`
 | 128
@@ -980,18 +780,25 @@ Use this property and the next one below tune the size.
 |`hazelcast.tcp.join.port.try.count`
 |3
 |int
-|The number of incremental ports, starting with the port number defined in the network configuration,
-that is used to connect to a host (which is defined without a port in TCP/IP member list while a member is searching for a cluster).
+|The number of incremental ports, starting with the port number defined in the network configuration, that is used to connect to a host (which is defined without a port in TCP/IP member list while a member is searching for a cluster).
+
+|`hazelcast.unsafe.mode`
+| auto
+| string
+| "auto" (the default value) automatically detects whether the usage of `Unsafe` is suitable for a given platform. "disabled" explicitly disables the `Unsafe` usage in your platform. "enforced" enforces the usage of `Unsafe` even if your platform does not support it. This property can only be set by passing a JVM-wide system property.
+
+|`hazelcast.phone.home.enabled`
+| true
+| bool
+| Enable or disable the sending of phone home data to Hazelcast's phone home server.
 
 |`hazelcast.wait.seconds.before.join`
 | 5
 | int
 | Wait time before join operation.
-This time establishes a pre-join phase time window for newcomer members to
-make their first join requests. Once `hazelcast.wait.seconds.before.join`
-elapses since the last first-timer join request (i.e., where the member hasn't
-made any previous join request), or the pre-join phase has lasted for
-`hazelcast.max.wait.seconds.before.join` seconds, the phase ends and the
-master starts forming the cluster.
 
+|`hazelcast.wan.map.useDeleteWhenProcessingRemoveEvents`
+| false
+| bool
+| Configures WAN replication for `IMap` on the PASSIVE cluster to remove entries using delete instead of remove and when using `com.hazelcast.enterprise.wan.replication.WanBatchReplication` as an endpoint implementation. The member which receives the event batch in the PASSIVE cluster dispatches WAN events to the partition owners as map merge and remove operations. When using remove operations, the old entry value is sent from the partition owner to the caller even though the caller does not use the old value. This can also lead to issues if the PASSIVE cluster does not contain the class definition for the entry value as the value tries to get deserialized, causing ``ClassNotFoundException``s. You can switch to using map remove instead on the PASSIVE cluster with this property. This both saves the bandwidth and avoid the exceptions.
 |===

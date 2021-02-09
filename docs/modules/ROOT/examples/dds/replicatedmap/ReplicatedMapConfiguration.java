@@ -11,7 +11,7 @@ public class ReplicatedMapConfiguration {
                 config.getReplicatedMapConfig( "default" );
 
         replicatedMapConfig.setInMemoryFormat( InMemoryFormat.BINARY )
-                .setSplitBrainProtectionName( "splitbrainprotectionname" );
+                .setQuorumName( "quorumname" );
         //end::rmc[]
     }
 }

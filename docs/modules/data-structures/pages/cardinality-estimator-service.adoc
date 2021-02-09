@@ -50,7 +50,7 @@ Cardinality Estimator can be configured to check for a minimum number of
 available members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]). This is a check to avoid performing successful queue
 operations on all parts of a cluster during a network partition.
 
-The following is a list of methods, grouped by the protection types, that support
+The following is a list of methods, grouped by quorum type, that support
 split-brain protection checks:
 
 * WRITE, READ_WRITE:
@@ -63,40 +63,22 @@ split-brain protection checks:
 **Configuring Split-Brain Protection**
 
 Split-brain protection for Cardinality Estimator can be configured
-programmatically using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/CardinalityEstimatorConfig.html[setSplitBrainProtectionName()^],
-or declaratively using the element `split-brain-protection-ref`.
+programmatically using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/CardinalityEstimatorConfig.html[setQuorunName()^],
+or declaratively using the element `quorum-ref`.
 Following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <cardinality-estimator name="default">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </cardinality-estimator>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  cardinality-estimator:
-    default:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name
-which you configured under the `split-brain-protection` element as explained in the
+The value of `quorum-ref` should be the quorum configuration name which you configured under the `quorum` element as explained in the
 xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
 
 **Configuring Merge Policy**
@@ -111,34 +93,16 @@ https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/c
 or declaratively using the element `merge-policy`.
 Following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <cardinality-estimator name="default">
-        <merge-policy batch-size="102">HyperLogLogMergePolicy</merge-policy>
+        <merge-policy>HyperLogLogMergePolicy</merge-policy>
     </cardinality-estimator>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  cardinality-estimator:
-      merge-policy:
-        batch-size: 102
-        class-name: HyperLogLogMergePolicy
-----
-====
 
 The following out-of-the-box merge policies are available:
 

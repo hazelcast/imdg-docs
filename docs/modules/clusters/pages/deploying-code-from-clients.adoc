@@ -1,5 +1,5 @@
-= Deploying User Code from Clients
-[[client-user-code-deployment]]
+= Deploying User Codes on Clients
+[[client-user-code-deployment-beta]]
 
 You can also deploy your code from the client side for the following
 situations:
@@ -21,25 +21,15 @@ are permitted to use User Code Deployment. See the xref:security:native-client-s
 Client User Code Deployment feature is not enabled by default. You can
 configure this feature declaratively or programmatically.
 
-NOTE: Using the user code deployment feature is a fit for your functional objects
-like `Runnable`, `Callable` and `EntryProcessor`.
-For the domain objects, we recommend you to use the
-<<accessing-domain-objects-without-domain-classes, generic object interface>> (`GenericRecord`).
-
 Following are example configuration snippets:
 
 **Declarative Configuration:**
 
-In your `hazelcast-client.xml/yaml`:
+In your `hazelcast-client.xml`:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
-<hazelcast-client>
+<hazelcast>
     ...
     <user-code-deployment enabled="true">
         <jarPaths>
@@ -49,33 +39,14 @@ XML::
             <jarPath>file://Users/example/example.jar</jarPath>
         </jarPaths>
         <classNames>
-            <!-- for classes available in client's class path -->
+            <!-- for the classes available in client class path -->
             <className>example.ClassName</className>
             <className>example.ClassName2</className>
         </classNames>
     </user-code-deployment>
     ...
-</hazelcast-client>
+</hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast-client:
-  user-code-deployment
-    enabled: true
-    jarPaths:
-      - /User/example/example.jar
-      - example.jar
-      - https://com.example.com/example.jar
-      - file://Users/example/example.jar
-    classNames:
-      - example.ClassName
-      - example.ClassName2
-----
-====
 
 **Programmatic Configuration:**
 
@@ -87,46 +58,22 @@ include::{javasource}/ClientUCD.java[tag=clientucd]
 [[client-user-code-deployment-note]]
 === Important to Know
 
-The members have to be configured in a specific way for the feature to work
-correctly:
-
-* User Code Deployment must be enabled on the members. Otherwise, the classes
-from the client will be ignored. Also blacklisted and non-whitelisted classes
-will be ignored.
-* All members must be providers, `provider-mode` must be set to
-`LOCAL_AND_CACHED_CLASSES` on all members.
-* No `provider-filter` must be configured.
-
-The client uploads the classes only to one member. If the members don't load
-classes from each other, other members won't see the class.
-
-Here's a programmatic configuration of the members that will work with client
-user code deployment:
+Note that User Code Deployment should also be enabled on the members to use this feature.
 
 [source,java]
 ----
-include::{javasource}/ClientUCD.java[tag=configureMemberForClientUcd]
+Config config = new Config();
+UserCodeDeploymentConfig userCodeDeploymentConfig = config.getUserCodeDeploymentConfig();
+userCodeDeploymentConfig.setEnabled( true );
 ----
 
-See the <<member-user-code-deployment, Member User Code Deployment section>>
-for more information on enabling it on the member side and the configuration properties.
+See the <<member-user-code-deployment-beta, Member User Code Deployment section>> for more information on enabling it on the member side and its configuration properties.
 
-Classes deployed from clients are always cached on the members, no matter
-whether `ETERNAL` or `OFF` is configured on the members.
+For the property `class-cache-mode`, Client User Code Deployment supports only the `ETERNAL` mode, regardless of the configuration set on the member side (which can be `ETERNAL` and `OFF`).
 
-=== Performance Considerations
+For the property, `provider-mode`, Client User Code Deployment supports only the `LOCAL_AND_CACHED_CLASSES` mode, regardless of the configuration set on the member side (which can be `LOCAL_AND_CACHED_CLASSES`, `LOCAL_CLASSES_ONLY` and `OFF`).
 
-The client always uploads all added classes and jars to one of the members,
-whether it has them or not. So avoid adding large jar files for each connection
-- if configured properly, the member will have the class the next time the
-client connects.
-
-=== Two Versions of a Class
-
-If the client uploads a class and the member already has that class, an
-exception is thrown if the byte code is different. If byte code is same, it is
-ignored. Therefore classes uploaded from the client can't be updated with a new
-version.
+The remaining properties, which are `blacklist-prefixes`, `whitelist-prefixes` and `provider-filter` configured on the member side, effect the client user code deployment's behavior too. For example, assuming that you provide `com.foo` as a blacklist prefix on the member side, the member discards the classes with the prefix `com.foo` loaded by the client.
 
 === Adding User Library to CLASSPATH
 
@@ -156,11 +103,6 @@ include::{javasource}/settingupclusters/IdentifiedFactory.java[tag=if]
 
 And the following is the configuration for the above factory:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -173,19 +115,6 @@ XML::
     </serialization>
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  serialization:
-    data-serializable-factories:
-      - factory-id: 5
-        class-name: IdentifiedFactory
-----
-====
 
 Then, you can start your Hazelcast member by using the start scripts
 (`start.sh` or `start.bat`) in the `/bin` directory. The start scripts

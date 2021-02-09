@@ -1,7 +1,7 @@
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.topic.ITopic;
-import com.hazelcast.topic.LocalTopicStats;
+import com.hazelcast.core.ITopic;
+import com.hazelcast.monitor.LocalTopicStats;
 
 public class ExampleTopicStats {
 

@@ -1,4 +1,5 @@
-= Monitoring with JMX
+= Enabling JMX on Hazelcast Members
+[[monitoring-with-jmx]]
 
 You can monitor your Hazelcast members via the JMX protocol.
 
@@ -13,11 +14,8 @@ http://download.oracle.com/javase/1.5.0/docs/guide/management/agent.html[JMX age
 Then enable JMX by setting the `hazelcast.jmx` property to `true` using
 the following configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+* By declarative configuration:
++
 [source,xml]
 ----
 <hazelcast>
@@ -28,46 +26,21 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
 +
---
-[source,yaml]
-----
-hazelcast:
-  properties:
-    hazelcast.jmx: true
-----
---
-
-Java::
+* By programmatic configuration:
 +
---
-[source,java]
-----
-config.setProperty("hazelcast.jmx", "true");
-----
---
-
-Spring::
+`config.setProperty("hazelcast.jmx", "true");`
 +
---
+* By Spring XML configuration:
++
 [source,xml]
 ----
 <hz:properties>
     <hz: property name="hazelcast.jmx">true</hz:property>
 </hz:properties>
 ----
---
-
-System Property::
 +
-[source,shell]
-----
--Dhazelcast.jmx=true
-----
-====
+* By setting the system property `-Dhazelcast.jmx=true`
 
 == MBean Naming for Hazelcast Data Structures
 

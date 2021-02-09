@@ -1,5 +1,5 @@
-= Deploying User Code on the Member
-[[member-user-code-deployment]]
+= Deploying User Codes on the Member
+[[member-user-code-deployment-beta]]
 
 Hazelcast can dynamically load your custom classes or domain classes from other
 members. A xref:management:cluster-utilities.adoc#enabling-lite-members[lite member] can be designated as a _class
@@ -22,11 +22,6 @@ class into the local class cache as mentioned in the previous step.
 . The dynamic class loader is released after the operation is handled. A next
 operation will load the class from the cache or re-fetch it.
 
-NOTE: Using the user code deployment feature is a fit for your functional objects
-like `Runnable`, `Callable` and `EntryProcessor`.
-For the domain objects, we recommend you to use the
-<<accessing-domain-objects-without-domain-classes, generic object interface>> (`GenericRecord`).
-
 [[configuring-user-code-deployment]]
 == Configuring User Code Deployment
 
@@ -39,41 +34,20 @@ Following are example configuration snippets:
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <user-code-deployment enabled="true">
         <class-cache-mode>ETERNAL</class-cache-mode>
-        <provider-mode>LOCAL_AND_CACHED_CLASSES</provider-mode>
-        <blacklist-prefixes>com.foo,com.bar</blacklist-prefixes>
+        <provider-mode>LOCAL_CLASSES_ONLY</provider-mode>
+        <blacklist-prefixes>com.foo</blacklist-prefixes>
         <whitelist-prefixes>com.bar.MyClass</whitelist-prefixes>
         <provider-filter>HAS_ATTRIBUTE:lite</provider-filter>
     </user-code-deployment>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  user-code-deployment:
-    enabled: true
-    class-cache-mode: ETERNAL
-    provider-mode: LOCAL_AND_CACHED_CLASSES
-    blacklist-prefixes: com.foo,com.bar
-    whitelist-prefixes: com.bar.MyClass
-    provider-filter: HAS_ATTRIBUTE:lite
-----
-====
 
 **Programmatic Configuration:**
 
@@ -135,20 +109,24 @@ limit members that can be used to load classes. The attribute required in the
 the classes are to be loaded. See the following examples provided as
 programmatic configurations.
 
-The example configuration below allows the Hazelcast member to load classes
-only from members with the `class-provider` attribute set. It prevents from
-asking any other member to provide a locally unavailable class:
+The below example configuration allows the Hazelcast member to load classes only from the members with the `class-provider` attribute set. It does not ask any other member to provide a locally unavailable class:
 
 [source,java]
 ----
-include::{javasource}/MemberUCD.java[tag=hasAttributeConfig]
+Config hazelcastConfig = new Config();
+DistributedClassloadingConfig distributedClassloadingConfig = hazelcastConfig.getDistributedClassloadingConfig();
+distributedClassloadingConfig.setProviderFilter("HAS_ATTRIBUTE:class-provider");
+
+HazelcastInstance instance = Hazelcast.newHazelcastInstance(hazelcastConfig);
 ----
 
-The example configuration below sets the attribute `class-provider` for a
-member. Therefore the above member will be able to load classes from this
-member:
+And the below example configuration sets the attribute `class-provider` for a member. So, the above member loads classes from the members who have the attribute `class-provider`:
 
 [source,java]
 ----
-include::{javasource}/MemberUCD.java[tag=memberAttributeConfig]
+Config hazelcastConfig = new Config();
+MemberAttributeConfig memberAttributes = hazelcastConfig.getMemberAttributeConfig();
+memberAttributes.setAttribute("class-provider", "true");
+
+HazecastInstance instance = Hazelcast.newHazelcastInstance(hazelcastConfig);
 ----

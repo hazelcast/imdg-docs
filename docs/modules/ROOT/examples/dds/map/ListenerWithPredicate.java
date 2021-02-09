@@ -2,11 +2,11 @@ import com.hazelcast.config.Config;
 import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.map.IMap;
+import com.hazelcast.core.IMap;
 import com.hazelcast.map.listener.EntryAddedListener;
 import com.hazelcast.map.listener.EntryRemovedListener;
 import com.hazelcast.map.listener.EntryUpdatedListener;
-import com.hazelcast.query.Predicates;
+import com.hazelcast.query.SqlPredicate;
 
 //tag::lwp[]
 public class ListenerWithPredicate {
@@ -17,7 +17,7 @@ public class ListenerWithPredicate {
         HazelcastInstance hz = Hazelcast.newHazelcastInstance(config);
         IMap<String, String> map = hz.getMap("map");
         map.addEntryListener(new MyEntryListener(),
-                Predicates.sql("surname=smith"), true);
+                new SqlPredicate("surname=smith"), true);
         System.out.println("Entry Listener registered");
     }
 

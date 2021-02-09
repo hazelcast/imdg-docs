@@ -4,110 +4,52 @@ Hazelcast's Client security includes both authentication and authorization.
 
 == Authentication
 
-The authentication mechanism works in similar way as the cluster member authentication.
-
-To implement the client authentication, you reference a xref:security-realms.adoc[Security Realm]
-with the `authentication` section defined in the `<client-authentication/>` element
-of a cluster member configuration.
-
-The `authentication` configuration defines a method used to verify the client's identity
-and assign its roles.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+The authentication mechanism works the same as cluster member authentication. To implement client authentication, you configure a Credential and one or more LoginModules. The client side also needs a factory object as in member side, e.g., the `ICredentialsFactory` given in the xref:security:cluster-member-security.adoc[Cluster Member Security section] above.
 
 [source,xml]
 ----
 <hazelcast>
     ...
     <security enabled="true">
-      <realms>
-          <realm name="clientRealm">
-              <authentication>
-                <ldap>
-                    <url>ldap://corp-ldap.example.com/</url>
-                    <role-mapping-attribute>cn</role-mapping-attribute>
-                </ldap>
-              </authentication>
-          </realm>
-      </realms>
-      <member-authentication realm="clientRealm"/>
+        <client-login-modules>
+            <login-module usage="REQUIRED"
+                class-name="com.hazelcast.examples.MyRequiredClientLoginModule">
+                <properties>
+                    <property name="property3">value3</property>
+                </properties>
+            </login-module>
+            <login-module usage="SUFFICIENT"
+                class-name="com.hazelcast.examples.MySufficientClientLoginModule">
+                <properties>
+                    <property name="property4">value4</property>
+                </properties>
+            </login-module>
+            <login-module usage="OPTIONAL"
+                class-name="com.hazelcast.examples.MyOptionalClientLoginModule">
+                <properties>
+                    <property name="property5">value5</property>
+                </properties>
+            </login-module>
+        </client-login-modules>
     </security>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
+You can define as many as `LoginModules` as you want in the configuration. Those are executed in the order given in configuration. The `usage` attribute has 4 values: 'required', 'requisite', 'sufficient' and 'optional' as defined in `javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag`.
+
+[source,java]
 ----
-hazelcast:
-  security:
-    enabled: true
-    realms:
-      name: clientRealm
-      authentication:
-        ldap:
-          url: ldap://corp-ldap.example.com/
-          role-mapping-attribute: cn
-    member-authentication:
-      realm: clientRealm
+ClientConfig clientConfig = new ClientConfig();
+clientConfig.setCredentials( new UsernamePasswordCredentials( "dev", "dev-pass" ) );
+HazelcastInstance client = HazelcastClient.newHazelcastClient( clientConfig );
 ----
-====
 
-The identity of the connecting client is defined on the client side.
-Usually, there are no security realms on the clients, but just identity
-defined directly in the security configuration:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
-[source,xml]
-----
-<hazelcast-client>
-    ...
-    <security>
-      <username-password username="uid=member1,dc=example,dc=com" password="s3crEt"/>
-    </security>
-    ...
-</hazelcast-client>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast-client:
-  security:
-    username-password:
-      username: uid=member1,dc=example,dc=com
-      password: s3crEt
-----
-====
-
-On the clients, You can use the same identity types as in security realms:
-
-* `username-password`
-* `token`
-* `kerberos` _(may require an additional security realm definition)_
-* `credentials-factory`
+NOTE: See an implementation and configuration example https://github.com/hazelcast/hazelcast-code-samples/tree/master/enterprise/client-custom-credentials[here].
 
 == Authorization
 
-Hazelcast client authorization is configured by a client permission
-policy. Hazelcast has a default permission policy implementation that uses
-permission configurations defined in the Hazelcast security configuration.
-Default policy permission checks are done against instance types (map, queue, etc.),
-instance names (map, queue, name, etc.), instance actions (put, read, remove, add, etc.),
-the client endpoint address (`ClusterEndpointPrincipal`) and client roles (`ClusterRolePrincipal`).
+Hazelcast client authorization is configured by a client permission policy. Hazelcast has a default permission policy implementation that uses permission configurations defined in the Hazelcast security configuration. Default policy permission checks are done against instance types (map, queue, etc.), instance names (map, queue, name, etc.), instance actions (put, read, remove, add, etc.), client endpoint addresses and client principal defined by the Credentials object.
 
 The default permission policy allows to use comma separated names in the `principal`
 attribute configuration.
@@ -117,12 +59,6 @@ See the xref:configuration:using-wildcards.adoc[Using Wildcards] section for det
 
 The endpoint names can use range characters `"-"` and `"*"` as described
 in the xref:clusters:network-configuration.adoc#interfaces[Interfaces] section.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 
 [source,xml]
 ----
@@ -185,54 +121,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  security:
-    enabled: true
-    client-permissions:
-      on-join-operation: RECEIVE
-      all:
-        principal: admin,root
-        endpoints:
-          - 127.0.0.1
-      map:
-        - name: myMap
-          principal: dev
-          endpoints:
-            - 127.0.0.1
-          actions:
-            - create
-            - destroy
-            - put
-            - read
-      map:
-        - name: com.foo.entity
-          principal: dev
-          endpoints:
-            - 10.10.*.*
-            - 127.0.0.1
-          actions:
-            - put
-            - read
-            - remove
-      queue:
-        - name: "*"
-          principal: dev
-          endpoints:
-            - 192.168.1.1-100
-            - 192.168.2.*
-          actions:
-            - create
-            - add
-            - remove
-      transaction:
-----
-====
 
 You can also define your own policy by implementing `com.hazelcast.security.IPermissionPolicy`.
 
@@ -271,14 +159,8 @@ it decides whether the current `Subject` has permission to access the requested 
 
 The following is the list of client permissions that can be configured on the member:
 
-**All Permission:**
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+* All Permission
++
 [source,xml]
 ----
 <all-permissions principal="principal">
@@ -287,29 +169,9 @@ XML::
     </endpoints>
 </all-permissions>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-all:
-  principal: principal
-  endpoints:
-    - ..
-----
-====
-
-**Map Permission:**
-
-Actions: all, create, destroy, put, read, remove, lock, intercept, index, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+* Map Permission
++
 [source,xml]
 ----
 <map-permission name="name" principal="principal">
@@ -321,32 +183,11 @@ XML::
     </actions>
 </map-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-map:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Queue Permission:**
-
-Actions: all, create, destroy, add, remove, read, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, put, read, remove, lock, intercept, index, listen
++
+* Queue Permission
++
 [source,xml]
 ----
 <queue-permission name="name" principal="principal">
@@ -358,32 +199,11 @@ XML::
     </actions>
 </queue-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-queue:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Multimap Permission:**
-
-Actions: all, create, destroy, put, read, remove, listen, lock
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, add, remove, read, listen
++
+* Multimap Permission
++
 [source,xml]
 ----
 <multimap-permission name="name" principal="principal">
@@ -395,69 +215,11 @@ XML::
      </actions>
 </multimap-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-multimap:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Replicated Map Permission:**
-
-Actions: all, create, destroy, put, read, remove, listen, lock, index, intercept
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
-[source,xml]
-----
-<replicatedmap-permission name="name" principal="principal">
-    <endpoints>
-        ...
-    </endpoints>
-    <actions>
-        ...
-     </actions>
-</replicatedmap-permission>
-----
---
-
-YAML::
+Actions: all, create, destroy, put, read, remove, listen, lock
 +
-[source,yaml]
-----
-replicatedmap:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Topic Permission:**
-
-Actions: create, destroy, publish, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+* Topic Permission
++
 [source,xml]
 ----
 <topic-permission name="name" principal="principal">
@@ -469,32 +231,11 @@ XML::
     </actions>
 </topic-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-topic:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**List Permission:**
-
-Actions: all, create, destroy, add, read, remove, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: create, destroy, publish, listen
++
+* List Permission
++
 [source,xml]
 ----
 <list-permission name="name" principal="principal">
@@ -506,32 +247,11 @@ XML::
     </actions>
 </list-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-list:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Set Permission:**
-
 Actions: all, create, destroy, add, read, remove, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
++
+* Set Permission
++
 [source,xml]
 ----
 <set-permission name="name" principal="principal">
@@ -543,32 +263,11 @@ XML::
     </actions>
 </set-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-set:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Lock Permission:**
-
-Actions: all, create, destroy, lock, read
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, add, read, remove, listen
++
+* Lock Permission
++
 [source,xml]
 ----
 <lock-permission name="name" principal="principal">
@@ -580,32 +279,11 @@ XML::
     </actions>
 </lock-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-lock:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**AtomicLong Permission:**
-
-Actions: all, create, destroy, read, modify
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, lock, read
++
+* AtomicLong Permission
++
 [source,xml]
 ----
 <atomic-long-permission name="name" principal="principal">
@@ -617,32 +295,11 @@ XML::
     </actions>
 </atomic-long-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-atomic-long:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**CountDownLatch Permission:**
-
 Actions: all, create, destroy, read, modify
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
++
+* CountDownLatch Permission
++
 [source,xml]
 ----
 <countdown-latch-permission name="name" principal="principal">
@@ -654,32 +311,27 @@ XML::
     </actions>
 </countdown-latch-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
+Actions: all, create, destroy, modify, read
++
+* IdGenerator Permission
++
+[source,xml]
 ----
-countdown-latch:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
+<id-generator-permission name="name" principal="principal">
+    <endpoints>
+        ...
+    </endpoints>
+    <actions>
+        ...
+    </actions>
+</id-generator-permission>
 ----
-====
-
-**FlakeIdGenerator Permission:**
-
-Actions: all, create, destroy, read, modify
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
++
+Actions: all, create, destroy, modify, read
++
+* FlakeIdGenerator Permission
++
 [source,xml]
 ----
 <flake-id-generator-permission name="name" principal="principal">
@@ -691,32 +343,11 @@ XML::
     </actions>
 </flake-id-generator-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-flake-id-generator:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Semaphore Permission:**
-
-Actions: all, create, destroy, acquire, release, read
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, modify
++
+* Semaphore Permission
++
 [source,xml]
 ----
 <semaphore-permission name="name" principal="principal">
@@ -728,32 +359,11 @@ XML::
     </actions>
 </semaphore-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-semaphore:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Executor Service Permission:**
-
-Actions: all, create, destroy
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, acquire, release, read
++
+* Executor Service Permission
++
 [source,xml]
 ----
 <executor-service-permission name="name" principal="principal">
@@ -765,30 +375,11 @@ XML::
     </actions>
 </executor-service-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-executor-service:
-  - name: name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-**Transaction Permission:**
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy
++
+* Transaction Permission
++
 [source,xml]
 ----
 <transaction-permission principal="principal">
@@ -797,29 +388,9 @@ XML::
     </endpoints>
 </transaction-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-transaction:
-  principal: principal
-  endpoints:
-    - ..
-----
-====
-
-**Cache Permission:**
-
-Actions: all, create, destroy, put, read, remove, listen
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+* Cache Permission
++
 [source,xml]
 ----
 <cache-permission name="/hz/cache-name" principal="principal">
@@ -831,36 +402,11 @@ XML::
     </actions>
 </cache-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-cache:
-  - name: /hz/cache-name
-    principal: principal
-    endpoints:
-      - ..
-    actions:
-      - ..
-----
-====
-
-NOTE: The name provided in `cache-permission` must be the Hazelcast distributed
-object name corresponding to the `Cache` as described in
-the xref:jcache:hazelcast-integration.adoc[JCache - Hazelcast Instance Integration section].
-
-**User Code Deployment Permission:**
-
-Actions: all, deploy
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
+Actions: all, create, destroy, put, read, remove, listen
++
+* User Code Deployment Permission
++
 [source,xml]
 ----
 <user-code-deployment-permission principal="principal">
@@ -872,54 +418,10 @@ XML::
     </actions>
 </user-code-deployment-permission>
 ----
---
-
-YAML::
 +
-[source,yaml]
-----
-user-code-deployment:
-  principal: principal
-  endpoints:
-    - ..
-  actions:
-    - ..
-----
-====
+Actions: all, deploy
 
-**Configuration Permission:**
-
-This permission defines which
-client principals/endpoints are allowed to perform
-xref:configuration:dynamic-data-structure-configuration.adoc[dynamic configuration changes],
-i.e., adding data structure configurations at runtime.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
-[source,xml]
-----
-<config-permission principal="principal">
-    <endpoints>
-        <endpoint>...</endpoint>
-    </endpoints>
-</config-permission>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-config:
-  principal: principal
-  endpoints:
-    - ..
-----
-====
+NOTE: The name provided in `cache-permission` must be the Hazelcast distributed object name corresponding to the `Cache` as described in xref:jcache:jcache-hazelcast-instance-integration.adoc[JCache - Hazelcast Instance Integration].
 
 === Handling Permissions When a New Member Joins
 
@@ -942,12 +444,6 @@ The following are the examples for both approaches on how to use them:
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
 [source,xml]
 ----
 <hazelcast>
@@ -960,19 +456,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  security:
-    enabled: true
-    client-permissions:
-      on-join-operation: SEND
-----
-====
 
 **Programmatic Configuration:**
 
@@ -1009,7 +492,7 @@ the `NONE` option, since the distributed objects need to be created/destroyed on
 +
 The following is an example for a scenario where `NONE` is used:
 +
-[source,java,options="nowrap"]
+[source,java]
 ----
 // temporary member, in the below case a lite member
 Config config = new Config().setLiteMember(true);

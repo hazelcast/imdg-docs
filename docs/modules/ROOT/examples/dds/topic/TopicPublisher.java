@@ -1,6 +1,6 @@
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.topic.ITopic;
+import com.hazelcast.core.ITopic;
 
 import java.util.Date;
 

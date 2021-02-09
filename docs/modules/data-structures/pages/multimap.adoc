@@ -65,11 +65,8 @@ The following are the example MultiMap configurations.
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+**Declarative Configuration:**
+
 [source,xml]
 ----
 <hazelcast>
@@ -81,30 +78,11 @@ XML::
         <entry-listeners>
             <entry-listener include-value="false" local="false" >com.hazelcast.examples.EntryListener</entry-listener>
         </entry-listeners>
-        <split-brain-protection-ref>split-brain-protection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </multimap>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  multimap:
-    default:
-      backup-count: 0
-      async-backup-count: 1
-      value-collection-type: SET
-      entry-listeners:
-        - class-name: com.hazelcast.examples.EntryListener
-          include-value: false
-          local: false
-      split-brain-protection-ref: split-brain-protection-name
-----
-====
 
 **Programmatic Configuration:**
 
@@ -132,7 +110,7 @@ You can also set the attribute
 `include-value` to `true` if you want the item event to contain the entry values.
 You can set
 `local` to `true` if you want to listen to the entries on the local member.
-* `split-brain-protection-ref`: Name of the split-brain protection configuration that you want this MultiMap to use.
+* `quorum-ref`: Name of quorum configuration that you want this MultiMap to use.
 See the xref:network-partitioning:split-brain-protection.adoc#split-brain-protection-for-multimap-and-transactionalmultimap[Split-Brain Protection for MultiMap and TransactionalMultiMap section].
 
 [[split-brain-protection-for-multimap-and-transactionalmultimap]]
@@ -142,7 +120,7 @@ MultiMap & TransactionalMultiMap can be configured to check for a minimum number
 available members before applying their operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
-The following is a list of methods that support split-brain protection checks. The list is grouped by the protection types.
+The following is a list of methods that support split-brain protection checks. The list is grouped by quorum type.
 
 MultiMap:
 
@@ -181,35 +159,17 @@ TransactionalMultiMap:
 
 Split-brain protection for MultiMap can be configured programmatically using
 the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/MultiMapConfig.html[setSplitBrainProtectionName()^],
-or declaratively using the element `split-brain-protection-ref`. Following is an example declarative configuration:
+or declaratively using the element `quorum-ref`. Following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <multimap name="default">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </multimap>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  multimap:
-    default:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured
-under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
+The value of `quorum-ref` should be the quorum configuration name which you configured under the `quorum` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

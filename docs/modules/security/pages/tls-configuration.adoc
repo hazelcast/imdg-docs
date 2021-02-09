@@ -8,52 +8,6 @@ you have to configure Management Center as explained in the
 xref:management-center::connecting-members.adoc[Connecting Hazelcast members to Management Center section] in the Hazelcast
 Management Center documentation.
 
-=== Updating Certificates in the Running Cluster
-
-Hazelcast allows updating TLS certificates on the members
-without fully stopping the cluster. You can stop the cluster members
-one by one and replace the certificates gradually. We can
-distinguish two cases based on the fact if the new certificate
-is already trusted:
-
-. New certificates are not trusted on the members.
-+
-This is usually a case when self-signed certificates are used on the members.
-+
-Before we can deploy new member certificates, we have to
-update the list of trusted certificates on all members.
-Complete the following steps on each member (one by one) in the cluster:
-
-* Gracefully shutdown the member
-* Wait for the cluster safe state (rebalance)
-* Import all new certificates to the member's truststore,
-so it contains both old and new ones.
-+
-You can use the `keytool` executable from Java installation
-to import the new certificates. Example:
-+
-[source,bash]
-----
-keytool -import -noprompt \
-  -keystore member.truststore -storepass s3crEt \
-  -alias new-cert-1 -file member-new-cert.crt
-----
-+
-* Start the member with the updated truststore
-* Wait for the cluster safe state (rebalance)
-+
-After completing the above steps, follow the steps
-described in the next point (certificates trusted).
-. New certificates are already trusted on the members
-+
-Switch certificate on each member one by one:
-
-* Gracefully shutdown the member
-* Wait for the cluster safe state (rebalance)
-* Replace the private key and certificate in the member's keystore
-* Start the member with the updated keystore
-* Wait for the cluster safe state (rebalance)
-
 == Configuring Cipher Suites
 
 To get the best performance, the correct https://en.wikipedia.org/wiki/Cipher_suite[cipher suites^]

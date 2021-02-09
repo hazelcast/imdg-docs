@@ -1,7 +1,7 @@
-import com.hazelcast.collection.IQueue;
-import com.hazelcast.collection.LocalQueueStats;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IQueue;
+import com.hazelcast.monitor.LocalQueueStats;
 
 public class ExampleQueueStats {
 
@@ -11,7 +11,7 @@ public class ExampleQueueStats {
         IQueue<Integer> orders = node.getQueue( "orders" );
         LocalQueueStats queueStatistics = orders.getLocalQueueStats();
         System.out.println( "average age of items = "
-                + queueStatistics.getAverageAge() );
+                + queueStatistics.getAvgAge() );
         //end::qs[]
     }
 }

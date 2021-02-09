@@ -250,11 +250,10 @@ in bulks. Bulk load is the size of these bulks. The default value of `bulk-load`
 [[split-brain-protection-for-queue]]
 == Split-Brain Protection for Queue
 
-Queues can be configured to check for a minimum number of available members before
-applying queue operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
+Queues can be configured to check for a minimum number of available members before applying queue operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
-The following is a list of methods, grouped by the protection types, that support split-brain protection checks:
+The following is a list of methods, grouped by the quorum type, that support Split-Brain Protection checks:
 
 * WRITE, READ_WRITE
 ** `Collection.addAll()`
@@ -281,11 +280,6 @@ Queueing with Persistent Datastore>> section.
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -307,37 +301,11 @@ XML::
                 <property name="bulk-load">500</property>
             </properties>
         </queue-store>
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </queue>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  queue:
-    default:
-      max-size: 0
-      backup-count: 1
-      async-backup-count: 0
-      empty-queue-ttl: -1
-      item-listeners:
-        - include-value: true
-          class-name: com.hazelcast.examples.ItemListener
-      statistics-enabled: true
-      queue-store:
-        class-name: com.hazelcast.QueueStoreImpl
-        properties:
-          binary: false
-          memory-limit: 1000
-          bulk-load: 500
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
 
 **Programmatic Configuration:**
 
@@ -381,6 +349,6 @@ listen to the items on the local member.
 * `statistics-enabled`: Specifies whether the statistics gathering is enabled for your queue.
 If set to `false`, you cannot collect statistics in your implementation
 (using `getLocalQueueStats()`) and also
-xref:management-center:monitor-imdg:monitor-dds.adoc#monitoring-queues[Hazelcast Management Center]
+{mc-docs}#monitoring-queues[Hazelcast Management Center^]
 will not show them. Its default value is `true`.
-* `split-brain-protection-ref` : Name of the split-brain protection configuration that you want this queue to use.
+* `quorum-ref` : Name of quorum configuration that you want this queue to use.

@@ -76,6 +76,8 @@ hazelcast:
 ----
 ====
 
+NOTE: The `hazelcast.http.healthcheck.enabled` system property has been deprecated. Please use either one of the above configuration to enable the Health Check utility.
+
 == Health Check
 
 This is Hazelcast's HTTP based health check implementation which provides
@@ -89,13 +91,11 @@ cluster state, cluster size, etc.) by launching `+http://<your member's host IP>
 An example output is given below:
 
 ```
-{
-  "nodeState": "ACTIVE",
-  "clusterState": "ACTIVE",
-  "clusterSafe": true,
-  "migrationQueueSize": 0,
-  "clusterSize": 3
-}
+Hazelcast::NodeState=ACTIVE
+Hazelcast::ClusterState=ACTIVE
+Hazelcast::ClusterSafe=TRUE
+Hazelcast::MigrationQueueSize=0
+Hazelcast::ClusterSize=2
 ```
 
 See the xref:cluster-utilities.adoc#managing-cluster-and-member-states[Managing Cluster and Member States section]
@@ -104,10 +104,7 @@ to learn more about each state of a Hazelcast cluster and member.
 [[health-check-script]]
 == Using the healthcheck.sh Script
 
-The `healthcheck.sh` script comes with the Hazelcast package. Internally, it uses
-the HTTP-based Health Check endpoint. You will need to enable the endpoint by using the
-`advanced-network` or the `network` configuration element.
-See the <<health-check-monitoring, Health Check and Monitoring section>>.
+The `healthcheck.sh` script comes with the Hazelcast package. Internally, it uses the HTTP-based Health Check endpoint and that is why you also need to set the `hazelcast.http.healthcheck.enabled` system property to `true`.
 
 You can use the script to check health parameters in the following manner:
 

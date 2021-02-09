@@ -7,29 +7,29 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 //tag::mivmp2[]
-public class MergeIntegerValuesMergePolicy2<V, T extends MergingValue<V>> implements SplitBrainMergePolicy<V, T, Object> {
+public class MergeIntegerValuesMergePolicy2<V, T extends MergingValue<V>> implements SplitBrainMergePolicy<V, T> {
 
     @Override
-    public Object merge(T mergingValue, T existingValue) {
-        if (mergingValue.getValue() instanceof Integer) {
-            return mergingValue.getRawValue();
+    public V merge(T mergingValue, T existingValue) {
+        if (mergingValue.getDeserializedValue() instanceof Integer) {
+            return mergingValue.getValue();
         }
-        if (existingValue != null && existingValue.getValue() instanceof Integer) {
-            return existingValue.getRawValue();
+        if (existingValue != null && existingValue.getDeserializedValue() instanceof Integer) {
+            return existingValue.getValue();
         }
-        if (mergingValue.getRawValue() instanceof Collection) {
-            Collection<Object> result = new ArrayList<>();
+        if (mergingValue.getValue() instanceof Collection) {
+            Collection<Object> result = new ArrayList<Object>();
             addIntegersToCollection(mergingValue, result);
             if (result.isEmpty() && existingValue != null) {
                 addIntegersToCollection(existingValue, result);
             }
-            return result;
+            return (V) result;
         }
         return null;
     }
 
     private void addIntegersToCollection(T mergingValue, Collection<Object> result) {
-        for (Object value : (Collection<Object>) mergingValue.getValue()) {
+        for (Object value : mergingValue.<Collection<Object>>getDeserializedValue()) {
             if (value instanceof Integer) {
                 result.add(value);
             }

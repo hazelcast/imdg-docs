@@ -1,6 +1,6 @@
 import com.hazelcast.config.NetworkConfig;
 import com.hazelcast.logging.ILogger;
-import com.hazelcast.cluster.Address;
+import com.hazelcast.nio.Address;
 import com.hazelcast.spi.discovery.AbstractDiscoveryStrategy;
 import com.hazelcast.spi.discovery.DiscoveryNode;
 import com.hazelcast.spi.discovery.SimpleDiscoveryNode;
@@ -69,7 +69,7 @@ public class HostsDiscoveryStrategy extends AbstractDiscoveryStrategy {
             String address = sliceAddress(assignment);
             String hostname = sliceHostname(assignment);
 
-            Map<String, String> attributes = Collections.singletonMap("hostname", hostname);
+            Map<String, Object> attributes = Collections.<String, Object>singletonMap("hostname", hostname);
 
             InetAddress inetAddress = mapToInetAddress(address);
             Address addr = new Address(inetAddress, NetworkConfig.DEFAULT_PORT);

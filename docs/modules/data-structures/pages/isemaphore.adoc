@@ -1,10 +1,9 @@
 = ISemaphore
 [[isemaphore]]
 
-NOTE: `ISemaphore` is a member of CP Subsystem API.
-For detailed information, see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] chapter.
-
 Hazelcast ISemaphore is the distributed implementation of `java.util.concurrent.Semaphore`.
+
+NOTE: The original implementation of `ISemaphore` has been deprecated. To read about the previous implementation, see the https://docs.hazelcast.org/docs/3.11.2/manual/html-single/index.html#isemaphore[ISemaphore] section of the Hazelcast IMDG 3.11 Reference Manual. The xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] introduces `ISemaphore` provided by the *CP Subsystem*.
 
 [[controlling-thread-counts-with-permits]]
 == Controlling Thread Counts with Permits

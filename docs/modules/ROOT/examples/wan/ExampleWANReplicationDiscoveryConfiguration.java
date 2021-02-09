@@ -9,8 +9,26 @@ public class ExampleWANReplicationDiscoveryConfiguration {
 //tag::wrdc[]
         Config config = new Config();
 
-        WanBatchPublisherConfig batchPublisherConfig = new WanBatchPublisherConfig()
-                .setClusterName("london");
+        WanReplicationConfig wrConfig = new WanReplicationConfig();
+        wrConfig.setName("my-wan-cluster-batch");
+
+        WanPublisherConfig publisherConfig = new WanPublisherConfig();
+        publisherConfig.setGroupName("london");
+        publisherConfig.setClassName("com.hazelcast.enterprise.wan.replication.WanBatchReplication");
+        publisherConfig.setQueueFullBehavior(WANQueueFullBehavior.THROW_EXCEPTION);
+        publisherConfig.setQueueCapacity(1000);
+
+        Map<String, Comparable> props = publisherConfig.getProperties();
+        props.put("batch.size", 500);
+        props.put("batch.max.delay.millis", 1000);
+        props.put("snapshot.enabled", false);
+        props.put("response.timeout.millis", 60000);
+        props.put("ack.type", WanAcknowledgeType.ACK_ON_OPERATION_COMPLETE.toString());
+        props.put("group.password", "london-pass");
+        props.put("discovery.period", "20");
+        props.put("executorThreadCount", "2");
+
+        DiscoveryConfig discoveryConfig = new DiscoveryConfig();
 
         DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig("com.hazelcast.aws.AwsDiscoveryStrategy");
         discoveryStrategyConfig.addProperty("access-key","test-access-key");
@@ -23,17 +41,10 @@ public class ExampleWANReplicationDiscoveryConfiguration {
         discoveryStrategyConfig.addProperty("tag-value","test-tag-value");
         discoveryStrategyConfig.addProperty("hz-port",5702);
 
-        DiscoveryConfig discoveryConfig = new DiscoveryConfig()
-                .addDiscoveryStrategyConfig(discoveryStrategyConfig);
-        batchPublisherConfig.setDiscoveryConfig(discoveryConfig);
-
-        WanReplicationConfig wrConfig = new WanReplicationConfig()
-                .setName("london-wan-rep")
-                .addBatchReplicationPublisherConfig(batchPublisherConfig);
+        discoveryConfig.addDiscoveryStrategyConfig(discoveryStrategyConfig);
+        publisherConfig.setDiscoveryConfig(discoveryConfig);
+        wrConfig.addWanPublisherConfig(publisherConfig);
         config.addWanReplicationConfig(wrConfig);
-
-        config.getMapConfig("replicatedMap").setWanReplicationRef(new WanReplicationRef().setName("london-wan-rep"));
-        config.getCacheConfig("replicatedCache").setWanReplicationRef(new WanReplicationRef().setName("london-wan-rep"));
 //end::wrdc[]
     }
 }

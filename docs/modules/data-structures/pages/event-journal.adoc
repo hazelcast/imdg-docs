@@ -65,52 +65,23 @@ event journal.
 Below is a declarative configuration example of an event journal with a
 `capacity` of 5000 items for a map and 10000 items for a cache:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <map name="default">
-        <event-journal enabled="true">
-            <capacity>5000</capacity>
-            <time-to-live-seconds>20</time-to-live-seconds>
-        </event-journal>
-    </map>
-    ...
-    <cache name="default">
-        <event-journal enabled="true">
-            <capacity>10000</capacity>
-            <time-to-live-seconds>0</time-to-live-seconds>
-        </event-journal>
-    </cache>
+    <event-journal enabled="true">
+        <mapName>myMap</mapName>
+        <capacity>5000</capacity>
+        <time-to-live-seconds>20</time-to-live-seconds>
+    </event-journal>
+    <event-journal enabled="true">
+        <cacheName>myCache</cacheName>
+        <capacity>10000</capacity>
+        <time-to-live-seconds>0</time-to-live-seconds>
+    </event-journal>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    default:
-      event-journal:
-        enabled: true
-        capacity: 5000
-        time-to-live-seconds: 20
-  cache:
-    default:
-      event-journal:
-        enabled: true
-        capacity: 10000
-        time-to-live-seconds: 0
-----
-====
 
 You can also configure an event journal programmatically. The following
 is a programmatic version of the above declarative configuration:
@@ -120,16 +91,7 @@ is a programmatic version of the above declarative configuration:
 include::{javasource}/dds/EventJournalConfiguration.java[tag=ejc]
 ----
 
-The `mapName` and `cacheName` attributes define the map or cache to which
-this event journal configuration applies. You can use pattern-matching and
-the `default` keyword when doing so. For instance, by using a `mapName` of
-`journaled*`, the journal configuration applies to all maps whose names start
-with "journaled" and don't have other journal configurations that match (e.g.,
-if you would have a more specific journal configuration with an exact name match).
-If you specify the `mapName` or `cacheName` as `default`, the journal configuration
-applies to all maps and caches that don't have any other journal configuration.
-This means that potentially all maps and/or caches have one single
-event journal configuration.
+The `mapName` and `cacheName` attributes define the map or cache to which this event journal configuration applies. You can use pattern-matching and the `default` keyword when doing so. For instance, by using a `mapName` of `journaled*`, the journal configuration applies to all maps whose names start with "journaled" and don't have other journal configurations that match (e.g., if you would have a more specific journal configuration with an exact name match). If you specify the `mapName` or `cacheName` as `default`, the journal configuration applies to all maps and caches that don't have any other journal configuration. This means that potentially all maps and/or caches have one single event journal configuration.
 
 [[event-journal-partitioning]]
 == Event Journal Partitioning
@@ -158,36 +120,15 @@ being read from or written to, the journal may keep expired items indefinitely.
 
 In the example below, an event journal is configured with a `time-to-live` of 180 seconds:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <cache name="myCache">
-        <event-journal enabled="true">
-            <capacity>10000</capacity>
-            <time-to-live-seconds>180</time-to-live-seconds>
-        </event-journal>
-    </cache>
+    <event-journal enabled="true">
+        <cacheName>myCache</cacheName>
+        <capacity>10000</capacity>
+        <time-to-live-seconds>180</time-to-live-seconds>
+    </event-journal>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  cache:
-    myCache:
-      event-journal:
-        enabled: true
-        capacity: 10000
-        time-to-live-seconds: 180
-----
-====

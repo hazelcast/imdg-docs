@@ -1,10 +1,11 @@
-= Aggregations
-[[aggregations]]
+= Fast-Aggregations
+[[fast-aggregations]]
 
-Aggregations allow to compute a value of some function (e.g sum or max) over the
-stored map entries. The computation is performed in a fully distributed manner,
-so no data other than the computed function value is transferred to a caller,
-making the computation fast.
+Fast-Aggregations functionality is the successor of the xref:query:aggregators.adoc[Aggregators].
+They are equivalent to the MapReduce Aggregators in most of the use cases, but instead
+of running on the MapReduce engine they run on the Query infrastructure.
+Their performance is tens to hundreds times better since they run in parallel for each
+partition and are highly optimized for speed and low memory consumption.
 
 NOTE: If the xref:data-structures:distributed-data-structures.adoc#setting-in-memory-format[in-memory format] of your data is `NATIVE`,
 aggregations always run on the partition threads. If the data is of type `BINARY`
@@ -13,7 +14,7 @@ the separate query threads to avoid blocking partition threads (if there are no 
 
 == Aggregator API
 
-The aggregation is split into three phases represented by three methods:
+The Fast-Aggregation consists of three phases represented by three methods:
 
 . `accumulate()`
 . `combine()`
@@ -60,7 +61,7 @@ results accumulated and combined in the preceding phases.
 In case of the `DoubleAverage` aggregation, the Aggregator would just
 divide the sum of the elements by their count (if non-zero).
 
-=== Aggregations and Map Interfaces
+=== Fast-Aggregations and Map Interfaces
 
 Aggregations are available on `com.hazelcast.map.IMap` only.
 IMap offers the method `aggregate` to apply the aggregation logic on

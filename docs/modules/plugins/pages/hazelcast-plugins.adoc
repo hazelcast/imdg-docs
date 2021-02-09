@@ -1,4 +1,0 @@
-= Hazelcast Plugins
-[[hazelcast-plugins]]
-
-This chapter describes the plugins using which you can extend Hazelcast IMDG's functionalities.

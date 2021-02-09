@@ -86,30 +86,6 @@ committed multiple times. If it is enabled, the public API call fails with
 `IndeterminateOperationStateException`.
 +
 Default value is `false`.
-+
-* `persistence-enabled`: Specifies whether CP Subsystem Persistence is globally
-enabled for CP groups created in CP Subsystem. If enabled, CP members persist
-their local CP data to stable storage and can recover from crashes.
-+
-Default value is `false`.
-* `base-dir`: Specifies the parent directory where CP data is stored. You can
-use the default value, or you can specify the value of another folder, but it
-is mandatory that `base-dir` element has a value. This directory is created
-automatically if it does not exist.
-+
-`base-dir` is used as the parent directory, and a unique directory is created
-inside `base-dir` for each CP member which uses the same `base-dir`. That
-means, `base-dir` is shared among multiple CP members safely. This is
-especially useful for cloud environments where CP members generally use
-a shared filesystem.
-+
-Default value is `cp-data`.
-+
-* `data-load-timeout-seconds`: Timeout duration for CP members to restore their
-data from disk. A CP member fails its startup if it cannot complete its CP data
-restore process in the configured duration.
-+
-Default value is `120` seconds.
 
 **Declarative Configuration:**
 
@@ -129,8 +105,6 @@ XML::
         <session-heartbeat-interval-seconds>5</session-heartbeat-interval-seconds>
         <missing-cp-member-auto-removal-seconds>14400</missing-cp-member-auto-removal-seconds>
         <fail-on-indeterminate-operation-state>false</fail-on-indeterminate-operation-state>
-        <persistence-enabled>true</persistence-enabled>
-        <base-dir>/custom-cp-dir</base-dir>
     </cp-subsystem>
     ...
 </hazelcast>
@@ -149,8 +123,6 @@ hazelcast:
     session-heartbeat-interval-seconds: 5
     missing-cp-member-auto-removal-seconds: 14400
     fail-on-indeterminate-operation-state: false
-    persistence-enabled: true
-    base-dir: custom-cp-dir
 ----
 ====
 

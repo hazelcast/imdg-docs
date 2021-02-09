@@ -1,7 +1,7 @@
 import com.hazelcast.aggregation.Aggregator;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.map.IMap;
+import com.hazelcast.core.IMap;
 
 import java.util.Map;
 import java.util.Random;

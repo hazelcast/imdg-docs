@@ -18,12 +18,6 @@ include::{javasource}/security/SocketInterceptorMember.java[tag=msi]
 
 You can declaratively configure this socket interceptor as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-
 [source,xml]
 ----
 <hazelcast>
@@ -32,32 +26,14 @@ XML::
         <socket-interceptor enabled="true">
             <class-name>com.hazelcast.examples.MySocketInterceptor</class-name>
             <properties>
-                <property name="property1">value1</property>
-                <property name="property2">value2</property>
-                <property name=foo>bar</property>
+                <property name="kerberos-host">kerb-host-name</property>
+                <property name="kerberos-config-file">kerb.conf</property>
             </properties>
         </socket-interceptor>
     </network>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  network:
-    socket-interceptor:
-        enabled: true
-        class-name: com.hazelcast.examples.MySocketInterceptor
-        properties:
-          property1: value1
-          property2: value2
-          foo: bar
-----
-====
 
 The following is an example configuration of the above socket
 interceptor for the client side.

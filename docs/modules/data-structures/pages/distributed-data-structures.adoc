@@ -29,7 +29,7 @@ Flajolet's HyperLogLog algorithm.
 ** xref:topic.adoc[Topic] is the distributed mechanism for publishing messages that are delivered to multiple subscribers. It is also known as the publish/subscribe (pub/sub) messaging model.
 ** xref:reliable-topic.adoc[Reliable Topic] uses the same interface as Hazelcast Topic, except it is backed up by the Ringbuffer data structure.
 * **Concurrency utilities**
-** xref:fencedlock.adoc[FencedLock] is the distributed implementation of `java.util.concurrent.locks.Lock`.
+** xref:lock.adoc[Lock] is the distributed implementation of `java.util.concurrent.locks.Lock`.
 When you use lock, the critical section that Hazelcast Lock guards is guaranteed to be
 executed by only one thread in the entire cluster.
 ** xref:isemaphore.adoc[ISemaphore] is the distributed implementation of `java.util.concurrent.Semaphore`.
@@ -41,7 +41,7 @@ AtomicLong, due to being distributed.
 ** xref:iatomicreference.adoc[IAtomicReference] is the distributed implementation of
 `java.util.concurrent.atomic.AtomicReference`. When you need to deal with a reference
 in a distributed environment, you can use Hazelcast IAtomicReference.
-** xref:flake-id-generator.adoc[FlakeIdGenerator] is used to generate cluster-wide unique identifiers.
+** xref:id-generator.adoc[IdGenerator] is used to generate cluster-wide unique identifiers.
 ** xref:icountdownlatch.adoc[ICountdownLatch] is the distributed implementation of
 `java.util.concurrent.CountDownLatch`. Hazelcast CountDownLatch is a gate keeper for
 concurrent activities. It enables the threads to wait for other threads to complete

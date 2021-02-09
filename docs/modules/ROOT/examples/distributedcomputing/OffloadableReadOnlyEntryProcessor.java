@@ -1,11 +1,12 @@
 import com.hazelcast.core.Offloadable;
 import com.hazelcast.core.ReadOnly;
+import com.hazelcast.map.EntryBackupProcessor;
 import com.hazelcast.map.EntryProcessor;
 
 import java.util.Map;
 
 //tag::oroep[]
-public class OffloadableReadOnlyEntryProcessor implements EntryProcessor<String, Employee, Object>,
+public class OffloadableReadOnlyEntryProcessor implements EntryProcessor<String, Employee>,
         Offloadable, ReadOnly {
 
     @Override
@@ -15,7 +16,7 @@ public class OffloadableReadOnlyEntryProcessor implements EntryProcessor<String,
     }
 
     @Override
-    public EntryProcessor<String, Employee, Object> getBackupProcessor() {
+    public EntryBackupProcessor<String, Employee> getBackupProcessor() {
         // ReadOnly EntryProcessor has to return null, since it's just a read-only operation that will not be
         // executed on the backup
         return null;

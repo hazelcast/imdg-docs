@@ -16,11 +16,6 @@ multicast values.
 
 The following is an example declarative configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -36,30 +31,15 @@ XML::
                     <interface>192.168.1.102</interface>
                 </trusted-interfaces>
             </multicast>
+            <tcp-ip enabled="false">
+            </tcp-ip>
+            <aws enabled="false">
+            </aws>
         </join>
     </network>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  network:
-    join:
-      multicast:
-        enabled: true
-        multicast-group: 224.2.2.3
-        multicast-port: 54327
-        multicast-time-to-live: 32
-        multicast-timeout-seconds: 2
-        trusted-interfaces:
-          - 192.168.1.102
-----
-====
 
 Pay attention to the `multicast-timeout-seconds` element. `multicast-timeout-seconds`
 specifies the time in seconds that a member should wait for a valid multicast

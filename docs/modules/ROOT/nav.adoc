@@ -1,15 +1,14 @@
 * xref:index.adoc[Hazelcast IMDG Reference Manual]
-* xref:getting-started.adoc[]
 
-include::overview:partial$overview-nav.adoc[]
+include::getting-started:partial$getting-started-nav.adoc[]
 
-include::installation:partial$installation-nav.adoc[]
-
-* xref:starting-members-clients.adoc[]
+* xref:hazelcast-overview.adoc[Hazelcast Overview]
 
 include::configuration:partial$configuration-nav.adoc[]
 
 include::clusters:partial$clusters-nav.adoc[]
+
+* xref:rolling-member-upgrades.adoc[Rolling Member Upgrades]
 
 include::data-structures:partial$data-structures-nav.adoc[]
 
@@ -18,8 +17,6 @@ include::events:partial$events-nav.adoc[]
 * xref:hazelcast-jet.adoc[Hazelcast Jet]
 
 include::computing:partial$computing-nav.adoc[]
-
-include::sql:partial$sql-nav.adoc[]
 
 include::query:partial$query-nav.adoc[]
 
@@ -53,7 +50,7 @@ include::osgi:partial$osgi-nav.adoc[]
 
 include::extending-hazelcast:partial$extending-hazelcast-nav.adoc[]
 
-include::plugins:partial$plugins-nav.adoc[]
+* xref:hazelcast-plugins.adoc[Hazelcast Plugins]
 
 include::consistency-and-replication:partial$consistency-nav.adoc[]
 
@@ -63,7 +60,6 @@ include::network-partitioning:partial$network-partitioning-nav.adoc[]
 * xref:migration-guides.adoc[Appendix B: Migration Guides]
 * xref:common-exception-types.adoc[Appendix C: Common Exception Types]
 * xref:licenses.adoc[Appendix D: License Questions]
-* xref:phone-homes.adoc[Appendix E: Phone Homes]
 * xref:faq.adoc[Appendix F: Frequently Asked Questions]
 * xref:glossary.adoc[Glossary]
 

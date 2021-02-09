@@ -21,7 +21,7 @@ The following are the non-partitioned Hazelcast data structures:
 * Set
 * List
 * Ringbuffer
-* FencedLock
+* Lock
 * ISemaphore
 * IAtomicLong
 * IAtomicReference
@@ -91,29 +91,25 @@ Let's load two queues as shown below:
 [source,java]
 ----
 HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
-IQueue q1 = hazelcastInstance.getQueue("q1");
-IQueue q2 = hazelcastInstance.getQueue("q2");
+ISemaphore s1 = hazelcastInstance.getSemaphore("s1");
+ISemaphore s2 = hazelcastInstance.getSemaphore("s2");
 ----
 
-Since these queues have different names, they will be placed into different partitions.
-If you want to put these two into the same partition, you use the `@` symbol as shown below:
+Since these semaphores have different names, they will be placed into different partitions. If you want to put these two into the same partition, you use the `@` symbol as shown below:
 
 [source,java]
 ----
 HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
-IQueue q1 = hazelcastInstance.getQueue("q1@foo");
-IQueue q2 = hazelcastInstance.getQueue("q2@foo");
+ISemaphore s1 = hazelcastInstance.getSemaphore("s1@foo");
+ISemaphore s2 = hazelcastInstance.getSemaphore("s2@foo");
 ----
 
-Now, these two queues will be put into the same partition whose partition key is `foo`.
-Note that you can use the method `getPartitionKey` to learn the partition key of a distributed object.
-It may be useful when you want to create an object in the same partition of an existing object.
-See its usage as shown below:
+Now, these two semaphores will be put into the same partition whose partition key is `foo`. Note that you can use the method `getPartitionKey` to learn the partition key of a distributed object. It may be useful when you want to create an object in the same partition of an existing object. See its usage as shown below:
 
 [source,java]
 ----
-String partitionKey = q1.getPartitionKey();
-IQueue q3 = hazelcastInstance.getQueue("q3@"+partitionKey);
+String partitionKey = s1.getPartitionKey();
+ISemaphore s3 = hazelcastInstance.getSemaphore("s3@"+partitionKey);
 ----
 
 [[common-features-of-all-hazelcast-data-structures]]

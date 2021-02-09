@@ -17,17 +17,14 @@ full descriptions of the TCP/IP discovery configuration elements.
 
 The following is an example declarative configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <network>
         <join>
+            <multicast enabled="false">
+            </multicast>
             <tcp-ip enabled="true">
                 <member>machine1</member>
                 <member>machine2</member>
@@ -40,25 +37,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  network:
-    join:
-      tcp-ip:
-        enabled: true
-        member-list:
-          - machine1
-          - machine2
-          - machine3:5799
-          - 192.168.1.0-7
-          - 192.168.1.21
-----
-====
 
 As shown above, you can provide IP addresses or host names for `member` elements.
 You can also give a range of IP addresses, such as `192.168.1.0-7`.

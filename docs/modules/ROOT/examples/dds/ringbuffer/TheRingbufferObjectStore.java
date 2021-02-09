@@ -1,4 +1,4 @@
-import com.hazelcast.ringbuffer.RingbufferStore;
+import com.hazelcast.core.RingbufferStore;
 //tag::rbstore[]
 public class TheRingbufferObjectStore implements RingbufferStore<Item> {
 

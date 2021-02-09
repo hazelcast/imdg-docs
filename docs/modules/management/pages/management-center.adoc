@@ -17,75 +17,22 @@ Scripts access the system, on which the member runs, with permissions of the run
 Scripting can be allowed or prevented by specifying the `scripting-enabled` attribute of
 the `management-center` element within the Hazelcast member configuration file, as shown below:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <management-center scripting-enabled="false" />
-    ...
-</hazelcast>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  management-center:
-    scripting-enabled: false
-----
-====
-
-Note that the https://jcp.org/en/jsr/detail?id=223[JSR 223^] API is used in Hazelcast IMDG to support scripting.
-
-== Limiting Source Addresses
-
-It's possible to restrict the source IP addresses from which Management Center operations
-are allowed. By default all source connections are allowed.
-
-Defining these source addresses is possible through the `trusted-interfaces`
-configuration element. The wildcard (`*`) and ranges can be used.
-See the following example:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
-----
-<hazelcast>
-    ...
-    <management-center>
-        <trusted-interfaces>
-            <interface>192.168.1.*</interface>
-        </trusted-interfaces>
+    <management-center enabled="true" scripting-enabled="false">
+        http://localhost:8080/hazelcast-mancenter
     </management-center>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  management-center:
-    trusted-interfaces:
-      - 192.168.1.*
-----
-====
+Note that the https://jcp.org/en/jsr/detail?id=223[JSR 223^] API is used in Hazelcast IMDG to support scripting.
 
 == Clustered JMX and REST via Management Center
 
 [blue]*Hazelcast IMDG Enterprise*
 
-See the xref:management-center::index.adoc[Hazelcast Management Center Documentation]
+See the {mc-docs}[Hazelcast Management Center Documentation^]
 for information on Clustered JMX and Clustered REST (via Management Center) features.

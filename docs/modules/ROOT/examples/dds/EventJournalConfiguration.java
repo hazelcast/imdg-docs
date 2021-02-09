@@ -4,20 +4,21 @@ import com.hazelcast.config.EventJournalConfig;
 public class EventJournalConfiguration {
     public static void main(String[] args) throws Exception{
         //tag::ejc[]
-        EventJournalConfig eventJournalMapConfig = new EventJournalConfig()
+        EventJournalConfig myMapJournalConfig = new EventJournalConfig()
+                .setMapName("myMap")
                 .setEnabled(true)
                 .setCapacity(5000)
                 .setTimeToLiveSeconds(20);
 
-        EventJournalConfig eventJournalCacheConfig = new EventJournalConfig()
+        EventJournalConfig myCacheJournalConfig = new EventJournalConfig()
+                .setMapName("myCache")
                 .setEnabled(true)
                 .setCapacity(10000)
                 .setTimeToLiveSeconds(0);
 
         Config config = new Config();
-        config.getMapConfig("myMap").setEventJournalConfig(eventJournalMapConfig);
-        config.getCacheConfig("myCache").setEventJournalConfig(eventJournalCacheConfig);
-        
+        config.addEventJournalConfig(myMapJournalConfig);
+        config.addEventJournalConfig(myCacheJournalConfig);
 //end::ejc[]
     }
 }

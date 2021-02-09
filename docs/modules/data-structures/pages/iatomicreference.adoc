@@ -1,13 +1,9 @@
 = IAtomicReference
 [[iatomicreference]]
 
-NOTE: `IAtomicReference` is a member of CP Subsystem API.
-For detailed information, see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] chapter.
+The `IAtomicLong` is very useful if you need to deal with a long, but in some cases you need to deal with a reference. That is why Hazelcast also supports the `IAtomicReference` which is the distributed version of the `java.util.concurrent.atomic.AtomicReference`.
 
-The `IAtomicLong` is very useful if you need to deal with a long,
-but in some cases you need to deal with a reference. That is why Hazelcast
-also supports the `IAtomicReference` which is the distributed version of
-the `java.util.concurrent.atomic.AtomicReference`.
+NOTE: The original implementation of `IAtomicReference` has been deprecated. To read about the previous implementation, see the https://docs.hazelcast.org/docs/3.11.2/manual/html-single/index.html#iatomicreference[IAtomicReference] section of the Hazelcast IMDG 3.11 Reference Manual. The xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] introduces `IAtomicReference` provided by the *CP Subsystem*.
 
 Here is an IAtomicReference example.
 

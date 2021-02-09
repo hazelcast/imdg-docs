@@ -109,7 +109,6 @@ The following are descriptions for some of them:
 * `like`: Checks if the result of an expression matches some string pattern. %
 (percentage sign) is the placeholder for many characters,  (underscore) is
 placeholder for only one character.
-* `ilike`: A case-insensitive variant of `like`.
 * `greaterThan`: Checks if the result of an expression is greater than a
 certain value.
 * `greaterEqual`: Checks if the result of an expression is greater than or
@@ -125,9 +124,6 @@ collection.
 * `isNot`: Checks if the result of an expression is false.
 * `regex`: Checks if the result of an expression matches some regular
 expression.
-* `alwaysTrue`: The result of an expression always matches.
-* `alwaysFalse`: The result of an expression ever matches.
-
 
 NOTE: See the
 https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/query/Predicates.html[Predicates Javadoc^]
@@ -185,18 +181,14 @@ public Collection<Employee> getWithNameAndAgeSimplified( String name, int age ) 
 
 == Querying with SQL
 
-`Predicates.sql()` takes the regular SQL `where` clause.
+`com.hazelcast.query.SqlPredicate` takes the regular SQL `where` clause.
 Here is an example:
 
 [source,java]
 ----
 IMap<String, Employee> map = hazelcastInstance.getMap( "employee" );
-Set<Employee> employees = map.values( Predicates.sql( "active AND age < 30" ) );
+Set<Employee> employees = map.values( new SqlPredicate( "active AND age < 30" ) );
 ----
-
-NOTE: Hazelcast offers an SQL service that allows to execute SQL queries,
-as opposed to SQL-like predicates in case of `Predicates.sql()`. See the
-xref:sql:distributed-sql.adoc[SQL chapter] for more information.
 
 === Supported SQL Syntax
 
@@ -395,8 +387,8 @@ predicate has a filter
 to retrieve the objects with an "age" greater than or equal to 18.
 * Then a `PagingPredicate` is constructed in which the page size is 5,
 so that there are five objects in each page.
-The first time the `values()` method is called, the first page is fetched.
-* Finally, the subsequent page is fetched by calling the `nextPage()`
+The first time the values are called creates the first page.
+* It gets subsequent pages with the `nextPage()`
 method of `PagingPredicate` and querying the map again with the
 updated `PagingPredicate`.
 
@@ -404,7 +396,7 @@ updated `PagingPredicate`.
 ----
 IMap<Integer, Student> map = hazelcastInstance.getMap( "students" );
 Predicate greaterEqual = Predicates.greaterEqual( "age", 18 );
-PagingPredicate pagingPredicate = Predicates.pagingPredicate( greaterEqual, 5 );
+PagingPredicate pagingPredicate = new PagingPredicate( greaterEqual, 5 );
 // Retrieve the first page
 Collection<Student> values = map.values( pagingPredicate );
 ...
@@ -444,7 +436,7 @@ See the following code snippet:
 [source,java]
 ----
 ...
-Predicate predicate = Predicates.partitionPredicate(partitionKey, Predicates.alwaysTrue());
+Predicate predicate = new PartitionPredicate<String, Integer>(partitionKey, TruePredicate.INSTANCE);
 
 Collection<Integer> values = map.values(predicate);
 Collection<String> keys = map.keySet(predicate);
@@ -497,25 +489,10 @@ IMap `addIndex` method.
 ----
 IMap map = hazelcastInstance.getMap( "employees" );
 // ordered, since we have ranged queries for this field
-map.addIndex(new IndexConfig(IndexType.SORTED, "age"));
+map.addIndex( "age", true );
 // not ordered, because boolean field cannot have range
-map.addIndex(new IndexConfig(IndexType.HASH, "active"));
+map.addIndex( "active", false );
 ----
-
-Note that creating indexes once is sufficient. Subsequent write
-operations on the map are reflected in the index automatically. So,
-although it is safe to call the `addIndex()` method repeatedly, there
-will be a performance penalty due to the redundant index creation.
-
-When you call, for example, `map.addIndex("fieldName", true)`, each
-partition iterates over its records and adds each entry to the index.
-The previously created index entry will be recreated and replaced with the new entry.
-The performance penalty will be proportional to the number of entries. If you
-have maps with a large number of entries, then synchronizing index addition process
-is recommended.
-
-Other than using the `addIndex()` method, you can define your index
-declaratively or programmatically as described in the <<configuring-imap-indexes, Configuring IMap Indexes section>>.
 
 === Indexing Ranged Queries
 
@@ -529,83 +506,41 @@ Otherwise, use `IndexType.HASH`.
 Also, you can define `IMap` indexes in configuration. An example is
 shown below.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="default">
         <indexes>
-            <index type="HASH">
-                <attributes>
-                    <attribute>name</attribute>
-                </attributes>
-            </index>
-            <index>
-                <attributes>
-                    <attribute>age</attribute>
-                </attributes>
-            </index>
+            <index ordered="false">name</index>
+            <index ordered="true">age</index>
         </indexes>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
---
-[source,yaml]
-----
-hazelcast:
-  map:
-    default:
-      indexes:
-        - type: HASH
-            attributes:
-              - "name"
-        - attributes:
-            - "age"
-----
---
-
-Spring::
-+
-[source,xml]
-----
-<hz:map name="default">
-    <hz:indexes>
-        <hz:index type="HASH">
-            <hz:attributes>
-                <hz:attribute>name</hz:attribute>
-            </hz:attributes>
-        </hz:index>
-        <hz:index>
-            <hz:attributes>
-                <hz:attribute>age</hz:attribute>
-            </hz:attributes>
-        </hz:index>
-    </hz:indexes>
-</hz:map>
-----
-====
 
 You can also define `IMap` indexes using programmatic configuration,
 as in the example below.
 
 [source,java]
 ----
-mapConfig.addIndexConfig(new IndexConfig(IndexType.HASH, "name"));
-mapConfig.addIndexConfig(new IndexConfig(IndexType.SORTED, "age"));
+mapConfig.addMapIndexConfig( new MapIndexConfig( "name", false ) );
+mapConfig.addMapIndexConfig( new MapIndexConfig( "age", true ) );
 ----
 
 The following is the Spring declarative configuration for the same
 example.
+
+[source,xml]
+----
+<hz:map name="default">
+    <hz:indexes>
+        <hz:index attribute="name"/>
+        <hz:index attribute="age" ordered="true"/>
+    </hz:indexes>
+</hz:map>
+----
 
 NOTE: Non-primitive types to be indexed should implement *`Comparable`*.
 
@@ -614,26 +549,6 @@ xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High
 indexes, the indexes are automatically stored in the High-Density Memory Store
 as well. This prevents from running into full garbage collections when doing
 a lot of updates to index.
-
-=== Global and Partitioned Indexes
-
-The on-heap indexes are always **global**, i.e., one index covers all ``IMap``s entries stored on the partitions
-owned by a cluster member. Such indexes are beneficial for lookup and range queries because only one lookup
-operation is needed to execute a query. A drawback of global indexes is a potentially high contention on the
-index concurrent data structure that might cause performance degradation.
-
-xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[High-Density Memory Store] supports **partitioned** indexes. Each partition
-owned by a cluster member has its own index. All operations on the partitioned index are performed on the
-partitioned thread, thus eliminating the contention issue of the global indexes. However, lookup and range
-queries have to perform lookup operations on every partition and combine the results. Normally, these partition and
-combine executions yield poorer performance results compared to the global indexes.
-
-Global concurrent indexes (based on our own off-heap B+ Tree implementation)
-bring all the benefits of global indexes to `IMap` backed by High-Density Memory Store.
-
-The global High-Density Memory Store indexes are enabled by default and controlled
-by the `hazelcast.hd.global.index.enabled` property. You can disable these indexes by setting
-this property to `false.`
 
 === Composite Indexes
 
@@ -660,43 +575,18 @@ operation which can be performed very efficiently.
 The unordered composite index on the `name` and `age` attributes may be
 configured for a map as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="persons">
         <indexes>
-            <index type="HASH">
-                <attributes>
-                    <attribute>name</attribute>
-                    <attribute>age</attribute>
-                </attributes>
-            </index>
+            <index ordered="false">name, age</index>
         </indexes>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    default:
-      - type: HASH
-          attributes:
-            - "name"
-            - "age"
-----
-====
 
 The attributes indexed by the _unordered_ composite indexes can't be
 matched partially: the `name = 'Alice'` query can't utilize the composite
@@ -716,45 +606,18 @@ into a single index query operation. For instance, the `name = 'Alice' and
 age > 33` and `name = 'Bob' and age = 33 and balance > 0.0` queries are good
 candidates to be covered by an ordered composite index configured as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="persons">
         <indexes>
-            <index>
-                <attributes>
-                    <attribute>name</attribute>
-                    <attribute>age</attribute>
-                    <attribute>balance</attribute>
-                </attributes>
-            </index>
+            <index ordered="true">name, age, balance</index>
         </indexes>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    persons:
-      indexes:
-        - attributes:
-          - "name"
-          - "age"
-          - "balance"
-----
-====
 
 Unlike the _unordered_ composite indexes, partial attribute prefixes may be
 matched for the _ordered_ composite indexes. In general, a valid non-empty
@@ -820,42 +683,18 @@ Memory Stores (HD).
 In the simplest form, bitmap index for an `IMap` entry attribute can be
 declaratively configured as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="persons">
         <indexes>
-            <index type="BITMAP">
-                <attributes>
-                    <attribute>age</attribute>
-                </attributes>
-            </index>
+            <index>BITMAP(age)</index>
         </indexes>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    persons:
-      indexes:
-        - type: BITMAP
-          attributes:
-            - "age"
-----
-====
 
 Internally, a unique non-negative `long` ID is assigned to every
 indexed `IMap` entry based on the entry key. That unique ID is
@@ -869,38 +708,18 @@ attribute, the attribute values can be used as unique `long` IDs
 directly without any additional transformations. That can be configured
 as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
-<index type="BITMAP">
-    <attributes>
-        <attribute>age</attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key>uniqueId</unique-key>
-        <unique-key-transformation>RAW</unique-key-transformation>
-    </bitmap-index-options>
-</index>
+<hazelcast>
+    ...
+    <map name="persons">
+        <indexes>
+            <index>BITMAP(age, uniqueId, RAW)</index>
+        </indexes>
+    </map>
+    ...
+</hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - "age"
-          bitmap-index-options:
-            unique-key: uniqueId
-            unique-key-transformation: RAW
-----
-====
 
 The index definition above instructs Hazelcast to create a bitmap index
 on the `age` attribute, extract the unique key values from `uniqueId` attribute
@@ -914,38 +733,18 @@ This causes increased memory usage in bitmap indexes since the best case
 scenario for them is sequential contiguous IDs. That can be countered by
 applying the renumbering technique:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
-<index type="BITMAP">
-    <attributes>
-        <attribute>age</attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key>uniqueId</unique-key>
-        <unique-key-transformation>LONG</unique-key-transformation>
-    </bitmap-index-options>
-</index>
+<hazelcast>
+    ...
+    <map name="persons">
+        <indexes>
+            <index>BITMAP(age, uniqueId, LONG)</index>
+        </indexes>
+    </map>
+    ...
+</hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - "age"
-          bitmap-index-options:
-            unique-key: uniqueId
-            unique-key-transformation: LONG
-----
-====
 
 The index definition above instructs the bitmap index to extract the unique
 keys from `uniqueId` attribute, convert every extracted non-negative
@@ -955,113 +754,24 @@ conversion is applied to the extracted values, if necessary.
 
 This long-to-long mapping is performed more efficiently than the general
 object-to-long mapping done for the simple index definitions. Basically,
-the following simple bitmap index definition:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
-----
-<index type="BITMAP">
-    <attributes>
-        <attribute>age</attribute>
-    </attributes>
-</index>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - "age"
-----
-====
-
-is equivalent to the following full-form definition:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
-----
-<index type="BITMAP">
-    <attributes>
-        <attribute>age</attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key>__key</unique-key>
-        <unique-key-transformation>OBJECT</unique-key-transformation>
-    </bitmap-index-options>
-</index>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - "age"
-          bitmap-index-options:
-            unique-key: __key
-            unique-key-transformation: OBJECT
-----
-====
-
-Which indexes `age` attribute, uses `IMap` entry keys (`__key`) interpreted
+a simple bitmap index definition like `BITMAP(age)` is equivalent to the
+following full-form definition: `BITMAP(age, __key, OBJECT)`, which
+indexes `age` attribute, uses `IMap` entry keys (`__key`) interpreted
 as Java objects (`OBJECT`) to assign internal unique `long` IDs.
 
 The full-form definition syntax is defined as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
+[source,plain]
 ----
-<index type="BITMAP">
-    <attributes>
-        <attribute><attr></attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key><key></unique-key>
-        <unique-key-transformation><transformation></unique-key-transformation>
-    </bitmap-index-options>
-</index>
+BITMAP(<attr>, <key>, <transform>)
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - <attribute>
-          bitmap-index-options:
-            unique-key: <key>
-            unique-key-transformation: <transformation>
-----
-====
 
 The following are the parameter descriptions:
 
 * `<attr>`: Specifies the attribute index.
 * `<key>`: Specifies the attribute to use as a unique key source
 for internal unique `long` ID assignment.
-* `<transformation>`: Specifies the transformation to be applied
+* `<transform>`: Specifies the transformation to be applied
 to unique keys to generate unique `long` IDs from them. The following
 transformations are supported:
 ** `OBJECT`: Object-to-long transformation. Each extracted unique
@@ -1086,93 +796,23 @@ and it has the best performance in terms of time and memory.
 The regular dotted attribute path syntax is supported for `<attr>` and
 `<key>`:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
+[source,plain]
 ----
-<index type="BITMAP">
-    <attributes>
-        <attribute>name.first</attribute>
-    </attributes>
-</index>
-<index type="BITMAP">
-    <attributes>
-        <attribute>name.first</attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key>__key.id</unique-key>
-    </bitmap-index-options>
-</index>
-<index type="BITMAP">
-    <attributes>
-        <attribute>name.first</attribute>
-    </attributes>
-    <bitmap-index-options>
-        <unique-key>id.external</unique-key>
-    </bitmap-index-options>
-</index>
+BITMAP(name.first)
+BITMAP(name.first, __key, RAW)
+BITMAP(name.first, __key.id, RAW)
+BITMAP(name.first, id.external, RAW)
+...
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - name.first
-        - type: BITMAP
-          attributes:
-            - name.first
-          bitmap-index-options:
-            unique-key: __key.id
-        - type: BITMAP
-          attributes:
-            - name.first
-          bitmap-index-options:
-            unique-key: id.external
-----
-====
 
 Collection and array indexing is also possible using the regular syntax:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
+[source,plain]
 ----
-<index type="BITMAP">
-    <attributes>
-        <attribute>habits[any]</attribute>
-    </attributes>
-</index>
-<index type="BITMAP">
-    <attributes>
-        <attribute>habits[0]</attribute>
-    </attributes>
-</index>
+BITMAP(habits[any])
+BITMAP(habits[0], __key, RAW)
+...
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-      indexes:
-        - type: BITMAP
-          attributes:
-            - habits[any]
-        - type: BITMAP
-          attributes:
-            - habits[0]
-----
-====
 
 See xref:querying-collections-and-arrays.adoc#indexing-in-collections-and-arrays[Indexing in Collections and Arrays section]
 for more details.
@@ -1221,42 +861,6 @@ in the above paragraphs, can be set:
 * `COPY_ON_WRITE`
 * `NEVER`
 
-The following is an example configuration snippet:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
-----
-<hazelcast>
-    <cluster-name>dev</cluster-name>
-    ...
-    <properties>
-        <property name="hazelcast.index.copy.behavior">NEVER</property>
-    </properties>
-    ...
-</hazelcast>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  cluster-name: dev
-  ...
-  properties:
-    hazelcast.index.copy.behavior: NEVER
-  ...
-----
-====
-
-See also the xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties section]
-for reference.
-
 NOTE: Usage of this system property is supported for BINARY and OBJECT
 in-memory formats. Only in Hazelcast 3.8.7, it is also supported for
 NATIVE in-memory format.
@@ -1275,16 +879,16 @@ index or creating a predicate. A basic usage is shown below.
 
 [source,java]
 ----
-map.addIndex(new IndexConfig(IndexType.SORTED, "this"));
+map.addIndex("this", true);
 Predicate<Integer, Integer> lessEqual = Predicates.between("this", 12, 20);
 ----
 
-Another basic example using `SQL` predicate is shown below.
+Another basic example using `SqlPredicate` is shown below.
 
 [source,java]
 ----
-Predicates.sql("this = 'jones'")
-Predicates.sql("this.age > 33")
+new SqlPredicate("this = 'jones'")
+new SqlPredicate("this.age > 33")
 ----
 
 The special attribute `this` acts on the value of a map entry. Typically,

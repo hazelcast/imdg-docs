@@ -9,18 +9,12 @@ use multicast discovery.
 To configure your cluster to have the multicast discovery plugin, follow
 these steps:
 
-* Set the `enabled` attribute of the `hazelcast.discovery.enabled`
-property to `true`.
-* Add multicast discovery strategy configuration to your XML file,
-i.e., `<discovery-strategies>` element.
+* Disable the multicast and TCP/IP join mechanisms. To do this, set the `enabled` attributes of the `multicast` and `tcp-ip` elements to `false` in your `hazelcast.xml` configuration file
+* Set the `enabled` attribute of the `hazelcast.discovery.enabled` property to `true`.
+* Add multicast discovery strategy configuration to your XML file, i.e., `<discovery-strategies>` element.
 
 The following is an example declarative configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -30,6 +24,10 @@ XML::
     </properties>
     <network>
         <join>
+            <multicast enabled="false">
+            </multicast>
+            <tcp-ip enabled="false">
+            </tcp-ip>
             <discovery-strategies>
                 <discovery-strategy class="com.hazelcast.spi.discovery.multicast.MulticastDiscoveryStrategy" enabled="true">
                     <properties>
@@ -43,26 +41,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  properties:
-    hazelcast.discovery.enabled: true
-  network:
-    join:
-      discovery-strategies:
-        discovery-strategy:
-          enabled: true
-          class: com.hazelcast.spi.discovery.multicast.MulticastDiscoveryStrategy
-          properties:
-            group: 224.2.2.3
-            port: 54327
-----
-====
 
 The following are the multicast discovery plugin configuration
 properties with their descriptions:

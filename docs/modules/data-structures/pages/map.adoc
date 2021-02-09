@@ -317,11 +317,6 @@ size and selected policy.
 
 The following is an example declarative configuration for map eviction.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -329,28 +324,12 @@ XML::
     <map name="default">
         <time-to-live-seconds>0</time-to-live-seconds>
         <max-idle-seconds>0</max-idle-seconds>
-        <eviction eviction-policy="LRU" max-size-policy="PER_NODE" size="5000"/>
+        <eviction-policy>LRU</eviction-policy>
+        <max-size policy="PER_NODE">5000</max-size>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    default:
-      time-to-live-seconds: 0
-      max-idle-seconds: 0
-      eviction:
-        eviction-policy: LRU
-        max-size-policy: PER_NODE
-        size: 5000
-----
-====
 
 The following are the configuration element descriptions:
 
@@ -362,8 +341,7 @@ evicted automatically. An individual entry may have its own lifetime limit by
 using one of the methods accepting a TTL; see <<evicting-specific-entries, Evicting Specific Entries section>>.
 If there is no TTL value provided for the individual entry, it inherits the value
 set for this element. Valid values are integers between 0 and `Integer.MAX VALUE`.
-Its default value is 0, which means infinite (no expiration and eviction). If it is not 0,
-entries are evicted regardless of the set `eviction-policy` described below.
+Its default value is 0, which means infinite (no expiration and eviction). If it is not 0, entries are evicted regardless of the set `eviction-policy` described below.
 * `max-idle-seconds`: Maximum time in seconds for each entry to stay idle in
 the map. It limits the lifetime of the entries relative to the time of the
 last read or write access performed on them. The entries whose idle period
@@ -372,154 +350,95 @@ if no `get`, `put`, `EntryProcessor.process` or `containsKey` is called on
 it. Valid values are integers between 0 and `Integer.MAX VALUE`.
 Its default value is 0, which means infinite.
 +
-NOTE: Setting this property to 1 second expires the entry after 1 second, regardless of
+NOTE: Setting this property to 1 second expires the entry after 1 second, regardless of 
 the operations done on that entry in-between, due to the loss of millisecond
 resolution on the entry timestamps. Assume that you create a record at time = 1 second
 (1000 milliseconds) and access it at wall clock time 1100 milliseconds and
 then again at 1400 milliseconds. In this case, the entry is deemed as not touched.
 So, setting this property to 1 second is not supported.
 +
-NOTE: Both `time-to-live-seconds` and `max-idle-seconds` may be used simultaneously on
-the map entries. In that case, the entry is considered expired if at least one of the
-policies marks it as expired.
+NOTE: Both `time-to-live-seconds` and `max-idle-seconds` may be used simultaneously on the map entries. In that case, the entry is considered expired if at least one of the policies marks it as expired.
 +
-* `eviction`: By default map has no eviction configured.
-To make it work you have to configure it using the following attributes of
-this element:
-** `eviction-policy`: Eviction policy to be applied when the size of map grows larger than
-the value specified by the `size` element described below.  Valid values are:
-*** NONE: Default policy. If set, no items are evicted and the property `size` described
-below is ignored. You still can combine it with `time-to-live-seconds` and `max-idle-seconds`.
-*** LRU: Least Recently Used.
-*** LFU: Least Frequently Used.
+* `eviction-policy`: Eviction policy to be applied when the size of map grows larger than the value specified by the `max-size` element described below.  Valid values are:
+** NONE: Default policy. If set, no items are evicted and the property `max-size` described below is ignored. You still can combine it with `time-to-live-seconds` and `max-idle-seconds`.
+** LRU: Least Recently Used.
+** LFU: Least Frequently Used.
 +
-Apart from the above values, you can also develop and use your own eviction policy.
-See the <<custom-eviction-policy, Custom Eviction Policy section>>.
+Apart from the above values, you can also develop and use your own eviction policy. See the <<custom-eviction-policy, Custom Eviction Policy section>>.
 +
-** `size`: Maximum size of the map. When maximum size is reached, the map is evicted
-based on the policy defined. Valid values are integers between 0 and `Integer.MAX VALUE`.
-Its default value is 0, which means infinite. If you want `size` to work, set the
-`eviction-policy` property to a value other than `NONE`. Its attributes are described below.
-** `max-size-policy`: Maximum size policy for eviction of the map. Available values are as follows:
-*** `PER_NODE`: Maximum number of map entries in each cluster member. This is the default policy.
-*** `PER_PARTITION`: Maximum number of map entries within each partition. Storage size depends
-on the partition count in a cluster member. This attribute should not be used often. For instance,
-avoid using this attribute with a small cluster. If the cluster is small, it hosts more partitions,
-and therefore map entries, than that of a larger cluster. Thus, for a small cluster, eviction of
-the entries decreases performance (the number of entries is large).
-*** `USED_HEAP_SIZE`: Maximum used heap size in megabytes per map for each Hazelcast instance.
-Please note that this policy does not work when <<setting-in-memory-format, in-memory format>>
-is set to `OBJECT`, since the memory footprint cannot be determined when data is put as `OBJECT`.
-** `USED_HEAP_PERCENTAGE`: Maximum used heap size percentage per map for each Hazelcast instance.
-If, for example, a JVM is configured to have 1000 MB and this value is 10, then the map entries
-will be evicted when used heap size exceeds 100 MB. Please note that this policy does not work
-when <<setting-in-memory-format, in-memory format>> is set to `OBJECT`, since the memory footprint
-cannot be determined when data is put as `OBJECT`.
-*** `FREE_HEAP_SIZE`: Minimum free heap size in megabytes for each JVM.
-*** `FREE_HEAP_PERCENTAGE`: Minimum free heap size percentage for each JVM. If, for example, a JVM
-is configured to have 1000 MB and this value is 10, then the map entries will be evicted when
-free heap size is below 100 MB.
-*** `USED_NATIVE_MEMORY_SIZE`: ([navy]*Hazelcast IMDG Pro and Enterprise*) Maximum used native memory
-size in megabytes per map for each Hazelcast instance.
-*** `USED_NATIVE_MEMORY_PERCENTAGE`: ([navy]*Hazelcast IMDG Pro and Enterprise*) Maximum used native
-memory size percentage per map for each Hazelcast instance.
-*** `FREE_NATIVE_MEMORY_SIZE`: ([navy]*Hazelcast IMDG Pro and Enterprise*) Minimum free native memory
-size in megabytes for each Hazelcast instance.
-*** `FREE_NATIVE_MEMORY_PERCENTAGE`: ([navy]*Hazelcast IMDG Pro and Enterprise*) Minimum free native
-memory size percentage for each Hazelcast instance.`
-
-==== Fine-Tuning Map Eviction
-
-Besides the above configuration elements and attributes you can fine-tune
-the eviction related to the entry counts to be evicted using the following
-Hazelcast properties:
-
-* `hazelcast.map.eviction.batch.size`: Specifies the maximum number of map entries
-that are evicted during a single eviction cycle. Its default value is 1, meaning
-at most 1 entry is evicted, which is typically fine.
-However, when you insert values during an eviction cycle, each iteration doubles the entry size.
-In this situation more than just a single entry should be evicted.
-* `hazelcast.map.eviction.sample.count`: Whenever a map eviction is required, a new sampling starts by the built-in sampler.
-The sampling algorithm selects a random sample from the underlying data storage and
-it results in a set of map entries. This property specifies the entry count of this sample. Its default value is 15.
-
-See also the xref:jcache:icache.adoc#eviction-algorithm[Eviction Algorithm section] to learn more details on evicting entries.
+* `max-size`: Maximum size of the map. When maximum size is reached, the map is evicted based on the policy defined. Valid values are integers between 0 and `Integer.MAX VALUE`. Its default value is 0, which means infinite. If you want `max-size` to work, set the `eviction-policy` property to a value other than NONE. Its attributes are described below.
+** `PER_NODE`: Maximum number of map entries in each cluster member. This is the default policy.
++
+`<max-size policy="PER_NODE">5000</max-size>`
++
+** `PER_PARTITION`: Maximum number of map entries within each partition. Storage size depends on the partition count in a cluster member. This attribute should not be used often. For instance, avoid using this attribute with a small cluster. If the cluster is small, it hosts more partitions, and therefore map entries, than that of a larger cluster. Thus, for a small cluster, eviction of the entries decreases performance (the number of entries is large).
++
+`<max-size policy="PER_PARTITION">27100</max-size>`
++
+** `USED_HEAP_SIZE`: Maximum used heap size in megabytes per map for each Hazelcast instance. Please note that this policy does not work when <<setting-in-memory-format, in-memory format>> is set to `OBJECT`, since the memory footprint cannot be determined when data is put as `OBJECT`.
++
+`<max-size policy="USED_HEAP_SIZE">4096</max-size>`
++
+** `USED_HEAP_PERCENTAGE`: Maximum used heap size percentage per map for each Hazelcast instance. If, for example, a JVM is configured to have 1000 MB and this value is 10, then the map entries will be evicted when used heap size exceeds 100 MB. Please note that this policy does not work when <<setting-in-memory-format, in-memory format>> is set to `OBJECT`, since the memory footprint cannot be determined when data is put as `OBJECT`.
++
+`<max-size policy="USED_HEAP_PERCENTAGE">10</max-size>`
++
+** `FREE_HEAP_SIZE`: Minimum free heap size in megabytes for each JVM.
++
+`<max-size policy="FREE_HEAP_SIZE">512</max-size>`
++
+** `FREE_HEAP_PERCENTAGE`: Minimum free heap size percentage for each JVM. If, for example, a JVM is configured to have 1000 MB and this value is 10, then the map entries will be evicted when free heap size is below 100 MB.
++
+`<max-size policy="FREE_HEAP_PERCENTAGE">10</max-size>`
++
+** `USED_NATIVE_MEMORY_SIZE`: ([navy]*Hazelcast IMDG Enterprise HD*) Maximum used native memory size in megabytes per map for each Hazelcast instance.
++
+`<max-size policy="USED_NATIVE_MEMORY_SIZE">1024</max-size>`
++
+** `USED_NATIVE_MEMORY_PERCENTAGE`: ([navy]*Hazelcast IMDG Enterprise HD*) Maximum used native memory size percentage per map for each Hazelcast instance.
++
+`<max-size policy="USED_NATIVE_MEMORY_PERCENTAGE">65</max-size>`
++
+** `FREE_NATIVE_MEMORY_SIZE`: ([navy]*Hazelcast IMDG Enterprise HD*) Minimum free native memory size in megabytes for each Hazelcast instance.
++
+`<max-size policy="FREE_NATIVE_MEMORY_SIZE">256</max-size>`
++
+** `FREE_NATIVE_MEMORY_PERCENTAGE`: ([navy]*Hazelcast IMDG Enterprise HD*) Minimum free native memory size percentage for each Hazelcast instance.
++
+`<max-size policy="FREE_NATIVE_MEMORY_PERCENTAGE">5</max-size>
 
 [[example-eviction-configurations]]
 ==== Example Eviction Configurations
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="documents">
-        <eviction eviction-policy="LRU" max-size-policy="PER_NODE" size="10000"/>
+        <max-size policy="PER_NODE">10000</max-size>
+        <eviction-policy>LRU</eviction-policy>
         <max-idle-seconds>60</max-idle-seconds>
     </map>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    documents:
-      eviction:
-        eviction-policy: LRU
-        max-size-policy: PER_NODE
-        size: 10000
-      max-idle-seconds: 60
-----
-====
+In the above example, `documents` map starts to evict its entries from a member when the map size exceeds 10000 in that member. Then the entries least recently used will be evicted. The entries not used for more than 60 seconds will be evicted as well.
 
-In the above example, `documents` map starts to evict its entries from a member when the
-map size exceeds 10000 in that member. Then the entries least recently used will be evicted.
-The entries not used for more than 60 seconds will be evicted as well.
+And the following is an example eviction configuration for a map having `NATIVE` as the in-memory format:
 
-And the following is an example eviction configuration for a map having `NATIVE` as the
-in-memory format:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <map name="nativeMap">
+    <map name="nativeMap*">
         <in-memory-format>NATIVE</in-memory-format>
-        <eviction max-size-policy="USED_NATIVE_MEMORY_PERCENTAGE" eviction-policy="LFU" size="99"/>
+        <eviction-policy>LFU</eviction-policy>
+        <max-size policy="USED_NATIVE_MEMORY_PERCENTAGE">99</max-size>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    nativeMap:
-      in-memory-format: NATIVE
-      eviction:
-        eviction-policy: LFU
-        max-size-policy: USED_NATIVE_MEMORY_PERCENTAGE
-        size: 99
-----
-====
 
 [[evicting-specific-entries]]
 === Evicting Specific Entries
@@ -602,58 +521,36 @@ multiple entries, which can even be owned by another caches/maps.
 [[custom-eviction-policy]]
 === Custom Eviction Policy
 
-Apart from the policies such as LRU and LFU, which Hazelcast provides out-of-the-box,
-you can develop and use your own eviction policy.
+Apart from the policies such as LRU and LFU, which Hazelcast provides out-of-the-box, you can develop and use your own eviction policy.
 
-To achieve this, you need to provide an implementation of `MapEvictionPolicyComparator` as in
-the following `OddEvictor` example:
+To achieve this, you need to provide an implementation of `MapEvictionPolicy` as in the following `OddEvictor` example:
 
 [source,java]
 ----
-include::{javasource}/dds/map/MapCustomEvictionPolicyComparator.java[tag=mcep]
+include::{javasource}/dds/map/MapCustomEvictionPolicy.java[tag=mcep]
 ----
 
-Then you can enable your policy by setting it via the method
-`MapConfig.getEvictionConfig().setComparatorClassName()`
-programmatically or via XML declaratively. Following is the example
-declarative configuration for the eviction policy `OddEvictor` implemented above:
+Then you can enable your policy by setting it via the method `MapConfig.setMapEvictionPolicy()`
+programmatically or via XML declaratively. Following is the example declarative configuration for the eviction policy `OddEvictor` implemented above:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="test">
         ...
-        <eviction comparator-class-name="com.mycompany.OddEvictor"/>
+        <map-eviction-policy-class-name>com.package.OddEvictor</map-eviction-policy-class-name>
         ...
     </map>
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    test:
-      eviction:
-        comparator-class-name: com.mycompany.OddEvictor
-----
-====
 
 If you Hazelcast with Spring, you can enable your policy as shown below.
 
 [source,xml]
 ----
 <hz:map name="test">
-    <hz:map-eviction comparator-class-name="com.package.OddEvictor"/>
+    <hz:map-eviction-policy class-name="com.package.OddEvictor"/>
 </hz:map>
 ----
 
@@ -751,10 +648,6 @@ hazelcast:
 Keep in mind that you should have already enabled the High-Density Memory Store
 usage for your cluster. See the xref:storage:high-density-memory.adoc#configuring-high-density-memory-store[Configuring High-Density Memory Store section].
 
-You can also benefit from the persistent memory technologies such as
-Intel(R) Optane(TM) DC to be used by the High-Density Memory Store. See the
-xref:storage:high-density-memory.adoc#using-persistent-memory[Using Persistent Memory section].
-
 [[required-configuration-changes-when-using-native]]
 === Required Configuration Changes When Using NATIVE
 
@@ -762,40 +655,56 @@ Note that the eviction mechanism is different for `NATIVE` in-memory format.
 The new eviction algorithm for map with High-Density Memory Store is similar
 to that of JCache with High-Density Memory Store and is described xref:jcache:icache.adoc#eviction-algorithm[here].
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+* Eviction percentage has no effect.
++
 [source,xml]
 ----
 <hazelcast>
     ...
-    <map name="nativeMap">
+    <map name="nativeMap*">
         <in-memory-format>NATIVE</in-memory-format>
         <eviction-percentage>25</eviction-percentage> <--! NO IMPACT with NATIVE -->
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
 +
-[source,yaml]
+* These IMap eviction policies for `max-size` cannot be used: `FREE_HEAP_PERCENTAGE`, `FREE_HEAP_SIZE`, `USED_HEAP_PERCENTAGE`, `USED_HEAP_SIZE`.
+* Near Cache eviction configuration is also different for `NATIVE` in-memory format. For a Near Cache configuration with in-memory format set to `BINARY`:
++
+[source,xml]
 ----
-hazelcast:
-  map:
-    nativeMap:
-      in-memory-format: NATIVE
-      eviction-percentage: 25 # NO IMPACT with NATIVE
+<hazelcast>
+    ...
+    <map name="nativeMap*">
+        <near-cache>
+            <in-memory-format>BINARY</in-memory-format>
+            <max-size>10000</max-size> <--! NO IMPACT with NATIVE -->
+            <eviction-policy>LFU</eviction-policy> <--! NO IMPACT with NATIVE -->
+        </near-cache>
+    </map>
+    ...
+</hazelcast>
 ----
-====
++
+the equivalent configuration for `NATIVE` in-memory format would be similar to the following:
++
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="nativeMap*">
+        <near-cache>
+            <in-memory-format>NATIVE</in-memory-format>
+            <eviction size="10000" eviction-policy="LFU" max-size-policy="USED_NATIVE_MEMORY_SIZE"/>   <--! Correct configuration with NATIVE -->
+        </near-cache>
+    </map>
+    ...
+</hazelcast>
+----
++
+* Near Cache eviction policy `ENTRY_COUNT` cannot be used for `max-size-policy`.
 
-* These IMap eviction policies for `size` cannot be used: `FREE_HEAP_PERCENTAGE`,
-`FREE_HEAP_SIZE`, `USED_HEAP_PERCENTAGE`, `USED_HEAP_SIZE`.
-* Near Cache eviction policy `ENTRY_COUNT` cannot be used for
-`max-size-policy`.
 
 NOTE: See the xref:storage:high-density-memory.adoc[High-Density Memory Store section]
 for more information.
@@ -1545,67 +1454,39 @@ strategy with the map `replace` method.
 [[lock-split-brain-protection-with-pessimistic-locking]]
 === Lock Split-Brain Protection with Pessimistic Locking
 
-Locks can be configured to check the number of currently present members
-before applying a locking operation. If the check fails, the lock operation
-fails with a `SplitBrainProtectionException` (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
-As pessimistic locking uses lock operations internally, it also uses the configured
-lock split-brain protection. This means that you can configure a lock split-brain protection with the same name or a
-pattern that matches the map name. Note that the split-brain protection for IMap locking actions can be
-different from the split-brain protection for other IMap actions.
+Locks can be configured to check the number of currently present members before applying a locking operation. If the check fails, the lock operation fails with a `QuorumException` (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
+As pessimistic locking uses lock operations internally, it also uses the configured lock quorum. This means that you can configure a lock quorum with the same name or a pattern that matches the map name. Note that the quorum for IMap locking actions can be different from the quorum for other IMap actions.
 
-The following actions check for lock split-brain protection before being applied:
+The following actions check for lock quorum before being applied:
 
 * `IMap.lock(K)` and `IMap.lock(K, long, java.util.concurrent.TimeUnit)`
 * `IMap.isLocked()`
-* `IMap.tryLock(K)`, `IMap.tryLock(K, long, java.util.concurrent.TimeUnit)` and
-`IMap.tryLock(K, long, java.util.concurrent.TimeUnit, long, java.util.concurrent.TimeUnit)`
+* `IMap.tryLock(K)`, `IMap.tryLock(K, long, java.util.concurrent.TimeUnit)` and `IMap.tryLock(K, long, java.util.concurrent.TimeUnit, long, java.util.concurrent.TimeUnit)`
 * `IMap.unlock()`
 * `IMap.forceUnlock()`
 * `MultiMap.lock(K)` and `MultiMap.lock(K, long, java.util.concurrent.TimeUnit)`
 * `MultiMap.isLocked()`
-* `MultiMap.tryLock(K)`, `MultiMap.tryLock(K, long, java.util.concurrent.TimeUnit)`
-and `MultiMap.tryLock(K, long, java.util.concurrent.TimeUnit, long, java.util.concurrent.TimeUnit)`
+* `MultiMap.tryLock(K)`, `MultiMap.tryLock(K, long, java.util.concurrent.TimeUnit)` and `MultiMap.tryLock(K, long, java.util.concurrent.TimeUnit, long, java.util.concurrent.TimeUnit)`
 * `MultiMap.unlock()`
 * `MultiMap.forceUnlock()`
 
 An example of declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="myMap">
-        <split-brain-protection-ref>map-actions-split-brain-protection</split-brain-protection-ref>
+        <quorum-ref>map-actions-quorum</quorum-ref>
     </map>
     <lock name="myMap">
-        <split-brain-protection-ref>map-lock-actions-split-brain-protection</split-brain-protection-ref>
+        <quorum-ref>map-lock-actions-quorum</quorum-ref>
     </lock>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    myMap:
-      split-brain-protection-ref: map-actions-split-brain-protection
-  lock:
-    myMap:
-      split-brain-protection-ref: map-lock-actions-split-brain-protection
-----
-====
-
-Here the configured map uses the `map-lock-actions-split-brain-protection` for
-map lock actions and the `map-actions-split-brain-protection` for other map actions.
+Here the configured map uses the `map-lock-actions-quorum` quorum for map lock actions and the `map-actions-quorum` quorum for other map actions.
 
 [[accessing-entry-statistics]]
 == Accessing Map and Entry Statistics

@@ -118,7 +118,7 @@ for (Handler h : rootLogger.getHandlers()) {
 
 == Example Log4j2 Configuration
 
-Specify the logging type as Log4j2 and, if desired, a separate logging configuration file as shown below.
+Specify the logging type as Log4j2 and a separate logging configuration file as shown below.
 
 Using JVM arguments:
 
@@ -140,6 +140,7 @@ XML::
     ...
     <properties>
         <property name="hazelcast.logging.type">log4j2</property>
+        <property name="log4j2.configuration">/path/to/properties/log4j2.properties</property>
     </properties>
     ...
 </hazelcast>
@@ -153,11 +154,9 @@ YAML::
 hazelcast:
   properties:
     hazelcast.logging.type: log4j2
+    log4j2.configuration: /path/to/properties/log4j2.properties
 ----
 ====
-
-NOTE: When using the declarative configuration approach, the default `log4j2.properties`
-file should be on your classpath.
 
 Following is an example `log4j2.properties` file:
 

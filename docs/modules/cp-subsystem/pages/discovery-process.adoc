@@ -1,4 +1,4 @@
-= CP Discovery Process
+= CP Subsystem Process
 
 CP Subsystem runs a discovery process on cluster startup. When CP Subsystem is
 enabled by setting a positive value to

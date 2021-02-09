@@ -1,24 +1,13 @@
 = Advanced Network Configuration
 
-With the default configuration, Hazelcast members use a single server socket for all kinds
-of connections: cluster members, Hazelcast clients implementing the Open Binary Client
-Protocol and HTTP protocol clients connect to a single server socket that handles all the protocols.
+Up to and including Hazelcast 3.11, Hazelcast members use a single server socket for all kinds of connections: cluster members, Hazelcast clients implementing the Open Binary Client Protocol and HTTP protocol clients connect to a single server socket that handles all the protocols.
 
-You can also configure the Hazelcast members with
-separate server sockets using a different network configuration for different protocols.
-This configuration scheme allows more flexibility when deploying Hazelcast as described
-in the following cases:
+Starting with Hazelcast 3.12, it is possible to configure the Hazelcast members with separate server sockets using a different network configuration for different protocols. This configuration scheme allows more flexibility when deploying Hazelcast as described in the following cases:
 
-* For security, it is possible to bind the member protocol server socket on a protected
-internal network interface, while the client connections can be established on another
-network interface accessible by the Hazelcast clients.
-* Different kinds of network connections can be established with different socket options.
-For example varying send/receive window size to optimize the network usage, TLS for
-connections over WAN while member-to-member connections may remain unencrypted, etc.
+* For security, it is possible to bind the member protocol server socket on a protected internal network interface, while the client connections can be established on another network interface accessible by the Hazelcast clients.
+* Different kinds of network connections can be established with different socket options. For example varying send/receive window size to optimize the network usage, TLS for connections over WAN while member-to-member connections may remain unencrypted, etc.
 
-In the following example we introduce the advanced network configuration for a
-member to listen for member-to-member connections on the default port `5701` while
-listening for client connections on the port `9090`:
+In the following example we introduce the advanced network configuration for a member to listen for member-to-member connections on the default port `5701` while listening for client connections on the port `9090`:
 
 [source,java]
 ----
@@ -34,11 +23,6 @@ indicating that the member listens for the specified protocols on the respective
 
 The following is the equivalent declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -54,23 +38,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  advanced-network:
-    enabled: true
-    member-server-socket-endpoint-config:
-      port:
-        - 5701
-    client-server-socket-endpoint-config:
-      port:
-        - 9090
-----
-====
 
 == Setting Up Cluster Members for Advanced Network Configuration
 

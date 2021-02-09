@@ -11,6 +11,7 @@ which are listed below:
 * xref:nodejs.adoc[Node.js]
 * xref:go.adoc[Go]
 * xref:python.adoc[Python]
+* xref:scala[Scala]
 
 **Feature Comparison for Hazelcast Clients:**
 

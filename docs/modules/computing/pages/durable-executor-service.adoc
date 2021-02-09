@@ -21,42 +21,21 @@ This section presents example configurations for durable executor service along 
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+**Declarative Configuration:**
+
 [source,xml]
 ----
 <hazelcast>
     ...
     <durable-executor-service name="myDurableExecSvc">
-        <statistics-enabled>true</statistics-enabled>
         <pool-size>8</pool-size>
         <durability>1</durability>
         <capacity>1</capacity>
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </durable-executor-service>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ...
-  durable-executor-service:
-    myDurableExecSvc:
-      statistics-enabled: true
-      pool-size: 8
-      durability: 1
-      capacity: 1
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
 
 **Programmatic Configuration:**
 
@@ -72,13 +51,13 @@ The following are the descriptions of each configuration element and attribute:
 * `pool-size`: Number of executor threads per member for the executor.
 * `durability`: Number of backups in the cluster for the submitted task. Its default value is 1.
 * `capacity`: Executor's task queue capacity; the number of tasks this queue can hold.
-* `split-brain-protection-ref`: Name of the split-brain protection configuration that you want this Durable Executor Service to use. See the <<split-brain-protection-for-durable-executor-service, Split-Brain Protection for Durable Executor Service section>>.
+* `quorum-ref`: Name of quorum configuration that you want this Durable Executor Service to use. See the <<split-brain-protection-for-durable-executor-service, Split-Brain Protection for Durable Executor Service section>>.
 
 == Split-Brain Protection for Durable Executor Service
 
 Durable Executor Service can be configured to check for a minimum number of available members before applying its operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]). This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
-The following is a list of methods, grouped by the operations, that support split-brain protection checks:
+The following is a list of methods, grouped by quorum type, that support split-brain protection checks:
 
 * WRITE, READ_WRITE:
 ** `disposeResult`
@@ -94,35 +73,17 @@ The following is a list of methods, grouped by the operations, that support spli
 
 **Configuring Split-Brain Protection**
 
-Split-brain protection for Durable Executor Service can be configured programmatically using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/DurableExecutorConfig.html[setSplitBrainProtectionName()^], or declaratively using the element `split-brain-protection-ref`. Following is an example declarative configuration:
+Split-brain protection for Durable Executor Service can be configured programmatically using the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/DurableExecutorConfig.html[setQuorumName()^], or declaratively using the element `quorum-ref`. Following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <durable-executor-service name="myDurableExecSvc">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </durable-executor-service>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ...
-  durable-executor-service:
-    myDurableExecSvc:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
+The value of `quorum-ref` should be the quorum configuration name which you configured under the `quorum` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

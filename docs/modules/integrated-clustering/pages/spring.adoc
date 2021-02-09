@@ -19,8 +19,8 @@ for Spring Configuration.
 
 _Classpath Configuration:_
 
-NOTE: To enable Spring integration, either `hazelcast-spring-{page-component-version}.jar`
-or `hazelcast-all-{page-component-version}.jar` must be in the classpath.
+NOTE: To enable Spring integration, either `hazelcast-spring-{page-component-display-version}.jar`
+or `hazelcast-all-{page-component-display-version}.jar` must be in the classpath.
 
 If you use Maven, add the following lines to your `pom.xml`.
 
@@ -31,7 +31,7 @@ If you use `hazelcast-all.jar`:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-all</artifactId>
-    <version>{page-component-version}</version>
+    <version>{page-component-display-version}</version>
 </dependency>
 ----
 
@@ -42,7 +42,7 @@ If you use `hazelcast-spring.jar`:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-spring</artifactId>
-    <version>{page-component-version}</version>
+    <version>{page-component-display-version}</version>
 </dependency>
 ----
 
@@ -420,6 +420,8 @@ NOTE: Spring managed properties/fields are marked as `transient`.
 
 == Adding Caching to Spring
 
+**Code Sample**: See the sample application for https://github.com/hazelcast/hazelcast-code-samples/tree/v.3.12.11/hazelcast-integration/spring-cache-manager[Spring Cache].
+
 As of version 3.1, Spring Framework provides support for adding caching
 into an existing Spring application. Spring 3.2 and later versions support
 JCache compliant caching providers. You can also use JCache caching
@@ -471,13 +473,10 @@ public interface IDummyBean {
 
 === Defining Timeouts for Cache Read Operation
 
-You can define a timeout value for the get operations from your Spring cache.
-This may be useful for some cases, such as SLA requirements. Hazelcast
-provides a property to specify this timeout: `hazelcast.spring.cache.prop`.
-This can be specified as a Java property (using `-D`) or you can add this
-property to your Spring properties file (usually named as `application.properties`).
+Starting with Hazelcast 3.8.4, you can define a timeout value for the get operations from your Spring cache. This may be useful for some cases, such as SLA requirements. Hazelcast provides a property to specify this timeout: `hazelcast.spring.cache.prop`. This can be specified as a Java property (using `-D`) or you can add this property to your Spring properties file (usually named as `application.properties`).
 
 An example usage is given below:
+
 
 ```
 hazelcast.spring.cache.prop=defaultReadTimeout=2,cache1=10,cache2=20

@@ -57,7 +57,7 @@ Let's have a look at the following data structure in pseudo-code:
 [source,java]
 ----
 class Motorbike {
-    Wheel[] wheel;
+    Wheel wheel[2];
 }
 
 class Wheel {
@@ -117,12 +117,12 @@ The following snippet demonstrates how to define a custom attribute using a `Val
 
 [source,java]
 ----
-AttributeConfig attributeConfig = new AttributeConfig();
+MapAttributeConfig attributeConfig = new MapAttributeConfig();
 attributeConfig.setName("currency");
-attributeConfig.setExtractorClassName("com.bank.CurrencyExtractor");
+attributeConfig.setExtractor("com.bank.CurrencyExtractor");
 
 MapConfig mapConfig = new MapConfig();
-mapConfig.addAttributeConfig(attributeConfig);
+mapConfig.addMapAttributeConfig(attributeConfig);
 ----
 
 `currency` is the name of the custom attribute that will be extracted using
@@ -136,37 +136,18 @@ All extractors have to be defined upfront in the map's initial configuration.
 The following snippet demonstrates how to define a custom attribute in the
 Hazelcast XML Configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <map name="trades">
         <attributes>
-            <attribute extractor-class-name="com.bank.CurrencyExtractor">currency</attribute>
+            <attribute extractor="com.bank.CurrencyExtractor">currency</attribute>
         </attributes>
     </map>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    trades:
-      attributes:
-        currency:
-          extractor-class-name: com.bank.CurrencyExtractor
-----
-====
 
 Analogous to the example above, `currency` is the name of the custom attribute
 that will be extracted using the
@@ -186,43 +167,16 @@ used in the attributes configuration.
 Defining indexes with extraction arguments is allowed, as shown in the example
 below:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <indexes>
         <!-- custom attribute without an extraction argument -->
-        <index>
-            <attributes>
-                <attribute>currency</attribute>
-            </attributes>
-        </index>
+        <index ordered="true">currency</index>
         <!-- custom attribute using an extraction argument -->
-        <index>
-            <attributes>
-                <attribute>currency[incoming]</attribute>
-            </attributes>
-        </index>
+        <index ordered="true">currency[incoming]</index>
     </indexes>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ...
-  indexes:
-    attributes:
-      - "currency"
-      - "currency[incoming]"
-----
-====

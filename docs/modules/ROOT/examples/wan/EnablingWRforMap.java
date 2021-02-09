@@ -1,7 +1,7 @@
 import com.hazelcast.config.Config;
 import com.hazelcast.config.WanReplicationConfig;
 import com.hazelcast.config.WanReplicationRef;
-import com.hazelcast.spi.merge.PassThroughMergePolicy;
+import com.hazelcast.map.merge.PassThroughMergePolicy;
 
 
 public class EnablingWRforMap {
@@ -17,9 +17,9 @@ public class EnablingWRforMap {
 
         WanReplicationRef wanRef = new WanReplicationRef();
         wanRef.setName("my-wan-cluster");
-        wanRef.setMergePolicyClassName(PassThroughMergePolicy.class.getName());
+        wanRef.setMergePolicy(PassThroughMergePolicy.class.getName());
         wanRef.setRepublishingEnabled(false);
         config.getMapConfig("my-shared-map").setWanReplicationRef(wanRef);
-//end::wrmap[]
+//tag::wrcache[]
     }
 }

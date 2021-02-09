@@ -1,28 +1,19 @@
-import com.hazelcast.partition.MigrationListener;
-import com.hazelcast.partition.MigrationState;
-import com.hazelcast.partition.ReplicaMigrationEvent;
+import com.hazelcast.core.MigrationEvent;
+import com.hazelcast.core.MigrationListener;
 
 //tag::clstrmigrationlistener[]
 public class ClusterMigrationListener implements MigrationListener {
-
     @Override
-    public void migrationStarted(MigrationState state) {
-        System.out.println("Migration Started: " + state);
+    public void migrationStarted(MigrationEvent migrationEvent) {
+        System.err.println("Started: " + migrationEvent);
     }
-
     @Override
-    public void migrationFinished(MigrationState state) {
-        System.out.println("Migration Finished: " + state);
+    public void migrationCompleted(MigrationEvent migrationEvent) {
+        System.err.println("Completed: " + migrationEvent);
     }
-
     @Override
-    public void replicaMigrationCompleted(ReplicaMigrationEvent event) {
-        System.out.println("Replica Migration Completed: " + event);
-    }
-
-    @Override
-    public void replicaMigrationFailed(ReplicaMigrationEvent event) {
-        System.out.println("Replica Migration Failed: " + event);
+    public void migrationFailed(MigrationEvent migrationEvent) {
+        System.err.println("Failed: " + migrationEvent);
     }
 }
 //end::clstrmigrationlistener[]

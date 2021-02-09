@@ -1,7 +1,7 @@
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.multimap.LocalMultiMapStats;
-import com.hazelcast.multimap.MultiMap;
+import com.hazelcast.core.MultiMap;
+import com.hazelcast.monitor.LocalMultiMapStats;
 
 public class ExampleMultiMapStats {
 

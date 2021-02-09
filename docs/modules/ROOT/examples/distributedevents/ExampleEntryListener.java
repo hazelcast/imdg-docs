@@ -1,6 +1,6 @@
 import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.EntryListener;
-import com.hazelcast.map.MapEvent;
+import com.hazelcast.core.MapEvent;
 
 //tag::mm[]
 public class ExampleEntryListener implements EntryListener<String, String> {
@@ -19,10 +19,6 @@ public class ExampleEntryListener implements EntryListener<String, String> {
     @Override
     public void entryEvicted(EntryEvent<String, String> event) {
         System.out.println( "Entry evicted: " + event );
-    }
-    @Override
-    public void entryExpired(EntryEvent<String, String> event) {
-        System.out.println( "Entry expired: " + event );
     }
     @Override
     public void mapCleared(MapEvent event) {

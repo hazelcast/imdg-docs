@@ -2,8 +2,8 @@ import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.EntryListener;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.map.MapEvent;
-import com.hazelcast.replicatedmap.ReplicatedMap;
+import com.hazelcast.core.MapEvent;
+import com.hazelcast.core.ReplicatedMap;
 
 public class ListeningMember {
 
@@ -36,10 +36,7 @@ public class ListeningMember {
         public void entryEvicted(EntryEvent<String, String> event) {
             System.out.println("entryEvicted: " + event);
         }
-        @Override
-        public void entryExpired(EntryEvent<String, String> event) {
-            System.out.println( "Entry expired: " + event );
-        }
+
         @Override
         public void mapEvicted(MapEvent event) {
             System.out.println("mapEvicted:" + event);

@@ -10,7 +10,7 @@ Let's have a look at the following data structure expressed in pseudo-code:
 [source,java]
 ----
 class Motorbike {
-    Wheel[] wheels;
+    Wheel wheels[2];
 }
 
 class Wheel {
@@ -37,11 +37,11 @@ Predicate p = Predicates.equal("wheels[any].name", "front-wheel");
 Collection<Motorbike> result = map.values(p);
 ----
 
-The exact same query may be executed using the `SQL` predicate as shown below:
+The exact same query may be executed using the `SQLPredicate` as shown below:
 
 [source,java]
 ----
-Predicate p = Predicates.sql("wheels[any].name = 'front-wheel'");
+Predicate p = new SqlPredicate("wheels[any].name = 'front-wheel'");
 Collection<Motorbike> result = map.values(p);
 ----
 
@@ -76,39 +76,16 @@ in the index definition.
 
 Let's assume you have the following index definition:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <indexes>
-        <index type="HASH">
-            <attributes>
-                <attribute>wheels[any].name</attribute>
-            </attributes>
-        </index>
+        <index ordered="false">wheels[any].name</index>
     </indexes>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ...
-  indexes:
-    - type: HASH
-      attributes:
-        - wheels.[any].name
-----
-====
 
 The following query uses the index:
 
@@ -129,39 +106,16 @@ Predicates.equal("wheels[0].name", "front-wheel")
 In order to use the index in the case mentioned above, you have to create
 another index, as shown below:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <indexes>
-        <index type="HASH">
-            <attributes>
-                <attribute>wheels[0].name</attribute>
-            </attributes>
-        </index>
+        <index ordered="false">wheels[0].name</index>
     </indexes>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  ...
-  indexes:
-    - type: HASH
-      attributes:
-        - wheels.[0].name
-----
-====
 
 == Corner cases
 

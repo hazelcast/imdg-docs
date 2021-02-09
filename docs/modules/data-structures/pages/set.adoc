@@ -41,46 +41,22 @@ The following are the example Hazelcast Set configurations.
 
 **Declarative Configuration:**
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <set name="default">
-        <statistics-enabled>false</statistics-enabled>
         <backup-count>1</backup-count>
         <async-backup-count>0</async-backup-count>
         <max-size>10</max-size>
         <item-listeners>
             <item-listener>com.hazelcast.examples.ItemListener</item-listener>
         </item-listeners>
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </set>
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  set:
-    default:
-      statistics-enabled: false
-      backup-count: 1
-      async-backup-count: 0
-      max-size: 10
-      item-listeners:
-        - class-name: com.hazelcast.examples.ItemListener
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
 
 **Programmatic Configuration:**
 
@@ -104,7 +80,7 @@ between 0 and Integer.MAX_VALUE. Its default value is 0, meaning there is no cap
 You can also set the attributes `include-value` to `true` if you want the item event
 to contain the item values. You can set `local` to `true` if you want to listen to
 the items on the local member.
-* `split-brain-protection-ref`: Name of the split-brain protection configuration that you want this Set to use.
+* `quorum-ref`: Name of quorum configuration that you want this Set to use.
 See the <<split-brain-protection-for-iset-and-transactionalset, Split-Brain Protection for ISet and TransactionalSet section>>.
 
 [[split-brain-protection-for-iset-and-transactionalset]]
@@ -114,7 +90,7 @@ ISet & TransactionalSet can be configured to check for a minimum number of
 available members before applying queue operations (see the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section]).
 This is a check to avoid performing successful queue operations on all parts of a cluster during a network partition.
 
-The following is a list of methods, grouped by the protection types, that support
+The following is a list of methods, grouped by quorum type, that support
 split-brain protection checks:
 
 ISet:
@@ -147,35 +123,17 @@ TransactionalSet:
 
 Split-brain protection for ISet can be configured programmatically using
 the method https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/config/SetConfig.html[setSplitBrainProtectionName()^],
-or declaratively using the element `split-brain-protection-ref`. The following is an example declarative configuration:
+or declaratively using the element `quorum-ref`. The following is an example declarative configuration:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
     <set name="default">
-        <split-brain-protection-ref>splitbrainprotection-name</split-brain-protection-ref>
+        <quorum-ref>quorumname</quorum-ref>
     </set>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  set:
-    default:
-      split-brain-protection-ref: splitbrainprotection-name
-----
-====
-
-The value of `split-brain-protection-ref` should be the split-brain protection configuration name which you
-configured under the `split-brain-protection` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].
+The value of `quorum-ref` should be the quorum configuration name which you configured under the `quorum` element as explained in the xref:network-partitioning:split-brain-protection.adoc[Split-Brain Protection section].

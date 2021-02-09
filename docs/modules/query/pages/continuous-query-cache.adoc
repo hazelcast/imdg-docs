@@ -85,11 +85,6 @@ create your query caches using the  `<query-cache>` sub-element under `<query-ca
 
 The following is an example declarative configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
@@ -110,11 +105,7 @@ XML::
                 <buffer-size>32</buffer-size>
                 <eviction size="1000" max-size-policy="ENTRY_COUNT" eviction-policy="LFU"/>
                 <indexes>
-                    <index>
-                        <attributes>
-                            <attribute>age</attribute>
-                        </attributes>
-                    </index>
+                    <index ordered="true">...</index>
                 </indexes>
             </query-cache>
         </query-caches>
@@ -122,36 +113,6 @@ XML::
     ...
 </hazelcast>
 ----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  map:
-    query-caches:
-        myContQueryCache:
-          include-value: true
-          predicate:
-            class-name: com.hazelcast.examples.ExamplePredicate
-          entry-listeners:
-            - class-name: "..."
-          in-memory-format: BINARY
-          populate: true
-          coalesce: false
-          batch-size: 2
-          delay-seconds: 3
-          buffer-size: 32
-          eviction:
-            size: 1000
-            max-size-policy: ENTRY_COUNT
-            eviction-policy: LFU
-          indexes:
-            - attributes:
-              - "age"
-----
-====
 
 Continuous query caches have the following configuration elements:
 
