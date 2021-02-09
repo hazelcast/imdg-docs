@@ -87,7 +87,7 @@ your members, for example, from 4.0 to 4.2 in a single rolling upgrade session.
 
 You have the following options to upgrade the cluster version:
 
-* Using {mc-docs}#rolling-upgrade[Management Center].
+* Using xref:management-center:ROOT:index.adoc#rolling-upgrade[Management Center].
 * Using the xref:management:cluster-utilities.adoc#using-the-script-cluster-sh[cluster.sh] script.
 * Allow the cluster to <<enabling-auto-upgrading, auto-upgrade>>.
 
