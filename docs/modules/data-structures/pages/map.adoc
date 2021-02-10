@@ -64,7 +64,7 @@ See the xref:ROOT:system-properties.adoc[System Properties appendix].
 
 Now let's create a second member by running the above code again. This creates a
 cluster with two members. This is also where backups of entries are created - remember
-the backup partitions mentioned in the xref:overview:hazelcast-overview.adoc[Hazelcast Overview section].
+the backup partitions mentioned in the xref:ROOT:hazelcast-overview.adoc[Hazelcast Overview section].
 The following illustration shows two members and how the data and its backup is distributed.
 
 image:ROOT:2Nodes.png[Map Entries with Backups in Two Members]

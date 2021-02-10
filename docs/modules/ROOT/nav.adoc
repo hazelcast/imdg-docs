@@ -8,7 +8,7 @@ include::configuration:partial$configuration-nav.adoc[]
 
 include::clusters:partial$clusters-nav.adoc[]
 
-* xref:rolling-member-upgrades.adoc[Rolling Member Upgrades]
+include::installation:partial$clusters-nav.adoc[]
 
 include::data-structures:partial$data-structures-nav.adoc[]
 

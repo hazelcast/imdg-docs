@@ -13,7 +13,7 @@ see the xref:cp-subsystem:cp-subsystem.adoc[CP Subsystem] section.
 
 For AP data structures, Hazelcast employs the combination of primary-copy and
 configurable lazy replication techniques. As briefly described in
-the xref:overview:data-partitioning.adoc[Data Partitioning section], each data entry is mapped to
+the xref:ROOT:hazelcast-overview.adoc#data-partitioning[Data Partitioning section], each data entry is mapped to
 a single Hazelcast partition and put into replicas of that partition. One of
 the replicas is elected as the primary replica, which is responsible for
 performing operations on that partition. When you read or

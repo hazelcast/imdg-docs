@@ -1,7 +1,7 @@
 = MapReduce
 
 NOTE: MapReduce is deprecated since Hazelcast 3.8. You can use
-xref:fast-aggregations.adoc[Fast-Aggregations] and https://jet.hazelcast.org/[Hazelcast Jet]
+xref:aggregations.adoc#fast-aggregations[Fast-Aggregations] and https://jet.hazelcast.org/[Hazelcast Jet]
 for map aggregations and general data processing, respectively. See the
 <<mapreduce-deprecation, MapReduce Deprecation section>> for more details.
 
@@ -834,7 +834,7 @@ The benefits are:
 * simplified API
 * utilization of existing indexes.
 
-See the xref:fast-aggregations.adoc[Fast Aggregations section] for examples. If you
+See the xref:aggregations.adoc#fast-aggregations[Fast-Aggregations section] for examples. If you
 need a more powerful tool like MapReduce, then there is Hazelcast Jet!
 
 === Distributed Computation with Jet
