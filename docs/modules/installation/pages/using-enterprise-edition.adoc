@@ -7,7 +7,7 @@ setup according to the license type you own.
 
 * **Pro license**: In addition to the open source edition of Hazelcast,
 Pro features are the following:
-** xref:cp-subsystem:persistence.adoc[]
+** xref:cp-subsystem:cp-subsystem.adoc[]
 ** xref:deploying-in-vmware-tanzu.adoc[Deploying in VMware Tanzu]
 ** xref:deploying-in-kubernetes.adoc[Deploying in Openshift container platform]
 * **Enterprise license**: In addition to the open source and Pro editions of

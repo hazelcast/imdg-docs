@@ -1,7 +1,7 @@
 = Distributed Data Structures
 [[distributed-data-structures]]
 
-As mentioned in the xref:overview:hazelcast-overview.adoc[Overview section], Hazelcast offers
+As mentioned in the xref:ROOT:hazelcast-overview.adoc[Overview section], Hazelcast offers
 distributed implementations of many common data structures. For each of the client
 languages, Hazelcast mimics as closely as possible the natural interface of the
 structure. So, for example in Java, the map follows `java.util.Map` semantics.

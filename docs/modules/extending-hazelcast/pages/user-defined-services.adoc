@@ -148,7 +148,7 @@ Once the HazelcastInstance is shutdown (for example, with Ctrl+C), the `CounterS
 `CounterService.shutdown`
 
 
-==== Placing a Remote Call via Proxy
+=== Placing a Remote Call via Proxy
 
 In the previous sections for the `CounterService` example, we started `CounterService` as part of a HazelcastInstance startup.
 

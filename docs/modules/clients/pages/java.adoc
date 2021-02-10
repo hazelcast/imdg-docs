@@ -208,8 +208,6 @@ their sections as listed below.
 * xref:data-structures:icountdownlatch.adoc[ICountDownLatch]
 * xref:data-structures:isemaphore.adoc[ISemaphore]
 * xref:data-structures:id-generator.adoc[IdGenerator]
-* xref:data-structures:flake-id-generator.adoc[FlakeIdGenerator]
-* xref:data-structures:fencedlock.adoc[Lock]
 
 === Using Client Services
 
@@ -1391,7 +1389,7 @@ diverted to another cluster on demand or when the intended cluster becomes unava
 
 Using the blue-green system, the clients can connect to another cluster automatically
 when they are blacklisted from their currently connected cluster.
-See the {mc-docs}#changing-cluster-client-filtering[Hazelcast Management Center Reference Manual^] for information on blacklisting the clients.
+See the xref:management-center:ROOT:index.adoc#changing-cluster-client-filtering[Hazelcast Management Center Reference Manual^] for information on blacklisting the clients.
 
 === Blue-Green Mechanism
 

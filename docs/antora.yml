@@ -1,8 +1,6 @@
 name: imdg
 title: Hazelcast IMDG
-version: 3.12.13-SNAPSHOT
-display_version: '3.12.13-SNAPSHOT'
-prerelease: true
+version: 3.12.12
 asciidoc:
   attributes:
     javasource: ROOT:example$

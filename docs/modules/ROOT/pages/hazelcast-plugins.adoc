@@ -202,7 +202,7 @@ See the plugin's https://github.com/hazelcast/hazelcast-wm/blob/master/README.md
 
 See also the https://github.com/hazelcast/hazelcast-code-samples/tree/master/hazelcast-integration/filter-based-session-replication[example application] which uses filter based web session replication.
 
-Note that filter based web session replication has the option to use a map with High-Density Memory Store, is available in [navy]*Hazelcast IMDG Enterprise HD*, to keep your session objects. See the xref:storage:high-density-memory-store.adoc[High-Density Memory Store section] for details on this feature.
+Note that filter based web session replication has the option to use a map with High-Density Memory Store, is available in [navy]*Hazelcast IMDG Enterprise HD*, to keep your session objects. See the xref:storage:high-density-memory.adoc[High-Density Memory Store section] for details on this feature.
 
 === Tomcat Based Web Session Replication
 

@@ -87,7 +87,7 @@ When you need to scale in this deployment type, just add more Hazelcast server m
 
 Note that Hazelcast **member** libraries are available only in Java. Therefore, embedding a member to a business service, it is only possible with Java. Applications written in other languages (.NET, C++, Node.js, etc.) can use Hazelcast client libraries to access the cluster. See the <<hazelcast-clients, Hazelcast Clients chapter>> for information on the clients and other language implementations. 
 
-If you want low-latency data access, as in the Embedded deployment, and you also want the scalability advantages of the Client/Server deployment, you can consider defining Near Caches for your clients. This enables the frequently used data to be kept in the client's local memory. See the xref:clients:java-client.adoc#configuring-client-near-cache[Configuring Client Near Cache section].
+If you want low-latency data access, as in the Embedded deployment, and you also want the scalability advantages of the Client/Server deployment, you can consider defining Near Caches for your clients. This enables the frequently used data to be kept in the client's local memory. See the xref:clients:java.adoc#configuring-client-near-cache[Configuring Client Near Cache section].
 
 [[why-hazelcast]]
 == Why Hazelcast?
@@ -172,7 +172,7 @@ they can access partitions that are owned by other members in the cluster.
 NOTE: See the xref:management:cluster-utilities.adoc#enabling-lite-members[Enabling Lite Members section].
 
 [[how-the-data-is-partitioned]]
-==== How the Data is Partitioned
+=== How the Data is Partitioned
 
 Hazelcast distributes data entries into the partitions using a hashing algorithm. Given an object key (for example, for a map) or an object name (for example, for a topic or list):
 
@@ -183,7 +183,7 @@ Hazelcast distributes data entries into the partitions using a hashing algorithm
 The result of this modulo - *MOD(hash result, partition count)* -  is the partition in which the data will be stored, that is the **partition ID**. For ALL members you have in your cluster, the partition ID for a given key is always the same.
 
 [[partition-table]]
-==== Partition Table
+=== Partition Table
 
 When you start a member, a partition table is created within it. This table stores the partition IDs and the cluster members to which they belong. The purpose of this table is to make all members (including lite members) in the cluster aware of this information, making sure that each member knows where the data is.
 
@@ -194,14 +194,14 @@ NOTE: If the oldest member of the cluster goes down, the next oldest member send
 You can configure the frequency (how often) that the member sends the partition table the information by using the `hazelcast.partition.table.send.interval` system property. The property is set to every 15 seconds by default.
 
 [[repartitioning]]
-==== Repartitioning
+=== Repartitioning
 
 Repartitioning is the process of redistribution of partition ownerships. Hazelcast performs the repartitioning when a member joins or leaves the cluster.
 
 In these cases, the partition table in the oldest member is updated with the new partition ownerships. Note that if a lite member joins or leaves a cluster, repartitioning is not triggered since lite members do not own any partitions.
 
 [[use-cases]]
-=== Use Cases
+== Use Cases
 
 Hazelcast can be used:
 
@@ -221,7 +221,7 @@ Hazelcast can be used:
 * as storage for session data in web applications (enables horizontal scalability of the web application).
 
 [[resources]]
-=== Resources
+== Resources
 
 * Hazelcast source code can be found at https://github.com/hazelcast/hazelcast[Github/Hazelcast].
 * Hazelcast API can be found at https://docs.hazelcast.org/docs/latest-dev/javadoc/[hazelcast.org/docs/Javadoc].

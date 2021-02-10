@@ -421,7 +421,7 @@ Actions: all, create, destroy, put, read, remove, listen
 +
 Actions: all, deploy
 
-NOTE: The name provided in `cache-permission` must be the Hazelcast distributed object name corresponding to the `Cache` as described in xref:jcache:jcache-hazelcast-instance-integration.adoc[JCache - Hazelcast Instance Integration].
+NOTE: The name provided in `cache-permission` must be the Hazelcast distributed object name corresponding to the `Cache` as described in xref:jcache:hazelcast-integration.adoc[JCache - Hazelcast Instance Integration].
 
 === Handling Permissions When a New Member Joins
 

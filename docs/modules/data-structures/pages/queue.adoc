@@ -349,6 +349,6 @@ listen to the items on the local member.
 * `statistics-enabled`: Specifies whether the statistics gathering is enabled for your queue.
 If set to `false`, you cannot collect statistics in your implementation
 (using `getLocalQueueStats()`) and also
-{mc-docs}#monitoring-queues[Hazelcast Management Center^]
+xref:management-center:ROOT:index.adoc#monitoring-queues[Hazelcast Management Center^]
 will not show them. Its default value is `true`.
 * `quorum-ref` : Name of quorum configuration that you want this queue to use.

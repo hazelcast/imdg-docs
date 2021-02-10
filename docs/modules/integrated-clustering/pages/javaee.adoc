@@ -2,7 +2,7 @@
 
 You can integrate Hazelcast into Java EE containers.
 This integration is offered as a Hazelcast plugin. See the
-xref:hazelcast-plugins.adoc#hazelcast-jca-resource-adapter[Hazelcast JCA Resource Adapter section]
+xref:ROOT:hazelcast-plugins.adoc#hazelcast-jca-resource-adapter[Hazelcast JCA Resource Adapter section]
 and its own GitHub repository https://github.com/hazelcast/hazelcast-ra[here^]
 for information on configuring the resource adapter, Glassfish applications
 and JBoss web applications.

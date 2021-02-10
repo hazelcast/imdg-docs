@@ -203,7 +203,7 @@ licenseInfo{"expiryDate":1560380399161,"maxNodeCount":10,"type":-1,"companyName"
 curl --data "${GROUPNAME}&${PASSWORD}&${LICENSE}" http://localhost:5001/hazelcast/rest/license
 ```
 
-NOTE: The request parameters must be properly URL-encoded as described in the xref:clients:rest-client.adoc[REST Client section].
+NOTE: The request parameters must be properly URL-encoded as described in the xref:clients:rest.adoc[REST Client section].
 
 The above command updates the license on all running Hazelcast members of the cluster. If successful, the response looks as follows:
 
