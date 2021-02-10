@@ -8,6 +8,7 @@ endif::[]
 :url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
 :url-ui: {url-org}/hazelcast-docs-ui
 :url-playbook: {url-org}/hazelcast-docs
+:url-staging: https://develop--nifty-wozniak-71a44b.netlify.app/home/index.html
 
 This repository contains the Antora components for the Hazelcast IMDG documentation.
 
@@ -19,8 +20,92 @@ This section describes some important information about how this repository is s
 
 - The component name, version, and start page are configured in each branch's `antora.yml` file.
 - The navigation for all modules is stored in the ROOT module's `nav.adoc` file.
-- Production branches use the *vX.Y* naming pattern (for example, v4.1), and the `master` branch contains the latest content.
-- The {url-playbook}[docs site playbook] instructs Antora to automatically aggregate content in the `master` branch as well as any branch names that start with *v*.
+- The {url-playbook}[docs site playbook] instructs Antora to automatically build the site using content in the `master` branch as well as any tags that are prefixed with *v*.
+
+== Release Workflow
+
+Documentation for new releases is hosted in versioned tags that are prefixed with `v`. For example, content for the `4.1.1` version is hosted in the `v4.1.1` tag. The `latest-dev` content is stored in the `master` branch
+
+The documentation build process is triggered whenever you push a new tag to this repository or commit to the `master` branch.
+
+=== Minor and Patch Releases
+
+To release new documentation for patch releases, you must tag it by doing the following.
+
+. Find the branch for your version that is suffixed with `.z`. For example, if you're working on content for version 4.1.2, find the branch named `4.1.z`.
++
+NOTE: If a branch for your major version does not exist, see <<major-releases, Major Releases>>.
+
+. Fork this repository and check out your version's branch locally.
+
+. Make your changes, and submit a PR to this repository.
++
+NOTE: Pull requests to the `.z` branches trigger a build of the {url-staging}[staging site] so you can preview your changes.
+
+. When you are ready to release, create a new temporary branch from the `.z` branch and label it with the full version number that you are releasing. For example, if you are releasing version 4.1.1, label the branch 4.1.1.
+
+. In the `antora.yml` file of your temporary branch, update the `version` field with the version of IMDG that you are working on.
++
+[source,yaml]
+----
+version: 4.1.1
+----
+
+. Tag the last commit in your temporary branch with a `v` followed by the version number.
+
+. Delete your temporary branch
++
+WARNING: Do not delete the `.z` branch. This branch is for documenting future patch releases.
+
+. Merge the pull request that you submitted to the `.z` branch.
+
+The documentation site will now be built, including content from your tagged version.
+
+== Major Releases
+
+To release new documentation for major releases, you must not only tag the content, but also update references to the `latest-dev` and `latest` aliases in the `_redirects` file of the `hazelcast/hazelcast-docs` repository.
+
+. Create a `.z` branch for your version. For example, if you're working on content for version 5.0, create a branch named `5.0.z`.
+
+. Fork this repository and check out the `.z` branch locally.
+
+. Make your changes, and submit a pull request to this repository.
++
+NOTE: Pull requests to the `.z` branches trigger a build of the {url-staging}[staging site] so you can preview your changes.
+
+. When you are happy with your changes, merge the pull request.
+
+. Submit a PR to the `master` branch to update the `version` field with the new `latest-dev` (SNAPSHOT) version of IMDG in the `antora.yml` file
++
+[source,yaml]
+----
+version: 5.0.1-SNAPSHOT
+----
++
+WARNING: Do not merge this pull request until you have completed the remaining steps.
+
+. When you are ready to release, create a new temporary branch from the `.z` branch and label it with the full version number that you are releasing. For example, if you created the branch `5.0.z` and you are releasing version 5.0, label the branch 5.0.
+
+. In the `antora.yml` file of your temporary branch, update the `version` field with the version of IMDG that you are working on.
++
+[source,yaml]
+----
+version: 5.0
+----
+
+. In the `develop` branch of the `hazelcast/hazelcast-docs` repository, create a pull request to update the `_redirects` file with the new versions of IMDG
++
+NOTE: This file is where we alias the `latest-dev` and `latest` paths in URLs.
+
+. When your pull request has been merged into the `develop` and `master` branches of the `hazelcast-docs` repository, tag the last commit in your temporary branch with a `v` followed by the version number.
+
+. Delete your temporary branch
++
+WARNING: Do not delete the `.z` branch. This branch is for documenting future patch releases.
+
+. Merge the pull request that you submitted to the `master` branch.
+
+The documentation site will now be built, including content from your tagged version.
 
 == GitHub Actions
 
@@ -33,15 +118,15 @@ To automate some elements of the build process, this repository includes the fol
 
 |validate-site.yml
 |Validates that all internal and external links are working
-|On a pull request to the `master` branch as well as any branch names that start with *v*
+|On a pull request to the `master` or `archive` branches
 
 |build-staging.yml
 |Builds the staging documentation site by sending a build hook to Netlify (the hosting platform that we use)
-|On a pull request or a push to the `master` branch as well as any branch names that start with *v*
+|On a pull request or a push to the `master` branch
 
 |build-site.yml
 |Builds the production documentation site by sending a build hook to Netlify (the hosting platform that we use)
-|On a push to the `master` branch as well as any branch names that start with *v*
+|On a push to the `master` branch
 |===
 
 == Contributing
