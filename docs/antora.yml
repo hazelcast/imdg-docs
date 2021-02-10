@@ -1,6 +1,6 @@
 name: imdg
 title: Hazelcast IMDG
-version: 4.2-SNAPSHOT
+version: 4.2-BETA-1-SNAPSHOT
 prerelease: true
 asciidoc:
   attributes:
