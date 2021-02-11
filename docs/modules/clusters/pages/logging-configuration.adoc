@@ -100,7 +100,7 @@ Below are example configurations for Log4j2 and Log4j. Note that Hazelcast does 
 recommend any specific logging library, these examples are provided only to demonstrate
 how to configure the logging. You can use your custom logging as explained above.
 
-== Changing Logging Levels for JDK Logging
+== Changing Log Levels for JDK Logging
 
 As mentioned in the introduction of this section above, the default
 logging type of Hazelcast IMDG is JDK logging. The default logging level
@@ -115,6 +115,22 @@ for (Handler h : rootLogger.getHandlers()) {
     h.setLevel(Level.FINE);
 }
 ----
+
+== Dynamically Changing Log Levels
+
+You can change log levels without the need of restarting the cluster members.
+This may be useful while monitoring or diagnosing the events in your cluster.
+
+This feature is supported for the default (JDK/JUL), Log4j, and Log4j2 frameworks.
+The Slf4j framework is not supported since it does not provide any log level changing APIs.
+
+You can use either of the following ways to dynamically change the level of your cluster's logs:
+
+* Using JMX API: The logging service exposes its JMX MBean as `LoggingServiceMBean`.
+You can retrieve, set, and reset the level. See the xref:management:jmx-api.adoc[JMX API]
+and xref:management:jmx-monitoring.adoc[Monitoring with JMX] sections.
+* Using REST API: You can use the `/hazelcast/rest/log-level` REST endpoint to retrieve (`GET`),
+set (`POST`), and reset (`DELETE`) the level. See the xref:management:rest-endpoint-groups.adoc[REST Endpoint Groups section].
 
 == Example Log4j2 Configuration
 
