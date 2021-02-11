@@ -270,12 +270,12 @@ public static class Foo implements Portable {
 
     @Override
     public void writePortable(PortableWriter writer) throws IOException {
-        writer.writeUTF("b", bar);
+        writer.writeString("b", bar);
     }
 
     @Override
     public void readPortable(PortableReader reader) throws IOException {
-        bar = reader.readUTF("b");
+        bar = reader.readString("b");
     }
 }
 
@@ -293,7 +293,7 @@ or manually register a class definition in serialization configuration as shown 
 ----
 Config config = new Config();
 final ClassDefinition classDefinition = new ClassDefinitionBuilder(FACTORY_ID, FOO_CLASS_ID)
-                       .addUTFField("b").build();
+                       .addStringField("b").build();
 config.getSerializationConfig().addClassDefinition(classDefinition);
 Hazelcast.newHazelcastInstance(config);
 ----
