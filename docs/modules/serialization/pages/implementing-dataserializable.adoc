@@ -38,16 +38,16 @@ public class Employee implements DataSerializable {
     //getters setters..
 
     public void writeData( ObjectDataOutput out ) throws IOException {
-        out.writeUTF(firstName);
-        out.writeUTF(lastName);
+        out.writeString(firstName);
+        out.writeString(lastName);
         out.writeInt(age);
         out.writeDouble (salary);
         address.writeData (out);
     }
 
     public void readData( ObjectDataInput in ) throws IOException {
-        firstName = in.readUTF();
-        lastName = in.readUTF();
+        firstName = in.readString();
+        lastName = in.readString();
         age = in.readInt();
         salary = in.readDouble();
         address = new Address();
@@ -116,13 +116,13 @@ public class Employee
     @Override
     public void readData( ObjectDataInput in )
       throws IOException {
-        this.surname = in.readUTF();
+        this.surname = in.readString();
     }
 
     @Override
     public void writeData( ObjectDataOutput out )
       throws IOException {
-        out.writeUTF( surname );
+        out.writeString( surname );
     }
 
     @Override
