@@ -4,7 +4,9 @@ name: Build production site
 
 on:
   push:
-    branches: [ master, v*, archive ]
+    branches: [ master, '*.z', archive ]
+    tags: 
+      - v*
 
 jobs:
   dispatch:
