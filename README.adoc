@@ -38,13 +38,13 @@ TIP: For guidance on writing content, see the {url-contribute}[contribution guid
 +
 NOTE: If a branch for your major or minor version does not exist, see <<major-and-minor-releases, Major and Minor Releases>>.
 
-. When you are ready to release, create a new release branch from the `.z` branch and name it with the full version number that you are releasing. For example, if you are releasing version 4.1.1, name the branch 4.1.1.
+. When you are ready to release, create a new release branch from the `.z` branch and name it with the full version number that you are releasing. For example, if you are releasing version 4.1.2, name the branch 4.1.2.
 
-. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on.
+. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on.  For example from `4.1.2-SNAPSHOT` to `4.1.2`.
 +
 [source,yaml]
 ----
-version: 4.1.1
+version: 4.1.2
 ----
 
 . Tag the latest commit in your release branch with a `v` followed by the version number.
@@ -64,7 +64,7 @@ NOTE: This file is where we alias the `latest` path in URLs.
 [source,bash]
 ----
 # Redirect latest imdg alias to the latest version
-/imdg/latest/*  /imdg/4.1.1/:splat 200!
+/imdg/latest/*  /imdg/4.1.2/:splat 200!
 ----
 
 The documentation site will now be built, including content from your tagged version.
@@ -73,13 +73,17 @@ The documentation site will now be built, including content from your tagged ver
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. Create a `\{version\}.z` branch from the `master` branch, where `\{version\}` is the version of IMDG that you are releasing. For example, if you're working on content for version 5.0, create a branch named `5.0.z`.
+. If you're writing content for a new major or minor release, make your changes to the `master` branch.
+
+. If you're writing content for a new minor version of a previous major release, create a `\{version\}.y` branch and work on that. For example if version 5.0 was already released and you plan to add content for version 4.3 then you need to create a branch named`4.y`.
 +
 TIP: For guidance on writing content, see the {url-contribute}[contribution guidelines].
 
-. When you are ready to release, create a new release branch from the `.z` branch and name it with the full version number that you are releasing. For example, if you are releasing version 5.0, name the branch 5.0.
+. When you are ready to release, create a new release branch from the `master` or `.y` branch and name it with the full version number that you are releasing. For example, if you are releasing version 5.0, name the branch 5.0.
 
-. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on.
+. If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1.0-SNAPSHOT`.
+
+. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on. For example from `5.0-SNAPSHOT` to `5.0`.
 +
 [source,yaml]
 ----
@@ -88,15 +92,13 @@ version: 5.0
 
 . Tag the latest commit in your release branch with a `v` followed by the version number.
 
-. If you have made any changes since creating your release branch, merge those changes back into the `.z` branch.
+. Create a `\{version\}.z` branch from release branch. It ensures that all changes made since creating your release branch will be applied to the new `.z` branch. For example `5.0.z` branch.
 
 . Delete your release branch.
 +
 WARNING: Do not delete the `.z` branch. This branch is for writing content for future patch releases.
 
-. In the `antora.yml` file of the `.z` branch, increment the `version` field. For example, `5.0-SNAPSHOT` becomes `5.0.1-SNAPSHOT`.
-
-. If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1.0-SNAPSHOT`.
+. In the `antora.yml` file of the `.z` branch, increment the `version` field. For example, `5.0` becomes `5.0.1-SNAPSHOT`.
 
 . In the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `_redirects` file with the new versions of IMDG.
 +
