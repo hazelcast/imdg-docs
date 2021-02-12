@@ -3,7 +3,7 @@
 The table below provides a comparison between the interfaces listed in the previous section
 to help you in deciding which interface to use in your applications.
 
-[cols="1,4a,5a"]
+[cols="3,3a,4a"]
 |===
 | Serialization Interface| Advantages| Drawbacks
 

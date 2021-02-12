@@ -1,4 +1,5 @@
 * xref:serialization:serialization.adoc[]
+** xref:serialization:overriding-built-in-serializers.adoc[]
 ** xref:serialization:interface-types.adoc[]
 ** xref:serialization:comparing-interfaces.adoc[]
 ** xref:serialization:implementing-java-serializable.adoc[]
