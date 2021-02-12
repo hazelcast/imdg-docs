@@ -73,11 +73,13 @@ The documentation site will now be built, including content from your tagged ver
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. Work on the content for a new Major or Minor release on the `master` branch (there is an exception - if you work on content for the new Minor branch which is lower than current Major version then you need to create `\{version\}.y` branch. For example if `5.0` was released and you plan to add content for `4.3` then you need to create `4.y` branch and work on it. Then use this branch in following text instead of `master` branch).
+. If you're writing content for a new major or minor release, make your changes to the `master` branch.
+
+. If you're writing content for a new minor version of a previous major release, create a `\{version\}.y` branch and work on that. For example if version 5.0 was already released and you plan to add content for version 4.3 then you need to create a branch named`4.y`.
 +
 TIP: For guidance on writing content, see the {url-contribute}[contribution guidelines].
 
-. When you are ready to release, create a new release branch from the `master` branch and name it with the full version number that you are releasing. For example, if you are releasing version 5.0, name the branch 5.0.
+. When you are ready to release, create a new release branch from the `master` or `.y` branch and name it with the full version number that you are releasing. For example, if you are releasing version 5.0, name the branch 5.0.
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1.0-SNAPSHOT`.
 
