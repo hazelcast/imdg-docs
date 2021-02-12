@@ -15,13 +15,18 @@ Serialization is used in the following cases:
 * Locking an object
 * Sending a message to a topic
 
-Hazelcast optimizes the serialization for the basic types and their array types.
-You cannot override this behavior.
+Hazelcast optimizes the serialization for the basic types and their array types
+with its built-in serializers. By default, you cannot override this behavior; however,
+Hazelcast offers a way to override them using a configuration option,
+see the xref:overriding-built-in-serializers.adoc[Overriding the Default Serializers section].
 
-The following are the default types:
+Hazelcast's built-in serializers can handle the following types:
 
-* `Byte`, `Boolean`, `Character`, `Short`, `Integer`, `Long`, `Float`, `Double`, `String`
+* `Byte`, `Boolean`, `Character`, `Short`, `Integer`, `Long`, `Float`, `Double`, `String`, `UUID`
 * `byte[]`, `boolean[]`, `char[]`, `short[]`, `int[]`, `long[]`, `float[]`, `double[]`, `String[]`
-* `java.util.Date`, `java.math.BigInteger`, `java.math.BigDecimal`, `java.lang.Class`
+* `Class`, `Optional`, `Date`, `BigInteger`, `BigDecimal`, `ArrayList`, `LinkedList`, `CopyOnWriteArrayList/Set`, `HashMap/Set`,
+`ConcurrentSkipListMap/Set`, `ConcurrentHashMap`, `LinkedHashMap/Set`, `TreeMap/Set`, `ArrayDeque`, `LinkedBlockingQueue`,
+`ArrayBlockingQueue`, `PriorityBlockingQueue`, `PriorityQueue`, `DelayQueue`, `SynchronousQueue`, `LinkedTransferQueue`
 
 Hazelcast optimizes all of the above object types. You do not need to worry about their (de)serializations.
+
