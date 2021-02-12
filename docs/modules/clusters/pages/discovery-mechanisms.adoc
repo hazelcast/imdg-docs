@@ -68,11 +68,3 @@ Eureka is a REST based service that is primarily used in the AWS cloud for locat
 == Zookeeper Cloud Discovery
 
 This discovery mechanism provides a service based discovery strategy by using Apache Curator to communicate with your Zookeeper server. You can use this plugin with Discovery SPI enabled applications. This is provided as a Hazelcast plugin. See its https://github.com/hazelcast/hazelcast-zookeeper/blob/master/README.md[documentation] for information on configuring and using it.
-
-[[hazelcast-for-pcf]]
-== Hazelcast for Tanzu VMware
-
-Using a clickable Hazelcast Tile for VMWare (former Pivotal Cloud Foundry), you can
-deploy your Hazelcast cluster on PCF. This feature is provided as a Hazelcast
-plugin.
-See the xref:installation:deploying-in-vmware-tanzu.adoc[Deploying in VMware Tanzu section].

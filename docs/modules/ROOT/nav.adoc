@@ -8,8 +8,6 @@ include::configuration:partial$configuration-nav.adoc[]
 
 include::clusters:partial$clusters-nav.adoc[]
 
-include::installation:partial$clusters-nav.adoc[]
-
 include::data-structures:partial$data-structures-nav.adoc[]
 
 include::events:partial$events-nav.adoc[]

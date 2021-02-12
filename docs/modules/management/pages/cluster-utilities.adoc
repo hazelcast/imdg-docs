@@ -257,7 +257,7 @@ The following also gets the cluster state, using the alternative parameter names
 
 **Changing the cluster version:**
 
-See the xref:installation:rolling-upgrades.adoc[Rolling Member Upgrades chapter] to learn more about the cases when you should change the cluster version.
+See the xref:ROOT:rolling-member-upgrades.adoc[Rolling Member Upgrades chapter] to learn more about the cases when you should change the cluster version.
 
 To change the cluster version to `X.Y`, use the following command:
 

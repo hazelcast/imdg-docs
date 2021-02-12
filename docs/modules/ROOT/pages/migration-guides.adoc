@@ -17,7 +17,7 @@ along with REST endpoint groups.
 Therefore, a configuration change is needed specifically when performing
 a rolling member upgrade from IMDG 3.11 to 3.12.
 +
-So, the steps listed in the above xref:installation:rolling-upgrades.adoc#rolling-upgrade-procedure[] section
+So, the steps listed in the above xref:ROOT:rolling-member-upgrades.adoc#rolling-upgrade-procedure[] section
 should be as follows:
 +
 . Shutdown the 3.11 member
