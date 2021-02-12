@@ -45,28 +45,6 @@ interfaces or domain names per physical machine, this assumption is invalid.
 The following are declarative and programmatic configuration snippets that
 show how to enable `HOST_AWARE` grouping:
 
-```
-<partition-group enabled="true" group-type="HOST_AWARE" />
-```
-
-[source,java]
-----
-Config config = ...;
-PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
-partitionGroupConfig.setEnabled( true )
-    .setGroupType( MemberGroupType.HOST_AWARE );
-----
-
-=== CUSTOM
-
-You can do custom grouping using Hazelcast's interface matching configuration.
-This way, you can add different and multiple interfaces to a group. You can also
-use wildcards in the interface addresses. For example, the users can create rack-aware
-or data warehouse partition groups using custom partition grouping.
-
-The following are declarative and programmatic configuration examples that show
-how to enable and use `CUSTOM` grouping:
-
 [tabs] 
 ==== 
 XML:: 
@@ -75,20 +53,12 @@ XML::
 [source,xml]
 ----
 <hazelcast>
-    ...
-    <partition-group enabled="true" group-type="CUSTOM">
+    <partition-group enabled="true" group-type="HOST_AWARE">
         <member-group>
             <interface>10.10.0.*</interface>
             <interface>10.10.3.*</interface>
             <interface>10.10.5.*</interface>
-        </member-group>
-        <member-group>
-            <interface>10.10.10.10-100</interface>
-            <interface>10.10.1.*</interface>
-            <interface>10.10.2.*</interface>
-        </member-group>
     </partition-group>
-    ...
 </hazelcast>
 ----
 --
@@ -100,50 +70,23 @@ YAML::
 hazelcast:
   partition-group:
     enabled: true
-    group-type: CUSTOM
+    group-type: HOST_AWARE
     member-group:
       - - 10.10.0.*
         - 10.10.3.*
         - 10.10.5.*
-      - - 10.10.10.10-100
-        - 10.10.1.*
-        - 10.10.2.*
-----
-====
-
-[source,java]
-----
-include::{javasource}/PartitionGrouping.java[tag=partitiongrouping]
 ----
 
-NOTE: While your cluster was forming, if you configured your members to
-discover each other by their IP addresses, you should use the IP addresses
-for the `<interface>` element. If your members discovered each other by their
-host names, you should use host names.
-
-=== PER_MEMBER
-
-You can give every member its own group. Each member is a group of its own
-and primary and backup partitions are distributed randomly (not on the same
-physical member). This gives the least amount of protection and is the default
-configuration for a Hazelcast cluster. This grouping type provides good redundancy
-when Hazelcast members are on separate hosts. However, if multiple instances
-run on the same host, this type is not a good option.
-
-The following are declarative and programmatic configuration snippets that
-show how to enable `PER_MEMBER` grouping:
-
-```
-<partition-group enabled="true" group-type="PER_MEMBER" />
-```
-
-[source,java]
+Java::
++
 ----
 Config config = ...;
 PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
 partitionGroupConfig.setEnabled( true )
-    .setGroupType( MemberGroupType.PER_MEMBER );
+    .setGroupType( MemberGroupType.HOST_AWARE );
+
 ----
+====
 
 === ZONE_AWARE
 
@@ -177,10 +120,31 @@ rack and host information in the given order and create partition groups with av
 The following are declarative and programmatic configuration snippets
 that show how to enable `ZONE_AWARE` grouping:
 
-```
-<partition-group enabled="true" group-type="ZONE_AWARE" />
-```
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <partition-group enabled="true" group-type="ZONE_AWARE" />
+</hazelcast>
+----
+--
 
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  partition-group:
+    enabled: true
+    group-type: ZONE_AWARE
+----
+
+Java::
++
 [source,java]
 ----
 Config config = ...;
@@ -188,6 +152,59 @@ PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
 partitionGroupConfig.setEnabled( true )
     .setGroupType( MemberGroupType.ZONE_AWARE );
 ----
+====
+
+=== PLACEMENT_AWARE
+
+You can group members according to their placement metadata provided by the
+cloud providers. This metadata indicates the placement information, such as rack,
+fault domain, power sources, network, and resources of a virtual machine in a zone.
+
+This grouping provides a finer granularity than `ZONE_AWARE`
+and is useful for good redundancy when running members within a
+single availability zone; it provides availability within a single zone as high as possible
+by spreading the partitions and their replicas across different racks.
+
+This grouping is currently supported in
+https://github.com/hazelcast/hazelcast-aws[Hazelcast AWS Discovery plugin].
+See also AWS' https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html[documentation^] on placement groups for more information.
+
+The following are declarative and programmatic configuration snippets
+that show how to enable `PLACEMENT_AWARE` grouping:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <partition-group enabled="true" group-type="PLACEMENT_AWARE" />
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  partition-group:
+    enabled: true
+    group-type: PLACEMENT_AWARE
+----
+
+Java::
++
+[source,java]
+----
+Config config = ...;
+PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
+partitionGroupConfig.setEnabled( true )
+    .setGroupType( MemberGroupType.PLACEMENT_AWARE );
+----
+====
 
 [[node-aware-partition-grouping]]
 === NODE_AWARE
@@ -210,11 +227,31 @@ distribution among the members.
 
 The following are declarative and programmatic configuration snippets that show how to enable `NODE_AWARE` grouping:
 
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
 [source,xml]
 ----
-<partition-group enabled="true" group-type="NODE_AWARE" />
+<hazelcast>
+    <partition-group enabled="true" group-type="NODE_AWARE" />
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  partition-group:
+    enabled: true
+    group-type: NODE_AWARE
 ----
 
+Java::
++
 [source,java]
 ----
 Config config = ...;
@@ -222,6 +259,117 @@ PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
 partitionGroupConfig.setEnabled( true )
     .setGroupType( MemberGroupType.NODE_AWARE );
 ----
+====
+
+=== PER_MEMBER
+
+You can give every member its own group. Each member is a group of its own
+and primary and backup partitions are distributed randomly (not on the same
+physical member). This gives the least amount of protection and is the default
+configuration for a Hazelcast cluster. This grouping type provides good redundancy
+when Hazelcast members are on separate hosts. However, if multiple instances
+run on the same host, this type is not a good option.
+
+The following are declarative and programmatic configuration snippets that
+show how to enable `PER_MEMBER` grouping:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <partition-group enabled="true" group-type="PER_MEMBER" />
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  partition-group:
+    enabled: true
+    group-type: PER_MEMBER
+----
+
+Java::
++
+[source,java]
+----
+Config config = ...;
+PartitionGroupConfig partitionGroupConfig = config.getPartitionGroupConfig();
+partitionGroupConfig.setEnabled( true )
+    .setGroupType( MemberGroupType.PER_MEMBER );
+----
+====
+
+=== CUSTOM
+
+You can do custom grouping using Hazelcast's interface matching configuration.
+This way, you can add different and multiple interfaces to a group. You can also
+use wildcards in the interface addresses. For example, the users can create rack-aware
+or data warehouse partition groups using custom partition grouping.
+
+The following are declarative and programmatic configuration examples that show
+how to enable and use `CUSTOM` grouping:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <partition-group enabled="true" group-type="CUSTOM">
+        <member-group>
+            <interface>10.10.0.*</interface>
+            <interface>10.10.3.*</interface>
+            <interface>10.10.5.*</interface>
+        </member-group>
+        <member-group>
+            <interface>10.10.10.10-100</interface>
+            <interface>10.10.1.*</interface>
+            <interface>10.10.2.*</interface>
+        </member-group>
+    </partition-group>
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  partition-group:
+    enabled: true
+    group-type: CUSTOM
+    member-group:
+      - - 10.10.0.*
+        - 10.10.3.*
+        - 10.10.5.*
+      - - 10.10.10.10-100
+        - 10.10.1.*
+        - 10.10.2.*
+----
+
+Java::
++
+[source,java]
+----
+include::{javasource}/PartitionGrouping.java[tag=partitiongrouping]
+----
+====
+
+NOTE: While your cluster was forming, if you configured your members to
+discover each other by their IP addresses, you should use the IP addresses
+for the `<interface>` element. If your members discovered each other by their
+host names, you should use host names.
 
 === SPI
 
