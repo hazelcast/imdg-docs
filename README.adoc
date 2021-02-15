@@ -69,13 +69,13 @@ NOTE: This file is where we alias the `latest` path in URLs.
 
 The documentation site will now be built, including content from your tagged version.
 
-== Major and Minor  Releases
+== Major and Minor Releases
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. If you're writing content for a new major or minor release, make your changes to the `master` branch.
+. If you're writing content for a new major or minor release, make your changes in the `master` branch.
 
-. If you're writing content for a new minor version of a previous major release, create a `\{version\}.y` branch and work on that. For example if version 5.0 was already released and you plan to add content for version 4.3 then you need to create a branch named`4.y`.
+. If you're writing content for a new minor version of a previous major release, create a `\{version\}.y` branch and make your changes in that branch. For example if version 5.0 was already released and you plan to add content for version 4.3 then you need to create a branch named`4.y`.
 +
 TIP: For guidance on writing content, see the {url-contribute}[contribution guidelines].
 
@@ -83,11 +83,11 @@ TIP: For guidance on writing content, see the {url-contribute}[contribution guid
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1.0-SNAPSHOT`.
 
-. Create a `\{version\}.z` branch from release branch. It ensures that all changes made since creating your release branch will be applied to the new `.z` branch. For example `5.0.z` branch.
+. To make it easier to amend your release for future patch versions or to fix typos,  create a `\{version\}.z` branch from your release branch. For example if your release branch is named `5.0`, create a branch named `5.0.z`.
 
 . In the `antora.yml` file of the `.z` branch, increment the `version` field. For example, `5.0` becomes `5.0.1-SNAPSHOT`.
 
-. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on. For example from `5.0-SNAPSHOT` to `5.0`.
+. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
 [source,yaml]
 ----
