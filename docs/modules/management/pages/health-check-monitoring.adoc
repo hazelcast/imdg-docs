@@ -111,7 +111,7 @@ to learn about the safety of clusters.
 `migrationQueueSize`: Specifies the count of remaining migration tasks while the cluster data
 is being repartitioned. See the xref:overview:data-partitioning.adoc[Data Partitioning section]
 to learn about Hazelcast's partitioning mechanism.
-`clusterSize`: 
+`clusterSize`: Specifies the cluster member count.
 
 [[health-check-script]]
 == Using the healthcheck.sh Script
