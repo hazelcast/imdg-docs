@@ -1610,16 +1610,16 @@ map lock actions and the `map-actions-split-brain-protection` for other map acti
 [[accessing-entry-statistics]]
 == Accessing Map and Entry Statistics
 
-You can retrieve the statistics of the map in your Hazelcast IMDG member
-using the `getLocalMapStats()` method, which is the programmatic approach.
+You can retrieve the statistics of maps in your Hazelcast IMDG members using the
+`getLocalMapStats()` method.
 It returns information such as primary and backup entry count, last update
 time and locked entry count. If you need the cluster-wide map statistics, you can
 get the local map statistics from all members of the cluster and combine them.
-Alternatively, you can see the map statistics on the
+Alternatively, you can see the map statistics on
 xref:management-center:monitor-imdg:monitor-dds.adoc#managing-maps[Hazelcast Management Center].
 
-To be able to retrieve the map statistics, the `statistics-enabled`
-element under the map configuration should be set as `true`, which is the default value:
+To be able to retrieve the statistics on map level, you should set `statistics-enabled`
+under the map configuration as `true`, which is also the default value:
 
 [tabs] 
 ==== 
@@ -1649,13 +1649,60 @@ hazelcast:
 ----
 ====
 
-When this element is set to `false`, the statistics are not gathered
-for the map and cannot be seen on the Hazelcast Management Center, nor retrieved
-by the `getLocalMapStats()` method.
+If it is `false`, the statistics are not gathered
+for the map: you cannot see them on the Hazelcast Management Center, nor retrieve
+using `getLocalMapStats()`.
 
-Hazelcast also keeps statistics about each map entry, such as creation time,
-last update time, last access time, and number of hits and version. To access
-the map entry statistics, use an `IMap.getEntryView(key)` call. Here is an example.
+When enabled, you can simply use `getLocalMapStats()`, an example of which is shown below:
+
+[source,java]
+----
+HazelcastInstance hc = Hazelcast.newHazelcastInstance();
+    IMap<String, String> myMap = hc.getMap( "myMap" );
+    LocalMapStats mapStatistics = myMap.getLocalMapStats();
+    System.out.println( "Number of entries owned on this member = "
+        + mapStatistics.getOwnedEntryCount() );
+----
+
+
+Using the same method, you can also retrieve the statistics on entry level.
+For this, you should set `per-entry-statistics-enabled` under the map configuration as
+`true` (its default value is `false`):
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="myMap">
+        <per-entry-statistics-enabled>true</per-entry-statistics-enabled>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    myMap:
+      per-entry-statistics-enabled: true
+----
+====
+
+When enabled, you can retrieve map entry statistics such as last accessed/updated time, creation
+time and last stored time, again using the `getLocalMapStats()` method.
+
+Also, when enabled, the fields in the `getEntryView(key)` operation becomes
+visible. This method returns an overview of a map entry specified by its key.
+Here is an example.
 
 [source,java]
 ----
