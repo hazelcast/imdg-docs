@@ -173,7 +173,7 @@ hazelcast:
 ====
 
 NOTE: When using the declarative configuration approach, the default `log4j2.properties`
-file should be on your classpath.
+file should be on your classpath, where the `log4j.jar` files are located.
 
 Following is an example `log4j2.properties` file:
 
