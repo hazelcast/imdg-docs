@@ -28,14 +28,14 @@ version numbers are compatible regardless of patch version.
 For example, in a cluster with members running on version 3.11.1,
 it is possible to perform a rolling upgrade to 3.11.2 by shutting
 down, upgrading to `hazelcast-3.11.2.jar` binary and starting each
-member one by one. _Patch level compatibility applies to both Hazelcast
-IMDG and Hazelcast IMDG Enterprise_.
+member one by one. Rolling upgrade for patch versions
+is supported in the open source, Pro, and Enterprise editions of Hazelcast IMDG.
 
 Also, each minor version is compatible with the previous one (back until
 Hazelcast IMDG 3.8). For example, it is possible to perform a rolling
 upgrade on a cluster running Hazelcast IMDG Enterprise 3.11 to Hazelcast
-IMDG Enterprise 3.12. _Rolling upgrades across minor versions is a Hazelcast
-IMDG Enterprise feature_.
+IMDG Enterprise 3.12. Rolling upgrade for minor versions is supported in the
+Enterprise edition of Hazelcast IMDG.
 
 The compatibility guarantees described above are given in the context of
 rolling member upgrades and only apply to GA (general availability) releases.
