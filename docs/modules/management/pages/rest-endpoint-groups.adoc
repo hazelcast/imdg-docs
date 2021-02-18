@@ -83,8 +83,8 @@ The following table lists all the endpoints along with the groups they belong to
 * `/hazelcast/rest/cp-subsystem/restart`
 * `/hazelcast/rest/cp-subsystem/groups/$\{CPGROUP_NAME}/sessions`
 * `/hazelcast/rest/cp-subsystem/groups/$\{CPGROUP_NAME}/sessions/$\{CP_SESSION_ID}/remove`
-* `/hazelcast/rest/log-level (`POST`)
-* `/hazelcast/rest/log-level (`DELETE`)
+* `/hazelcast/rest/log-level` (`POST`)
+* `/hazelcast/rest/log-level` (`DELETE`)
 * `/hazelcast/` (Other HTTP REST API operations)
 
 | `HEALTH_CHECK`
