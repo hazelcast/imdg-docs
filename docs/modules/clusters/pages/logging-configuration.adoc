@@ -140,7 +140,6 @@ XML::
     ...
     <properties>
         <property name="hazelcast.logging.type">log4j2</property>
-        <property name="log4j2.configuration">/path/to/properties/log4j2.properties</property>
     </properties>
     ...
 </hazelcast>
@@ -154,18 +153,27 @@ YAML::
 hazelcast:
   properties:
     hazelcast.logging.type: log4j2
-    log4j2.configuration: /path/to/properties/log4j2.properties
 ----
 ====
+
+NOTE: When using the declarative configuration approach,
+the default `log4j2.properties` file should be on your classpath,
+where the log4j.jar files are located.
 
 Following is an example `log4j2.properties` file:
 
 [source,shell]
 ----
-rootLogger=file
 rootLogger.level=info
-property.filepath=/path/to/log/files
+property.filepath=log
 property.filename=hazelcast
+
+appenders = console, file
+
+appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} %-5p %c\{1}:%L - %m%n
 
 appender.file.type=RollingFile
 appender.file.name=RollingFile
@@ -182,7 +190,8 @@ appender.file.policies.size.size=50MB
 appender.file.strategy.type=DefaultRolloverStrategy
 appender.file.strategy.max=100
 
-rootLogger.appenderRefs=file
+rootLogger.appenderRefs= STDOUT
+rootLogger.appenderRef.stdout.ref = STDOUT
 rootLogger.appenderRef.file.ref=RollingFile
 
 #Hazelcast specific logs.
