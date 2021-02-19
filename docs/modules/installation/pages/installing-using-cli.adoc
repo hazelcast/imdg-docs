@@ -1,0 +1,49 @@
+= CLI
+[[installing-using-cli]]
+
+NOTE: Currently, installation using CLI is intended for development purposes.
+For production setups please use the other installation options explained later in this chapter.
+
+To install Hazelcast via command line interface, run the following commands:
+
+[tabs] 
+==== 
+Homebrew:: 
++ 
+-- 
+[source,bash]
+----
+brew tap hazelcast/hz
+brew install hazelcast
+----
+--
+
+Debian::
++
+[source,bash]
+----
+$ wget -qO - https://repository.hazelcast.com/api/gpg/key/public | sudo apt-key add -
+$ echo "deb https://repository.hazelcast.com/debian stable main" | sudo tee -a /etc/apt/sources.list
+$ sudo apt update && sudo apt install hazelcast
+----
+
+RPM::
++
+[source,bash]
+----
+$ wget https://repository.hazelcast.com/rpm/hazelcast-rpm.repo -O hazelcast-rpm.repo
+$ sudo mv hazelcast-rpm.repo /etc/yum.repos.d/
+$ sudo yum install hazelcast
+----
+====
+
+Then, you can use the following command on your terminal/command line
+to start a standalone Hazelcast member:
+
+[source,bash,subs="attributes+"]
+----
+hz start
+----
+
+For more information visit the GitHub repository
+of the https://github.com/hazelcast/hazelcast-command-line[Command Line Interface (CLI)^].
