@@ -1,0 +1,67 @@
+* xref:index.adoc[Hazelcast IMDG Reference Manual]
+
+include::getting-started:partial$getting-started-nav.adoc[]
+
+include::overview:partial$overview-nav.adoc[]
+
+include::configuration:partial$configuration-nav.adoc[]
+
+include::clusters:partial$clusters-nav.adoc[]
+
+* xref:rolling-upgrades.adoc[Rolling Member Upgrades]
+
+include::data-structures:partial$data-structures-nav.adoc[]
+
+include::events:partial$events-nav.adoc[]
+
+* xref:hazelcast-jet.adoc[Hazelcast Jet]
+
+include::computing:partial$computing-nav.adoc[]
+
+include::query:partial$query-nav.adoc[]
+
+include::cp-subsystem:partial$cp-subsystem-nav.adoc[]
+
+include::transactions:partial$transactions-nav.adoc[]
+
+include::jcache:partial$jcache-nav.adoc[]
+
+include::integrated-clustering:partial$integrated-clustering-nav.adoc[]
+
+include::storage:partial$storage-nav.adoc[]
+
+* xref:striim-cdc.adoc[Database CDC Integration Using Striim Hot Cache]
+
+include::clients:partial$clients-nav.adoc[]
+
+include::serialization:partial$serialization-nav.adoc[]
+
+include::management:partial$management-nav.adoc[]
+
+include::security:partial$security-nav.adoc[]
+
+include::performance:partial$performance-nav.adoc[]
+
+* xref:simulator.adoc[Hazelcast Simulator]
+
+include::wan:partial$wan-nav.adoc[]
+
+include::osgi:partial$osgi-nav.adoc[]
+
+include::extending-hazelcast:partial$extending-hazelcast-nav.adoc[]
+
+include::plugins:partial$plugins-nav.adoc[]
+
+include::consistency-and-replication:partial$consistency-nav.adoc[]
+
+include::network-partitioning:partial$network-partitioning-nav.adoc[]
+
+* xref:system-properties.adoc[Appendix A: System Properties]
+* xref:migration-guides.adoc[Appendix B: Migration Guides]
+* xref:common-exception-types.adoc[Appendix C: Common Exception Types]
+* xref:licenses.adoc[Appendix D: License Questions]
+* xref:phone-homes.adoc[Appendix E: Phone Homes]
+* xref:faq.adoc[Appendix F: Frequently Asked Questions]
+* xref:glossary.adoc[Glossary]
+
+

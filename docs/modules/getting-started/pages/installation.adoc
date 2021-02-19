@@ -1,0 +1,195 @@
+= Installation
+[[installation]]
+
+The following sections explain the installation of Hazelcast IMDG
+and Hazelcast IMDG Enterprise. It also includes notes and changes
+to consider when upgrading Hazelcast.
+
+NOTE: As a prerequisite, make sure you have Java installed on your system.
+If you're using JDK 11 or later, see xref:running-in-modular-java.adoc[].
+For the list of supported Java versions, see xref:supported-jvms.adoc[].
+
+You can find Hazelcast in standard Maven repositories. If your
+project uses Maven, you do not need to add
+additional repositories to your `pom.xml` or add
+`hazelcast-{page-component-display-version}.jar` file into your
+classpath (Maven does that for you). Just add the following
+lines to your `pom.xml`:
+
+[tabs] 
+==== 
+Hazelcast Open Source Edition:: 
++ 
+-- 
+
+[source,xml,subs="attributes+"]
+----
+<dependencies>
+    <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-all</artifactId>
+        <version>{page-component-display-version}</version>
+    </dependency>
+</dependencies>
+----
+--
+
+Hazelcast Enterprise Edition::
++
+[source,xml,subs="attributes+"]
+----
+<!-- You need to define following repository: -->
+<repository>
+    <id>Hazelcast Private Release Repository</id>
+    <url>https://repository.hazelcast.com/release/</url>
+</repository>
+<!-- Optional repository if you want to use latest snapshots -->
+<repository>
+    <id>Hazelcast Private Snapshot Repository</id>
+    <url>https://repository.hazelcast.com/snapshot/</url>
+</repository>
+
+<!-- You also need to define following dependencies: -->
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-enterprise-all</artifactId>
+    <version>{page-component-display-version}</version>
+</dependency>
+<!-- Optional dependency for including JavaDoc -->
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-enterprise-all</artifactId>
+    <version>{page-component-display-version}</version>
+    <classifier>javadoc</classifier>
+</dependency>
+---- 
+====
+
+Above dependency (`hazelcast-all`) includes both member and Java
+client libraries of Hazelcast IMDG. A separate Java client module
+and dependency do not exist. See xref:ROOT:migration-guides.adoc#removal-of-hazelcast-client-module[here]
+for the details.
+
+As an alternative, you can download and install Hazelcast IMDG
+yourself. You only need to:
+
+* download the package `hazelcast-<version>.zip` or `hazelcast-<version>.tar.gz`
+from link:https://hazelcast.org/download[hazelcast.org^]
+* extract the package
+* add the file `hazelcast-<version>.jar` to your classpath.
+
+[[setting-the-license-key]]
+== Setting the License Key
+
+Hazelcast IMDG Enterprise offers you two types of licenses: **Enterprise**
+and **Enterprise HD**. The supported features differ in your Hazelcast
+setup according to the license type you own.
+
+* **Enterprise license**: In addition to the open source edition of
+Hazelcast, Enterprise features are the following:
+** Security
+** WAN Replication
+** Clustered REST
+** Clustered JMX
+** Striim Hot Cache
+** Rolling Upgrades
+* **Enterprise HD license**: In addition to the Enterprise features,
+Enterprise HD features are the following:
+** High-Density Memory Store
+** Hot Restart Persistence
+
+To use Hazelcast IMDG Enterprise, you need to set the provided license
+key using one of the configuration methods shown below.
+
+NOTE: Hazelcast IMDG Enterprise license keys are required only for members.
+You do not need to set a license key for your Java clients for which you
+want to use IMDG Enterprise features.
+
+Add the below line to any place you like in the file `hazelcast.xml`.
+This XML file offers you a declarative way to configure your Hazelcast.
+It is included in the Hazelcast download package. When you extract the
+downloaded package, you will see the file `hazelcast.xml` under the `/bin` directory.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+
+[source,xml]
+----
+<!-- Add the below line to any place you like in the file `hazelcast-default.xml`. -->
+
+<hazelcast>
+    ...
+    <license-key>Your Enterprise License Key</license-key>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+--
+[source,yaml]
+----
+# Add the below line to any place you like in the file `hazelcast-default.yaml`.
+
+hazelcast:
+  ...
+  license-key: Your Hazelcast Enterprise or Enterprise HD License Key
+  ...
+----
+--
+Java::
++
+--
+[source,java]
+----
+// Programmatic configuration.
+
+Config config = new Config();
+config.setLicenseKey( "Your Enterprise License Key" );
+----
+--
+Spring XML::
++
+--
+[source,xml]
+----
+<hz:config>
+    ...
+    <hz:license-key>Your Enterprise License Key</hz:license-key>
+    ...
+</hz:config>
+----
+--
+
+JVM System Property::
++
+[source,shell]
+----
+-Dhazelcast.enterprise.license.key=Your Enterprise License Key
+----
+====
+
+[[license-key-format]]
+== License Key Format
+
+License keys have the following format:
+
+```
+<Name of the Hazelcast edition>#<Count of the Members>#<License key>
+```
+
+The strings before the `<License key>` is the human readable part. You
+can use your license key with or without this human readable part. So,
+both the following example license keys are valid:
+
+```
+HazelcastEnterpriseHD#2Nodes#1q2w3e4r5t
+```
+
+```
+1q2w3e4r5t
+```

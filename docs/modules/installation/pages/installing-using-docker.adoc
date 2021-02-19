@@ -1,0 +1,48 @@
+= Docker
+[[installing-using-docker]]
+
+Hazelcast is distributed in a form of Docker images.
+
+* https://hub.docker.com/r/hazelcast/hazelcast[hazelcast/hazelcast^]: Hazelcast Docker image hosted on Docker Hub
+* https://hub.docker.com/r/hazelcast/hazelcast-enterprise[hazelcast/hazelcast-enterprise^]: Hazelcast Enterprise Docker image hosted on Docker Hub
+* https://catalog.redhat.com/software/containers/hazelcast/hazelcast-enterprise-4-rhel8/5ee38856ecb5246c090412bd[registry.connect.redhat.com/hazelcast/hazelcast-enterprise-4-rhel8^]: Red Hat certified Docker image hosted on Red Hat Container Catalog
+
+You can run the following command to launch the Hazelcast Docker container:
+
+[tabs] 
+==== 
+hazelcast:: 
++ 
+-- 
+
+[source,shell]
+----
+docker run hazelcast/hazelcast:$HAZELCAST_VERSION
+----
+--
+
+hazelcast-enterprise::
++
+--
+[source,shell]
+----
+docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> hazelcast/hazelcast-enterprise:$HAZELCAST_VERSION
+----
+--
+
+hazelcast-enterprise-4-rhel8::
++
+[source,shell]
+----
+# You must be logged into Red Hat Container Registry
+
+docker run -e HZ_LICENSE_KEY=<Your Enterprise License Key> registry.connect.redhat.com/hazelcast/hazelcast-enterprise-4-rhel8:$HAZELCAST_VERSION
+----
+====
+
+This command will pull Hazelcast Docker image and run a new Hazelcast instance.
+
+See the following for more details:
+
+* https://github.com/hazelcast/hazelcast-docker[Hazelcast and Hazelcast Enterprise Docker image documentation^]
+* https://github.com/hazelcast/hazelcast-openshift[Red Hat Hazelcast Enterprise Docker image documentation^]
