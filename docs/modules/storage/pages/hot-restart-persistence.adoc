@@ -1,6 +1,6 @@
 = Hot Restart Persistence
 
-[blue]*Hazelcast IMDG Enterprise Feature*
+[blue]*Hazelcast IMDG Pro Feature*
 
 This chapter explains Hazelcast's Hot Restart Persistence feature. It provides fast
 cluster restarts by storing the states of the cluster members on the disk.
