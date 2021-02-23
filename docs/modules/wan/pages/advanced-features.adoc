@@ -32,7 +32,7 @@ following options to synchronize your WAN replicated clusters:
 The following sections describe each. 
 
 [[synchronizing-wan-target-cluster]]
-=== Full WAN Synchronization
+== Full WAN Synchronization
 
 Full WAN synchronization sends all the data of an IMap to a target cluster to align the state of target IMap with source IMap.
 It is useful if two remote clusters lost their synchronizations due to overflow in the WAN queue or in restart scenarios.
@@ -115,7 +115,7 @@ NOTE: Synchronization for a target cluster operates only with
 the data residing in the memory. Therefore, evicted entries are not
 synchronized, not even if `MapLoader` is configured.
 
-=== Delta WAN Synchronization
+== Delta WAN Synchronization
 
 As explained in the previous section, the default <<synchronizing-wan-target-cluster, Full WAN Synchronization>> feature
 synchronizes  the maps in different clusters by transferring all the entries from the source to the target cluster.
@@ -134,7 +134,7 @@ NOTE: Currently, Delta WAN Synchronization is implemented only for Hazelcast IMa
 It will be implemented also for ICache in the future releases.
 
 [[requirements-for-delta-wan-sync]]
-==== Requirements
+=== Requirements
 
 To be able to use Delta WAN synchronization, the following must be met:
 
@@ -143,7 +143,7 @@ To be able to use Delta WAN synchronization, the following must be met:
 * Both clusters must use the same partitioning strategy.
 * Both clusters must have the Merkle tree structure enabled.
 
-==== Using Delta WAN Synchronization
+=== Using Delta WAN Synchronization
 
 To be able to use Delta WAN synchronization for a Hazelcast data structure:
 
@@ -355,7 +355,7 @@ NOTE: Merkle trees are created for each partition holding IMap data.
 Therefore, increasing the partition count also
 increases the efficiency of the Delta WAN Synchronization.
 
-===== The Process
+==== The Process
 
 Synchronizing the maps based on Merkle trees consists of two phases:
 
@@ -388,7 +388,7 @@ http://{member IP address:port}/hazelcast/rest/wan/sync/map
 See the REST call details xref:rest-api.adoc#synchronizing-the-clusters[here].
 
 
-===== Memory Consumption
+==== Memory Consumption
 
 Since Merkle trees are built for each partition and each map, the memory overhead of the trees with high entry count and deep
 trees can be significant. The trees are maintained on-heap, therefore - besides the memory consumption - garbage collection could be another
@@ -434,7 +434,7 @@ The table below shows a few examples for what the memory overhead could be.
 
 |===
 
-===== Defining the Depth
+==== Defining the Depth
 
 The efficiency of the Delta WAN Synchronization (WAN synchronization based on Merkle trees) is determined by the average number of entries per the tree
 leaves that is proportionate to the number of entries in the map. The bigger this average the more entries are getting
@@ -511,7 +511,7 @@ NOTE: The average entries per leaf number above assumes perfect distribution of 
 typically not true in real-life scenarios the efficiency can be slightly worse. The statistics section below describes how to
 get the actual average for the leaves involved in the synchronization.
 
-==== WAN Synchronization Statistics
+=== WAN Synchronization Statistics
 
 Both Full and Delta WAN Synchronization processes write statistics into the
 xref:management:diagnostics.adoc[diagnostics] subsystem and send them to Hazelcast Management
@@ -563,7 +563,7 @@ Merkle synchronization statistics:
 See the xref:management:diagnostics.adoc[Diagnostics section] to learn how to enable
 diagnostics and locate its log file to see the above statistics.
 
-==== Dynamically Adding WAN Publishers
+== Dynamically Adding WAN Publishers
 
 When running clusters for an extensive period, you might need to
 dynamically change the configuration while the cluster is running.
@@ -1134,4 +1134,160 @@ differently.
 The processing behavior is configured using the `consumer` element. It has the following sub-elements:
 
 * `persist-wan-replicated-data`: When set to `true`, an incoming event over WAN replication can be persisted to a database for example, otherwise it is not persisted. Default value is `false`.
+
+[[securing-wan-connections]]
+== Securing the Connections for WAN Replication
+
+You can secure the communications between the endpoints on the WAN replicated clusters
+using security features such as TLS/SSL, socket interceptor and encryption.
+WAN connections, cluster members and clients can
+have their own unique security configurations. You can also choose to have
+security features configured on some of the WAN connections/members/clients and not on the others.
+
+Multiple WAN endpoint configurations can be defined to configure the outgoing
+connections and server sockets, depending on the role of the member in the WAN
+replication. The configuration examples are provided in the following sections for
+both active and passive side of the WAN replication.
+
+=== Configuring the WAN Active Side
+
+The members on the active cluster initiate connections to the target cluster members,
+so there is no need to create a server socket. A plain `EndpointConfig` is created that
+supplies the configuration for the client side of connections that the active members
+will create:
+
+[source,java]
+----
+include::{javasource}/settingupclusters/AdvancedNetworkConfig.java[tag=wanActiveEndpoint]
+----
+
+The following is the equivalent declarative configuration:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <advanced-network enabled="true">
+        <wan-endpoint-config name="tokyo">
+            <ssl enabled="true">
+                <factory-class-name>com.hazelcast.examples.MySSLContextFactory</factory-class-name>
+                <properties>
+                    <property name="endpoints">tokyo.example.com:11010</property>
+                </properties>
+            </ssl>
+        </wan-endpoint-config>
+    </advanced-network>
+    ...
+    <wan-replication name="replicate-to-tokyo">
+        <batch-publisher>
+            <cluster-name>clusterB</cluster-name>
+            <target-endpoints>...</target-endpoints>
+            <endpoint>tokyo</endpoint>
+        </batch-publisher>
+    </wan-replication>
+    ...
+    <map name="customer">
+        <wan-replication-ref name="replicate-to-tokyo">
+            <merge-policy>...</merge-policy>
+        </wan-replication-ref>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  advanced-network:
+    enabled: true
+    wan-endpoint-config:
+      endpoint-tokyo:
+        ssl:
+          enabled: true
+          factory-class-name: com.hazelcast.examples.MySSLContextFactory
+          properties:
+            endpoints: tokyo.example.com:11010
+    wan-replication:
+      replicate-to-tokyo:
+        batch-publisher:
+          cluster-name: clusterB
+          target-endpoints: ...
+          endpoint: tokyo
+    map:
+      customer:
+        wan-replication-ref:
+          replicate-to-tokyo:
+            merge-policy-class-name: ...
+----
+====
+
+The `wan-endpoint-config` element contains the same sub-elements as the
+`member-server-socket-endpoint-config` element described
+in the xref:clusters:advanced-network-configuration.adoc[Advanced Network Configuration section] except `port`, `public-address` and `reuse-address`.
+
+=== Configuring the WAN Passive Side
+
+On the passive cluster, a server socket is configured on the members to listen
+for the incoming WAN connections, matching the network configuration (SSL configuration,
+etc.) configured on the active side of the WAN replication.
+
+[source,java]
+----
+include::{javasource}/settingupclusters/AdvancedNetworkConfig.java[tag=wanPassiveEndpoint]
+----
+
+The following is the equivalent declarative configuration:
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <advanced-network enabled="true">
+        <wan-server-socket-endpoint-config name="tokyo">
+            <port auto-increment="false">11010</port>
+            <ssl enabled="true">
+                <factory-class-name>com.hazelcast.examples.MySSLContextFactory</factory-class-name>
+                <properties>
+                    <property name="foo">bar</property>
+                </properties>
+            </ssl>
+        </wan-server-socket-endpoint-config>
+    </advanced-network>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  advanced-network:
+    enabled: true
+    wan-server-socket-endpoint-config:
+      tokyo:
+        port:
+          auto-increment: false
+          port: 11010
+        ssl:
+          enabled: true
+          factory-class-name: com.hazelcast.examples.MySSLContextFactory
+        properties:
+          foo: bar
+----
+====
 
