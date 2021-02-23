@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 = Hot Restart Persistence
 
 [blue]*Hazelcast IMDG Enterprise Feature*
@@ -2266,5 +2265,4 @@ The following is an equivalent programmatic configuration:
 [source,java]
 ----
 include::{javasource}/storage/SampleEncryptionAtRestConfiguration.java[tag=vault]
->>>>>>> 7b1bad05... Updating the Pro & Enterprise features section which was out of date.
 ----
