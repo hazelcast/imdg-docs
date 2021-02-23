@@ -29,11 +29,9 @@ this manual:
 of Hazelcast in-memory data grid middleware. **Hazelcast** is also the
 name of the company (Hazelcast, Inc.) providing the Hazelcast product.
 * [navy]*Hazelcast IMDG Pro* is a commercially licensed edition of
-Hazelcast IMDG which provides various cloud and Management Center plugins
-in addition to Hazelcast IMDG.
+Hazelcast IMDG which provides CP Sub-system Persistence, Hot Restart Persistence & Unlimited Members on Hazelcast Management Center (This is restricted to 3 members on the freely available but unlicensed version of Management Center)
 * [blue]*Hazelcast IMDG Enterprise* is a commercially licensed edition of
-Hazelcast IMDG which provides High-Density Memory Store, Hot Restart
-Persistence features and Security suite in addition to Hazelcast IMDG Pro.
+Hazelcast IMDG which provides all the features of the Pro Edition, plus High-Density Memory Store, Security Suite (RBAC, TLS, Mutual Auth, Client Certificates), WAN Replication (Sync data between two geo-replicated clusters) & Blue/Green Deployments.
 
 The Pro and Enterprise editions offer all the features of the open source edition.
 
