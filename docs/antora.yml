@@ -6,7 +6,7 @@ asciidoc:
   attributes:
     javasource: ROOT:example$
     page-toclevels: 1
-    page-ghissue: https://github.com/hazelcast/hazelcast-reference-manual/issues/new
+    page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
     javadocBaseUrl: https://docs.hazelcast.org/docs/
 nav:
 - modules/ROOT/nav.adoc
