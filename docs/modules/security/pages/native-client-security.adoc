@@ -300,6 +300,41 @@ all:
 ----
 ====
 
+[[management-permission]]
+
+**Management Permission:**
+
+This permission defines which
+client principals/endpoints are allowed to perform management tasks
+(i.e. client supposed to be used by Hazelcast Management Center).
+
+[tabs]
+====
+XML::
++
+--
+
+[source,xml]
+----
+<management-permission principal="mcadmin">
+    <endpoints>
+        ...
+    </endpoints>
+</management-permission>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+management:
+  principal: mcadmin
+  endpoints:
+    - ..
+----
+====
+
 **Map Permission:**
 
 Actions: all, create, destroy, put, read, remove, lock, intercept, index, listen
