@@ -34,7 +34,7 @@ XML::
               </authentication>
           </realm>
       </realms>
-      <member-authentication realm="clientRealm"/>
+      <client-authentication realm="clientRealm"/>
     </security>
     ...
 </hazelcast>
@@ -54,7 +54,7 @@ hazelcast:
         ldap:
           url: ldap://corp-ldap.example.com/
           role-mapping-attribute: cn
-    member-authentication:
+    client-authentication:
       realm: clientRealm
 ----
 ====
