@@ -93,7 +93,7 @@ hazelcast-client:
 ----
 ====
 
-On the clients, You can use the same identity types as in security realms:
+On the clients, you can use the same identity types as in security realms:
 
 * `username-password`
 * `token`
