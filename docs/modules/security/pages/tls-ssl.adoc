@@ -329,6 +329,18 @@ incoming TLS connections without verifying if the connecting side is trusted.
 Therefore it's recommended to require the mutual authentication in Hazelcast
 members configuration.
 
+== TLS/SSL for WAN Replication
+
+Hazelcast allows you to secure the communications between the
+WAN replicated clusters using TLS/SSL. WAN connections, cluster members
+and clients can have their own unique TLS/SSL certificates. You can also
+choose to have TLS/SSL configured on some of the members/clients and not on
+the others.
+
+You can configure TLS/SSL for WAN replication using the advanced network configuration.
+See the xref:wan:advanced-features.adoc#securing-wan-connections.adoc[Securing the Connections for WAN Replication section]
+for the details.
+
 == TLS/SSL Performance Improvements for Java
 
 TLS/SSL can have a significant impact on performance. There are a few ways to
