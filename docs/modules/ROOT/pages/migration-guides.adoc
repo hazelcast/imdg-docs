@@ -1421,7 +1421,7 @@ public class Main {
 
 === WAN Replication Configuration Changes
 
-Previously, Configuring WAN replication was problematic:
+Previously, configuring WAN replication was problematic:
 
 * You needed to specify the fully qualified class name of the WAN implementation that should be used.
 In most cases, this was the built-in Hazelcast IMDG Enterprise Edition (EE) implementation.
