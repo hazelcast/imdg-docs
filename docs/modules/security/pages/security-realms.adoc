@@ -10,7 +10,7 @@ The realm is a named configuration and other modules just reference it by name.
 ====
 XML::
 +
--- 
+--
 
 [source,xml]
 ----
@@ -979,14 +979,15 @@ YAML::
 [source,yaml]
 ----
 realms:
-  name: tokenRealm1
-    identity:
-      token: Hazelcast
-  name: tokenRealm2
-    identity:
-      token:
-        encoding: base64
-        value: SGF6ZWxjYXN0
+  - name: tokenRealm1
+      identity:
+        token:
+          value: Hazelcast
+  - name: tokenRealm2
+      identity:
+        token:
+          encoding: base64
+          value: SGF6ZWxjYXN0
 ----
 ====
 
