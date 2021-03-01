@@ -6,10 +6,10 @@ Realms allow configuring JAAS authentication and/or own identity
 independently on the module which consumes this configuration.
 The realm is a named configuration and other modules just reference it by name.
 
-[tabs] 
-==== 
-XML:: 
-+ 
+[tabs]
+====
+XML::
++
 -- 
 
 [source,xml]
@@ -67,11 +67,11 @@ custom login modules and ordering them in a login module stack.
 The following is a sample configuration which authenticates against an LDAP server or
 database as a fallback:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -339,11 +339,11 @@ include::{javasource}/security/ldap/CustomSSLSocketFactory.java[]
 
 The authentication configuration could look like as follows:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -369,11 +369,11 @@ The LDAP authentication is backed by the JNDI API in Java.
 It has also the failover support. You can configure multiple space-separated
 URLs in the `<url>` option:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -417,11 +417,11 @@ implementations (find the correct login module and its options in your Java
 documentation). On the Hazelcast side, the `security-ream` property allows
 referencing another realm with `Krb5LoginModule` configured.
 
-[tabs] 
-==== 
-Sample Kerberos Identity Configuration XML:: 
-+ 
--- 
+[tabs]
+====
+Sample Kerberos Identity Configuration XML::
++
+--
 
 [source,xml]
 ----
@@ -529,11 +529,11 @@ accept the Kerberos tickets and verify them. Again the Kerberos
 authentication is delegated to another realm with the Kerberos login module
 configured.
 
-[tabs] 
-==== 
-Sample Kerberos Identity Configuration XML:: 
-+ 
--- 
+[tabs]
+====
+Sample Kerberos Identity Configuration XML::
++
+--
 
 [source,xml]
 ----
@@ -668,11 +668,11 @@ an LDAP server (usually the one backing the Kerberos KDC server, too).
 Therefore the `<ldap>` authentication configuration is also available as
 sub-configuration of the `<kerberos>` authentication.
 
-[tabs] 
-==== 
-Sample Kerberos Identity Configuration XML:: 
-+ 
--- 
+[tabs]
+====
+Sample Kerberos Identity Configuration XML::
++
+--
 
 [source,xml]
 ----
@@ -728,11 +728,11 @@ Instead it's possible to define the `principal` and `keytabFile` options in the
 If these options are used instead of the `security-realm`, then a new temporary
 realm is generated on the fly during the authentication.
 
-[tabs] 
-==== 
-Sample Kerberos Identity Configuration XML:: 
-+ 
--- 
+[tabs]
+====
+Sample Kerberos Identity Configuration XML::
++
+--
 
 [source,xml]
 ----
@@ -816,11 +816,11 @@ This authentication type is able to parse a role name from the client's certific
 subject DN. The `<tls>` element has an attribute, `roleAttribute`, which specifies
 a part of DN to be used as a role name.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -918,11 +918,11 @@ A `PasswordCredentials` implementation can be configured as a
 simple identity representation. It is configured by the `<username-password/>`
 XML configuration element as shown below:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -962,11 +962,11 @@ as its value.
 
 The following two realms define the same token value - bytes of the "Hazelcast" string:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -1018,11 +1018,11 @@ The properties are provided in the `init(Properties)` method.
 
 A sample configuration is shown below:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
@@ -1050,11 +1050,11 @@ Hazelcast IMDG 4.1 introduces a limited support of security realms in native cli
 The configuration allows specifying JAAS login modules which can be referenced from
 the Kerberos identity configuration.
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 
 [source,xml]
 ----
