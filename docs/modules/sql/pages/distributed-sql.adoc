@@ -5,6 +5,10 @@ The SQL service provided by Hazelcast allows you to query data stored in `IMap` 
 WARNING: The SQL feature is currently in beta. The compatibility between versions
 is not guaranteed. API might change between versions without notice.
 
+NOTE: If you're using the `hazelcast-all` or `hazelcast-enterprise-all` packages, the `hazelcast-sql`
+module is included in them by default. If not, i.e., you are using `hazelcast` or `hazelcast-enterprise`,
+then you need to have `hazelcast-sql` in the classpath.
+
 == Example: How to Query an IMap using SQL
 
 Consider that we have a map called `emp` that contains values of type `Employee`:
