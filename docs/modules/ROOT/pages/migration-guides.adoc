@@ -112,6 +112,11 @@ If Hazelcast IMDG detects that there are many active threads,
 response- and write-through are disabled so it won't cause a performance
 degradation.
 
+=== Renaming `GroupProperty`
+
+The `GroupProperty` class that defines the Hazelcast system properties
+has been renamed as `ClusterProperty` to align with the change mentioned <<group-to-cluster, here>>.
+
 === Removing Deprecated Client Configurations
 
 The following methods of https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/client/config/ClientConfig.html[ClientConfig^] have been refactored:
@@ -627,6 +632,7 @@ Hazelcast IMDG defaults to use OpenSSL when:
 
 === Changes in Security Configurations
 
+[[group-to-cluster]]
 ==== Replacing `group` by Simple Cluster Name Configuration
 
 The `GroupConfig` class has been removed. Both the client and member configurations have
