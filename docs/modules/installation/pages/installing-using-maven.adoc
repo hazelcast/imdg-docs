@@ -34,30 +34,34 @@ Hazelcast Enterprise Edition::
 +
 [source,xml,subs="attributes+"]
 ----
-<!-- You need to define following repository: -->
-<repository>
-    <id>Hazelcast Private Release Repository</id>
-    <url>https://repository.hazelcast.com/release/</url>
-</repository>
-<!-- Optional repository if you want to use latest snapshots -->
-<repository>
-    <id>Hazelcast Private Snapshot Repository</id>
-    <url>https://repository.hazelcast.com/snapshot/</url>
-</repository>
+<repositories>
+    <!-- You need to define following repository: -->
+    <repository>
+        <id>Hazelcast Private Release Repository</id>
+        <url>https://repository.hazelcast.com/release/</url>
+    </repository>
+    <!-- Optional repository if you want to use latest snapshots -->
+    <repository>
+        <id>Hazelcast Private Snapshot Repository</id>
+        <url>https://repository.hazelcast.com/snapshot/</url>
+    </repository>
+</repositories>
 
-<!-- You also need to define following dependencies: -->
-<dependency>
-    <groupId>com.hazelcast</groupId>
-    <artifactId>hazelcast-enterprise-all</artifactId>
-    <version>{page-component-display-version}</version>
-</dependency>
-<!-- Optional dependency for including JavaDoc -->
-<dependency>
-    <groupId>com.hazelcast</groupId>
-    <artifactId>hazelcast-enterprise-all</artifactId>
-    <version>{page-component-display-version}</version>
-    <classifier>javadoc</classifier>
-</dependency>
+<dependencies>
+    <!-- You also need to define following dependencies: -->
+    <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-enterprise-all</artifactId>
+        <version>4.1.1</version>
+    </dependency>
+    <!-- Optional dependency for including JavaDoc -->
+    <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-enterprise-all</artifactId>
+        <version>4.1.1</version>
+        <classifier>javadoc</classifier>
+    </dependency>
+</dependencies>
 ---- 
 ====
 
