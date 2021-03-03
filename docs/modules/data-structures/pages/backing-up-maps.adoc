@@ -1,0 +1,165 @@
+= Backing Up Maps
+:description: Backing up maps helps to protect your data in case a cluster member goes down. For each backup, Hazelcast creates a copy of the map and distributes it across another member. Because each backup is a copy, the number of backups in your cluster affects the amount of memory that your members need.
+:url-monotonic-reads: https://en.wikipedia.org/wiki/Consistency_model#Monotonic_read_consistency
+
+[[backing-up-maps]]
+
+{description}
+
+When you write an entry to a map, Hazelcast calculates which partition should store this entry, using the hash of the key. This partition is called the primary partition and is owned by one member in the cluster.
+
+For example, in a single member cluster, all map entries are stored in partitions on one member. If you have a map that contains captial cities, the entries are distributed across the single member's partitions.
+
+image:ROOT:1Node.png[Map Entries in a Single Member]
+
+To back up map entries, you need to configure a backup count for the map to specify the number of backups that you want. By default, maps have one backup. If a member goes down, your data is recovered using this backup.
+
+For example, in a cluster with two members, map entries are distributed almost equally among them.
+
+image:ROOT:2Nodes.png[Backup Map Entries in blue are partitioned across two members]
+
+== Choosing a Backup Count
+
+To provide data safety, Hazelcast allows you to specify the number of backup copies you want to have. That way, data on one member is copied onto other members.
+
+The backup count is equal to the number of members on which you want to store a copy of your map entries.
+
+NOTE: When you write data to a map, that data is also written to any backups. As a result, the more backups you configure, the slower write operations may become. If performance is more important to your application than backing up a map, you can <<disabling-backups, disable backups>>.
+
+== Backup Types
+
+Maps can be backed up synchronously and asynchronously.
+
+By default, all backup operations are synchronous. In this case, backup operations, such as adding or removing a backup, block other operations until the backups are acknowledged are received. As a result, synchronous backup operations have a blocking cost which may lead to latency issues.
+
+Asynchronous backups do not block operations. They are fire & forget and
+do not require acknowledgements; the backup operations are performed at some point in time.
+
+To learn how Hazelcast keeps backups consistent with primary partitions, see xref:consistency-and-replication:consistency.adoc[Consistency and Replication Model].
+
+[NOTE]
+====
+A map can have both synchronous and asynchronous backups at the same time.
+
+The maximum number of backups you can have in a cluster is 6.
+====
+
+[[creating-sync-backups]]
+== Creating Synchronous Backups
+
+To create synchronous backups, set the number of backups that you want, using the `backup-count` property.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="default">
+        <backup-count>1</backup-count>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    default:
+      backup-count: 1
+----
+====
+
+[[creating-async-backups]]
+== Creating Asynchronous Backups
+
+To create asynchronous backups, set the number of backups that you want, using the `async-backup-count` property.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="default">
+        <backup-count>0</backup-count>
+        <async-backup-count>1</async-backup-count>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    default:
+      backup-count: 0
+      async-backup-count: 1 
+----
+====
+
+== Disabling Backups
+
+To disable backups, set the `backup-count` and `async-backup-count` properties to 0.
+
+[[enabling-backup-reads]]
+== Enabling Backup Reads (Embedded Mode)
+
+If you use Hazelcast in embedded mode, you can enable local members to read map data from their local backups. By doing so, local members do not need to make unnecessary requests to the owner of the primary partition, reducing latency and improving performance. For details about how Hazelcast decides which member owns the primary partition, see xref:overview:data-partitioning.adoc#how-the-data-is-partitioned[How Data is Partitioned].
+
+NOTE: Backup reads that are requested by Hazelcast clients are ignored since this operation is performed on the local entries.
+
+WARNING: Although backup reads can improve performance, they can also cause stale reads while still preserving the link:{url-monotonic-reads}[monotonic-reads] property.
+
+[WARNING]
+====
+Maximum idle seconds and time-to-live seconds expiration settings apply only to reads on the primary partition. Therefore, reading from backups may cause the key on the primary partition to expire.
+====
+
+To allow a local member to read a map entry from its own backup, set the value of the `read-backup-data` property to `true`.
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="default">
+        <backup-count>0</backup-count>
+        <async-backup-count>1</async-backup-count>
+        <read-backup-data>true</read-backup-data>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    default:
+      backup-count: 0
+      async-backup-count: 1
+      read-backup-data: true 
+----
+====
