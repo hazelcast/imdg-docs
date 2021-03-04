@@ -29,7 +29,7 @@ For example, in a cluster with members running on version 3.11.1,
 it is possible to perform a rolling upgrade to 3.11.2 by shutting
 down, upgrading to `hazelcast-3.11.2.jar` binary and starting each
 member one by one. Rolling upgrade for patch versions
-is supported in the open source, Pro, and Enterprise editions of Hazelcast IMDG.
+is supported in the open source, Pro, or Enterprise editions of Hazelcast IMDG.
 
 Also, each minor version is compatible with the previous one (back until
 Hazelcast IMDG 3.8). For example, it is possible to perform a rolling

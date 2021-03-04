@@ -305,8 +305,7 @@ hazelcast:
 
 Multiple WAN endpoint configurations can be defined to configure the outgoing
 connections and server sockets, depending on the role of the member in the WAN
-replication. The configuration examples are provided in the following sections for
-both active and passive side of the WAN replication.
+replication. See the xref:wan:advanced-features.adoc#securing-wan-connections.adoc[Securing the Connections for WAN Replication section] for the configuration examples.
 
 === Configuring the WAN Active Side
 
