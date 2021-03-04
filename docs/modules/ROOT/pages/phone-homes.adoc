@@ -27,6 +27,7 @@ The following information is sent in a phone home:
 ** Version of operating system
 ** Version of installed Java
 ** Name of Java Virtual Machine
+** Classpath of Java Virtual Machine
 * Hazelcast IMDG Enterprise specific:
 ** Flag for Hazelcast Enterprise
 ** Hash value of license key
