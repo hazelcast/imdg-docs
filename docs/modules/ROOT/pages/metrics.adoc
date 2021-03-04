@@ -29,12 +29,12 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`client.endpoint.count`
 |count
 |INFO
-|60000
+| the number of endpoints for this member. (For each client connected to a member, a client endpoint is available
 
 |`client.endpoint.totalRegistrations`
 |count
 |INFO
-|60000
+|the total number of client endpoint registrations
 
 |`cluster.clock.clusterStartTime`
 |ms
@@ -54,7 +54,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`cluster.clock.clusterUpTime`
 |ms
 |INFO
-|60000
+|the uptime for the cluster. It's equal to currentTime - clusterStartTime
 
 |`cluster.clock.localClockTime`
 |ms
@@ -69,32 +69,85 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`cluster.heartbeat.lastHeartbeat`
 |ms
 |INFO
-|
+|the timestamp of last local heartbeat of this member **(investigate it more)
 
 |`cluster.size`
 |count
 |INFO
+|the size of the cluster
+
+|event.eventQueueSize
+|count
+|INFO
 |
+
+|event.eventsProcessed
+|count
+|INFO
+|
+
+|event.listenerCount
+service=hz:core:proxyService,
+|count
+|
+
+|event.publicationCount
+service=hz:core:partitionService,
+|count
+|INFO
+
+|event.publicationCount
+service=hz:core:proxyService,|count
+
+|event.queueCapacity
+|count
+
+|event.rejectedCount
+|count
+
+|event.syncDeliveryFailureCount
+|count
+
+|event.threadCount
+|count
+
+|event.totalFailureCount
+|count
+
+|file.partition.freeSpace
+|bytes
+|INFO
+|
+
+|file.partition.totalSpace
+|bytes
+|INFO
+|
+
+|file.partition.usableSpace
+|bytes
+|INFO
+|the amount of usable space in the given dir=user.home,
 
 |`gc.majorCount`
 |count
 |INFO
-|
+|the total number of major garbage collections that have occurred
 
 |`gc.majorTime`
 |ms
 |INFO
-|
+|the accumulated elapsed time in major gc's 
 
 |`gc.minorCount`
 |count
 |INFO
-|
+|the total number of minor garbage collections that have occurred
 
 |`gc.minorTime`
 |ms
 |INFO
-|
+|the accumulated elapsed time in minor gc's 
 
 |`gc.unknownCount`
 |count
@@ -109,62 +162,62 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`memory.committedHeap`
 |bytes
 |INFO
-|
+|the amount of memory in bytes that is committed for the JVM to use
 
 |`memory.committedNative`
 |bytes
 |INFO
-|
+|the amount of native memory in bytes that is committed for current HazelcastInstance to use
 
 |`memory.freeHeap`
 |bytes
 |INFO
-|
+|the amount of free memory in the JVM
 
 |`memory.freeNative`
 |bytes
 |INFO
-|
+|the amount of free native memory in current HazelcastInstance
 
 |`memory.freePhysical`
 |bytes
 |INFO
-|
+|the amount of free physical memory available in OS
 
 |`memory.maxHeap`
 |bytes
 |INFO
-|
+|the maximum amount of memory that the JVM will attempt to us
 
 |`memory.maxMetadata`
 |bytes
 |INFO
-|
+|the amount of native memory reserved for metadata. This memory is separate and not accounted for by the NativeMemory statistics.
 
 |`memory.maxNative`
 |bytes
 |INFO
-|
+|the maximum amount of native memory that current HazelcastInstance will attempt to use
 
 |`memory.totalPhysical`
 |bytes
 |INFO
-|
+|the amount of total physical memory available in OS
 
 |`memory.usedHeap`
 |bytes
 |INFO
-|
+|the amount of used memory in the JVM
 
 |`memory.usedMetadata`
 |bytes
 |INFO
-|
+|the amount of used metadata memory
 
 |`memory.usedNative`
 |bytes
 |INFO
-|
+|the amount of used native memory in current HazelcastInstance
 
 |`operation.asyncOperations`
 |count
@@ -440,7 +493,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.activePartitionCount`
 |count
 |INFO
-|
+|the number of partitions assigned to the member
 
 |`partitions.completedMigrations`
 |count
@@ -465,7 +518,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.lastRepartitionTime`
 |ms
 |INFO
-|
+|the latest time the repartition took place
 
 |`partitions.localPartitionCount`
 |count
@@ -475,7 +528,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.maxBackupCount`
 |count
 |INFO
-|
+|MaxAllowedBackupCount
 
 |`partitions.memberGroupsSize`
 |count
@@ -500,7 +553,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.plannedMigrations`
 |count
 |INFO
-|
+|the number of planned migrations on the latest repartitioning round
 
 |`partitions.replicaSyncRequestsCounter`
 |count
@@ -515,7 +568,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.stateStamp`
 |count
 |INFO
-|
+|the stamp value for the current partition table. Stamp is calculated by hashing the individual partition versions using MurmurHash3. If stamp has this initial value, 0L, then that means partition table is not initialized yet.
 
 |`partitions.totalCompletedMigrations`
 |count
