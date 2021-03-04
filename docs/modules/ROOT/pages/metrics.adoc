@@ -110,6 +110,7 @@ service=hz:core:proxyService,|count
 
 |event.threadCount
 |count
+|the number of threads for the event service executor
 
 |event.totalFailureCount
 |count
@@ -117,7 +118,7 @@ service=hz:core:proxyService,|count
 |file.partition.freeSpace
 |bytes
 |INFO
-|
+|for the partition of the user.home
 
 |file.partition.totalSpace
 |bytes
@@ -222,7 +223,7 @@ service=hz:core:proxyService,|count
 |`operation.asyncOperations`
 |count
 |INFO
-|
+|the number of current executing async operations on the operation service of the member
 
 |`operation.callTimeoutCount`
 |count
@@ -237,7 +238,7 @@ service=hz:core:proxyService,|count
 |`operation.failedBackups`
 |count
 |INFO
-|
+|the number of failed backup operations on the operation service of the member
 
 |`operation.genericPriorityQueueSize`
 |count
@@ -252,7 +253,7 @@ service=hz:core:proxyService,|count
 |`operation.genericThreadCount`
 |count
 |INFO
-|
+|the number of generic operation handler threads in the member
 
 |`operation.invocations.backupTimeoutMillis`
 |ms
@@ -332,7 +333,7 @@ service=hz:core:proxyService,|count
 |`operation.partitionThreadCount`
 |count
 |INFO
-|the number of partition threads
+|the number of partition operation handler threads for given member
 
 |`operation.priorityQueueSize`
 |count
@@ -397,7 +398,7 @@ service=hz:core:proxyService,|count
 |`operation.thread.completedOperationBatchCount`
 |count
 |INFO
-|
+|  'batch' of tasks to be executed on a partition thread.
 
 |`operation.thread.completedPacketCount`
 |count
@@ -523,12 +524,12 @@ service=hz:core:proxyService,|count
 |`partitions.localPartitionCount`
 |count
 |INFO
-|
+|the number of partitions currently owned by given member
 
 |`partitions.maxBackupCount`
 |count
 |INFO
-|MaxAllowedBackupCount
+|
 
 |`partitions.memberGroupsSize`
 |count
@@ -548,7 +549,7 @@ service=hz:core:proxyService,|count
 |`partitions.partitionCount`
 |count
 |INFO
-|
+|Total partition count
 
 |`partitions.plannedMigrations`
 |count
@@ -563,7 +564,7 @@ service=hz:core:proxyService,|count
 |`partitions.replicaSyncSemaphore`
 |count
 |INFO
-|
+|the permits count of replica sync semaphore
 
 |`partitions.stateStamp`
 |count
@@ -674,22 +675,22 @@ service=hz:core:proxyService,|count
 |`thread.daemonThreadCount`
 |COUNT
 |INFO
-|the number of daemon threads
+|the current number of live daemon  in the JVM
 
 |`thread.peakThreadCount`
 |COUNT
 |INFO
-|
+|the peak live thread count since the JVM started
 
 |`thread.threadCount`
 |COUNT
 |INFO
-|
+|the current number of live threads including both daemon and non-daemon threads in the JVM
 
 |`thread.totalStartedThreadCount`
 |COUNT
 |INFO
-|
+|the total number of threads started since the JVM started
 
 |`transactions.commitCount`
 |COUNT
