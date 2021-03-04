@@ -12,22 +12,45 @@ This is a tool using which you can install and run Hazelcast IMDG and Management
 on your Unix-like local environments. You need https://www.oracle.com/java/technologies/javase-downloads.html[JRE 8 or newer^]
 as a prerequisite.
 
-This tool comes with your Hazelcast IMDG download package.
-When you extract the package, you see the "hazelcast-command-line" directory.
+You can install this tool using its Homebrew, RPM, or Debian packages:
 
-To install and start using the tool, follow these steps:
+[tabs] 
+==== 
+Homebrew:: 
++ 
+-- 
+[source,bash]
+----
+$ brew tap hazelcast/hz
+$ brew install hazelcast
+----
+--
+Debian::
++
+[source,bash]
+----
+$ wget -qO - https://repository.hazelcast.com/api/gpg/key/public | sudo apt-key add -
+$ echo "deb https://repository.hazelcast.com/debian stable main" | sudo tee -a /etc/apt/sources.list
+$ sudo apt update && sudo apt install hazelcast
+----
+RPM::
++
+[source,bash]
+----
+$ wget https://repository.hazelcast.com/rpm/hazelcast-rpm.repo -O hazelcast-rpm.repo
+$ sudo mv hazelcast-rpm.repo /etc/yum.repos.d/
+$ sudo yum install hazelcast
+----
+====
 
-. Run the following commands in the extracted IMDG directory:
-+
+Alternatively, you can manually download and install this tool using
+the TAR package on its GitHub https://github.com/hazelcast/hazelcast-command-line/releases[repo^].
+After you download and extract the package, you see the `hazelcast-<version>` directory.
+Simply run the following commands to install it:
+
 ```
-cd hazelcast-command-line/distro
-make
-```
-. When the `make` command finishes, run the following commands:
-+
-```
-cd build/dist/bin
-./hz
+$ cd hazelcast-<version>/bin
+$ ./hz
 ```
 
 You are now ready to use the tool.
