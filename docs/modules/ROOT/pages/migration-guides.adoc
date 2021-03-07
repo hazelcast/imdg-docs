@@ -5,7 +5,7 @@ See also the https://docs.hazelcast.org/docs/rn/index.html[release notes^] docum
 for the changes for each Hazelcast IMDG release.
 
 [[migrating-from-3-12-to-4-0-4-1]]
-=== Migrating Between IMDG 3.12 and 4.0/4.1 Releases
+== Migrating Between IMDG 3.12 and 4.0/4.1 Releases
 
 NOTE: If you want to migrate between 3.12 and 4.0/4.1 releases
 using this tool, you need to contact the Hazelcast Sales department at
