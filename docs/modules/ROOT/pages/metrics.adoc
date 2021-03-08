@@ -87,33 +87,31 @@ The table below lists the metrics with their explanations in alphabetical order.
 |
 
 |event.listenerCount
-service=hz:core:proxyService,
 |count
-|
+|the number of subscribed listeners for the specified service
 
 |event.publicationCount
-service=hz:core:partitionService,
 |count
-|INFO
-
-|event.publicationCount
-service=hz:core:proxyService,|count
+|the number of published events for a specified service
 
 |event.queueCapacity
 |count
+|the queue capacity of the executor processing the events. This capacity is shared for all service events
 
 |event.rejectedCount
 |count
+|the number of rejected events. If the event is not accepted to the executor in `hazelcast.event.queue.timeout.millis`(see xref:system-properties.adoc[]), it will be rejected and not processed
 
 |event.syncDeliveryFailureCount
 |count
 
 |event.threadCount
 |count
-|the number of threads for the event service executor
+|the number of threads for the event service executor (the event thread count)
 
 |event.totalFailureCount
 |count
+|the number of events that fail to be published
 
 |file.partition.freeSpace
 |bytes
@@ -228,7 +226,7 @@ service=hz:core:proxyService,|count
 |`operation.callTimeoutCount`
 |count
 |INFO
-|
+|the number of operation calls ran into a timeout
 
 |`operation.completedCount`
 |count
@@ -253,7 +251,7 @@ service=hz:core:proxyService,|count
 |`operation.genericThreadCount`
 |count
 |INFO
-|the number of generic operation handler threads in the member
+|the number of generic operation handler threads in the member.
 
 |`operation.invocations.backupTimeoutMillis`
 |ms
@@ -348,7 +346,7 @@ service=hz:core:proxyService,|count
 |`operation.responseQueueSize`
 |count
 |INFO
-|
+|the total queue size for 
 
 |`operation.responses.backupCount`
 |count
@@ -378,12 +376,12 @@ service=hz:core:proxyService,|count
 |`operation.retryCount`
 |count
 |INFO
-|
+|the number of retried operations
 
 |`operation.runningCount`
 |count
 |INFO
-|
+|the number of currently running operations
 
 |`operation.runningGenericCount`
 |count
@@ -448,12 +446,12 @@ service=hz:core:proxyService,|count
 |`os.freeSwapSpaceSize`
 |BYTE
 |INFO
-|
+|the amount of free swap space size 
 
 |`os.maxFileDescriptorCount`
 |count
 |INFO
-|the max number of open file descriptors (only for UNIX platforms).
+|the maximum number of open file descriptors (only for UNIX platforms).
 
 |`os.openFileDescriptorCount`
 |count
@@ -468,7 +466,7 @@ service=hz:core:proxyService,|count
 |`os.processCpuTime`
 |ms
 |INFO
-|
+|the amount of time for which a CPU was used
 
 |`os.systemCpuLoad`
 |percentage
@@ -519,7 +517,7 @@ service=hz:core:proxyService,|count
 |`partitions.lastRepartitionTime`
 |ms
 |INFO
-|the latest time the repartition took place
+|the latest time that repartition took place
 
 |`partitions.localPartitionCount`
 |count
@@ -534,17 +532,17 @@ service=hz:core:proxyService,|count
 |`partitions.memberGroupsSize`
 |count
 |INFO
-|
+| the number of the member groups to be used in partition assignments
 
 |`partitions.migrationActive`
 |boolean
 |INFO
-|
+|the number of active migration tasks
 
 |`partitions.migrationQueueSize`
 |count
 |INFO
-|
+|the number of migration tasks in the migration queue
 
 |`partitions.partitionCount`
 |count
@@ -675,7 +673,7 @@ service=hz:core:proxyService,|count
 |`thread.daemonThreadCount`
 |COUNT
 |INFO
-|the current number of live daemon  in the JVM
+|the current number of live daemon thread in the JVM
 
 |`thread.peakThreadCount`
 |COUNT
