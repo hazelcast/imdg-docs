@@ -319,13 +319,9 @@ You can configure the Hazelcast members and Java clients declaratively with YAML
 installations of Hazelcast running on Java runtime version 8 or above.
 
 The structure of the YAML configuration follows the structure of the XML configuration.
-Therefore, you can rewrite the existing XML
-configurations in YAML easily. There are some differences between the XML and YAML languages
-that make the two declarative configurations to slightly derive as the the following examples show.
 
 In the YAML declarative configuration, mappings are used in which the name of the mapping node
-needs to be unique within its enclosing mapping. See the following example with
-configuring two maps in the same configuration file.
+needs to be unique within its enclosing mapping. See the following example of configuring two maps in the same configuration file.
 
 In the XML configuration files, we have two `<map>` elements as shown below.
 
@@ -435,5 +431,26 @@ hazelcast:
 ----
 
 You can refer to the full example YAML configuration files placed in the `/bin` folder
-of the downloadable `hazelcast-{page-component-display-version}.zip` after unzipping it. Please see the
-complete list of the full example YAML configurations <<configuring-declaratively, here>>.
+of the downloadable `hazelcast-{page-component-version}.zip` after unzipping it. Please see the
+complete list of the full example YAML configurations link:https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.yaml[here^].
+
+== Setting the Path to a Configuration File
+
+Before looking for configuration files either in your working directory or in the classpath, Hazelcast checks the `hazelcast.config` system property. For details about precedence, see xref:understanding-configuration.adoc#configuration-precedence[Configuration Precedence].
+
+You may want to use this option if you have configuration files for different environments and you want to start members with different configurations. For example, you may have a test configuration file and a production configuration file.
+
+```
+-Dhazelcast.config=`*`<path to the hazelcast.xml or hazelcast.yaml>
+```
+
+The path can be a regular one or a classpath reference with the prefix `classpath:`.
+
+[NOTE]
+====
+The suffix of the filename is used to determine the language of the configuration.
+If the suffix is `.xml` the
+configuration file is parsed as an
+XML configuration file. If it is `.yaml`, the configuration file is parsed as a
+YAML configuration file.
+====
