@@ -45,10 +45,6 @@ To retrieve all existing Hazelcast members, use the following:
 Hazelcast.getAllHazelcastInstances();
 ```
 
-NOTE: Hazelcast performs schema validation through the file `hazelcast-config-{page-component-version}.xsd`
-which comes with your Hazelcast libraries. Hazelcast throws a meaningful exception if there
-is an error in the declarative or programmatic configuration.
-
 If you want to specify your own configuration file to create `Config`, Hazelcast supports
 several ways including filesystem,
 classpath, InputStream and URL.
