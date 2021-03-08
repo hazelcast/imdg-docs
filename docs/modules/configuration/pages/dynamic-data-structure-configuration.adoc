@@ -1,7 +1,7 @@
 = Dynamically Adding Data Structure Configuration on a Cluster
 [[dynamically-adding-data-structure-configuration-on-a-cluster]]
 
-As described above, Hazelcast can be configured in a declarative or
+Hazelcast can be configured in a declarative or
 programmatic way; configuration must be completed before starting a
 Hazelcast member and this configuration cannot be altered at runtime,
 thus we refer to this as _static_ configuration.
