@@ -8,47 +8,38 @@ The table below lists the metrics with their explanations in alphabetical order.
 |===
 | Metric Name
 | Unit
-| Probe Level
 | Description
 
 |`classloading.loadedClassesCount`
 |count
-|INFO
 |the number of classes that are currently loaded
 
 |`classloading.totalLoadedClassesCount`
 |count
-|INFO
 |the total number of classes that have been loaded since the instance has started execution.
 
 |`classloading.unloadedClassesCount`
 |count
-|INFO
 |the total number of unloaded classes.
 
 |`client.endpoint.count`
 |count
-|INFO
-| the number of endpoints for this member. (For each client connected to a member, a client endpoint is available
+|the number of endpoints for this member. (For each client connected to a member, a client endpoint is available
 
 |`client.endpoint.totalRegistrations`
 |count
-|INFO
 |the total number of client endpoint registrations
 
 |`cluster.clock.clusterStartTime`
 |ms
-|INFO
 |60000
 
 |`cluster.clock.clusterTime`
 |ms
-|INFO
-|60000
+|the cluster time 
 
 |`cluster.clock.clusterTimeDiff`
 |ms
-|INFO
 |60000
 
 |`cluster.clock.clusterUpTime`
@@ -76,28 +67,29 @@ The table below lists the metrics with their explanations in alphabetical order.
 |INFO
 |the size of the cluster
 
-|cp.atomiclong.value
-id=counter@counter,name=counter,group=counter,
-|count
-|
-
-|event.eventQueueSize
+|cp.atomiclong.value id=counter@counter,name=counter,group=counter,
 |count
 |INFO
 |
 
-|event.eventsProcessed
+|`event.eventQueueSize`
 |count
 |INFO
 |
 
-|event.listenerCount
+|`event.eventsProcessed`
 |count
+|INFO
+|
+
+|`event.listenerCount`
+|count
+|INFO
 |the number of subscribed listeners for the specified service
 
-|event.publicationCount
+|`event.publicationCount`
 |count
-|the number of published events for a specified service
+|the number of published events for the specified service
 
 |event.queueCapacity
 |count
@@ -117,6 +109,26 @@ id=counter@counter,name=counter,group=counter,
 |event.totalFailureCount
 |count
 |the number of events that fail to be published
+
+|executor.internal.completedTasks
+|count
+|
+
+|executor.internal.maximumPoolSize
+|count
+|
+
+|executor.internal.poolSize
+|count
+|
+
+|executor.internal.queueSize
+|count
+|
+
+|executor.internal.remainingQueueCapacity
+|count
+|
 
 |file.partition.freeSpace
 |bytes
@@ -163,119 +175,119 @@ id=counter@counter,name=counter,group=counter,
 |INFO
 |
 
-|map.backupCount
+|`map.backupCount`
 |count
 |the number of backups per entry
 
-|map.backupEntryCount
+|`map.backupEntryCount`
 |count
 |the number of backup entries held by the member
 
-|map.backupEntryMemoryCost
+|`map.backupEntryMemoryCost`
 |bytes
 |the memory cost of backup entries in this member
 
-|map.creationTime
+|`map.creationTime`
 |ms
 |the creation time of the map on the member
 
-|map.dirtyEntryCount
+|`map.dirtyEntryCount`
 |count
 |the number of dirty (updated but not persisted yet) entries that the member owns
 
-|map.getCount
+|`map.getCount`
 |count
 |the number of get operations on the map
 
-|map.heapCost
+|`map.heapCost`
 |count
 |the total heap cost in bytes for the map
 
-|map.hits
+|`map.hits`
 |count
 |the number of hits (reads) of the locally owned entries
 
-|map.indexedQueryCount
+|`map.indexedQueryCount`
 |count
 |the total number of indexed queries performed on the map
 
-|map.lastAccessTime
+|`map.lastAccessTime`
 |ms
 |the last access (read) time of the locally owned entries
 
-|map.lastUpdateTime
+|`map.lastUpdateTime`
 |ms
 |the last update time of the locally owned entries
 
-|map.lockedEntryCount
+|`map.lockedEntryCount`
 |count
 |the number of dirty entries that the member owns
 
-|map.merkleTreesCost
+|`map.merkleTreesCost`
 |count
 |the heap cost of the Merkle trees
 
-|map.numberOfEvents
+|`map.numberOfEvents`
 |count
 |the number of events received
 
-|map.numberOfOtherOperations
+|`map.numberOfOtherOperations`
 |count
 |the total number of other operations
 
-|map.ownedEntryCount
+|`map.ownedEntryCount`
 |count
 |the number of entries owned by the member
 
-|map.ownedEntryMemoryCost
+|`map.ownedEntryMemoryCost`
 |bytes
 |the memory cost of owned entries in this member
 
-|map.putCount
+|`map.putCount`
 |count
 |the number of put operations on the map
 
-|map.queryCount
+|`map.queryCount`
 |count
 |the number of queries executed on the map (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
 
-|map.removeCount
+|`map.removeCount`
 |count
 |the number of remove operations on the map
 
-|map.setCount
+|`map.setCount`
 |count
 |the number of set operations on the map
 
-|map.totalGetLatency
+|`map.totalGetLatency`
 |ms
 |the total latency of get operations
 
-|map.totalMaxGetLatency
+|`map.totalMaxGetLatency`
 |ms
 |the maximum latency of get operations
 
-|map.totalMaxPutLatency
+|`map.totalMaxPutLatency`
 |ms
 |the maximum latency of put operations
 
-|map.totalMaxRemoveLatency
+|`map.totalMaxRemoveLatency`
 |ms
 |the maximum latency of remove operations
 
-|map.totalMaxSetLatency
+|`map.totalMaxSetLatency`
 |ms
 |the maximum latency of set operations
 
-|map.totalPutLatency
+|`map.totalPutLatency`
 |ms
 |the total latency of put operations
 
-|map.totalRemoveLatency
+|`map.totalRemoveLatency`
 |ms
 |the total latency of remove operations
 
-|map.totalSetLatency
+|`map.totalSetLatency`
 |ms
 |the total latency of set operations
 
@@ -382,7 +394,7 @@ id=counter@counter,name=counter,group=counter,
 |`operation.invocations.backupTimeouts`
 |count
 |INFO
-|
+|the number of times that the operation invocations having backups timed out
 
 |`operation.invocations.delayedExecutionCount`
 |count
@@ -392,7 +404,7 @@ id=counter@counter,name=counter,group=counter,
 |`operation.invocations.heartbeatBroadcastPeriodMillis`
 |ms
 |INFO
-|the period of heardbeat broadcast
+|the broadcast period of operation heartbeats (this heartbeat packets sent to inform the other member about if the operation is still alive)
 
 |`operation.invocations.heartbeatPacketsReceived`
 |count
@@ -407,7 +419,7 @@ id=counter@counter,name=counter,group=counter,
 |`operation.invocations.invocationScanPeriodMillis`
 |ms
 |INFO
-|
+|the period for scanning over pending invocations for getting rid of duplicates, checking for heartbeat timeout, and checking for backup timeout
 
 |`operation.invocations.invocationTimeoutMillis`
 |ms
@@ -417,17 +429,17 @@ id=counter@counter,name=counter,group=counter,
 |`operation.invocations.lastCallId`
 |count
 |INFO
-|
+|the last issued invocation call ID
 
 |`operation.invocations.normalTimeouts`
 |count
 |INFO
-|
+|the number of times the normal operation 
 
 |`operation.invocations.pending`
 |count
 |INFO
-|
+|the number of pending invocations
 
 |`operation.invocations.usedPercentage`
 |percent
@@ -447,7 +459,7 @@ id=counter@counter,name=counter,group=counter,
 |`operation.parker.totalParkedOperationCount`
 |count
 |INFO
-|
+|the total number of parked operations
 
 |`operation.partitionThreadCount`
 |count
@@ -532,17 +544,17 @@ id=counter@counter,name=counter,group=counter,
 |`operation.thread.completedRunnableCount`
 |count
 |INFO
-|the total number of processed runnable on the operation thread
+|the total number of processed runnables on the operation thread
 
 |`operation.thread.completedTotalCount`
 |count
 |INFO
-|
+|total number of operations completed on this operation thread 
 
 |`operation.thread.errorCount`
 |count
 |INFO
-|
+|total number of failed operation on this operation thread
 
 |`operation.thread.normalPendingCount`
 |count
@@ -678,7 +690,7 @@ id=counter@counter,name=counter,group=counter,
 |`partitions.replicaSyncRequestsCounter`
 |count
 |INFO
-|
+|the number of replica sync requests
 
 |`partitions.replicaSyncSemaphore`
 |count
@@ -712,15 +724,15 @@ id=counter@counter,name=counter,group=counter,
 
 |pnCounter.creationTime
 |ms
-|the creation time of the pn counter on the member
+|the creation time of the PN counter on the member
 
 |pnCounter.totalDecrementOperationCount
 |count
-|
+|the number of subtract (including decrement) operations on this PN counter
 
 |pnCounter.totalIncrementOperationCount
 |count
-|
+|the number of add (including increment) operations on this PN counter
 
 |pnCounter.value
 |count
@@ -821,7 +833,7 @@ id=counter@counter,name=counter,group=counter,
 
 |tcp.acceptor.selectorRecreateCount
 |count
-|
+|the number of times the selector was recreated
 
 |tcp.balancer.imbalanceDetectedCount
 |count
@@ -845,7 +857,7 @@ id=counter@counter,name=counter,group=counter,
 
 |tcp.connection.activeCount
 |count
-|
+|the number of active connections 
 
 |tcp.connection.clientCount
 |count
@@ -853,7 +865,7 @@ id=counter@counter,name=counter,group=counter,
 
 |tcp.connection.closedCount
 |count
-|
+|the number of closed connections 
 
 |tcp.connection.connectionListenerCount
 |count
@@ -877,35 +889,35 @@ id=counter@counter,name=counter,group=counter,
 
 |tcp.inputThread.bytesTransceived
 |bytes
-|
+|the amount of transceived data on this input thread 
 
-|tcp.inputThread.completedTaskCount
+|`tcp.inputThread.completedTaskCount`
 |count
 |
 
-|tcp.inputThread.eventCount
+|`tcp.inputThread.eventCount`
 |count
 |
 
-|tcp.inputThread.framesTransceived
+|`tcp.inputThread.framesTransceived`
 |count
-|
+|the number of transceived frames on this input thread
 
-|tcp.inputThread.idleTimeMillis
+|`tcp.inputThread.idleTimeMillis`
 |ms
 |
 
-|tcp.inputThread.ioThreadId
+|`tcp.inputThread.ioThreadId`
 |count
-|
+|the thread id for this input thread 
 
-|tcp.inputThread.priorityFramesTransceived
+|`tcp.inputThread.priorityFramesTransceived`
 |count
-|
+|the number of transceived priority frames
 
-|tcp.inputThread.processCount
+|`tcp.inputThread.processCount`
 |count
-|
+|the number of times the the nio pipeline has been processed
 
 |`thread.daemonThreadCount`
 |COUNT
@@ -926,6 +938,18 @@ id=counter@counter,name=counter,group=counter,
 |COUNT
 |INFO
 |the total number of threads started since the JVM started
+
+|topic.creationTime
+|ms
+|the creation time of the topic on the member
+
+|topic.totalPublishes
+|count
+|the total number of published messages of this topic on this member
+
+|topic.totalReceivedMessages
+|count
+|the total number of received messages of this topic on this member
 
 |`transactions.commitCount`
 |COUNT
