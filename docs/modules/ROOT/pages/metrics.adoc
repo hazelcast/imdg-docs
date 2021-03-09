@@ -76,6 +76,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 |INFO
 |the size of the cluster
 
+|cp.atomiclong.value
+id=counter@counter,name=counter,group=counter,
+|count
+|
+
 |event.eventQueueSize
 |count
 |INFO
@@ -121,7 +126,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |file.partition.totalSpace
 |bytes
 |INFO
-|
+|the amount of total space in the given dir=user.home
 
 |file.partition.usableSpace
 |bytes
@@ -157,6 +162,122 @@ The table below lists the metrics with their explanations in alphabetical order.
 |ms
 |INFO
 |
+
+|map.backupCount
+|count
+|the number of backups per entry
+
+|map.backupEntryCount
+|count
+|the number of backup entries held by the member
+
+|map.backupEntryMemoryCost
+|bytes
+|the memory cost of backup entries in this member
+
+|map.creationTime
+|ms
+|the creation time of the map on the member
+
+|map.dirtyEntryCount
+|count
+|the number of dirty (updated but not persisted yet) entries that the member owns
+
+|map.getCount
+|count
+|the number of get operations on the map
+
+|map.heapCost
+|count
+|the total heap cost in bytes for the map
+
+|map.hits
+|count
+|the number of hits (reads) of the locally owned entries
+
+|map.indexedQueryCount
+|count
+|the total number of indexed queries performed on the map
+
+|map.lastAccessTime
+|ms
+|the last access (read) time of the locally owned entries
+
+|map.lastUpdateTime
+|ms
+|the last update time of the locally owned entries
+
+|map.lockedEntryCount
+|count
+|the number of dirty entries that the member owns
+
+|map.merkleTreesCost
+|count
+|the heap cost of the Merkle trees
+
+|map.numberOfEvents
+|count
+|the number of events received
+
+|map.numberOfOtherOperations
+|count
+|the total number of other operations
+
+|map.ownedEntryCount
+|count
+|the number of entries owned by the member
+
+|map.ownedEntryMemoryCost
+|bytes
+|the memory cost of owned entries in this member
+
+|map.putCount
+|count
+|the number of put operations on the map
+
+|map.queryCount
+|count
+|the number of queries executed on the map (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
+
+|map.removeCount
+|count
+|the number of remove operations on the map
+
+|map.setCount
+|count
+|the number of set operations on the map
+
+|map.totalGetLatency
+|ms
+|the total latency of get operations
+
+|map.totalMaxGetLatency
+|ms
+|the maximum latency of get operations
+
+|map.totalMaxPutLatency
+|ms
+|the maximum latency of put operations
+
+|map.totalMaxRemoveLatency
+|ms
+|the maximum latency of remove operations
+
+|map.totalMaxSetLatency
+|ms
+|the maximum latency of set operations
+
+|map.totalPutLatency
+|ms
+|the total latency of put operations
+
+|map.totalRemoveLatency
+|ms
+|the total latency of remove operations
+
+|map.totalSetLatency
+|ms
+|the total latency of set operations
 
 |`memory.committedHeap`
 |bytes
@@ -231,7 +352,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`operation.completedCount`
 |count
 |INFO
-|
+|the number of completed operations of the executor service.
 
 |`operation.failedBackups`
 |count
@@ -241,12 +362,12 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`operation.genericPriorityQueueSize`
 |count
 |INFO
-|
+|the number of priority generic operations pending (waiting in the queue)
 
 |`operation.genericQueueSize`
 |count
 |INFO
-|
+|the number of normal generic operations pending (waiting in the queue)
 
 |`operation.genericThreadCount`
 |count
@@ -266,22 +387,22 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`operation.invocations.delayedExecutionCount`
 |count
 |INFO
-|
+|the number of 
 
 |`operation.invocations.heartbeatBroadcastPeriodMillis`
 |ms
 |INFO
-|
+|the period of heardbeat broadcast
 
 |`operation.invocations.heartbeatPacketsReceived`
 |count
 |INFO
-|
+|the number of received heartbeat packets
 
 |`operation.invocations.heartbeatPacketsSent`
 |count
 |INFO
-|
+|the number of sent heartbeat packets
 
 |`operation.invocations.invocationScanPeriodMillis`
 |ms
@@ -396,12 +517,12 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`operation.thread.completedOperationBatchCount`
 |count
 |INFO
-|  'batch' of tasks to be executed on a partition thread.
+| 
 
 |`operation.thread.completedPacketCount`
 |count
 |INFO
-|
+|the number of completed packets
 
 |`operation.thread.completedPartitionSpecificRunnableCount`
 |count
@@ -411,7 +532,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`operation.thread.completedRunnableCount`
 |count
 |INFO
-|
+|the total number of processed runnable on the operation thread
 
 |`operation.thread.completedTotalCount`
 |count
@@ -532,7 +653,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.memberGroupsSize`
 |count
 |INFO
-| the number of the member groups to be used in partition assignments
+|the number of the member groups to be used in partition assignments
 
 |`partitions.migrationActive`
 |boolean
@@ -547,7 +668,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`partitions.partitionCount`
 |count
 |INFO
-|Total partition count
+|total partition count
 
 |`partitions.plannedMigrations`
 |count
@@ -588,6 +709,22 @@ The table below lists the metrics with their explanations in alphabetical order.
 |ns
 |INFO
 |the total elapsed time from start of migration tasks to their completion since the beginning
+
+|pnCounter.creationTime
+|ms
+|the creation time of the pn counter on the member
+
+|pnCounter.totalDecrementOperationCount
+|count
+|
+
+|pnCounter.totalIncrementOperationCount
+|count
+|
+
+|pnCounter.value
+|count
+|the current value of the pn counter
 
 |`proxy.createdCount`
 |count
@@ -670,6 +807,106 @@ The table below lists the metrics with their explanations in alphabetical order.
 |INFO
 |an approximation to the total amount of memory currently used
 
+|tcp.acceptor.eventCount
+|count
+|
+
+|tcp.acceptor.exceptionCount
+|count
+|
+
+|tcp.acceptor.idleTimeMillis
+|ms
+|
+
+|tcp.acceptor.selectorRecreateCount
+|count
+|
+
+|tcp.balancer.imbalanceDetectedCount
+|count
+|
+
+|tcp.balancer.migrationCompletedCount
+|count
+|
+
+|tcp.bytesReceived
+|bytes
+|
+
+|tcp.bytesSend
+|bytes
+|
+
+|tcp.connection.acceptedSocketCount
+|count
+|
+
+|tcp.connection.activeCount
+|count
+|
+
+|tcp.connection.clientCount
+|count
+|
+
+|tcp.connection.closedCount
+|count
+|
+
+|tcp.connection.connectionListenerCount
+|count
+|
+
+|tcp.connection.count
+|count
+|
+
+|tcp.connection.inProgressCount
+|count
+|
+
+|tcp.connection.openedCount
+|count
+|
+
+|tcp.connection.textCount
+|count
+|
+
+|tcp.inputThread.bytesTransceived
+|bytes
+|
+
+|tcp.inputThread.completedTaskCount
+|count
+|
+
+|tcp.inputThread.eventCount
+|count
+|
+
+|tcp.inputThread.framesTransceived
+|count
+|
+
+|tcp.inputThread.idleTimeMillis
+|ms
+|
+
+|tcp.inputThread.ioThreadId
+|count
+|
+
+|tcp.inputThread.priorityFramesTransceived
+|count
+|
+
+|tcp.inputThread.processCount
+|count
+|
+
 |`thread.daemonThreadCount`
 |COUNT
 |INFO
@@ -705,3 +942,4 @@ The table below lists the metrics with their explanations in alphabetical order.
 |INFO
 |the number of started transactions
 
+|===
