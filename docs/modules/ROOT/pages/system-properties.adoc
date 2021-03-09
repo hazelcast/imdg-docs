@@ -258,9 +258,12 @@ See the xref:clusters:network-configuration.adoc#public-address[Public Address s
 |`hazelcast.dynamicconfig.ignore.conflicts`
 |
 |bool
-| Specifies whether you want IMDG to ignore the configuration conflicts while registering a
-new dynamic configuration. Set to `true` and restart your cluster with this property to
-ignore these conflicts.
+| When it is set to `true`, IMDG does not check if the added dynamic
+configuration conflicts with an existing dynamic configuration.
+Existing dynamic configuration is not replaced. Note that, this property
+is not meant to ignore the conflicts between static configuration and dynamic configuration.
+If the added dynamic configuration exists in the static configuration of
+the member, it will throw an exception regardless this property. 
 
 |`hazelcast.enterprise.license.key`
 | null
