@@ -245,7 +245,7 @@ networkConfig.setReuseAddress( true );
 == Join
 
 The `join` configuration element is used to discover Hazelcast members and enable them
-to form a cluster. Hazelcast provides Auto Detection, Multicast, TCP/IP, AWS, Kubernetes, Azure, GCP, Eureka, and more.
+to form a cluster. Hazelcast provides Multicast, TCP/IP, AWS, Kubernetes, Azure, GCP, Eureka, and more.
 These mechanisms are explained the xref:discovery-mechanisms.adoc[Discovery Mechanisms section].
 This section describes all the sub-elements and attributes of `join` element.
 The following are example configurations.
@@ -263,7 +263,6 @@ XML::
     ...
     <network>
         <join>
-            <auto-detection enabled="true" />
             <multicast enabled="false">
                 <multicast-group>224.2.2.3</multicast-group>
                 <multicast-port>54327</multicast-port>
@@ -304,8 +303,6 @@ YAML::
 hazelcast:
   network:
     join:
-      auto-detection:
-        enabled: true
       multicast:
         enabled: false
         multicast-group: 224.2.2.3
@@ -347,13 +344,6 @@ join.getTcpIpConfig().addMember( "10.45.67.32" ).addMember( "10.45.67.100" )
 ----
 
 The `join` element has the following sub-elements and attributes.
-
-[[auto-detection-element]]
-=== auto-detection element
-
-The `auto-detection` element includes the following parameters:
-
-* `enabled`: Enables xref:discovering-by-auto-detection.adoc[Hazelcast Auto Detection], `true` by default.
 
 [[multicast-element]]
 === multicast element

@@ -14,7 +14,7 @@ from https://hazelcast.org/download[hazelcast.org^]
 
 When you download and extract the Hazelcast ZIP or TAR.GZ package, you will
 see the `start/stop.sh` (for Linux) and `start/stop.bat` (for Windows) scripts under the `/bin` folder.
-These scripts start/stop a Hazelcast member. See the xref:ROOT:getting-started.adoc#creating-a-cluster[Quick Start chapter] to see the start scripts in action.
+These scripts start/stop a Hazelcast member. See the xref:getting-started:using-the-scripts.adoc[Using the Scripts section].
 
 There are also some other scripts in the download archive whose usage descriptions
 are given in their related sections including the xref:management:cluster-utilities.adoc#using-the-script-cluster-sh[Using the Script cluster.sh],

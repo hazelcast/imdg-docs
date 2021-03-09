@@ -15,9 +15,3 @@ assume that the other side is crashed, the cluster splits into
 multiple partitions and they start operating independently.
 That's why any communication failure/interruption long enough can be
 classified as network partitioning.
-
-Moreover, communication failures don't have to be symmetrical.
-A network failure can interrupt only one side of the channel or
-a suspended process/member may not even observe the rest as crashed.
-That kind of network partitioning can be called as _partial network partitioning_.
-See xref:partial-network-partitions.adoc[Partial Network Partitions section] for more info.
