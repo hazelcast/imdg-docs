@@ -1,40 +1,59 @@
 = Dynamically Adding Data Structure Configuration on a Cluster
+:description: Dynamic configuration allows you to temporarily change the configuration of some data structures at runtime. This option is useful if you want to reconfigure a data structure without having to shut down cluster members.
 [[dynamically-adding-data-structure-configuration-on-a-cluster]]
 
-Hazelcast can be configured in a declarative or
-programmatic way; configuration must be completed before starting a
-Hazelcast member and this configuration cannot be altered at runtime,
-thus we refer to this as _static_ configuration.
+{description}
 
-It is possible to dynamically add configuration for certain data structures at
-runtime; these can be added by invoking one of the `Config.add*Config` methods on
-the `Config` object obtained from a running member's `HazelcastInstance.getConfig()` method.
-For example:
+To configure a data structure at runtime, you can use either a Hazelcast client or the member API. When you submit a dynamic configuration to a member, it is propagated across all cluster members as well as those that may join the cluster later.
+
+To add a configuration dynamically, you must invoke the `add*Config()` method on the Hazelcast instance's configuration object. 
+
+[tabs] 
+==== 
+Member API:: 
++ 
+-- 
 
 [source,java]
 ----
 include::{javasource}/DynamicConfiguration.java[tag=dynconf]
 ----
+--
+Java Client::
++
+--
 
-WARNING: You must invoke the `add*Config` method on the Hazelcast instance's configuration object to
-add a configuration dynamically. In the above example, this is done with the
-`instance.getConfig().addMapConfig(noBackupsMap);` line. This submits the map configuration dynamically
-to all cluster members and also to members which join the cluster later.
+[source,java]
+----
+HazelcastInstance client = HazelcastClient.newHazelcastClient();
+MapConfig mCfg = new MapConfig("test");
+mCfg.setTimeToLiveSeconds(15);
+client.getConfig().addMapConfig(mCfg);
+HazelcastClient.shutdownAll();
+----
+--
+====
+
+NOTE: Dynamic configurations are not persisted, thus they are lost when a cluster restarts. This feature will be improved in future releases of Hazelcast IMDG.
 
 Dynamic configuration elements must be fully configured before the invocation
-of `add*Config` method: at that point, the configuration object is delivered
+of `add*Config()` method. At that point, the configuration object is delivered
 to every member of the cluster and added to each member's dynamic configuration,
-so mutating the configuration object after the `add*Config` invocation does not have
+so mutating the configuration object after the `add*Config()` invocation does not have
 an effect.
 
-As dynamically added data structure configuration is propagated across all cluster
+== Handling Partial Propagation
+
+Because dynamic configurations are propagated across all cluster
 members, failures may occur due to conditions such as timeout and network partition.
 The configuration propagation mechanism internally retries adding the configuration
-whenever a membership change is detected. However if an exception is thrown from
-`add*Config` method, the configuration may have been partially propagated to some
+whenever a membership change is detected. However if an exception is thrown from the
+`add*Config()` method, the configuration may have been partially propagated to some
 cluster members and adding the configuration should be retried by the user.
 
-Adding a new dynamic configuration is supported for all `add*Config` methods except the following:
+== Unsupported Configuration Methods
+
+Dynamic configuration is supported for all `add*Config()` methods except the following:
 
 * `SplitBrainProtectionConfig`: A new split-brain protection configuration cannot be dynamically added but other
 configuration can reference split-brain protections configured in the existing static configuration.
@@ -45,22 +64,6 @@ configured WAN replication.
 * `ListenerConfig`: Listeners can be instead added at runtime via other API such as
 `HazelcastInstance.getCluster().addMembershipListener` and
 `HazelcastInstance.getPartitionService().addMigrationListener`.
-
-Keep in mind that this feature also works for Hazelcast Java clients.
-See the following example:
-
-[source,java]
-----
-HazelcastInstance client = HazelcastClient.newHazelcastClient();
-MapConfig mCfg = new MapConfig("test");
-mCfg.setTimeToLiveSeconds(15);
-client.getConfig().addMapConfig(mCfg);
-HazelcastClient.shutdownAll();
-----
-
-NOTE: If your cluster has data structures with configurations added during runtime,
-those configurations are lost when a cluster restart occurs due to any reason since
-they are not persisted. This will be improved in future Hazelcast IMDG releases.
 
 [[handling-configuration-conflicts]]
 == Handling Configuration Conflicts
@@ -113,10 +116,12 @@ MapConfig sessionsWithoutBackup = new MapConfig("sessions").setBackupCount(0);
 instance.getConfig().addMapConfig(sessionsWithoutBackup);
 ----
 
+To ignore conflicts between dynamic configurations, set the xref:ROOT:system-properties.adoc#ignore-dynamic-conf-conflicts[`hazelcast.dynamicconfig.ignore.conflicts`] system property to `true`.
+
 == Dynamic Data Structure Configuration and User Customizations
 
-Dynamically added data structure configuration may reference
-user customizations, such as a user-provided `MapLoader` implementation referenced
+Dynamic configuration may reference
+user customizations such as a user-provided `MapLoader` implementation referenced
 by a `MapConfig`. User customizations can be usually configured using either of the following:
 
 * by specifying a class or factory class name, e.g., `MapStoreConfig.setClassName`, and letting the
