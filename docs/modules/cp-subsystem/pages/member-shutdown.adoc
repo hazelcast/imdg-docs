@@ -60,6 +60,3 @@ after its shutdown request is committed also on the last CP member. Then,
 the last CP member checks its local data to notice that it is the last CP
 member alive, and proceeds its shutdown without attempting a Raft commit on
 _the METADATA CP group_.
-
-See the xref:listeners.adoc#cp-membership-listener[CP Membership Listener section] to get notified
-about the CP member additions and removals.
