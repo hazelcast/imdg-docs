@@ -3,7 +3,7 @@
 
 The table below lists the metrics with their explanations in alphabetical order.
 
-[cols="2,1,1,4a"]
+[cols="2,1,4a"]
 .Metrics
 |===
 | Metric Name
