@@ -1,5 +1,6 @@
 = Configuration Options
 :description: To configure Hazelcast applications, you can choose either static or dynamic configuration. Explore the options and decide which one is best for your application.
+:keywords: configuration, configuring hazelcast
 
 [[understanding-configuration]]
 
@@ -9,14 +10,14 @@ TIP: Before configuring Hazelcast, we recommend trying the defaults, which are s
 
 == Static Configuration
 
-Static configuration allows you to configure Hazelcast before runtime by providing either configuration files or using the Java API. Static configuration cannot be changed during runtime.
+Static configuration allows you to configure Hazelcast before runtime by providing either configuration files or using the API. Static configuration cannot be changed during runtime.
 
 To use static configuration, you have the following options:
 
-- xref:configuring-declaratively.adoc[Declarative]: Use configuration files to configure a Hazelcast cluster before starting it.
-- xref:configuring-programmatically.adoc[Programmatic]: Use the Java API to configure a cluster in embedded mode.
+- xref:configuring-declaratively.adoc[Declarative configuration]: Use configuration files to configure a Hazelcast cluster before starting it.
+- xref:configuring-programmatically.adoc[Programmatic configuration]: Use the Java API to configure a cluster in embedded mode.
 - xref:configuring-with-system-properties.adoc[System properties]: Use system properties to configure some aspects of Hazelcast.
-- xref:configuring-within-spring.adoc[Within the Spring context]: Configure Hazelcast for Spring integration.
+- xref:configuring-within-spring.adoc[Spring configuration]: Configure Hazelcast for Spring integration.
 
 The following topics are also relevant to static configuration:
 
@@ -34,12 +35,12 @@ which comes with Hazelcast libraries. If an error occurs in declarative or progr
 
 Hazelcast looks for static configuration options in the following order:
 
-. xref:configuring-programmatically.adoc[Programmatic]
-. xref:configuring-declaratively.adoc#setting the path to a configuration file[`hazelcast.config` system property]
-. `hazelcast.xml` file in the working directory
-. `hazelcast.xml` file on the classpath
-. `hazelcast.yaml` (or `.yml`) in the working directory
-. `hazelcast.yaml` on the classpath
+. `Config` object provided by programmatic configuration
+. `hazelcast.config` system property
+. `hazelcast.xml` declarative configuration file in the working directory
+. `hazelcast.xml` declarative configuration file on the classpath
+. `hazelcast.yaml` (or `.yml`) declarative configuration file in the working directory
+. `hazelcast.yaml` declarative configuration file on the classpath
 
 If Hazelcast does not find any of these configuration options, it loads the default configuration file (`hazelcast-default.xml`), which comes with your Hazelcast package.
 
