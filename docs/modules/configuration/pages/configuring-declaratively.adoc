@@ -1,4 +1,4 @@
-= Configuring Declaratively
+= Declarative Configuration
 [[configuring-declaratively]]
 
 This is the configuration option where you use an XML or a YAML configuration
