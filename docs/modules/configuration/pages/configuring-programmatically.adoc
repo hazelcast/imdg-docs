@@ -1,4 +1,4 @@
-= Configuring Programmatically
+= Programmatic Configuration
 [[configuring-programmatically]]
 
 Besides declarative configuration, you can configure your cluster programmatically.
