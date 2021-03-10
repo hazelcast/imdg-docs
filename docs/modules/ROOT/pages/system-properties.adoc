@@ -255,8 +255,7 @@ If you set this property to true in your source cluster, please make sure you ha
 target members since they will be discovered using their public addresses. Otherwise, they cannot be discovered.
 See the xref:clusters:network-configuration.adoc#public-address[Public Address section].
 
-[[ignore-dynamic-conf-conflicts]]
-|`hazelcast.dynamicconfig.ignore.conflicts`
+|[[ignore-dynamic-conf-conflicts]] `hazelcast.dynamicconfig.ignore.conflicts`
 |
 |bool
 | When it is set to `true`, IMDG does not check if the added dynamic configuration
