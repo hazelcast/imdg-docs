@@ -1,0 +1,260 @@
+= Creating a Map
+:description: Maps store data in key/value pairs called entries, which can be one of many data types. To create a map, you just need to give it a name, then write some data to it.
+
+[[getting-a-map-and-putting-an-entry]]
+
+{description}
+
+To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
+
+After creating a map, you can write data to it, using the map's `put()` method. This method takes a key and a value.
+
+In this example, we create a map called `captials`, which stores the names of capital cities as strings. The key is just an incrementing integer to make it unique.
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+capitalcities.put( 1, "Tokyo" );
+capitalcities.put( 2, "Paris" );
+capitalcities.put( 3, "Washington" );
+capitalcities.put( 4, "Ankara" );
+capitalcities.put( 5, "Brussels" );
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzInstance.getMap("capitals");
+capitalcities.put( 1, "Tokyo" );
+capitalcities.put( 2, "Paris" );
+capitalcities.put( 3, "Washington" );
+capitalcities.put( 4, "Ankara" );
+capitalcities.put( 5, "Brussels" );
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzInstance.GetMap("capitals");
+capitalcities.put( 1, "Tokyo" );
+capitalcities.put( 2, "Paris" );
+capitalcities.put( 3, "Washington" );
+capitalcities.put( 4, "Ankara" );
+capitalcities.put( 5, "Brussels" );
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const capitalcities = await hzInstance.getMap('capitals');
+await capitalcities.put( 1, "Tokyo" );
+await capitalcities.put( 2, "Paris" );
+await capitalcities.put( 3, "Washington" );
+await capitalcities.put( 4, "Ankara" );
+await capitalcities.put( 5, "Brussels" );
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+captial_cities = hzInstance.get_map("capitals").blocking()
+capital_cities.put( 1, "Tokyo" )
+capital_cities.put( 2, "Paris" )
+capital_cities.put( 3, "Washington" )
+capital_cities.put( 4, "Ankara" )
+capital_cities.put( 5, "Brussels" )
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzInstance.GetMap("capitals")
+capitalcities.Put( 1, "Tokyo" );
+capitalcities.Put( 2, "Paris" );
+capitalcities.Put( 3, "Washington" );
+capitalcities.Put( 4, "Ankara" );
+capitalcities.Put( 5, "Brussels" );
+----
+--
+====
+
+== Writing JSON to a Map
+
+You can use JSON values both as keys and values in a map.
+
+If you plan on querying your JSON data, it's best practice to write it to a map using the `HazelcastJsonValue` object because it adds metadata to your map to make queries faster.
+
+However, this metadata also adds some processing and memory overhead because Hazelcast must preprocess JSON values and store metadata in memory.
+
+As a result, if you do not plan on querying JSON values, you can save on the processing and memory overhead by <<disabling-the-metadata-policy,disabling the metadata policy>> or writing JSON to a map as a string.
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+String person1 = "{ \"name\": \"John\", \"age\": 35 }";
+String person2 = "{ \"name\": \"Jane\", \"age\": 24 }";
+String person3 = "{ \"name\": \"Trey\", \"age\": 17 }";
+
+idPersonMap.put(1, new HazelcastJsonValue(person1));
+idPersonMap.put(2, new HazelcastJsonValue(person2));
+idPersonMap.put(3, new HazelcastJsonValue(person3));
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+idPersonMap->put(1, hazelcast::client::hazelcast_json_value("{ \"name\": \"John\", \"age\": 35 }")).get();
+
+idPersonMap->put(2, hazelcast::client::hazelcast_json_value("{ \"name\": \"Jane\", \"age\": 24 }")).get();
+
+idPersonMap->put(3, hazelcast::client::hazelcast_json_value("{ \"name\": \"Trey\", \"age\": 17 }")).get();
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+idPersonMap.put(1, new HazelcastJsonValue("{ \"name\": \"John\", \"age\": 35 }"));
+
+idPersonMap.put(2, new HazelcastJsonValue("{ \"name\": \"Jane\", \"age\": 24 }"));
+
+idPersonMap.put(3, new HazelcastJsonValue("{ \"name\": \"Trey\", \"age\": 17 }"));
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const people = [
+  { name: "John", "age": 35 },
+  { name: "Jane", "age": 24 },
+  { name: "Trey", "age": 17 }
+];
+await idPersonMap.putAll(people.map((person, index) => {
+  return [index, new HazelcastJsonValue(JSON.stringify(person))];
+}));
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+person1 = '{ \"name\": \"John\", \"age\": 35 }'
+person2 = '{ \"name\": \"Jane\", \"age\": 24 }'
+person3 = '{ \"name\": \"Trey\", \"age\": 17 }'
+
+id_person_map.put(1, HazelcastJsonValue(person1))
+
+id_person_map.put(2, HazelcastJsonValue(person2))
+
+id_person_map.put(3, HazelcastJsonValue(person3))
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+person1, _ := core.CreateHazelcastJSONValue( { name: "John", "age": 35 } )
+person2, _ := core.CreateHazelcastJSONValue( { name: "Jane", "age": 24 } )
+person3, _ := core.CreateHazelcastJSONValue( { name: "Trey", "age": 17 } )
+
+idPersonMap.Put( 1, person1 );
+idPersonMap.Put( 2, person2 );
+idPersonMap.Put( 3, person3 );
+----
+--
+====
+
+WARNING: Hazelcast does not check the validity of JSON strings written to maps. You should make sure that your JSON strings are valid before writing them to a map.
+
+=== Disabling the Metadata Policy
+
+To disable the metadata policy, set the `metadata-policy`
+configuration element to `OFF`.
+
+**Declarative Configuration:**
+
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    ...
+    <map name="map-a">
+        <!--
+        valid values for metadata-policy are:
+          - OFF
+          - CREATE_ON_UPDATE (default)
+        -->
+        <metadata-policy>OFF</metadata-policy>
+    </map>
+    ...
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    map-a:
+    # valid values for metadata-policy are:
+    # - OFF
+    # - CREATE_ON_UPDATE (default)
+      metadata-policy: OFF
+----
+====
+
+**Programmatic Configuration:**
+
+[source,java]
+----
+MapConfig mapConfig = new MapConfig();
+mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
+----
+
+== Learn More
+
+You can do a lot more with maps than simply writing data to them. Explore the following topics to find out what else you can do with maps:
+
+- xref:locking-maps.adoc[Locking Maps]
+- xref:expiration-and-eviction.adoc[Expiration and Eviction]
+- xref:working-with-external-data.adoc[Working with External Data]
+- xref:reading-map-statistics.adoc[Reading Map Statistics]
+- xref:listening-for-map-entries.adoc[Listening to Map Entries with Predicates]
+- xref:intercepting-map-entries.adoc[Intercepting Map Entries]
+- xref:preventing-out-of-memory.adoc[Preventing Out of Memory Exceptions]
