@@ -56,7 +56,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
-|the timestamp of last local heartbeat of this member **(investigate it more)
+|
 
 |`cluster.size`
 |count
