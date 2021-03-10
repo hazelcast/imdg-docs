@@ -618,19 +618,19 @@ The table below lists the metrics with their explanations in alphabetical order.
 |ns
 |the total elapsed time from start of migration tasks to their completion since the beginning
 
-|pnCounter.creationTime
+|`pnCounter.creationTime`
 |ms
 |the creation time of the PN counter on the member
 
-|pnCounter.totalDecrementOperationCount
+|`pnCounter.totalDecrementOperationCount`
 |count
 |the number of subtract (including decrement) operations on this PN counter
 
-|pnCounter.totalIncrementOperationCount
+|`pnCounter.totalIncrementOperationCount`
 |count
 |the number of add (including increment) operations on this PN counter
 
-|pnCounter.value
+|`pnCounter.value`
 |count
 |the current value of the pn counter
 
