@@ -21,8 +21,9 @@ Any row that doesn't satisfy the condition is eliminated from the result.
 
 == Sorting
 
-You can use standard the SQL clauses `ORDER BY`, `LIMIT`, and `OFFSET` to sort and limit the result set.
-Note that, for this, you need to add indexes to the map objects to be queried and sorted.
+You can use the standard SQL clauses `ORDER BY`, `LIMIT`, and `OFFSET` to sort and limit the result set.
+
+WARNING: Note that, you must add indexes to the map objects to be queried and sorted.
 See the xref:query:how-distributed-query-works.adoc#indexing-queries[indexing section]
 for information on adding and configuring indexes.
 
