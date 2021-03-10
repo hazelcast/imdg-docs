@@ -32,27 +32,27 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterStartTime`
 |ms
-|60000
+|when the first node in cluster becomes master, its localClockTime value is saved as clusterStartTime
 
 |`cluster.clock.clusterTime`
 |ms
-|the cluster time 
+|the elapsed time since the cluster was created
 
 |`cluster.clock.clusterTimeDiff`
 |ms
-|60000
+|the difference between this member's local clock timestamp and the cluster clock timestamp sent by the master node
 
 |`cluster.clock.clusterUpTime`
 |ms
-|the uptime for the cluster. It's equal to currentTime - clusterStartTime
+|the uptime for the cluster (current time - cluster start time)
 
 |`cluster.clock.localClockTime`
 |ms
-|
+|this member's local clock timestamp
 
 |`cluster.clock.maxClusterTimeDiff`
 |ms
-|
+|the maximum observed cluster time difference
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
@@ -62,77 +62,76 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the size of the cluster
 
-|cp.atomiclong.value id=counter@counter,name=counter,group=counter,
+|`cp.atomiclong.value`,
 |count
-|
+|the value of this AtomicLong
 
 |`event.eventQueueSize`
 |count
-|
+|the total number of events pending to be executed
 
 |`event.eventsProcessed`
 |count
-|
+|the total number of processed events
 
 |`event.listenerCount`
 |count
-|INFO
 |the number of subscribed listeners for the specified service
 
 |`event.publicationCount`
 |count
 |the number of published events for the specified service
 
-|event.queueCapacity
+|`event.queueCapacity`
 |count
-|the queue capacity of the executor processing the events. This capacity is shared for all service events
+|the queue capacity of the executor processing the events. This capacity is shared for all events
 
-|event.rejectedCount
+|`event.rejectedCount`
 |count
 |the number of rejected events. If the event is not accepted to the executor in `hazelcast.event.queue.timeout.millis`(see xref:system-properties.adoc[]), it will be rejected and not processed
 
-|event.syncDeliveryFailureCount
+|`event.syncDeliveryFailureCount`
 |count
+|the number of failures of sync event delivery 
 
-|event.threadCount
+|`event.threadCount`
 |count
 |the number of threads for the event service executor (the event thread count)
 
-|event.totalFailureCount
+|`event.totalFailureCount`
 |count
 |the number of events that fail to be published
 
-|executor.internal.completedTasks
+|`executor.internal.completedTasks`
 |count
 |the number of completed tasks by this executor
 
-|executor.internal.maximumPoolSize
+|`executor.internal.maximumPoolSize`
 |count
 |the maximum number of threads in the executor's thread pool
 
-|executor.internal.poolSize
+|`executor.internal.poolSize`
 |count
 |the current number of threads in the executor's thread pool
 
-|executor.internal.queueSize
+|`executor.internal.queueSize`
 |count
 |the work queue size
 
-|executor.internal.remainingQueueCapacity
+|`executor.internal.remainingQueueCapacity`
 |count
 |The remaining capacity on the work queue
 
-|file.partition.freeSpace
+|`file.partition.freeSpace`
 |bytes
 |for the partition of the user.home
 
-|file.partition.totalSpace
+|`file.partition.totalSpace`
 |bytes
 |the amount of total space in the given dir=user.home
 
 |file.partition.usableSpace
 |bytes
-|INFO
 |the amount of usable space in the given dir=user.home,
 
 |`gc.majorCount`
@@ -496,15 +495,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the number of priority pending operations (tasks)
 
 |`os.committedVirtualMemorySize`
-|BYTE
-|Amount of committed virtual memory (that is, the amount of virtual memory guaranteed to be available to the running process).
+|bytes
+|the amount of committed virtual memory (that is, the amount of virtual memory guaranteed to be available to the running process).
 
 |`os.freePhysicalMemorySize`
-|BYTE
-|
+|bytes
+|the amount of free physical memory
 
 |`os.freeSwapSpaceSize`
-|BYTE
+|bytes
 |the amount of free swap space size 
 
 |`os.maxFileDescriptorCount`
@@ -517,28 +516,27 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`os.processCpuLoad`
 |percentage
-|
+|the "recent cpu usage" for the JVM process; a negative value if not available.
 
 |`os.processCpuTime`
 |ms
-|the amount of time for which a CPU was used
+|the CPU time used by the process on which the JVM is running
 
 |`os.systemCpuLoad`
 |percentage
-|
-
+|the "recent cpu usage" for the whole system; a negative value if not available
 
 |`os.systemLoadAverage`
 |percentage
 |the system load average for the last minute, or a negative value if not available
 
 |`os.totalPhysicalMemorySize`
-|byte
-|
+|bytes
+|the total amount of physical memory
 
 |`os.totalSwapSpaceSize`
-|byte
-|
+|bytes
+|the total amount of swap space
 
 |`partitions.activePartitionCount`
 |count
@@ -638,7 +636,6 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`proxy.createdCount`
 |count
-|INFO
 |the number of created proxies for a given service.
 
 |`proxy.destroyedCount`
@@ -683,83 +680,82 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the number of processors available to the JVM
 
 |`runtime.freeMemory`
-|BYTE
+|bytes
 |the amount of free memory in the JVM.
 
 |`runtime.maxMemory`
-|BYTE
-|INFO
+|bytes
 |the maximum amount of memory that the JVM will attempt to use.
 
 |`runtime.totalMemory`
-|BYTE
+|bytes
 |the total amount of memory in the JVM. The value returned by this method may vary over time, depending on the host environment.
 
 |`runtime.upTime`
-|MS
+|ms
 |the uptime of the JVM
 
 |`runtime.usedMemory`
-|BYTE
+|bytes
 |an approximation to the total amount of memory currently used
 
-|tcp.acceptor.eventCount
+|`tcp.acceptor.eventCount`
 |count
 |
 
-|tcp.acceptor.exceptionCount
+|`tcp.acceptor.exceptionCount`
 |count
-|
+|the number of thrown exception on this TcpServerAcceptor
 
-|tcp.acceptor.idleTimeMillis
+|`tcp.acceptor.idleTimeMillis`
 |ms
-|
+|the idle time that measures how long this TcpServerAcceptor has not received any events
 
-|tcp.acceptor.selectorRecreateCount
+|`tcp.acceptor.selectorRecreateCount`
 |count
-|the number of times the selector was recreated
+|the number of times the selector was rebuilt
 
-|tcp.balancer.imbalanceDetectedCount
-|count
-|
-
-|tcp.balancer.migrationCompletedCount
+|`tcp.balancer.imbalanceDetectedCount`
 |count
 |
 
-|tcp.bytesReceived
+|`tcp.balancer.migrationCompletedCount`
+|count
+|
+
+|`tcp.bytesReceived`
 |bytes
-|
+|the number of bytes received over all connections (active and closed)
 
-|tcp.bytesSend
+|`tcp.bytesSend`
 |bytes
-|
+|the number of bytes sent over all connections (active and closed)
 
-|tcp.connection.acceptedSocketCount
+|`tcp.connection.acceptedSocketCount`
 |count
-|
+|the number of accepted socket channels
 
-|tcp.connection.activeCount
+|`tcp.connection.activeCount`
 |count
 |the number of active connections 
 
-|tcp.connection.clientCount
+|`tcp.connection.clientCount`
 |count
 |
 
-|tcp.connection.closedCount
+|`tcp.connection.closedCount`
 |count
 |the number of closed connections 
 
-|tcp.connection.connectionListenerCount
+|`tcp.connection.connectionListenerCount`
 |count
-|
+|the number of active connection listeners
 
-|tcp.connection.count
+|`tcp.connection.count`
 |count
-|
+|the number of `TcpServerConnection`
 
-|tcp.connection.inProgressCount
+|`tcp.connection.inProgressCount`
 |count
 |
 
@@ -777,7 +773,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.inputThread.completedTaskCount`
 |count
-|
+|the total number of completed tasks on this thread
 
 |`tcp.inputThread.eventCount`
 |count
@@ -789,7 +785,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.inputThread.idleTimeMillis`
 |ms
-|
+|the idle time that indicates how long since the last read 
 
 |`tcp.inputThread.ioThreadId`
 |count
