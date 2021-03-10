@@ -26,7 +26,7 @@ You can use the standard SQL clauses `ORDER BY`, `LIMIT`, and `OFFSET` to sort a
 WARNING: Note that, you must add sorted indexes to the map object's fields to be sorted by.
 See the xref:query:how-distributed-query-works.adoc#indexing-queries[indexing section]
 for information on adding and configuring indexes. For example, for the `SELECT * FROM persons ORDER BY name ASC` query,
-there's has to be a sorted index on the `name` field as shown below:
+there has to be a sorted index on the `name` field as shown below:
 +
 [tabs] 
 ==== 
