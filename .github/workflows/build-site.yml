@@ -1,10 +1,13 @@
-# This workflow will take the contents of the content branches and build the production documentation site
+# This workflow triggers a build of the production documentation site
+# if a commit it made to the listed branches or tags
 
 name: Build production site
 
 on:
   push:
     branches: [ master, v*, archive ]
+    tags:
+      - v*
 
 jobs:
   dispatch:
