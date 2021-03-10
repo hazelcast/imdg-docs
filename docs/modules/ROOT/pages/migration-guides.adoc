@@ -7,12 +7,12 @@ for the changes for each Hazelcast IMDG release.
 [[migrating-from-3-12-to-4-0-4-1]]
 == Migrating Between IMDG 3.12 and 4.0/4.1 Releases
 
-[blue]*Hazelcast IMDG Pro and Enterprise Feature*
+[blue]*Hazelcast IMDG Enterprise Feature*
 
 NOTE: If you want to migrate between 3.12 and 4.0/4.1 releases
 using this tool, you need to contact the Hazelcast Sales department at
 sales@hazelcast.com. Our existing Enterprise Edition users
-(IMDG Enterprise (4.x) and IMDG Enterprise HD (3.12.x)) can contact
+(IMDG Enterprise (4.x, 3.12.x) and IMDG Enterprise HD (3.12.x)) can contact
 support@hazelcast.com.
 
 This section outlines a solution for migrating user data from a
