@@ -815,15 +815,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the total number of threads started since the JVM started
 
-|topic.creationTime
+|`topic.creationTime`
 |ms
 |the creation time of the topic on the member
 
-|topic.totalPublishes
+|`topic.totalPublishes`
 |count
 |the total number of published messages of this topic on this member
 
-|topic.totalReceivedMessages
+|`topic.totalReceivedMessages`
 |count
 |the total number of received messages of this topic on this member
 
