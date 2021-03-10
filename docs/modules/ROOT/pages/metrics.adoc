@@ -44,42 +44,34 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterUpTime`
 |ms
-|INFO
 |the uptime for the cluster. It's equal to currentTime - clusterStartTime
 
 |`cluster.clock.localClockTime`
 |ms
-|INFO
 |
 
 |`cluster.clock.maxClusterTimeDiff`
 |ms
-|INFO
 |
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
-|INFO
 |the timestamp of last local heartbeat of this member **(investigate it more)
 
 |`cluster.size`
 |count
-|INFO
 |the size of the cluster
 
 |cp.atomiclong.value id=counter@counter,name=counter,group=counter,
 |count
-|INFO
 |
 
 |`event.eventQueueSize`
 |count
-|INFO
 |
 
 |`event.eventsProcessed`
 |count
-|INFO
 |
 
 |`event.listenerCount`
@@ -112,32 +104,30 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |executor.internal.completedTasks
 |count
-|
+|the number of completed tasks by this executor
 
 |executor.internal.maximumPoolSize
 |count
-|
+|the maximum number of threads in the executor's thread pool
 
 |executor.internal.poolSize
 |count
-|
+|the current number of threads in the executor's thread pool
 
 |executor.internal.queueSize
 |count
-|
+|the work queue size
 
 |executor.internal.remainingQueueCapacity
 |count
-|
+|The remaining capacity on the work queue
 
 |file.partition.freeSpace
 |bytes
-|INFO
 |for the partition of the user.home
 
 |file.partition.totalSpace
 |bytes
-|INFO
 |the amount of total space in the given dir=user.home
 
 |file.partition.usableSpace
@@ -147,32 +137,26 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`gc.majorCount`
 |count
-|INFO
 |the total number of major garbage collections that have occurred
 
 |`gc.majorTime`
 |ms
-|INFO
 |the accumulated elapsed time in major gc's 
 
 |`gc.minorCount`
 |count
-|INFO
 |the total number of minor garbage collections that have occurred
 
 |`gc.minorTime`
 |ms
-|INFO
 |the accumulated elapsed time in minor gc's 
 
 |`gc.unknownCount`
 |count
-|INFO
 |
 
 |`gc.unknownTime`
 |ms
-|INFO
 |
 
 |`map.backupCount`
@@ -293,433 +277,347 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`memory.committedHeap`
 |bytes
-|INFO
 |the amount of memory in bytes that is committed for the JVM to use
 
 |`memory.committedNative`
 |bytes
-|INFO
 |the amount of native memory in bytes that is committed for current HazelcastInstance to use
 
 |`memory.freeHeap`
 |bytes
-|INFO
 |the amount of free memory in the JVM
 
 |`memory.freeNative`
 |bytes
-|INFO
 |the amount of free native memory in current HazelcastInstance
 
 |`memory.freePhysical`
 |bytes
-|INFO
 |the amount of free physical memory available in OS
 
 |`memory.maxHeap`
 |bytes
-|INFO
 |the maximum amount of memory that the JVM will attempt to us
 
 |`memory.maxMetadata`
 |bytes
-|INFO
 |the amount of native memory reserved for metadata. This memory is separate and not accounted for by the NativeMemory statistics.
 
 |`memory.maxNative`
 |bytes
-|INFO
 |the maximum amount of native memory that current HazelcastInstance will attempt to use
 
 |`memory.totalPhysical`
 |bytes
-|INFO
 |the amount of total physical memory available in OS
 
 |`memory.usedHeap`
 |bytes
-|INFO
 |the amount of used memory in the JVM
 
 |`memory.usedMetadata`
 |bytes
-|INFO
 |the amount of used metadata memory
 
 |`memory.usedNative`
 |bytes
-|INFO
 |the amount of used native memory in current HazelcastInstance
 
 |`operation.asyncOperations`
 |count
-|INFO
 |the number of current executing async operations on the operation service of the member
 
 |`operation.callTimeoutCount`
 |count
-|INFO
-|the number of operation calls ran into a timeout
+|possibly a leftover (never used)
 
 |`operation.completedCount`
 |count
-|INFO
 |the number of completed operations of the executor service.
 
 |`operation.failedBackups`
 |count
-|INFO
 |the number of failed backup operations on the operation service of the member
 
 |`operation.genericPriorityQueueSize`
 |count
-|INFO
-|the number of priority generic operations pending (waiting in the queue)
+|the number of priority generic operations pending (waiting in the priority queue)
 
 |`operation.genericQueueSize`
 |count
-|INFO
 |the number of normal generic operations pending (waiting in the queue)
 
 |`operation.genericThreadCount`
 |count
-|INFO
 |the number of generic operation handler threads in the member.
 
 |`operation.invocations.backupTimeoutMillis`
 |ms
-|INFO
-|
+|operation backup timeout that specifies how long the invocation will wait for acknowledgements from the backup replicas (If acks are not received from some backups, there will not be any rollback on other successful replicas)
 
 |`operation.invocations.backupTimeouts`
 |count
-|INFO
-|the number of times that the operation invocations having backups timed out
+|the number of operation invocations that acknowledgment from backups has timeout.
 
 |`operation.invocations.delayedExecutionCount`
 |count
-|INFO
-|the number of 
+|the number of times that the operation invocations have delayed 
 
 |`operation.invocations.heartbeatBroadcastPeriodMillis`
 |ms
-|INFO
-|the broadcast period of operation heartbeats (this heartbeat packets sent to inform the other member about if the operation is still alive)
+|the broadcast period of operation heartbeats (this heartbeat packets sent to inform the other member about if the operation is still alive). The heartbeat period is configured to be 1/4 of the call timeout. So with default settings, every 15 seconds, every member in the cluster, will notify every other member in the cluster about all calls that are pending.
 
 |`operation.invocations.heartbeatPacketsReceived`
 |count
-|INFO
 |the number of received heartbeat packets
 
 |`operation.invocations.heartbeatPacketsSent`
 |count
-|INFO
 |the number of sent heartbeat packets
 
 |`operation.invocations.invocationScanPeriodMillis`
 |ms
-|INFO
 |the period for scanning over pending invocations for getting rid of duplicates, checking for heartbeat timeout, and checking for backup timeout
 
 |`operation.invocations.invocationTimeoutMillis`
 |ms
-|INFO
-|
+|timeout for operation invocations
 
 |`operation.invocations.lastCallId`
 |count
-|INFO
 |the last issued invocation call ID
 
 |`operation.invocations.normalTimeouts`
 |count
-|INFO
 |the number of times the normal operation 
 
 |`operation.invocations.pending`
 |count
-|INFO
 |the number of pending invocations
 
 |`operation.invocations.usedPercentage`
 |percent
-|INFO
-|
+|the usage percentage of the operation invocation capacity that can concurrently occur (pending invocations/ max concurrent invocations)
 
 |`operation.operationTimeoutCount`
 |count
-|INFO
-|
+|possibly a leftover (never used)
 
 |`operation.parker.parkQueueCount`
 |count
-|INFO
-|
+|the number of separate WaitSet (set of operations waiting for some condition)
 
 |`operation.parker.totalParkedOperationCount`
 |count
-|INFO
 |the total number of parked operations
 
 |`operation.partitionThreadCount`
 |count
-|INFO
 |the number of partition operation handler threads for given member
 
 |`operation.priorityQueueSize`
 |count
-|INFO
-|
+|the number of priority operations pending (priority partition ops. + priority generic ops.)
 
 |`operation.queueSize`
 |count
-|INFO
 |
 
 |`operation.responseQueueSize`
 |count
-|INFO
 |the total queue size for 
 
 |`operation.responses.backupCount`
 |count
-|INFO
 |
 
 |`operation.responses.errorCount`
 |count
-|INFO
 |
 
 |`operation.responses.missingCount`
 |count
-|INFO
 |
 
 |`operation.responses.normalCount`
 |count
-|INFO
 |
 
 |`operation.responses.timeoutCount`
 |count
-|INFO
 |
 
 |`operation.retryCount`
 |count
-|INFO
 |the number of retried operations
 
 |`operation.runningCount`
 |count
-|INFO
-|the number of currently running operations
+|the number of currently running operations (runningPartitionCount + runningGenericCount)
 
 |`operation.runningGenericCount`
 |count
-|INFO
-|
+|the number of currently running generic (non partition specific) operations
 
 |`operation.runningPartitionCount`
 |count
-|INFO
-|
+|the number of currently running partition operations
 
 |`operation.thread.completedOperationBatchCount`
 |count
-|INFO
 | 
 
 |`operation.thread.completedPacketCount`
 |count
-|INFO
-|the number of completed packets
+|the number of packets that executed by this operation thread
 
 |`operation.thread.completedPartitionSpecificRunnableCount`
 |count
-|INFO
-|
+|the number of `PartitionSpecificRunnable` tasks executed by this operation thread
 
 |`operation.thread.completedRunnableCount`
 |count
-|INFO
-|the total number of processed runnables on the operation thread
+|the total number of runnables exuceted by this operation thread
 
 |`operation.thread.completedTotalCount`
 |count
-|INFO
-|total number of operations completed on this operation thread 
+|total number of tasks (`Operation` + `PartitionSpecificRunnable` + `Runnable` + `TaskBatch`) completed on this operation thread 
 
 |`operation.thread.errorCount`
 |count
-|INFO
-|total number of failed operation on this operation thread
+|total number of failed tasks on this operation thread
 
 |`operation.thread.normalPendingCount`
 |count
-|INFO
-|
+|the number of normal pending operations (tasks)
 
 |`operation.thread.priorityPendingCount`
 |count
-|INFO
-|
+|the number of priority pending operations (tasks)
 
 |`os.committedVirtualMemorySize`
 |BYTE
-|INFO
 |Amount of committed virtual memory (that is, the amount of virtual memory guaranteed to be available to the running process).
 
 |`os.freePhysicalMemorySize`
 |BYTE
-|INFO
 |
 
 |`os.freeSwapSpaceSize`
 |BYTE
-|INFO
 |the amount of free swap space size 
 
 |`os.maxFileDescriptorCount`
 |count
-|INFO
 |the maximum number of open file descriptors (only for UNIX platforms).
 
 |`os.openFileDescriptorCount`
 |count
-|INFO
 |the number of open file descriptors (only for UNIX platforms).
 
 |`os.processCpuLoad`
 |percentage
-|INFO
 |
 
 |`os.processCpuTime`
 |ms
-|INFO
 |the amount of time for which a CPU was used
 
 |`os.systemCpuLoad`
 |percentage
-|INFO
 |
 
 
 |`os.systemLoadAverage`
-|Percentage
-|INFO
+|percentage
 |the system load average for the last minute, or a negative value if not available
 
 |`os.totalPhysicalMemorySize`
 |byte
-|INFO
 |
 
 |`os.totalSwapSpaceSize`
 |byte
-|INFO
 |
 
 |`partitions.activePartitionCount`
 |count
-|INFO
 |the number of partitions assigned to the member
 
 |`partitions.completedMigrations`
 |count
-|INFO
 |the number of completed migrations on the latest repartitioning round
 
 |`partitions.elapsedDestinationCommitTime`
 |ns
-|INFO
 |the total elapsed time of commit operations' executions to the destination endpoint on the latest repartitioning round
 
 |`partitions.elapsedMigrationOperationTime`
 |ns
-|INFO
 |the total elapsed time of migration & replication operations' executions from source to destination endpoints on the latest repartitioning round
 
 |`partitions.elapsedMigrationTime`
 |ns
-|INFO
 |the total elapsed time from start of migration tasks to their completion on the latest repartitioning round
 
 |`partitions.lastRepartitionTime`
 |ms
-|INFO
 |the latest time that repartition took place
 
 |`partitions.localPartitionCount`
 |count
-|INFO
 |the number of partitions currently owned by given member
 
 |`partitions.maxBackupCount`
 |count
-|INFO
 |
 
 |`partitions.memberGroupsSize`
 |count
-|INFO
 |the number of the member groups to be used in partition assignments
 
 |`partitions.migrationActive`
 |boolean
-|INFO
 |the number of active migration tasks
 
 |`partitions.migrationQueueSize`
 |count
-|INFO
 |the number of migration tasks in the migration queue
 
 |`partitions.partitionCount`
 |count
-|INFO
 |total partition count
 
 |`partitions.plannedMigrations`
 |count
-|INFO
 |the number of planned migrations on the latest repartitioning round
 
 |`partitions.replicaSyncRequestsCounter`
 |count
-|INFO
 |the number of replica sync requests
 
 |`partitions.replicaSyncSemaphore`
 |count
-|INFO
 |the permits count of replica sync semaphore
 
 |`partitions.stateStamp`
 |count
-|INFO
 |the stamp value for the current partition table. Stamp is calculated by hashing the individual partition versions using MurmurHash3. If stamp has this initial value, 0L, then that means partition table is not initialized yet.
 
 |`partitions.totalCompletedMigrations`
 |count
-|INFO
 |the total number of completed migrations
 
 |`partitions.totalElapsedDestinationCommitTime`
 |ns
-|INFO
 |the total elapsed time of commit operations' executions to the destination endpoint since the beginning
 
 |`partitions.totalElapsedMigrationOperationTime`
 |ns
-|INFO
 |the total elapsed time of migration & replication operations' executions from source to destination endpoints since the beginning
 
 |`partitions.totalElapsedMigrationTime`
 |ns
-|INFO
 |the total elapsed time from start of migration tasks to their completion since the beginning
 
 |pnCounter.creationTime
@@ -745,58 +643,47 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`proxy.destroyedCount`
 |count
-|INFO
 |the number of destroyed proxies for a given service.
 
 |`proxy.proxyCount`
 |count
-|INFO
 |the number of active proxies for a given service. e.g., the number of all proxies for the IMap.
 
 
 |`raft.destroyedGroupIds`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.metadata.activeMembers`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.metadata.activeMembersCommitIndex`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.metadata.groups`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.missingMembers`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.nodes`
-|COUNT
-|INFO
+|count
 |
 
 |`raft.terminatedRaftNodeGroupIds`
-|COUNT
-|INFO
-|
+|count
+|the terminated raft node group ids
 
 |`runtime.availableProcessors`
-|COUNT
-|INFO
+|count
 |the number of processors available to the JVM
 
 |`runtime.freeMemory`
 |BYTE
-|INFO
 |the amount of free memory in the JVM.
 
 |`runtime.maxMemory`
@@ -806,17 +693,14 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`runtime.totalMemory`
 |BYTE
-|INFO
 |the total amount of memory in the JVM. The value returned by this method may vary over time, depending on the host environment.
 
 |`runtime.upTime`
 |MS
-|INFO
 |the uptime of the JVM
 
 |`runtime.usedMemory`
 |BYTE
-|INFO
 |an approximation to the total amount of memory currently used
 
 |tcp.acceptor.eventCount
@@ -881,7 +765,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |tcp.connection.openedCount
 |count
-|
+|the number of opened connections
 
 |tcp.connection.textCount
 |count
@@ -920,23 +804,19 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the number of times the the nio pipeline has been processed
 
 |`thread.daemonThreadCount`
-|COUNT
-|INFO
+|count
 |the current number of live daemon thread in the JVM
 
 |`thread.peakThreadCount`
-|COUNT
-|INFO
+|count
 |the peak live thread count since the JVM started
 
 |`thread.threadCount`
-|COUNT
-|INFO
+|count
 |the current number of live threads including both daemon and non-daemon threads in the JVM
 
 |`thread.totalStartedThreadCount`
-|COUNT
-|INFO
+|count
 |the total number of threads started since the JVM started
 
 |topic.creationTime
@@ -952,18 +832,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the total number of received messages of this topic on this member
 
 |`transactions.commitCount`
-|COUNT
-|INFO
+|count
 |the number of committed transactions
 
 |`transactions.rollbackCount`
-|COUNT
-|INFO
+|count
 |the number of rollbacked transactions
 
 |`transactions.startCount`
-|COUNT
-|INFO
+|count
 |the number of started transactions
 
 |===
