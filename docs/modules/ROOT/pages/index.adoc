@@ -51,13 +51,19 @@ Hazelcast is a registered trademark of Hazelcast, Inc. All other trademarks in t
 are held by their respective owners.
 
 [[customer-support]]
-== Customer Support
+== Support
 
-Support for Hazelcast is provided via https://github.com/hazelcast/hazelcast/issues[GitHub^],
-https://groups.google.com/forum/#!forum/hazelcast[Mail Group^] and http://www.stackoverflow.com[StackOverflow^].
+Hazelcast provides two types of support: community and customer.
 
-For information on the commercial support for Hazelcast IMDG and Hazelcast IMDG Enterprise, see
-https://hazelcast.com/pricing/[hazelcast.com^].
+Community support is for every Hazelcast IMDG user. You can use the following channels for this purpose:
+
+* https://github.com/hazelcast/hazelcast[Hazelcast GitHub^] (for reporting issues through our GitHub repository)
+* https://slack.hazelcast.com[Hazelcast Community Slack^]
+* https://groups.google.com/forum/#!forum/hazelcast[Mail Group^]
+* http://www.stackoverflow.com[StackOverflow^].
+
+Customer support is for the paying Hazelcast IMDG customers. See
+https://hazelcast.com/pricing/[hazelcast.com^] for the support options.
 
 == Release Notes
 
