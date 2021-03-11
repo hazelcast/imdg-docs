@@ -32,7 +32,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterStartTime`
 |ms
-|when the first node in cluster becomes master, its localClockTime value is saved as clusterStartTime
+|the start time of the cluster (when the first node in cluster becomes master, its localClockTime value is saved as clusterStartTime)
 
 |`cluster.clock.clusterTime`
 |ms
@@ -388,7 +388,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.invocations.normalTimeouts`
 |count
-|the number of times the normal operation 
+|the number of times that the operation invocations timeout
 
 |`operation.invocations.pending`
 |count
@@ -713,15 +713,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.acceptor.selectorRecreateCount`
 |count
-|the number of times the selector was rebuilt
+|the number of times the selector was recreated
 
 |`tcp.balancer.imbalanceDetectedCount`
 |count
-|
+|the number of times the `IOBalancer` detects the imbalance of loads on `NioThread`s
 
 |`tcp.balancer.migrationCompletedCount`
 |count
-|
+|the number of completed NioPipeline migrations by the IOBalancer (these migrations are performed to fix the load imbalance problem on the NioThreads) 
 
 |`tcp.bytesReceived`
 |bytes
@@ -737,7 +737,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.connection.activeCount`
 |count
-|the number of active connections 
+|the number of active connections
 
 |`tcp.connection.clientCount`
 |count
@@ -767,37 +767,37 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |
 
-|tcp.inputThread.bytesTransceived
+|tcp.inputThread/outputThread.bytesTransceived
 |bytes
-|the amount of transceived data on this input thread 
+|the amount of transceived data on this NioThread
 
-|`tcp.inputThread.completedTaskCount`
+|`tcp.inputThread/outputThread.completedTaskCount`
 |count
-|the total number of completed tasks on this thread
+|the total number of completed tasks on this NioThread
 
-|`tcp.inputThread.eventCount`
+|`tcp.inputThread/outputThread.eventCount`
 |count
 |
 
-|`tcp.inputThread.framesTransceived`
+|`tcp.inputThread/outputThread.framesTransceived`
 |count
-|the number of transceived frames on this input thread
+|the number of transceived frames on this NioThread
 
-|`tcp.inputThread.idleTimeMillis`
+|`tcp.inputThread/outputThread.idleTimeMillis`
 |ms
-|the idle time that indicates how long since the last read 
+|the idle time that indicates how long since the last read/write 
 
-|`tcp.inputThread.ioThreadId`
+|`tcp.inputThread/outputThread.ioThreadId`
 |count
-|the thread id for this input thread 
+|the thread id of this NioThread
 
-|`tcp.inputThread.priorityFramesTransceived`
+|`tcp.inputThread/outputThread.priorityFramesTransceived`
 |count
 |the number of transceived priority frames
 
-|`tcp.inputThread.processCount`
+|`tcp.inputThread/outputThread.processCount`
 |count
-|the number of times the the nio pipeline has been processed
+|the number of processed `NioPipeline`s on this NioThread
 
 |`thread.daemonThreadCount`
 |count
