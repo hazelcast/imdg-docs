@@ -63,7 +63,7 @@ Community support is for every Hazelcast IMDG user. You can use the following ch
 * http://www.stackoverflow.com[StackOverflow^].
 
 Customer support is for the paying Hazelcast IMDG customers. See
-https://hazelcast.com/pricing/[hazelcast.com^] for the support options.
+https://hazelcast.com/services/support/[hazelcast.com^] for the support options.
 
 == Release Notes
 
