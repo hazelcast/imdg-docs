@@ -678,8 +678,8 @@ operations and the objects are complex, making the serialization cost comparativ
 high. By storing objects, entry processing does not contain the deserialization
 cost. Note that when you use `OBJECT` as the in-memory format, the key is still
 stored in binary format and the value is stored in object format.
-* `NATIVE`: ([navy]*Hazelcast IMDG Enterprise HD*) This format behaves the same as
-BINARY, however, instead of heap memory, key and value are stored in the off-heap
+* `NATIVE`: ([navy]*Hazelcast IMDG Enterprise*) This format behaves the same as
+BINARY, however, instead of on-heap memory, keys and values are stored in the off-heap
 memory.
 
 Regular operations like `get` rely on the object instance. When the `OBJECT` format
