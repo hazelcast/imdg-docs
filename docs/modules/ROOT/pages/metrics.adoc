@@ -12,62 +12,63 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cache.averageGetTime`
 |ms
-|
+|the mean time in µs to execute gets on the cache
 
 |`cache.averagePutTime`
 |ms
-|
+|the mean time in µs to execute puts on the cache
 
 |`cache.averageRemovalTime`
 |ms
-|
+|the mean time in µs to execute removes on the cache
 
 |`cache.cacheEvictions`
-|
-|
+|count
+|the number of evictions on the cache
 
 |`cache.cacheGets`
-|
-|
+|count
+|the number of gets on the cache
 
 |`cache.cacheHits`
-|
-|
+|count
+|the number of hits (successful get operations) on the cache
 
 |`cache.cacheHitPercentage`
-|
-|
+|percent
+|the percentage of hits (successful get operations) on the cache
 
 |`cache.cachePuts`
-|
-|
+|count
+|the number of puts to the cache
 
 |`cache.cacheRemovals`
-|
-|
+|count
+|the number of removals from the cache
 
 |`cache.cacheMisses`
-|
-|
+|count
+|the number of missed cache accesses on the cache
 
 |`cache.cacheMissPercentage`
-|
-|
+|percent
+|the percentage of missed cache accesses on the cache
 
 |`cache.creationTime`
 |ms
-|
+|the creation of the cache on the member
 
 |`cache.lastAccessTime`
-|
-|
+|ms
+|the last access time to cache
 
 |`cache.lastUpdateTime`
-|
-|
+|ms
+|the last update time to cache
 
-
-
+|`cache.ownedEntryCount`
+|count
+|the owned entry count in the cache
 
 |`classloading.loadedClassesCount`
 |count
@@ -181,17 +182,18 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the remaining capacity on the work queue
 
+// TODO: Validate this file.partition metrics 
 |`file.partition.freeSpace`
 |bytes
-|for the partition of the user.home
+|the amoun of free space in the given directory, user.home
 
 |`file.partition.totalSpace`
 |bytes
-|the amount of total space in the given dir=user.home
+|the amount of total space in the given directory, user.home
 
 |`file.partition.usableSpace`
 |bytes
-|the amount of usable space in the given dir=user.home,
+|the amount of usable space in the given directory, user.home
 
 |`gc.majorCount`
 |count
@@ -574,7 +576,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the number of open file descriptors (only for UNIX platforms).
 
 |`os.processCpuLoad`
-|percentage
+|percent
 |the "recent cpu usage" for the JVM process; a negative value if not available.
 
 |`os.processCpuTime`
@@ -582,11 +584,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 |the CPU time used by the process on which the JVM is running
 
 |`os.systemCpuLoad`
-|percentage
+|percent
 |the "recent cpu usage" for the whole system; a negative value if not available
 
 |`os.systemLoadAverage`
-|percentage
+|percent
 |the system load average for the last minute, or a negative value if not available
 
 |`os.totalPhysicalMemorySize`
@@ -707,47 +709,47 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`queue.averageAge`
 |ms
-|
+|the average age of the items in this member
 
 |`queue.backupItemCount`
 |count
-|
+|the number of backup items held by the member
 
 |`queue.creationTime`
 |ms
-|
+|the creation time of the topic on the member
 
 |`queue.eventOperationCount`
 |count
-|
+|the number of event operations
 
 |`queue.maxAge`
 |ms
-|
+|the maximum age of the items in this member
 
 |`queue.minAge`
 |ms
-|
+|the minimum age of the items in this member
 
 |`queue.numberOfEmptyPolls`
 |count
-|
+|the number of null returning poll operations
 
 |`queue.numberOfEvents`
 |count
-|
+|the number of event operations (duplicate of eventOperationCount)
 
 |`queue.numberOfOffers`
 |count
-|
+|the number of offer/put/add operations
 
 |`queue.numberOfOtherOperations`
 |count
-|
+|the number of other operations
 
 |`queue.numberOfPolls`
 |count
-|
+|the number of poll/take/remove operations.
 
 |`queue.numberOfRejectedOffers`
 |count
@@ -755,11 +757,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`queue.ownedItemCount`
 |count
-|
+|the number of owned items in this member
 
 |`queue.total`
 |count
-|
+|the total number of operations (numberOfOffers + numberOfPolls + numberOfOtherOperations)
 
 |`raft.destroyedGroupIds`
 |count
@@ -873,15 +875,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the number of connections establishments in progress.
 
-|tcp.connection.openedCount
+|`tcp.connection.openedCount`
 |count
 |the number of opened connections
 
-|tcp.connection.textCount
+|`tcp.connection.textCount`
 |count
 |the number of connections used by text-based protocols (REST, Memcache).
 
-|tcp.inputThread/outputThread.bytesTransceived
+|`tcp.inputThread/outputThread.bytesTransceived`
 |bytes
 |the amount of transceived data on this NioThread
 
@@ -913,11 +915,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the number of processed `NioPipeline`s on this NioThread
 
-|tcp.inputThread/outputThread.selectorIOExceptionCount
+|`tcp.inputThread/outputThread.selectorIOExceptionCount`
 |count
 |the number of times that io exceptions are thrown during selection
 
-|tcp.inputThread/outputThread.taskQueueSize
+|`tcp.inputThread/outputThread.taskQueueSize`
 |count
 |the number of pending tasks on the queue of NioThread
 
