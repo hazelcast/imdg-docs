@@ -259,6 +259,30 @@ name=flake-id-gen,|count
 |ms
 |the accumulated elapsed time in unknown gc's
 
+|`invocations.maxCurrentInvocations`
+|count
+|the maximum number of concurrent client invocations
+
+|`invocations.pendingCalls`
+|count
+client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=1615555462258,|the number of pending client invocation calls on this client
+
+|`invocations.startedInvocations`
+|count
+|the number of started client invocations on this client
+
+|`list.creationTime`
+name=my-list,|ms
+|[1615555462515]
+
+|`list.lastAccessTime`
+|ms
+|the last access (read) time of the locally owned items
+
+|`list.lastUpdateTime`
+|ms
+|the last update time of the locally owned items
+
 |`map.backupCount`
 |count
 |the number of backups per entry
@@ -422,6 +446,62 @@ name=flake-id-gen,|count
 |`memory.usedNative`
 |bytes
 |the amount of used native memory in current HazelcastInstance
+
+|`nearcache.creationTime`
+|ms
+|the creation time of this Near Cache on this instance (member or client)
+
+|`nearcache.evictions`
+|count
+|the number of evictions of Near Cache entries owned by this instance (member or client)
+
+|`nearcache.expirations`
+|count
+|the number of TTL and max-idle expirations of Near Cache entries owned by this instance (member or client)
+
+|`nearcache.hits`
+|count
+|the number of hits (reads) of Near Cache entries owned by this instance (member or client)
+
+|`nearcache.invalidationRequests`
+|count
+|the number of invalidations of Near Cache entries owned by this instance (member or client).
+
+|`nearcache.invalidations`
+|count
+|the number of invalidations of Near Cache entries owned by this instance (member or client).
+
+|`nearcache.lastPersistenceDuration`
+|ms
+|the duration of the last Near Cache key persistence
+
+|`nearcache.lastPersistenceKeyCount`
+|count
+|the number of persisted keys of the last Near Cache key persistence
+
+|`nearcache.lastPersistenceTime`
+|ms
+|the timestamp of the last Near Cache key persistence
+
+|`nearcache.lastPersistenceWrittenBytes`
+|bytes
+|the written bytes of the last Near Cache key persistence
+
+|`nearcache.misses`
+|count
+|the number of misses of Near Cache entries owned by this instance (member or client).
+
+|`nearcache.ownedEntryCount`
+|count
+|the number of Near Cache entries owned by this instance (member or client)
+
+|`nearcache.ownedEntryMemoryCost`
+|bytes
+|the memory cost of Near Cache entries owned by this instance (member or client)
+
+|`nearcache.persistenceCount`
+|count
+|the number of Near Cache key persistences (when the pre-load feature is enabled)
 
 |`operation.asyncOperations`
 |count
