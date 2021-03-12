@@ -164,31 +164,31 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`executor.cancelled`
 |count
-|
+|the number of cancelled operations on the executor service
 
 |`executor.completed`
 |count
-|
+|the number of completed operations on the executor service
 
 |`executor.creationTime`
 |ms
-|
+|the creation time of this executor on the member
 
 |`executor.pending`
 |count
-|
+|the number of pending operations on the executor service
 
 |`executor.started`
 |count
-|
+|the number of started operations on the executor service
 
 |`executor.totalExecutionTime`
 |ms
-|
+|the total execution time of operations finished
 
 |`executor.totalStartLatency`
 |ms
-|
+|the total start latency of operations started
 
 |`executor.internal.completedTasks`
 |count
@@ -222,6 +222,18 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`file.partition.usableSpace`
 |bytes
 |the amount of usable space in the given directory, user.home
+
+|`flakeIdGenerator.batchCount`
+name=flake-id-gen,|count
+|the total number of times the ID generator has been used to generate a new ID batch
+
+|`flakeIdGenerator.creationTime`
+name=flake-id-gen,|ms
+|the creation time of this flakeIdGenerator on the member
+
+|`flakeIdGenerator.idCount`
+name=flake-id-gen,|count
+|the total number of IDs generated (the sum of IDs for all batches)
 
 |`gc.majorCount`
 |count
