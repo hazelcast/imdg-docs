@@ -11,16 +11,16 @@ The table below lists the metrics with their explanations in alphabetical order.
 | Description
 
 |`cache.averageGetTime`
-|ms
-|the mean time in µs to execute gets on the cache
+|µs
+|the mean time to execute gets on the cache
 
 |`cache.averagePutTime`
-|ms
-|the mean time in µs to execute puts on the cache
+|µs
+|the mean time to execute puts on the cache
 
 |`cache.averageRemovalTime`
-|ms
-|the mean time in µs to execute removes on the cache
+|µs
+|the mean time to execute removes on the cache
 
 |`cache.cacheEvictions`
 |count
@@ -161,6 +161,34 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`event.totalFailureCount`
 |count
 |the number of events that fail to be published
+
+|`executor.cancelled`
+|count
+|
+
+|`executor.completed`
+|count
+|
+
+|`executor.creationTime`
+|ms
+|
+
+|`executor.pending`
+|count
+|
+
+|`executor.started`
+|count
+|
+
+|`executor.totalExecutionTime`
+|ms
+|
+
+|`executor.totalStartLatency`
+|ms
+|
 
 |`executor.internal.completedTasks`
 |count
