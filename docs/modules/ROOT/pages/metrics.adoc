@@ -10,6 +10,65 @@ The table below lists the metrics with their explanations in alphabetical order.
 | Unit
 | Description
 
+|`cache.averageGetTime`
+|ms
+|
+
+|`cache.averagePutTime`
+|ms
+|
+
+|`cache.averageRemovalTime`
+|ms
+|
+
+|`cache.cacheEvictions`
+|
+|
+
+|`cache.cacheGets`
+|
+|
+
+|`cache.cacheHits`
+|
+|
+
+|`cache.cacheHitPercentage`
+|
+|
+
+|`cache.cachePuts`
+|
+|
+
+|`cache.cacheRemovals`
+|
+|
+
+|`cache.cacheMisses`
+|
+|
+
+|`cache.cacheMissPercentage`
+|
+|
+
+|`cache.creationTime`
+|ms
+|
+
+|`cache.lastAccessTime`
+|
+|
+
+|`cache.lastUpdateTime`
+|
+|
+
+
+
+
 |`classloading.loadedClassesCount`
 |count
 |the number of classes that are currently loaded
@@ -24,7 +83,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`client.endpoint.count`
 |count
-|the number of endpoints for this member. (For each client connected to a member, a client endpoint is available
+|the number of active client endpoints for this member
 
 |`client.endpoint.totalRegistrations`
 |count
@@ -56,19 +115,19 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
-|
+|the last timestamp of sending heartbeats to the other known cluster members
 
 |`cluster.size`
 |count
 |the size of the cluster
 
-|`cp.atomiclong.value`,
+|`cp.atomiclong.value`
 |count
 |the value of this AtomicLong
 
 |`event.eventQueueSize`
 |count
-|the total number of events pending to be executed
+|the total number of events pending to be processed
 
 |`event.eventsProcessed`
 |count
@@ -120,7 +179,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`executor.internal.remainingQueueCapacity`
 |count
-|The remaining capacity on the work queue
+|the remaining capacity on the work queue
 
 |`file.partition.freeSpace`
 |bytes
@@ -204,7 +263,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.lockedEntryCount`
 |count
-|the number of dirty entries that the member owns
+|the number of locked entries that the member owns
 
 |`map.merkleTreesCost`
 |count
@@ -328,11 +387,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.callTimeoutCount`
 |count
-|possibly a leftover (never used)
+|possibly a leftover (AFAIU its value is never updated)
 
 |`operation.completedCount`
 |count
-|the number of completed operations of the executor service.
+|the number of completed operations
 
 |`operation.failedBackups`
 |count
@@ -380,7 +439,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.invocations.invocationTimeoutMillis`
 |ms
-|timeout for operation invocations
+|the timeout for operation invocations
 
 |`operation.invocations.lastCallId`
 |count
@@ -400,7 +459,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.operationTimeoutCount`
 |count
-|possibly a leftover (never used)
+|possibly a leftover (AFAIU its value is never updated)
 
 |`operation.parker.parkQueueCount`
 |count
@@ -476,7 +535,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.thread.completedRunnableCount`
 |count
-|the total number of runnables exuceted by this operation thread
+|the total number of runnables executed by this operation thread
 
 |`operation.thread.completedTotalCount`
 |count
@@ -568,7 +627,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`partitions.maxBackupCount`
 |count
-|
+|the maximum allowed backup count according to current cluster formation and partition group configuration
 
 |`partitions.memberGroupsSize`
 |count
@@ -646,6 +705,61 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the number of active proxies for a given service. e.g., the number of all proxies for the IMap.
 
+|`queue.averageAge`
+|ms
+|
+
+|`queue.backupItemCount`
+|count
+|
+
+|`queue.creationTime`
+|ms
+|
+
+|`queue.eventOperationCount`
+|count
+|
+
+|`queue.maxAge`
+|ms
+|
+
+|`queue.minAge`
+|ms
+|
+
+|`queue.numberOfEmptyPolls`
+|count
+|
+
+|`queue.numberOfEvents`
+|count
+|
+
+|`queue.numberOfOffers`
+|count
+|
+
+|`queue.numberOfOtherOperations`
+|count
+|
+
+|`queue.numberOfPolls`
+|count
+|
+
+|`queue.numberOfRejectedOffers`
+|count
+|the number of rejected offers
+
+|`queue.ownedItemCount`
+|count
+|
+
+|`queue.total`
+|count
+|
 
 |`raft.destroyedGroupIds`
 |count
@@ -701,7 +815,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.acceptor.eventCount`
 |count
-|
+|the total number of the connections accepted by TcpServerAcceptor
 
 |`tcp.acceptor.exceptionCount`
 |count
@@ -741,7 +855,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.connection.clientCount`
 |count
-|
+|the number of the active client connections
 
 |`tcp.connection.closedCount`
 |count
@@ -757,7 +871,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.connection.inProgressCount`
 |count
-|
+|the number of connections establishments in progress.
 
 |tcp.connection.openedCount
 |count
@@ -765,7 +879,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |tcp.connection.textCount
 |count
-|
+|the number of connections used by text-based protocols (REST, Memcache).
 
 |tcp.inputThread/outputThread.bytesTransceived
 |bytes
@@ -777,7 +891,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.inputThread/outputThread.eventCount`
 |count
-|
+|the total number of the connections accepted by TcpServerAcceptor
 
 |`tcp.inputThread/outputThread.framesTransceived`
 |count
@@ -798,6 +912,14 @@ The table below lists the metrics with their explanations in alphabetical order.
 |`tcp.inputThread/outputThread.processCount`
 |count
 |the number of processed `NioPipeline`s on this NioThread
+
+|tcp.inputThread/outputThread.selectorIOExceptionCount
+|count
+|the number of times that io exceptions are thrown during selection
+
+|tcp.inputThread/outputThread.taskQueueSize
+|count
+|the number of pending tasks on the queue of NioThread
 
 |`thread.daemonThreadCount`
 |count
