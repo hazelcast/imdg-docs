@@ -272,8 +272,8 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 |the number of started client invocations on this client
 
 |`list.creationTime`
-name=my-list,|ms
-|[1615555462515]
+|ms
+|the creation time of this list on the member
 
 |`list.lastAccessTime`
 |ms
@@ -349,7 +349,7 @@ name=my-list,|ms
 
 |`map.ownedEntryMemoryCost`
 |bytes
-|the memory cost of owned entries in this member
+|the memory cost of owned entries on this member
 
 |`map.putCount`
 |count
@@ -398,6 +398,54 @@ name=my-list,|ms
 |`map.totalSetLatency`
 |ms
 |the total latency of set operations
+
+|`map.index.averageHitLatency`
+|ns
+|the average hit latency for the index
+
+|`map.index.averageHitSelectivity`
+|percent
+|the average selectivity of the hits served by the index (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
+
+|`map.index.creationTime`
+|ms
+|the creation time of the index on this member
+
+|`map.index.hitCount`
+|count
+|the total number of hits into the index (the value of this metric may be greater than the `map.index.queryCount` since a single query may hit the same index more than once)
+
+|`map.index.insertCount`
+|count
+|the number of insert operations performed on the index
+
+|`map.index.memoryCost`
+|bytes
+|the memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
+
+|`map.index.queryCount`
+|count
+|the total number of queries served by the index
+
+|`map.index.removeCount`
+|count
+|the number of remove operations performed on the index
+
+|`map.index.totalInsertLatency`
+|ns
+|the total latency of insert operations performed on the index
+
+|`map.index.totalRemoveLatency`
+|ns
+|the total latency of remove operations performed on the index
+
+|`map.index.totalUpdateLatency`
+|ns
+|the total latency of update operations performed on the index.
+
+|`map.index.updateCount`
+|count
+|the number of update operations performed on the index
 
 |`memory.committedHeap`
 |bytes
@@ -910,6 +958,78 @@ name=my-list,|ms
 |`raft.terminatedRaftNodeGroupIds`
 |count
 |the terminated raft node group ids
+
+|`replicatedMap.creationTime`
+|ms
+|the creation time of this replicated map on this member.
+
+|`replicatedMap.getCount`
+|count
+|the number of get operations on this member
+
+|`replicatedMap.hits`
+|count
+|the number of hits (reads) of the locally owned entries
+
+|`replicatedMap.lastAccessTime`
+|ms
+|the last access (read) time of the locally owned entries
+
+|`replicatedMap.lastUpdateTime`
+|ms
+|the last update time of the locally owned entries
+
+|`replicatedMap.maxGetLatency`
+|ms
+|the maximum latency of get operations
+
+|`replicatedMap.maxPutLatency`
+|ms
+|the maximum latency of put operations
+
+|`replicatedMap.maxRemoveLatency`
+|ms
+|the maximum latency of remove operations
+
+|`replicatedMap.numberOfEvents`
+|count
+|the number of events received on this member
+
+|`replicatedMap.numberOfOtherOperations`
+|count
+|the total number of other operations on this member
+
+|`replicatedMap.ownedEntryCount`
+|count
+|the number of entries owned on this member
+
+|`replicatedMap.ownedEntryMemoryCost`
+|bytes
+|the memory cost of owned entries on this member
+
+|`replicatedMap.putCount`
+|count
+|the number of put operations on this member
+
+|`replicatedMap.removeCount`
+|count
+|the number of remove operations on this member
+
+|`replicatedMap.totalGetLatencies`
+|ms
+|the total latency of get operations
+
+|`replicatedMap.totalPutLatencies`
+|ms
+|the total latency of put operations
+
+|`replicatedMap.totalRemoveLatencies`
+|ms
+|the total latency of remove operations
+
+|`replicatedMap.total`
+|count
+|the total number of operations on this member
 
 |`runtime.availableProcessors`
 |count
