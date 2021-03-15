@@ -60,11 +60,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cache.lastAccessTime`
 |ms
-|the last access time to cache
+|the last access time to the cache
 
 |`cache.lastUpdateTime`
 |ms
-|the last update time to cache
+|the last update time to the cache
 
 |`cache.ownedEntryCount`
 |count
@@ -1078,6 +1078,18 @@ name=flake-id-gen,|count
 |`runtime.usedMemory`
 |bytes
 |an approximation to the total amount of memory currently used
+
+|`set.creationTime`
+|ms
+|the creation time of the set on the member
+
+|`set.lastAccessTime`
+|ms
+|the last access (read) time of the locally owned items
+
+|`set.lastUpdateTime`
+|ms
+|the last update time of the locally owned items
 
 |`tcp.acceptor.eventCount`
 |count
