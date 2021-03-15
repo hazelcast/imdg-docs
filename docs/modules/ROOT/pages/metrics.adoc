@@ -259,13 +259,37 @@ name=flake-id-gen,|count
 |ms
 |the accumulated elapsed time in unknown gc's
 
+|`hot-restart.liveTombstones`
+|count
+|the number of live tombstones in the store
+
+|`hot-restart.liveValues`
+|count
+|the number of live values in the store
+
+|`hot-restart.tombGarbage`
+|bytes
+|the size of the tombstone record garbage (it is incremented when a record is retired or an active chunk is turned into a stable one)
+
+|`hot-restart.tombOccupancy`
+|bytes
+|the size of tombstone chunks (it is incremented when the active chunk is turned into a stable one)
+
+|`hot-restart.valGarbage`
+|bytes
+|the size of the value record garbage (it is incremented when a record is retired or an active chunk is turned into a stable one)
+
+|`hot-restart.valOccupancy`
+|bytes
+|the size of value chunks (it is incremented when the active chunk is turned into a stable one)
+
 |`invocations.maxCurrentInvocations`
 |count
 |the maximum number of concurrent client invocations
 
 |`invocations.pendingCalls`
 |count
-client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=1615555462258,|the number of pending client invocation calls on this client
+|the number of pending client invocations on this client
 
 |`invocations.startedInvocations`
 |count
@@ -1202,5 +1226,113 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 |`transactions.startCount`
 |count
 |the number of started transactions
+
+|`wan.ackDelayCurrentMillis`
+|ms
+|the duration of ongoing delaying, -1 if there is no current delaying
+
+|`wan.ackDelayLastEnd`
+|ms
+|the timestamp of the last end of delaying the acknowledgments. If this value is bigger than `wan.ackDelayLastStart`, then there is no delaying.
+
+|`wan.ackDelayLastStart`
+|ms
+|the timestamp of the last start of delaying the acknowledgments
+
+|`wan.ackDelayTotalCount`
+|count
+|the total number of the triggering delaying the WAN acknowledgments (exceeding the invocation threshold)
+
+|`wan.ackDelayTotalMillis`
+|ms
+|the total amount of time delaying the WAN acknowledgments was taking place
+
+|`wan.consistencyCheck.lastCheckedPartitionCount`
+|count
+|the number of checked partitions on the last WAN consistency check
+
+|`wan.consistencyCheck.lastCheckedLeafCount`
+|count
+|the number of checked partitions on the last WAN consistency check
+
+|`wan.consistencyCheck.lastDiffLeafCount`
+|count
+|the number of different Merkle tree leaves on the last WAN consistency check
+
+|`wan.consistencyCheck.lastDiffPartitionCount`
+|count
+|the number of partitions found to be inconsistent on the last WAN consistency check
+
+|`wan.consistencyCheck.lastEntriesToSync`
+|count
+|the number of entries to synchronize to get the clusters into sync on the last WAN consistency check
+
+|`wan.droppedCount`
+|count
+|the number of dropped entry events
+
+|`wan.outboundQueueSize`
+|count
+|the outbound wan queue size on this member
+
+|`wan.removeCount`
+|count
+|the number of entry remove events
+
+|`wan.syncCount`
+|count
+|the number of entry sync events
+
+|`wan.sync.avgEntriesPerLeaf`
+|count
+|the average of the number of records belong the synchronized Merkle tree nodes have
+
+|`wan.sync.maxLeafEntryCount`
+|count
+|the maximum of the number of records belong the synchronized Merkle tree nodes have
+
+|`wan.sync.minLeafEntryCount`
+|count
+|the minimum of the number of records belong the synchronized Merkle tree nodes have
+
+|`wan.sync.nodesSynced`
+|count
+|the number of the synchronized Merkle tree nodes
+
+|`wan.sync.partitionsSynced`
+|count
+|the number of synchronized partitions
+
+|`wan.sync.partitionsToSync`
+|count
+|the number of partitions to synchronize
+
+|`wan.sync.recordsSynced`
+|count
+|the number of synchronized records
+
+|`wan.sync.syncDurationNanos`
+|ns
+|the duration of the last synchronization
+
+|`wan.sync.stdDevEntriesPerLeaf`
+|count
+|the standard deviation of the number of records belong the synchronized Merkle tree nodes have
+
+|`wan.sync.syncStartNanos`
+|ns
+|the start time for the synchronization
+
+|`wan.totalPublishLatency`
+|ms
+|the total latency of published WAN events from this member
+
+|`wan.totalPublishedEventCount`
+|count
+|the total number of published WAN events from this member
+
+|`wan.updateCount`
+|count
+|the number of entry update events
 
 |===
