@@ -309,7 +309,7 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 
 |`map.heapCost`
 |count
-|the total heap cost in bytes for the map
+|the total heap cost for the map
 
 |`map.hits`
 |count
@@ -449,11 +449,11 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 
 |`memory.committedHeap`
 |bytes
-|the amount of memory in bytes that is committed for the JVM to use
+|the amount of heap memory that is committed for the JVM to use
 
 |`memory.committedNative`
 |bytes
-|the amount of native memory in bytes that is committed for current HazelcastInstance to use
+|the amount of native memory that is committed for current HazelcastInstance to use
 
 |`memory.freeHeap`
 |bytes
@@ -693,7 +693,7 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 
 |`operation.thread.completedOperationBatchCount`
 |count
-| 
+|the number of completed `TaskBatch` (a batch of tasks) by this operation thread
 
 |`operation.thread.completedPacketCount`
 |count
@@ -733,7 +733,7 @@ client=660cbca1-1f4e-451b-85ec-5e2fcee57e50,clientname=hz.client_1,timestamp=161
 
 |`os.freeSwapSpaceSize`
 |bytes
-|the amount of free swap space size 
+|the amount of free swap space size
 
 |`os.maxFileDescriptorCount`
 |count
