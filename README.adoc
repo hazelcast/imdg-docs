@@ -10,6 +10,8 @@ endif::[]
 :url-playbook: {url-org}/hazelcast-docs
 :url-staging: https://develop--nifty-wozniak-71a44b.netlify.app/home/index.html
 
+# Hello
+
 This repository contains the Antora components for the Hazelcast IMDG documentation.
 
 The documentation source files are marked up with AsciiDoc.
