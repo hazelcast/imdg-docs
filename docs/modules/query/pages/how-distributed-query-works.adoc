@@ -17,7 +17,7 @@ is sent to the requester.
 Hazelcast offers the following APIs for distributed query purposes:
 
 * Criteria API
-* Distributed SQL Query
+* Querying with SQL-like Predicates
 
 == Employee Map Query Example
 
@@ -183,7 +183,7 @@ public Collection<Employee> getWithNameAndAgeSimplified( String name, int age ) 
 }
 ----
 
-== Querying with SQL
+== Querying with SQL-like Predicates
 
 `Predicates.sql()` takes the regular SQL `where` clause.
 Here is an example:
@@ -355,19 +355,13 @@ whether such an entry is going to be returned or not from a query is not defined
 
 Hazelcast stores a metadata object per `HazelcastJsonValue` stored.
 This metadata object is created every time
-a `HazelcastJsonValue` is put into an IMap. Metadata is later used
-to speed up the query operations. Metadata creation
+a `HazelcastJsonValue` is put into an IMap and stored in the on-heap or off-heap
+memories depending on your IMap's xref:data-structures:map.adoc#setting-in-memory-format[in-memory format setting].
+Metadata is later used to speed up the query operations. Metadata creation
 is on by default. Depending on your application's needs, you may want
 to turn off the metadata creation
 to decrease the put latency and increase the throughput. You can configure
 this using xref:data-structures:map.adoc#metadata-policy[Metadata Policy].
-
-NOTE: JSON metadata is stored on-heap even when you use the `NATIVE`
-in-memory format. If you are storing
-``HazelcastJsonValue``s in your `NATIVE` maps, there is a certain
-amount of on-heap cost per object. Metadata is not created unless you
-put ``HazelcastJsonValue``s in your `NATIVE` maps even when metadata
-creation is on.
 
 == Filtering with Paging Predicates
 

@@ -1,6 +1,6 @@
 site:
   title: Documentation
-  url: http:localhost:5000
+  url: https://brave-engelbart-6d53bf.netlify.app/
   start_page: imdg::index.adoc
   keys:
     google_analytics: 'GTM-MQ59XD6'
