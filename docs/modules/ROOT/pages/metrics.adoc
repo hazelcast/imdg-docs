@@ -114,6 +114,18 @@ The table below lists the metrics with their explanations in alphabetical order.
 |ms
 |the maximum observed cluster time difference
 
+|`cluster.connection.closedTime`
+|count
+|the connection close time for this connection
+
+|`cluster.connection.connectionId`
+|count
+|the connection id for this client connection
+
+|`cluster.connection.eventHandlerCount`
+|count
+|the number of event handler for this client connection
+
 |`cluster.heartbeat.lastHeartbeat`
 |ms
 |the last timestamp of sending heartbeats to the other known cluster members
@@ -957,13 +969,13 @@ name=flake-id-gen,|count
 
 |`raft.destroyedGroupIds`
 |count
-|
+|the destroyed raft node group ids
 
-|`raft.metadata.activeMembers`
+|`raft.metadata.activeMembersCommitIndex`
 |count
 |
 
-|`raft.metadata.activeMembersCommitIndex`
+|`raft.metadata.activeMembers`
 |count
 |
 
@@ -1158,6 +1170,82 @@ name=flake-id-gen,|count
 |`tcp.connection.textCount`
 |count
 |the number of connections used by text-based protocols (REST, Memcache).
+
+|`tcp.connection.in/out.completedMigrations`
+|count
+|the number of completed migrations on this pipeline (migrates this pipeline to a different owner)
+
+|`tcp.connection.in/out.opsInterested`
+|count
+|
+
+|`tcp.connection.in/out.opsReady`
+|count
+|
+
+|`tcp.connection.in/out.ownerId`
+|count
+|the owner id of this nio pipeline, -1 if the pipeline is being migrated (owner is null)
+
+|`tcp.connection.in/out.processCount`
+|count
+|the number of time the `NioPipeline.process()` method has been called
+
+|`tcp.connection.in/out.startedMigrations`
+|count
+|the number of started migrations on this pipeline
+
+|`tcp.connection.in.bytesRead`
+|bytes
+|the total size of frames read on this inbound pipeline
+
+|`tcp.connection.in.idleTimeMs`
+|ms
+|the idle time that indicates how long since the last read on this inbound nio pipeline
+
+|`tcp.connection.in.normalFramesRead`
+|count
+|the number of priority frames read on this inbound nio pipeline
+
+|`tcp.connection.in.priorityFramesRead`
+|count
+|the number of priority frames read 
+
+|`tcp.connection.out.bytesWritten`
+|bytes
+|the total amount of written frames on this outbound pipeline
+
+|`tcp.connection.out.idleTimeMillis`
+|ms
+|the idle time that indicates how long since the last write on this outbound nio pipeline
+
+|`tcp.connection.out.normalFramesWritten`
+|count
+|the number of written normal frames on this outbound nio pipeline
+
+|`tcp.connection.out.priorityFramesWritten`
+|count
+|the number of priority frames written into this nio pipeline
+
+|`tcp.connection.out.priorityWriteQueuePendingBytes`
+|bytes
+|the total size of priority frames pending in the write queue
+
+|`tcp.connection.out.priorityWriteQueueSize`
+|count
+|the number of priority frames pending in the write queue
+
+|`tcp.connection.out.scheduled`
+|count
+|the ordinal of enum state of this outbound pipeline: 0 -> UNSCHEDULED, 1 -> SCHEDULED, 2 -> BLOCKED, 3 -> RESCHEDULE
+
+|`tcp.connection.out.writeQueuePendingBytes`
+|bytes
+|the total size of normal frames pending in the write queue
+
+|`tcp.connection.out.writeQueueSize`
+|count
+|the number of normal frames pending in the write queue
 
 |`tcp.inputThread/outputThread.bytesTransceived`
 |bytes
