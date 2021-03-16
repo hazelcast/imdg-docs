@@ -673,32 +673,32 @@ name=flake-id-gen,|count
 
 |`operation.queueSize`
 |count
-|
+|the number of normal operations pending (normal partition ops. + normal generic ops.)
 
 |`operation.responseQueueSize`
 |count
-|the total queue size for 
+|the total number of pending responses to be processed
 
 |`operation.responses.backupCount`
 |count
-|
+|the number of backup acknowledgement responses
 
 |`operation.responses.errorCount`
 |count
-|
+|the number of error responses
 
 |`operation.responses.missingCount`
 |count
-|
+|the number of responses having missing invocations
 
 |`operation.responses.normalCount`
 |count
-|
+|the number of normal responses
 
 |`operation.responses.timeoutCount`
 |count
-|
-
+|the number of call timeout responses
+ 
 |`operation.retryCount`
 |count
 |the number of retried operations
