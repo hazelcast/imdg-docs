@@ -8,7 +8,9 @@ endif::[]
 :url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
 :url-ui: {url-org}/hazelcast-docs-ui
 :url-playbook: {url-org}/hazelcast-docs
-:url-staging: https://develop--nifty-wozniak-71a44b.netlify.app/home/index.html
+:url-staging: https://xenodochial-spence-280948.netlify.app/cloud/preface.html
+
+image:https://img.shields.io/badge/Build-Staging-yellow[link="{url-staging}"]
 
 This repository contains the Antora components for the Hazelcast IMDG documentation.
 
