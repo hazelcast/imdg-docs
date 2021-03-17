@@ -8,7 +8,7 @@ endif::[]
 :url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
 :url-ui: {url-org}/hazelcast-docs-ui
 :url-playbook: {url-org}/hazelcast-docs
-:url-staging: https://xenodochial-spence-280948.netlify.app/cloud/preface.html
+:url-staging: https://brave-engelbart-6d53bf.netlify.app/
 
 image:https://img.shields.io/badge/Build-Staging-yellow[link="{url-staging}"]
 
