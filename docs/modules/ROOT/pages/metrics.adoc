@@ -971,6 +971,38 @@ name=flake-id-gen,|count
 |count
 |the destroyed raft node group ids
 
+|`raft.group.availableLogCapacity`
+|count
+|
+
+|`raft.group.commitIndex`
+|count
+|
+
+|`raft.group.lastApplied`
+|count
+|
+
+|`raft.group.lastLogIndex`
+|count
+|
+
+|`raft.group.lastLogTerm`
+|count
+|
+
+|`raft.group.memberCount`
+|count
+|
+
+|`raft.group.snapshotIndex`
+|count
+|
+
+|`raft.group.term`
+|count
+|
+
 |`raft.metadata.activeMembersCommitIndex`
 |count
 |
@@ -1081,7 +1113,7 @@ name=flake-id-gen,|count
 
 |`runtime.totalMemory`
 |bytes
-|the total amount of memory in the JVM. The value returned by this method may vary over time, depending on the host environment.
+|the total amount of memory in the JVM, the value of this metric may vary over time, depending on the host environment
 
 |`runtime.upTime`
 |ms
