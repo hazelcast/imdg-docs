@@ -281,19 +281,19 @@ name=flake-id-gen,|count
 
 |`hot-restart.tombGarbage`
 |bytes
-|the size of the tombstone record garbage (it is incremented when a record is retired or an active chunk is turned into a stable one)
+|the approximate size of the garbage within the tombstone chunks (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
 
 |`hot-restart.tombOccupancy`
 |bytes
-|the size of tombstone chunks (it is incremented when the active chunk is turned into a stable one)
+|the approximate size of tombstone chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
 
 |`hot-restart.valGarbage`
 |bytes
-|the size of the value record garbage (it is incremented when a record is retired or an active chunk is turned into a stable one)
+|the approximate size of the garbage within the value chunk (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
 
 |`hot-restart.valOccupancy`
 |bytes
-|the size of value chunks (it is incremented when the active chunk is turned into a stable one)
+|the approximate size of value chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
 
 |`invocations.maxCurrentInvocations`
 |count
@@ -991,7 +991,7 @@ name=flake-id-gen,|count
 |count
 |
 
-|`raft.group.memberCount`
+|`raft.group.memberCount` // missing count 
 |count
 |
 
