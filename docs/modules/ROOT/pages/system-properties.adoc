@@ -681,7 +681,7 @@ CAUTION: Setting this value too low may cause members to be evicted from the clu
 | true
 | bool
 | Enables/disables Hazelcast IMDG shutdownhook thread.
-When it is disabled, this thread terminates the Hazelcast instance without waiting to shutdown gracefully.
+This property should be considered with `hazelcast.shutdownhook.policy` whose default value is `TERMINATE`; so when enabled (default behavior), this thread terminates the Hazelcast instance without waiting to shutdown gracefully.
 
 |`hazelcast.shutdownhook.policy`
 |TERMINATE
