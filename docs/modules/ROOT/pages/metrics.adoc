@@ -587,6 +587,10 @@ name=flake-id-gen,|count
 |count
 |the number of Near Cache key persistences (when the pre-load feature is enabled)
 
+|`operation.adhoc.executedOperationsCount`
+|count
+|the number of executed adhoc operations
+
 |`operation.asyncOperations`
 |count
 |the number of current executing async operations on the operation service of the member
@@ -602,6 +606,10 @@ name=flake-id-gen,|count
 |`operation.failedBackups`
 |count
 |the number of failed backup operations on the operation service of the member
+
+|`operation.generic.executedOperationsCount`
+|count
+|the number of executed generic operations
 
 |`operation.genericPriorityQueueSize`
 |count
@@ -675,6 +683,10 @@ name=flake-id-gen,|count
 |count
 |the total number of parked operations
 
+|`operation.partition.executedOperationsCount`
+|count
+|the number of executed partition operations on the specified partition
+
 |`operation.partitionThreadCount`
 |count
 |the number of partition operation handler threads for given member
@@ -726,6 +738,10 @@ name=flake-id-gen,|count
 |`operation.runningPartitionCount`
 |count
 |the number of currently running partition operations
+
+|`operation.thread.completedOperationCount`
+|count
+|the number of completed operations by this operation thread
 
 |`operation.thread.completedOperationBatchCount`
 |count
@@ -910,6 +926,18 @@ name=flake-id-gen,|count
 |`proxy.proxyCount`
 |count
 |the number of active proxies for a given service. e.g., the number of all proxies for the IMap.
+
+|`reliableTopic.creationTime`
+|ms
+|the creation time of this reliable topic on the member
+
+|`reliableTopic.totalPublishes`
+|count
+|the total number of published messages of this reliable topic on this member
+
+|`reliableTopic.totalReceivedMessages`
+|count
+|the total number of received messages of this reliable topic on this member
 
 |`queue.averageAge`
 |ms
