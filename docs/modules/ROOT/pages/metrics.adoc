@@ -138,6 +138,62 @@ The table below lists the metrics with their explanations in alphabetical order.
 |count
 |the value of this AtomicLong
 
+|`cp.countdownlatch.count`
+|count
+|the initial count of the `ICountDownLatch`
+
+|`cp.countdownlatch.remaining`
+|count
+|the remaining number of expected count-downs
+
+|`cp.countdownlatch.round`
+|count
+|the round number of the `ICountDownLatch`, each time `ICountDownLatch` is initialized with a new count after it downs to zero, a new round begins
+
+|`cp.lock.acquireLimit`
+|count
+|the maximum number of reentrant acquires of this `FencedLock`
+
+|`cp.lock.lockCount`
+|count
+|the number that shows how many times this `FencedLock` acquired
+
+|`cp.lock.owner`
+|count
+|the address of the `FencedLock` owner
+
+|`cp.lock.ownerSessionId`
+|count
+|the sessionId of the `FencedLock` owner
+
+|`cp.semaphore.available`
+|count
+|the number of the remaining available permits
+
+|`cp.semaphore.initialized`
+|count
+|a boolean state, which shows whether semaphore is initialized with a value or not. In exposed metrics it will be 0 when semaphore is not initialized, a positive value otherwise
+
+|`cp.session.creationTime`
+|ms
+|the creation time of this session
+
+|`cp.session.endpoint`
+|
+|the address of the endpoint which session belongs to
+
+|`cp.session.endpointType`
+|
+|the type of the endpoint; either SERVER or CLIENT
+
+|`cp.session.expirationTime`
+|ms
+|the expiration time of the session
+
+|`cp.session.version`
+|count
+|a boolean state, which shows whether semaphore is initialized with a value or not. In exposed metrics it will be 0 when semaphore is not initialized, a positive value otherwise
+
 |`event.eventQueueSize`
 |count
 |the total number of events pending to be processed
@@ -1125,55 +1181,55 @@ name=flake-id-gen,|count
 
 |`raft.group.availableLogCapacity`
 |count
-|
+|available log capacity for this CP group
 
 |`raft.group.commitIndex`
 |count
-|
+|the commit index of this CP group
 
 |`raft.group.lastApplied`
 |count
-|
+|the last applied index of this CP group
 
 |`raft.group.lastLogIndex`
 |count
-|
+|the last log index of this CP group
 
 |`raft.group.lastLogTerm`
 |count
-|
+|the last log term of this CP group
 
-|`raft.group.memberCount` // missing count 
+|`raft.group.memberCount`
 |count
-|
+|the number of members in this CP group
 
 |`raft.group.snapshotIndex`
 |count
-|
+|the raft snapshot index of this CP group
 
 |`raft.group.term`
 |count
-|
+|the raft term of this CP group
 
 |`raft.metadata.activeMembersCommitIndex`
 |count
-|
+|the commit index of the active CP members
 
 |`raft.metadata.activeMembers`
 |count
-|
+|the number of active CP members
 
 |`raft.metadata.groups`
 |count
-|
+|the number of destroyed CP groups
 
 |`raft.missingMembers`
 |count
-|
+|the number of missing CP members
 
 |`raft.nodes`
 |count
-|
+|the number of local Raft nodes
 
 |`raft.terminatedRaftNodeGroupIds`
 |count
