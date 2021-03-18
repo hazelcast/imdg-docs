@@ -349,11 +349,11 @@ name=flake-id-gen,|count
 
 |`map.getCount`
 |count
-|the number of get operations on the map
+|the number of local get operations on the map
 
 |`map.heapCost`
 |count
-|the total heap cost for the map
+|the total heap cost for the map on this member
 
 |`map.hits`
 |count
@@ -361,7 +361,7 @@ name=flake-id-gen,|count
 
 |`map.indexedQueryCount`
 |count
-|the total number of indexed queries performed on the map
+|the total number of indexed local queries performed on the map
 
 |`map.lastAccessTime`
 |ms
@@ -381,11 +381,11 @@ name=flake-id-gen,|count
 
 |`map.numberOfEvents`
 |count
-|the number of events received
+|the number of local events received
 
 |`map.numberOfOtherOperations`
 |count
-|the total number of other operations
+|the total number of other operations performed on this member
 
 |`map.ownedEntryCount`
 |count
@@ -397,7 +397,7 @@ name=flake-id-gen,|count
 
 |`map.putCount`
 |count
-|the number of put operations on the map
+|the number of local put operations on the map
 
 |`map.queryCount`
 |count
@@ -405,51 +405,51 @@ name=flake-id-gen,|count
 
 |`map.removeCount`
 |count
-|the number of remove operations on the map
+|the number of local remove operations on the map
 
 |`map.setCount`
 |count
-|the number of set operations on the map
+|the number of local set operations on the map
 
 |`map.totalGetLatency`
 |ms
-|the total latency of get operations
+|the total latency of local get operations
 
 |`map.totalMaxGetLatency`
 |ms
-|the maximum latency of get operations
+|the maximum latency of local get operations
 
 |`map.totalMaxPutLatency`
 |ms
-|the maximum latency of put operations
+|the maximum latency of local put operations
 
 |`map.totalMaxRemoveLatency`
 |ms
-|the maximum latency of remove operations
+|the maximum latency of local remove operations
 
 |`map.totalMaxSetLatency`
 |ms
-|the maximum latency of set operations
+|the maximum latency of local set operations
 
 |`map.totalPutLatency`
 |ms
-|the total latency of put operations
+|the total latency of local put operations
 
 |`map.totalRemoveLatency`
 |ms
-|the total latency of remove operations
+|the total latency of local remove operations
 
 |`map.totalSetLatency`
 |ms
-|the total latency of set operations
+|the total latency of local set operations
 
 |`map.index.averageHitLatency`
 |ns
-|the average hit latency for the index
+|the average hit latency for the index on this member
 
 |`map.index.averageHitSelectivity`
 |percent
-|the average selectivity of the hits served by the index (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
+|the average selectivity of the hits served by the index on this member (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
 
 |`map.index.creationTime`
 |ms
@@ -465,7 +465,7 @@ name=flake-id-gen,|count
 
 |`map.index.memoryCost`
 |bytes
-|the memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
+|the local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
 
 |`map.index.queryCount`
 |count
@@ -497,15 +497,15 @@ name=flake-id-gen,|count
 
 |`memory.committedNative`
 |bytes
-|the amount of native memory that is committed for current HazelcastInstance to use
+|the amount of native memory that is committed for current instance (member or client) to use
 
 |`memory.freeHeap`
 |bytes
-|the amount of free memory in the JVM
+|the amount of free memory in the JVM of current instance (member or client)
 
 |`memory.freeNative`
 |bytes
-|the amount of free native memory in current HazelcastInstance
+|the amount of free native memory in the current instance (member or client)
 
 |`memory.freePhysical`
 |bytes
@@ -521,7 +521,7 @@ name=flake-id-gen,|count
 
 |`memory.maxNative`
 |bytes
-|the maximum amount of native memory that current HazelcastInstance will attempt to use
+|the maximum amount of native memory that current instance (member or client) will attempt to use
 
 |`memory.totalPhysical`
 |bytes
@@ -529,15 +529,131 @@ name=flake-id-gen,|count
 
 |`memory.usedHeap`
 |bytes
-|the amount of used memory in the JVM
+|the amount of used memory in the JVM of the current instance (member or client)
 
 |`memory.usedMetadata`
 |bytes
-|the amount of used metadata memory
+|the amount of used metadata memory by the current instance (member or client)
 
 |`memory.usedNative`
 |bytes
-|the amount of used native memory in current HazelcastInstance
+|the amount of used native memory by the current instance (member or client)
+
+|`multiMap.backupCount`
+|count
+|the number of backups per entry
+
+|`multiMap.backupEntryCount`
+|count
+|the number of backup entries held by the member
+
+|`multiMap.backupEntryMemoryCost`
+|bytes
+|the memory cost of backup entries in this member
+
+|`multiMap.creationTime`
+|ms
+|the creation time of the multimap in the member
+
+|`multiMap.dirtyEntryCount`
+|count
+|the number of dirty (updated but not persisted yet) entries that the member owns
+
+|`multiMap.getCount`
+|count
+|the number of local get operations on the multimap
+
+|`multiMap.heapCost`
+|count
+|the total heap cost for the multimap on this member
+
+|`multiMap.hits`
+|count
+|the number of hits (reads) of the locally owned entries
+
+|`multiMap.indexedQueryCount`
+|count
+|the total number of indexed local queries performed on the multimap
+
+|`multiMap.lastAccessTime`
+|ms
+|the last access (read) time of the locally owned entries
+
+|`multiMap.lastUpdateTime`
+|ms
+|the last update time of the locally owned entries
+
+|`multiMap.lockedEntryCount`
+|count
+|the number of locked entries that the member owns
+
+|`multiMap.merkleTreesCost`
+|count
+|the heap cost of the Merkle trees
+
+|`multiMap.numberOfEvents`
+|count
+|the number of local events received
+
+|`multiMap.numberOfOtherOperations`
+|count
+|the total number of other operations
+
+|`multiMap.ownedEntryCount`
+|count
+|the number of entries owned by the member
+
+|`multiMap.ownedEntryMemoryCost`
+|bytes
+|the memory cost of owned entries on this member
+
+|`multiMap.putCount`
+|count
+|the number of local put operations on the multimap
+
+|`multiMap.queryCount`
+|count
+|the number of local queries executed on the multimap (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
+
+|`multiMap.removeCount`
+|count
+|the number of local remove operations on the multimap
+
+|`multiMap.setCount`
+|count
+|the number of local set operations on the multimap
+
+|`multiMap.totalGetLatency`
+|ms
+|the total latency of local get operations
+
+|`multiMap.totalMaxGetLatency`
+|ms
+|the maximum latency of local get operations
+
+|`multiMap.totalMaxPutLatency`
+|ms
+|the maximum latency of local put operations
+
+|`multiMap.totalMaxRemoveLatency`
+|ms
+|the maximum latency of local remove operations
+
+|`multiMap.totalMaxSetLatency`
+|ms
+|the maximum latency of local set operations
+
+|`multiMap.totalPutLatency`
+|ms
+|the total latency of local put operations
+
+|`multiMap.totalRemoveLatency`
+|ms
+|the total latency of local remove operations
+
+|`multiMap.totalSetLatency`
+|ms
+|the total latency of local set operations
 
 |`nearcache.creationTime`
 |ms
