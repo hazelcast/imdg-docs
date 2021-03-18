@@ -319,6 +319,14 @@ name=flake-id-gen,|count
 |ms
 |the last update time of the locally owned items
 
+|`listeners.eventsProcessed`
+|count
+|the total number of processed events on the client listener service
+
+|`listeners.eventQueueSize`
+|count
+|the total number of tasks pending to be processed on the client listener service
+
 |`map.backupCount`
 |count
 |the number of backups per entry
