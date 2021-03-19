@@ -12,768 +12,768 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cache.averageGetTime`
 |µs
-|the mean time to execute gets on the cache
+|Mean time to execute gets on the cache
 
 |`cache.averagePutTime`
 |µs
-|the mean time to execute puts on the cache
+|Mean time to execute puts on the cache
 
 |`cache.averageRemovalTime`
 |µs
-|the mean time to execute removes on the cache
+|Mean time to execute removes on the cache
 
 |`cache.cacheEvictions`
 |count
-|the number of evictions on the cache
+|Number of evictions on the cache
 
 |`cache.cacheGets`
 |count
-|the number of gets on the cache
+|Number of gets on the cache
 
 |`cache.cacheHits`
 |count
-|the number of hits (successful get operations) on the cache
+|Number of hits (successful get operations) on the cache
 
 |`cache.cacheHitPercentage`
 |percent
-|the percentage of hits (successful get operations) on the cache
+|Percentage of hits (successful get operations) out of all get operations on the cache
 
 |`cache.cachePuts`
 |count
-|the number of puts to the cache
+|Number of puts to the cache
 
 |`cache.cacheRemovals`
 |count
-|the number of removals from the cache
+|Number of removals from the cache
 
 |`cache.cacheMisses`
 |count
-|the number of missed cache accesses on the cache
+|Number of missed cache accesses on the cache
 
 |`cache.cacheMissPercentage`
 |percent
-|the percentage of missed cache accesses on the cache
+|Percentage of missed cache accesses out of all the cache accesses/access attempts
 
 |`cache.creationTime`
 |ms
-|the creation of the cache on the member
+|Creation time of the cache on the member
 
 |`cache.lastAccessTime`
 |ms
-|the last access time to the cache
+|Cache's last access time
 
 |`cache.lastUpdateTime`
 |ms
-|the last update time to the cache
+|Cache's last update time
 
 |`cache.ownedEntryCount`
 |count
-|the owned entry count in the cache
+|Locally owned entry count in the cache
 
 |`classloading.loadedClassesCount`
 |count
-|the number of classes that are currently loaded
+|Number of classes that are currently loaded
 
 |`classloading.totalLoadedClassesCount`
 |count
-|the total number of classes that have been loaded since the instance has started execution.
+|Total number of classes that have been loaded since the instance has started execution.
 
 |`classloading.unloadedClassesCount`
 |count
-|the total number of unloaded classes.
+|Total number of unloaded classes.
 
 |`client.endpoint.count`
 |count
-|the number of active client endpoints for this member
+|Number of active client endpoints for this member
 
 |`client.endpoint.totalRegistrations`
 |count
-|the total number of client endpoint registrations
+|Total number of client endpoint registrations
 
 |`cluster.clock.clusterStartTime`
 |ms
-|the start time of the cluster (when the first node in cluster becomes master, its localClockTime value is saved as clusterStartTime)
+|Start time of the cluster (when the first member in cluster becomes master, its localClockTime value is saved as clusterStartTime)
 
 |`cluster.clock.clusterTime`
 |ms
-|the elapsed time since the cluster was created
+|Elapsed time since the cluster was created
 
 |`cluster.clock.clusterTimeDiff`
 |ms
-|the difference between this member's local clock timestamp and the cluster clock timestamp sent by the master node
+|Difference between this member's local clock timestamp and the cluster clock timestamp sent by the master member
 
 |`cluster.clock.clusterUpTime`
 |ms
-|the uptime for the cluster (current time - cluster start time)
+|Uptime of the cluster (current time - cluster start time)
 
 |`cluster.clock.localClockTime`
 |ms
-|this member's local clock timestamp
+|Member's local clock timestamp
 
 |`cluster.clock.maxClusterTimeDiff`
 |ms
-|the maximum observed cluster time difference
+|Maximum observed cluster time difference
 
 |`cluster.connection.closedTime`
 |count
-|the connection close time for this connection
+|Connection close time for this connection
 
 |`cluster.connection.connectionId`
 |count
-|the connection id for this client connection
+|Connection ID for this client connection
 
 |`cluster.connection.eventHandlerCount`
 |count
-|the number of event handler for this client connection
+|Number of event handlers for this client connection
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
-|the last timestamp of sending heartbeats to the other known cluster members
+|Last timestamp of sending heartbeats to the other known cluster members
 
 |`cluster.size`
 |count
-|the size of the cluster
+|Size of the cluster
 
 |`cp.atomiclong.value`
 |count
-|the value of this AtomicLong
+|Value of this `AtomicLong`
 
 |`cp.countdownlatch.count`
 |count
-|the initial count of the `ICountDownLatch`
+|Initial count of the `ICountDownLatch`
 
 |`cp.countdownlatch.remaining`
 |count
-|the remaining number of expected count-downs
+|Remaining number of expected countdowns
 
 |`cp.countdownlatch.round`
 |count
-|the round number of the `ICountDownLatch`, each time `ICountDownLatch` is initialized with a new count after it downs to zero, a new round begins
+|Round number of the `ICountDownLatch`; each time `ICountDownLatch` is initialized with a new count after it downs to zero, a new round begins
 
 |`cp.lock.acquireLimit`
 |count
-|the maximum number of reentrant acquires of this `FencedLock`
+|Maximum number of reentrant acquires of this `FencedLock`
 
 |`cp.lock.lockCount`
 |count
-|the number that shows how many times this `FencedLock` acquired
+|Number that shows how many times this `FencedLock` acquired
 
 |`cp.lock.owner`
 |count
-|the address of the `FencedLock` owner
+|Address of the `FencedLock` owner
 
 |`cp.lock.ownerSessionId`
 |count
-|the sessionId of the `FencedLock` owner
+|Session Id of the `FencedLock` owner
 
 |`cp.semaphore.available`
 |count
-|the number of the remaining available permits
+|Number of the remaining available permits
 
 |`cp.semaphore.initialized`
 |count
-|a boolean state, which shows whether semaphore is initialized with a value or not. In exposed metrics it will be 0 when semaphore is not initialized, a positive value otherwise
+|State value which shows whether semaphore is initialized with a value or not; in exposed metrics, it shows 0 when semaphore is not initialized, a positive value otherwise
 
 |`cp.session.creationTime`
 |ms
-|the creation time of this session
+|Creation time of this session
 
 |`cp.session.endpoint`
 |
-|the address of the endpoint which session belongs to
+|Address of the endpoint which the CP session session belongs to
 
 |`cp.session.endpointType`
 |
-|the type of the endpoint; either SERVER or CLIENT
+|Type of the endpoint; either SERVER or CLIENT
 
 |`cp.session.expirationTime`
 |ms
-|the expiration time of the session
+|Expiration time of the CP session
 
 |`cp.session.version`
 |count
-|a boolean state, which shows whether semaphore is initialized with a value or not. In exposed metrics it will be 0 when semaphore is not initialized, a positive value otherwise
+|Version number of the CP session, basically it shows how many times the session heartbeat is received
 
 |`event.eventQueueSize`
 |count
-|the total number of events pending to be processed
+|Total number of events pending to be processed
 
 |`event.eventsProcessed`
 |count
-|the total number of processed events
+|Total number of processed events
 
 |`event.listenerCount`
 |count
-|the number of subscribed listeners for the specified service
+|Number of subscribed listeners for the specified service
 
 |`event.publicationCount`
 |count
-|the number of published events for the specified service
+|Number of published events for the specified service
 
 |`event.queueCapacity`
 |count
-|the queue capacity of the executor processing the events. This capacity is shared for all events
+|Queue capacity of the executor processing the events (this capacity is shared for all events)
 
 |`event.rejectedCount`
 |count
-|the number of rejected events. If the event is not accepted to the executor in `hazelcast.event.queue.timeout.millis`(see xref:system-properties.adoc[]), it will be rejected and not processed
+|Number of rejected events; if the event is not accepted to the executor in `hazelcast.event.queue.timeout.millis`(see xref:system-properties.adoc[]), it will be rejected and not processed
 
 |`event.syncDeliveryFailureCount`
 |count
-|the number of failures of sync event delivery 
+|Number of failures of sync event delivery 
 
 |`event.threadCount`
 |count
-|the number of threads for the event service executor (the event thread count)
+|Number of threads for the event service executor (the event thread count)
 
 |`event.totalFailureCount`
 |count
-|the number of events that fail to be published
+|Number of events that fail to be published
 
 |`executor.cancelled`
 |count
-|the number of cancelled operations on the executor service
+|Number of cancelled operations on the executor service
 
 |`executor.completed`
 |count
-|the number of completed operations on the executor service
+|Number of completed operations on the executor service
 
 |`executor.creationTime`
 |ms
-|the creation time of this executor on the member
+|Creation time of this executor on the member
 
 |`executor.pending`
 |count
-|the number of pending operations on the executor service
+|Number of pending operations on the executor service
 
 |`executor.started`
 |count
-|the number of started operations on the executor service
+|Number of started operations on the executor service
 
 |`executor.totalExecutionTime`
 |ms
-|the total execution time of operations finished
+|Total execution time of the finished operations
 
 |`executor.totalStartLatency`
 |ms
-|the total start latency of operations started
+|Total start latency of operations started
 
 |`executor.internal.completedTasks`
 |count
-|the number of completed tasks by this executor
+|Number of completed tasks by this executor
 
 |`executor.internal.maximumPoolSize`
 |count
-|the maximum number of threads in the executor's thread pool
+|Maximum number of threads in the executor's thread pool
 
 |`executor.internal.poolSize`
 |count
-|the current number of threads in the executor's thread pool
+|Number of threads in the executor's thread pool
 
 |`executor.internal.queueSize`
 |count
-|the work queue size
+|Number 
 
 |`executor.internal.remainingQueueCapacity`
 |count
-|the remaining capacity on the work queue
+|Remaining capacity on the executor's work queue
 
 // TODO: Validate this file.partition metrics 
 |`file.partition.freeSpace`
 |bytes
-|the amoun of free space in the given directory, user.home
+|amoun of free space in the given directory, user.home
 
 |`file.partition.totalSpace`
 |bytes
-|the amount of total space in the given directory, user.home
+|Amount of total space in the given directory, user.home
 
 |`file.partition.usableSpace`
 |bytes
-|the amount of usable space in the given directory, user.home
+|Amount of usable space in the given directory, user.home
 
 |`flakeIdGenerator.batchCount`
-name=flake-id-gen,|count
-|the total number of times the ID generator has been used to generate a new ID batch
+|count
+|Total number of times the ID generator has been used to generate a new ID batch
 
 |`flakeIdGenerator.creationTime`
-name=flake-id-gen,|ms
-|the creation time of this flakeIdGenerator on the member
+|ms
+|Creation time of this flakeIdGenerator on the member
 
 |`flakeIdGenerator.idCount`
-name=flake-id-gen,|count
-|the total number of IDs generated (the sum of IDs for all batches)
+|count
+|Total number of IDs generated (the sum of IDs for all batches)
 
 |`gc.majorCount`
 |count
-|the total number of major garbage collections that have occurred
+|Total number of major garbage collections that have occurred
 
 |`gc.majorTime`
 |ms
-|the accumulated elapsed time in major gc's 
+|Accumulated elapsed time in major gc's 
 
 |`gc.minorCount`
 |count
-|the total number of minor garbage collections that have occurred
+|Total number of minor garbage collections that have occurred
 
 |`gc.minorTime`
 |ms
-|the accumulated elapsed time in minor gc's 
+|Accumulated elapsed time in minor gc's 
 
 |`gc.unknownCount`
 |count
-|the number of unknown garbage collections that cannot be determined to be as a minor or major (this is usually due to the lack of support of the used garbage collector)
+|Number of unknown garbage collections that cannot be determined to be as a minor or major (this is usually due to the lack of support of the used garbage collector)
 
 |`gc.unknownTime`
 |ms
-|the accumulated elapsed time in unknown gc's
+|Accumulated elapsed time in unknown gc's
 
 |`hot-restart.liveTombstones`
 |count
-|the number of live tombstones in the store
+|Number of live tombstones in the store
 
 |`hot-restart.liveValues`
 |count
-|the number of live values in the store
+|Number of live values in the store
 
 |`hot-restart.tombGarbage`
 |bytes
-|the approximate size of the garbage within the tombstone chunks (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
+|Approximate size of the garbage within the tombstone chunks (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
 
 |`hot-restart.tombOccupancy`
 |bytes
-|the approximate size of tombstone chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
+|Approximate size of tombstone chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
 
 |`hot-restart.valGarbage`
 |bytes
-|the approximate size of the garbage within the value chunk (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
+|Approximate size of the garbage within the value chunk (it does not account for data in the active chunk, it is incremented when a record is retired or an active chunk is turned into a stable one)
 
 |`hot-restart.valOccupancy`
 |bytes
-|the approximate size of value chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
+|Approximate size of value chunks (it does not account for data in the active chunk, it is incremented when the active chunk is turned into a stable one)
 
 |`invocations.maxCurrentInvocations`
 |count
-|the maximum number of concurrent client invocations
+|Maximum number of concurrent client invocations
 
 |`invocations.pendingCalls`
 |count
-|the number of pending client invocations on this client
+|Number of pending client invocations on this client
 
 |`invocations.startedInvocations`
 |count
-|the number of started client invocations on this client
+|Number of started client invocations on this client
 
 |`list.creationTime`
 |ms
-|the creation time of this list on the member
+|Creation time of this list on the member
 
 |`list.lastAccessTime`
 |ms
-|the last access (read) time of the locally owned items
+|Last access (read) time of the locally owned items
 
 |`list.lastUpdateTime`
 |ms
-|the last update time of the locally owned items
+|Last update time of the locally owned items
 
 |`listeners.eventsProcessed`
 |count
-|the total number of processed events on the client listener service
+|Total number of processed events on the client listener service
 
 |`listeners.eventQueueSize`
 |count
-|the total number of tasks pending to be processed on the client listener service
+|Total number of tasks pending to be processed on the client listener service
 
 |`map.backupCount`
 |count
-|the number of backups per entry
+|Number of backups per entry
 
 |`map.backupEntryCount`
 |count
-|the number of backup entries held by the member
+|Number of backup entries held by the member
 
 |`map.backupEntryMemoryCost`
 |bytes
-|the memory cost of backup entries in this member
+|Memory cost of backup entries in this member
 
 |`map.creationTime`
 |ms
-|the creation time of the map on the member
+|Creation time of the map on the member
 
 |`map.dirtyEntryCount`
 |count
-|the number of dirty (updated but not persisted yet) entries that the member owns
+|Number of dirty (updated but not persisted yet) entries that the member owns
 
 |`map.getCount`
 |count
-|the number of local get operations on the map
+|Number of local get operations on the map
 
 |`map.heapCost`
 |count
-|the total heap cost for the map on this member
+|Total heap cost for the map on this member
 
 |`map.hits`
 |count
-|the number of hits (reads) of the locally owned entries
+|Number of hits (reads) of the locally owned entries
 
 |`map.indexedQueryCount`
 |count
-|the total number of indexed local queries performed on the map
+|Total number of indexed local queries performed on the map
 
 |`map.lastAccessTime`
 |ms
-|the last access (read) time of the locally owned entries
+|Last access (read) time of the locally owned entries
 
 |`map.lastUpdateTime`
 |ms
-|the last update time of the locally owned entries
+|Last update time of the locally owned entries
 
 |`map.lockedEntryCount`
 |count
-|the number of locked entries that the member owns
+|Number of locked entries that the member owns
 
 |`map.merkleTreesCost`
 |count
-|the heap cost of the Merkle trees
+|heap cost of the Merkle trees
 
 |`map.numberOfEvents`
 |count
-|the number of local events received
+|Number of local events received
 
 |`map.numberOfOtherOperations`
 |count
-|the total number of other operations performed on this member
+|Total number of other operations performed on this member
 
 |`map.ownedEntryCount`
 |count
-|the number of entries owned by the member
+|Number of entries owned by the member
 
 |`map.ownedEntryMemoryCost`
 |bytes
-|the memory cost of owned entries on this member
+|Memory cost of owned entries on this member
 
 |`map.putCount`
 |count
-|the number of local put operations on the map
+|Number of local put operations on the map
 
 |`map.queryCount`
 |count
-|the number of queries executed on the map (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
+|Number of queries executed on the map (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
 
 |`map.removeCount`
 |count
-|the number of local remove operations on the map
+|Number of local remove operations on the map
 
 |`map.setCount`
 |count
-|the number of local set operations on the map
+|Number of local set operations on the map
 
 |`map.totalGetLatency`
 |ms
-|the total latency of local get operations
+|Total latency of local get operations
 
 |`map.totalMaxGetLatency`
 |ms
-|the maximum latency of local get operations
+|Maximum latency of local get operations
 
 |`map.totalMaxPutLatency`
 |ms
-|the maximum latency of local put operations
+|Maximum latency of local put operations
 
 |`map.totalMaxRemoveLatency`
 |ms
-|the maximum latency of local remove operations
+|Maximum latency of local remove operations
 
 |`map.totalMaxSetLatency`
 |ms
-|the maximum latency of local set operations
+|Maximum latency of local set operations
 
 |`map.totalPutLatency`
 |ms
-|the total latency of local put operations
+|Total latency of local put operations
 
 |`map.totalRemoveLatency`
 |ms
-|the total latency of local remove operations
+|Total latency of local remove operations
 
 |`map.totalSetLatency`
 |ms
-|the total latency of local set operations
+|Total latency of local set operations
 
 |`map.index.averageHitLatency`
 |ns
-|the average hit latency for the index on this member
+|Average hit latency for the index on this member
 
 |`map.index.averageHitSelectivity`
 |percent
-|the average selectivity of the hits served by the index on this member (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
+|Average selectivity of the hits served by the index on this member (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
 
 |`map.index.creationTime`
 |ms
-|the creation time of the index on this member
+|Creation time of the index on this member
 
 |`map.index.hitCount`
 |count
-|the total number of hits into the index (the value of this metric may be greater than the `map.index.queryCount` since a single query may hit the same index more than once)
+|Total number of hits into the index (the value of this metric may be greater than the `map.index.queryCount` since a single query may hit the same index more than once)
 
 |`map.index.insertCount`
 |count
-|the number of insert operations performed on the index
+|Number of insert operations performed on the index
 
 |`map.index.memoryCost`
 |bytes
-|the local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
+|Local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
 
 |`map.index.queryCount`
 |count
-|the total number of queries served by the index
+|Total number of queries served by the index
 
 |`map.index.removeCount`
 |count
-|the number of remove operations performed on the index
+|Number of remove operations performed on the index
 
 |`map.index.totalInsertLatency`
 |ns
-|the total latency of insert operations performed on the index
+|Total latency of insert operations performed on the index
 
 |`map.index.totalRemoveLatency`
 |ns
-|the total latency of remove operations performed on the index
+|Total latency of remove operations performed on the index
 
 |`map.index.totalUpdateLatency`
 |ns
-|the total latency of update operations performed on the index.
+|Total latency of update operations performed on the index.
 
 |`map.index.updateCount`
 |count
-|the number of update operations performed on the index
+|Number of update operations performed on the index
 
 |`memory.committedHeap`
 |bytes
-|the amount of heap memory that is committed for the JVM to use
+|Amount of heap memory that is committed for the JVM to use
 
 |`memory.committedNative`
 |bytes
-|the amount of native memory that is committed for current instance (member or client) to use
+|Amount of native memory that is committed for current instance (member or client) to use
 
 |`memory.freeHeap`
 |bytes
-|the amount of free memory in the JVM of current instance (member or client)
+|Amount of free memory in the JVM of current instance (member or client)
 
 |`memory.freeNative`
 |bytes
-|the amount of free native memory in the current instance (member or client)
+|Amount of free native memory in the current instance (member or client)
 
 |`memory.freePhysical`
 |bytes
-|the amount of free physical memory available in OS
+|Amount of free physical memory available in OS
 
 |`memory.maxHeap`
 |bytes
-|the maximum amount of memory that the JVM will attempt to us
+|Maximum amount of memory that the JVM will attempt to us
 
 |`memory.maxMetadata`
 |bytes
-|the amount of native memory reserved for metadata. This memory is separate and not accounted for by the NativeMemory statistics.
+|Amount of native memory reserved for metadata. This memory is separate and not accounted for by the NativeMemory statistics.
 
 |`memory.maxNative`
 |bytes
-|the maximum amount of native memory that current instance (member or client) will attempt to use
+|Maximum amount of native memory that current instance (member or client) will attempt to use
 
 |`memory.totalPhysical`
 |bytes
-|the amount of total physical memory available in OS
+|Amount of total physical memory available in OS
 
 |`memory.usedHeap`
 |bytes
-|the amount of used memory in the JVM of the current instance (member or client)
+|Amount of used memory in the JVM of the current instance (member or client)
 
 |`memory.usedMetadata`
 |bytes
-|the amount of used metadata memory by the current instance (member or client)
+|Amount of used metadata memory by the current instance (member or client)
 
 |`memory.usedNative`
 |bytes
-|the amount of used native memory by the current instance (member or client)
+|Amount of used native memory by the current instance (member or client)
 
 |`multiMap.backupCount`
 |count
-|the number of backups per entry
+|Number of backups per entry
 
 |`multiMap.backupEntryCount`
 |count
-|the number of backup entries held by the member
+|Number of backup entries held by the member
 
 |`multiMap.backupEntryMemoryCost`
 |bytes
-|the memory cost of backup entries in this member
+|Memory cost of backup entries in this member
 
 |`multiMap.creationTime`
 |ms
-|the creation time of the multimap in the member
+|Creation time of the multimap in the member
 
 |`multiMap.dirtyEntryCount`
 |count
-|the number of dirty (updated but not persisted yet) entries that the member owns
+|Number of dirty (updated but not persisted yet) entries that the member owns
 
 |`multiMap.getCount`
 |count
-|the number of local get operations on the multimap
+|Number of local get operations on the multimap
 
 |`multiMap.heapCost`
 |count
-|the total heap cost for the multimap on this member
+|Total heap cost for the multimap on this member
 
 |`multiMap.hits`
 |count
-|the number of hits (reads) of the locally owned entries
+|Number of hits (reads) of the locally owned entries
 
 |`multiMap.indexedQueryCount`
 |count
-|the total number of indexed local queries performed on the multimap
+|Total number of indexed local queries performed on the multimap
 
 |`multiMap.lastAccessTime`
 |ms
-|the last access (read) time of the locally owned entries
+|Last access (read) time of the locally owned entries
 
 |`multiMap.lastUpdateTime`
 |ms
-|the last update time of the locally owned entries
+|Last update time of the locally owned entries
 
 |`multiMap.lockedEntryCount`
 |count
-|the number of locked entries that the member owns
+|Number of locked entries that the member owns
 
 |`multiMap.merkleTreesCost`
 |count
-|the heap cost of the Merkle trees
+|Heap cost of the Merkle trees
 
 |`multiMap.numberOfEvents`
 |count
-|the number of local events received
+|Number of local events received
 
 |`multiMap.numberOfOtherOperations`
 |count
-|the total number of other operations
+|Total number of other operations
 
 |`multiMap.ownedEntryCount`
 |count
-|the number of entries owned by the member
+|Number of entries owned by the member
 
 |`multiMap.ownedEntryMemoryCost`
 |bytes
-|the memory cost of owned entries on this member
+|Memory cost of owned entries on this member
 
 |`multiMap.putCount`
 |count
-|the number of local put operations on the multimap
+|Number of local put operations on the multimap
 
 |`multiMap.queryCount`
 |count
-|the number of local queries executed on the multimap (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
+|Number of local queries executed on the multimap (it may be imprecise for queries involving partition predicates (PartitionPredicate) on the off-heap storage)
 
 |`multiMap.removeCount`
 |count
-|the number of local remove operations on the multimap
+|Number of local remove operations on the multimap
 
 |`multiMap.setCount`
 |count
-|the number of local set operations on the multimap
+|Number of local set operations on the multimap
 
 |`multiMap.totalGetLatency`
 |ms
-|the total latency of local get operations
+|Total latency of local get operations
 
 |`multiMap.totalMaxGetLatency`
 |ms
-|the maximum latency of local get operations
+|Maximum latency of local get operations
 
 |`multiMap.totalMaxPutLatency`
 |ms
-|the maximum latency of local put operations
+|Maximum latency of local put operations
 
 |`multiMap.totalMaxRemoveLatency`
 |ms
-|the maximum latency of local remove operations
+|Maximum latency of local remove operations
 
 |`multiMap.totalMaxSetLatency`
 |ms
-|the maximum latency of local set operations
+|Maximum latency of local set operations
 
 |`multiMap.totalPutLatency`
 |ms
-|the total latency of local put operations
+|Total latency of local put operations
 
 |`multiMap.totalRemoveLatency`
 |ms
-|the total latency of local remove operations
+|Total latency of local remove operations
 
 |`multiMap.totalSetLatency`
 |ms
-|the total latency of local set operations
+|Total latency of local set operations
 
 |`nearcache.creationTime`
 |ms
-|the creation time of this Near Cache on this instance (member or client)
+|Creation time of this Near Cache on this instance (member or client)
 
 |`nearcache.evictions`
 |count
-|the number of evictions of Near Cache entries owned by this instance (member or client)
+|Number of evictions of Near Cache entries owned by this instance (member or client)
 
 |`nearcache.expirations`
 |count
-|the number of TTL and max-idle expirations of Near Cache entries owned by this instance (member or client)
+|Number of TTL and max-idle expirations of Near Cache entries owned by this instance (member or client)
 
 |`nearcache.hits`
 |count
-|the number of hits (reads) of Near Cache entries owned by this instance (member or client)
+|Number of hits (reads) of Near Cache entries owned by this instance (member or client)
 
 |`nearcache.invalidationRequests`
 |count
-|the number of invalidations of Near Cache entries owned by this instance (member or client).
+|Number of invalidations of Near Cache entries owned by this instance (member or client).
 
 |`nearcache.invalidations`
 |count
-|the number of invalidations of Near Cache entries owned by this instance (member or client).
+|Number of invalidations of Near Cache entries owned by this instance (member or client).
 
 |`nearcache.lastPersistenceDuration`
 |ms
-|the duration of the last Near Cache key persistence
+|Duration of the last Near Cache key persistence
 
 |`nearcache.lastPersistenceKeyCount`
 |count
-|the number of persisted keys of the last Near Cache key persistence
+|Number of persisted keys of the last Near Cache key persistence
 
 |`nearcache.lastPersistenceTime`
 |ms
-|the timestamp of the last Near Cache key persistence
+|Timestamp of the last Near Cache key persistence
 
 |`nearcache.lastPersistenceWrittenBytes`
 |bytes
-|the written bytes of the last Near Cache key persistence
+|Written bytes of the last Near Cache key persistence
 
 |`nearcache.misses`
 |count
-|the number of misses of Near Cache entries owned by this instance (member or client).
+|Number of misses of Near Cache entries owned by this instance (member or client).
 
 |`nearcache.ownedEntryCount`
 |count
-|the number of Near Cache entries owned by this instance (member or client)
+|Number of Near Cache entries owned by this instance (member or client)
 
 |`nearcache.ownedEntryMemoryCost`
 |bytes
-|the memory cost of Near Cache entries owned by this instance (member or client)
+|Memory cost of Near Cache entries owned by this instance (member or client)
 
 |`nearcache.persistenceCount`
 |count
-|the number of Near Cache key persistences (when the pre-load feature is enabled)
+|Number of Near Cache key persistences (when the pre-load feature is enabled)
 
 |`operation.adhoc.executedOperationsCount`
 |count
-|the number of executed adhoc operations
+|Number of executed adhoc operations
 
 |`operation.asyncOperations`
 |count
-|the number of current executing async operations on the operation service of the member
+|Number of current executing async operations on the operation service of the member
 
 |`operation.callTimeoutCount`
 |count
@@ -781,75 +781,75 @@ name=flake-id-gen,|count
 
 |`operation.completedCount`
 |count
-|the number of completed operations
+|Number of completed operations
 
 |`operation.failedBackups`
 |count
-|the number of failed backup operations on the operation service of the member
+|Number of failed backup operations on the operation service of the member
 
 |`operation.generic.executedOperationsCount`
 |count
-|the number of executed generic operations
+|Number of executed generic operations
 
 |`operation.genericPriorityQueueSize`
 |count
-|the number of priority generic operations pending (waiting in the priority queue)
+|Number of priority generic operations pending (waiting in the priority queue)
 
 |`operation.genericQueueSize`
 |count
-|the number of normal generic operations pending (waiting in the queue)
+|Number of normal generic operations pending (waiting in the queue)
 
 |`operation.genericThreadCount`
 |count
-|the number of generic operation handler threads in the member.
+|Number of generic operation handler threads in the member.
 
 |`operation.invocations.backupTimeoutMillis`
 |ms
-|operation backup timeout that specifies how long the invocation will wait for acknowledgements from the backup replicas (If acks are not received from some backups, there will not be any rollback on other successful replicas)
+|Operation backup timeout that specifies how long the invocation will wait for acknowledgements from the backup replicas (If acks are not received from some backups, there will not be any rollback on other successful replicas)
 
 |`operation.invocations.backupTimeouts`
 |count
-|the number of operation invocations that acknowledgment from backups has timeout.
+|Number of operation invocations that acknowledgment from backups has timeout.
 
 |`operation.invocations.delayedExecutionCount`
 |count
-|the number of times that the operation invocations have delayed 
+|Number of times that the operation invocations have delayed
 
 |`operation.invocations.heartbeatBroadcastPeriodMillis`
 |ms
-|the broadcast period of operation heartbeats (this heartbeat packets sent to inform the other member about if the operation is still alive). The heartbeat period is configured to be 1/4 of the call timeout. So with default settings, every 15 seconds, every member in the cluster, will notify every other member in the cluster about all calls that are pending.
+|Broadcast period of operation heartbeats (this heartbeat packets sent to inform the other member about if the operation is still alive). The heartbeat period is configured to be 1/4 of the call timeout. So with default settings, every 15 seconds, every member in the cluster, will notify every other member in the cluster about all calls that are pending.
 
 |`operation.invocations.heartbeatPacketsReceived`
 |count
-|the number of received heartbeat packets
+|Number of received heartbeat packets
 
 |`operation.invocations.heartbeatPacketsSent`
 |count
-|the number of sent heartbeat packets
+|Number of sent heartbeat packets
 
 |`operation.invocations.invocationScanPeriodMillis`
 |ms
-|the period for scanning over pending invocations for getting rid of duplicates, checking for heartbeat timeout, and checking for backup timeout
+|Period for scanning over pending invocations for getting rid of duplicates, checking for heartbeat timeout, and checking for backup timeout
 
 |`operation.invocations.invocationTimeoutMillis`
 |ms
-|the timeout for operation invocations
+|Timeout for operation invocations
 
 |`operation.invocations.lastCallId`
 |count
-|the last issued invocation call ID
+|Last issued invocation call ID
 
 |`operation.invocations.normalTimeouts`
 |count
-|the number of times that the operation invocations timeout
+|Number of times that the operation invocations timeout
 
 |`operation.invocations.pending`
 |count
-|the number of pending invocations
+|Number of pending invocations
 
 |`operation.invocations.usedPercentage`
 |percent
-|the usage percentage of the operation invocation capacity that can concurrently occur (pending invocations/ max concurrent invocations)
+|Usage percentage of the operation invocation capacity (pending invocations/ max concurrent invocations)
 
 |`operation.operationTimeoutCount`
 |count
@@ -857,563 +857,563 @@ name=flake-id-gen,|count
 
 |`operation.parker.parkQueueCount`
 |count
-|the number of separate WaitSet (set of operations waiting for some condition)
+|Number of separate WaitSet (set of operations waiting for some condition)
 
 |`operation.parker.totalParkedOperationCount`
 |count
-|the total number of parked operations
+|Total number of parked operations
 
 |`operation.partition.executedOperationsCount`
 |count
-|the number of executed partition operations on the specified partition
+|Number of executed partition operations on the specified partition
 
 |`operation.partitionThreadCount`
 |count
-|the number of partition operation handler threads for given member
+|Number of partition operation handler threads for given member
 
 |`operation.priorityQueueSize`
 |count
-|the number of priority operations pending (priority partition ops. + priority generic ops.)
+|Number of priority operations pending (priority partition ops. + priority generic ops.)
 
 |`operation.queueSize`
 |count
-|the number of normal operations pending (normal partition ops. + normal generic ops.)
+|Number of normal operations pending (normal partition ops. + normal generic ops.)
 
 |`operation.responseQueueSize`
 |count
-|the total number of pending responses to be processed
+|Total number of pending responses to be processed
 
 |`operation.responses.backupCount`
 |count
-|the number of backup acknowledgement responses
+|Number of backup acknowledgement responses
 
 |`operation.responses.errorCount`
 |count
-|the number of error responses
+|Number of error responses
 
 |`operation.responses.missingCount`
 |count
-|the number of responses having missing invocations
+|Number of responses having missing invocations
 
 |`operation.responses.normalCount`
 |count
-|the number of normal responses
+|Number of normal responses
 
 |`operation.responses.timeoutCount`
 |count
-|the number of call timeout responses
+|Number of call timeout responses
  
 |`operation.retryCount`
 |count
-|the number of retried operations
+|Number of retried operations
 
 |`operation.runningCount`
 |count
-|the number of currently running operations (runningPartitionCount + runningGenericCount)
+|Number of currently running operations (runningPartitionCount + runningGenericCount)
 
 |`operation.runningGenericCount`
 |count
-|the number of currently running generic (non partition specific) operations
+|Number of currently running generic (non partition specific) operations
 
 |`operation.runningPartitionCount`
 |count
-|the number of currently running partition operations
+|Number of currently running partition operations
 
 |`operation.thread.completedOperationCount`
 |count
-|the number of completed operations by this operation thread
+|Number of completed operations by this operation thread
 
 |`operation.thread.completedOperationBatchCount`
 |count
-|the number of completed `TaskBatch` (a batch of tasks) by this operation thread
+|Number of completed `TaskBatch` (a batch of tasks) by this operation thread
 
 |`operation.thread.completedPacketCount`
 |count
-|the number of packets that executed by this operation thread
+|Number of packets that executed by this operation thread
 
 |`operation.thread.completedPartitionSpecificRunnableCount`
 |count
-|the number of `PartitionSpecificRunnable` tasks executed by this operation thread
+|Number of `PartitionSpecificRunnable` tasks executed by this operation thread
 
 |`operation.thread.completedRunnableCount`
 |count
-|the total number of runnables executed by this operation thread
+|Total number of runnables executed by this operation thread
 
 |`operation.thread.completedTotalCount`
 |count
-|total number of tasks (`Operation` + `PartitionSpecificRunnable` + `Runnable` + `TaskBatch`) completed on this operation thread 
+|Total number of tasks (`Operation` + `PartitionSpecificRunnable` + `Runnable` + `TaskBatch`) completed on this operation thread 
 
 |`operation.thread.errorCount`
 |count
-|total number of failed tasks on this operation thread
+|Total number of failed tasks on this operation thread
 
 |`operation.thread.normalPendingCount`
 |count
-|the number of normal pending operations (tasks)
+|Number of normal pending operations (tasks)
 
 |`operation.thread.priorityPendingCount`
 |count
-|the number of priority pending operations (tasks)
+|Number of priority pending operations (tasks)
 
 |`os.committedVirtualMemorySize`
 |bytes
-|the amount of committed virtual memory (that is, the amount of virtual memory guaranteed to be available to the running process).
+|Amount of committed virtual memory (that is, the amount of virtual memory guaranteed to be available to the running process)
 
 |`os.freePhysicalMemorySize`
 |bytes
-|the amount of free physical memory
+|Amount of free physical memory
 
 |`os.freeSwapSpaceSize`
 |bytes
-|the amount of free swap space size
+|Amount of free swap space size
 
 |`os.maxFileDescriptorCount`
 |count
-|the maximum number of open file descriptors (only for UNIX platforms).
+|Maximum number of open file descriptors (only for UNIX platforms)
 
 |`os.openFileDescriptorCount`
 |count
-|the number of open file descriptors (only for UNIX platforms).
+|Number of open file descriptors (only for UNIX platforms)
 
 |`os.processCpuLoad`
 |percent
-|the "recent cpu usage" for the JVM process; a negative value if not available.
+|Recent cpu usage for the JVM process; a negative value if not available
 
 |`os.processCpuTime`
 |ms
-|the CPU time used by the process on which the JVM is running
+|CPU time used by the process on which the JVM is running
 
 |`os.systemCpuLoad`
 |percent
-|the "recent cpu usage" for the whole system; a negative value if not available
+|Recent cpu usage for the whole system; a negative value if not available
 
 |`os.systemLoadAverage`
 |percent
-|the system load average for the last minute, or a negative value if not available
+|System load average for the last minute, or a negative value if not available
 
 |`os.totalPhysicalMemorySize`
 |bytes
-|the total amount of physical memory
+|Total amount of physical memory
 
 |`os.totalSwapSpaceSize`
 |bytes
-|the total amount of swap space
+|Total amount of swap space
 
 |`partitions.activePartitionCount`
 |count
-|the number of partitions assigned to the member
+|Number of partitions assigned to the member
 
 |`partitions.completedMigrations`
 |count
-|the number of completed migrations on the latest repartitioning round
+|Number of completed migrations on the latest repartitioning round
 
 |`partitions.elapsedDestinationCommitTime`
 |ns
-|the total elapsed time of commit operations' executions to the destination endpoint on the latest repartitioning round
+|Total elapsed time of commit operations' executions to the destination endpoint on the latest repartitioning round
 
 |`partitions.elapsedMigrationOperationTime`
 |ns
-|the total elapsed time of migration & replication operations' executions from source to destination endpoints on the latest repartitioning round
+|Total elapsed time of migration & replication operations' executions from source to destination endpoints on the latest repartitioning round
 
 |`partitions.elapsedMigrationTime`
 |ns
-|the total elapsed time from start of migration tasks to their completion on the latest repartitioning round
+|Total elapsed time from start of migration tasks to their completion on the latest repartitioning round
 
 |`partitions.lastRepartitionTime`
 |ms
-|the latest time that repartition took place
+|Latest time that repartition took place
 
 |`partitions.localPartitionCount`
 |count
-|the number of partitions currently owned by given member
+|Number of partitions currently owned by given member
 
 |`partitions.maxBackupCount`
 |count
-|the maximum allowed backup count according to current cluster formation and partition group configuration
+|Maximum allowed backup count according to current cluster formation and partition group configuration
 
 |`partitions.memberGroupsSize`
 |count
-|the number of the member groups to be used in partition assignments
+|Number of the member groups to be used in partition assignments
 
 |`partitions.migrationActive`
 |boolean
-|the number of active migration tasks
+|Number of active migration tasks
 
 |`partitions.migrationQueueSize`
 |count
-|the number of migration tasks in the migration queue
+|Number of migration tasks in the migration queue
 
 |`partitions.partitionCount`
 |count
-|total partition count
+|Total partition count
 
 |`partitions.plannedMigrations`
 |count
-|the number of planned migrations on the latest repartitioning round
+|Number of planned migrations on the latest repartitioning round
 
 |`partitions.replicaSyncRequestsCounter`
 |count
-|the number of replica sync requests
+|Number of replica sync requests
 
 |`partitions.replicaSyncSemaphore`
 |count
-|the permits count of replica sync semaphore
+|Permits count of this replica sync semaphore
 
 |`partitions.stateStamp`
 |count
-|the stamp value for the current partition table. Stamp is calculated by hashing the individual partition versions using MurmurHash3. If stamp has this initial value, 0L, then that means partition table is not initialized yet.
+|Stamp value for the current partition table; stamp is calculated by hashing the individual partition versions using MurmurHash3 (if stamp has this initial value, 0L, then that means partition table is not initialized yet)
 
 |`partitions.totalCompletedMigrations`
 |count
-|the total number of completed migrations
+|Total number of completed migrations
 
 |`partitions.totalElapsedDestinationCommitTime`
 |ns
-|the total elapsed time of commit operations' executions to the destination endpoint since the beginning
+|Total elapsed time of commit operations' executions to the destination endpoint since the beginning
 
 |`partitions.totalElapsedMigrationOperationTime`
 |ns
-|the total elapsed time of migration & replication operations' executions from source to destination endpoints since the beginning
+|Total elapsed time of migration & replication operations' executions from source to destination endpoints since the beginning
 
 |`partitions.totalElapsedMigrationTime`
 |ns
-|the total elapsed time from start of migration tasks to their completion since the beginning
+|Total elapsed time from start of migration tasks to their completion since the beginning
 
 |`pnCounter.creationTime`
 |ms
-|the creation time of the PN counter on the member
+|Creation time of the PN counter on the member
 
 |`pnCounter.totalDecrementOperationCount`
 |count
-|the number of subtract (including decrement) operations on this PN counter
+|Number of subtract (including decrement) operations on this PN counter
 
 |`pnCounter.totalIncrementOperationCount`
 |count
-|the number of add (including increment) operations on this PN counter
+|Number of add (including increment) operations on this PN counter
 
 |`pnCounter.value`
 |count
-|the current value of the pn counter
+|Current value of the PN counter
 
 |`proxy.createdCount`
 |count
-|the number of created proxies for a given service.
+|Number of created proxies for a given service
 
 |`proxy.destroyedCount`
 |count
-|the number of destroyed proxies for a given service.
+|Number of destroyed proxies for a given service
 
 |`proxy.proxyCount`
 |count
-|the number of active proxies for a given service. e.g., the number of all proxies for the IMap.
+|Number of active proxies for a given service
 
 |`reliableTopic.creationTime`
 |ms
-|the creation time of this reliable topic on the member
+|Creation time of this reliable topic on the member
 
 |`reliableTopic.totalPublishes`
 |count
-|the total number of published messages of this reliable topic on this member
+|Total number of published messages of this reliable topic on this member
 
 |`reliableTopic.totalReceivedMessages`
 |count
-|the total number of received messages of this reliable topic on this member
+|Total number of received messages of this reliable topic on this member
 
 |`queue.averageAge`
 |ms
-|the average age of the items in this member
+|Average age of the items in this member
 
 |`queue.backupItemCount`
 |count
-|the number of backup items held by the member
+|Number of backup items held by the member
 
 |`queue.creationTime`
 |ms
-|the creation time of the topic on the member
+|Creation time of the topic on the member
 
 |`queue.eventOperationCount`
 |count
-|the number of event operations
+|Number of event operations
 
 |`queue.maxAge`
 |ms
-|the maximum age of the items in this member
+|Maximum age of the items in this member
 
 |`queue.minAge`
 |ms
-|the minimum age of the items in this member
+|Minimum age of the items in this member
 
 |`queue.numberOfEmptyPolls`
 |count
-|the number of null returning poll operations
+|Number of null returning poll operations
 
 |`queue.numberOfEvents`
 |count
-|the number of event operations (duplicate of eventOperationCount)
+|Number of event operations (duplicate of eventOperationCount)
 
 |`queue.numberOfOffers`
 |count
-|the number of offer/put/add operations
+|Number of offer/put/add operations
 
 |`queue.numberOfOtherOperations`
 |count
-|the number of other operations
+|Number of other operations
 
 |`queue.numberOfPolls`
 |count
-|the number of poll/take/remove operations.
+|Number of poll/take/remove operations.
 
 |`queue.numberOfRejectedOffers`
 |count
-|the number of rejected offers
+|Number of rejected offers
 
 |`queue.ownedItemCount`
 |count
-|the number of owned items in this member
+|Number of owned items in this member
 
 |`queue.total`
 |count
-|the total number of operations (numberOfOffers + numberOfPolls + numberOfOtherOperations)
+|Total number of operations (numberOfOffers + numberOfPolls + numberOfOtherOperations)
 
 |`raft.destroyedGroupIds`
 |count
-|the destroyed raft node group ids
+|Destroyed raft node group ids
 
 |`raft.group.availableLogCapacity`
 |count
-|available log capacity for this CP group
+|Available log capacity for this CP group
 
 |`raft.group.commitIndex`
 |count
-|the commit index of this CP group
+|Commit index of this CP group
 
 |`raft.group.lastApplied`
 |count
-|the last applied index of this CP group
+|Last applied index of this CP group
 
 |`raft.group.lastLogIndex`
 |count
-|the last log index of this CP group
+|Last log index of this CP group
 
 |`raft.group.lastLogTerm`
 |count
-|the last log term of this CP group
+|Last log term of this CP group
 
 |`raft.group.memberCount`
 |count
-|the number of members in this CP group
+|Number of members in this CP group
 
 |`raft.group.snapshotIndex`
 |count
-|the raft snapshot index of this CP group
+|Raft snapshot index of this CP group
 
 |`raft.group.term`
 |count
-|the raft term of this CP group
+|Raft term of this CP group
 
 |`raft.metadata.activeMembersCommitIndex`
 |count
-|the commit index of the active CP members
+|Commit index of the active CP members
 
 |`raft.metadata.activeMembers`
 |count
-|the number of active CP members
+|Number of active CP members
 
 |`raft.metadata.groups`
 |count
-|the number of destroyed CP groups
+|Number of destroyed CP groups
 
 |`raft.missingMembers`
 |count
-|the number of missing CP members
+|Number of missing CP members
 
 |`raft.nodes`
 |count
-|the number of local Raft nodes
+|Number of local Raft nodes
 
 |`raft.terminatedRaftNodeGroupIds`
 |count
-|the terminated raft node group ids
+|terminated raft node group ids
 
 |`replicatedMap.creationTime`
 |ms
-|the creation time of this replicated map on this member.
+|Creation time of this replicated map on this member.
 
 |`replicatedMap.getCount`
 |count
-|the number of get operations on this member
+|Number of get operations on this member
 
 |`replicatedMap.hits`
 |count
-|the number of hits (reads) of the locally owned entries
+|Number of hits (reads) of the locally owned entries
 
 |`replicatedMap.lastAccessTime`
 |ms
-|the last access (read) time of the locally owned entries
+|Last access (read) time of the locally owned entries
 
 |`replicatedMap.lastUpdateTime`
 |ms
-|the last update time of the locally owned entries
+|Last update time of the locally owned entries
 
 |`replicatedMap.maxGetLatency`
 |ms
-|the maximum latency of get operations
+|Maximum latency of get operations
 
 |`replicatedMap.maxPutLatency`
 |ms
-|the maximum latency of put operations
+|Maximum latency of put operations
 
 |`replicatedMap.maxRemoveLatency`
 |ms
-|the maximum latency of remove operations
+|Maximum latency of remove operations
 
 |`replicatedMap.numberOfEvents`
 |count
-|the number of events received on this member
+|Number of events received on this member
 
 |`replicatedMap.numberOfOtherOperations`
 |count
-|the total number of other operations on this member
+|Total number of other operations on this member
 
 |`replicatedMap.ownedEntryCount`
 |count
-|the number of entries owned on this member
+|Number of entries owned on this member
 
 |`replicatedMap.ownedEntryMemoryCost`
 |bytes
-|the memory cost of owned entries on this member
+|Memory cost of owned entries on this member
 
 |`replicatedMap.putCount`
 |count
-|the number of put operations on this member
+|Number of put operations on this member
 
 |`replicatedMap.removeCount`
 |count
-|the number of remove operations on this member
+|Number of remove operations on this member
 
 |`replicatedMap.totalGetLatencies`
 |ms
-|the total latency of get operations
+|Total latency of get operations
 
 |`replicatedMap.totalPutLatencies`
 |ms
-|the total latency of put operations
+|Total latency of put operations
 
 |`replicatedMap.totalRemoveLatencies`
 |ms
-|the total latency of remove operations
+|Total latency of remove operations
 
 |`replicatedMap.total`
 |count
-|the total number of operations on this member
+|Total number of operations on this member
 
 |`runtime.availableProcessors`
 |count
-|the number of processors available to the JVM
+|Number of processors available to the JVM
 
 |`runtime.freeMemory`
 |bytes
-|the amount of free memory in the JVM.
+|Amount of free memory in the JVM
 
 |`runtime.maxMemory`
 |bytes
-|the maximum amount of memory that the JVM will attempt to use.
+|Maximum amount of memory that the JVM will attempt to use
 
 |`runtime.totalMemory`
 |bytes
-|the total amount of memory in the JVM, the value of this metric may vary over time, depending on the host environment
+|Total amount of memory in the JVM, the value of this metric may vary over time, depending on the host environment
 
 |`runtime.upTime`
 |ms
-|the uptime of the JVM
+|Uptime of the JVM
 
 |`runtime.usedMemory`
 |bytes
-|an approximation to the total amount of memory currently used
+|Approximation to the total amount of memory currently used
 
 |`set.creationTime`
 |ms
-|the creation time of the set on the member
+|Creation time of the set on the member
 
 |`set.lastAccessTime`
 |ms
-|the last access (read) time of the locally owned items
+|Last access (read) time of the locally owned items
 
 |`set.lastUpdateTime`
 |ms
-|the last update time of the locally owned items
+|Last update time of the locally owned items
 
 |`tcp.acceptor.eventCount`
 |count
-|the total number of the connections accepted by TcpServerAcceptor
+|Total number of the connections accepted by TcpServerAcceptor
 
 |`tcp.acceptor.exceptionCount`
 |count
-|the number of thrown exception on this TcpServerAcceptor
+|Number of thrown exception on this TcpServerAcceptor
 
 |`tcp.acceptor.idleTimeMillis`
 |ms
-|the idle time that measures how long this TcpServerAcceptor has not received any events
+|Idle time that measures how long this TcpServerAcceptor has not received any events
 
 |`tcp.acceptor.selectorRecreateCount`
 |count
-|the number of times the selector was recreated
+|Number of times the selector was recreated
 
 |`tcp.balancer.imbalanceDetectedCount`
 |count
-|the number of times the `IOBalancer` detects the imbalance of loads on `NioThread`s
+|Number of times the `IOBalancer` detects the imbalance of loads on `NioThread` s
 
 |`tcp.balancer.migrationCompletedCount`
 |count
-|the number of completed NioPipeline migrations by the IOBalancer (these migrations are performed to fix the load imbalance problem on the NioThreads) 
+|Number of completed NioPipeline migrations by the IOBalancer (these migrations are performed to fix the load imbalance problem on the NioThreads)
 
 |`tcp.bytesReceived`
 |bytes
-|the number of bytes received over all connections (active and closed)
+|Number of bytes received over all connections (active and closed)
 
 |`tcp.bytesSend`
 |bytes
-|the number of bytes sent over all connections (active and closed)
+|Number of bytes sent over all connections (active and closed)
 
 |`tcp.connection.acceptedSocketCount`
 |count
-|the number of accepted socket channels
+|Number of accepted socket channels
 
 |`tcp.connection.activeCount`
 |count
-|the number of active connections
+|Number of active connections
 
 |`tcp.connection.clientCount`
 |count
-|the number of the active client connections
+|Number of the active client connections
 
 |`tcp.connection.closedCount`
 |count
-|the number of closed connections 
+|Number of closed connections
 
 |`tcp.connection.connectionListenerCount`
 |count
-|the number of active connection listeners
+|Number of active connection listeners
 
 |`tcp.connection.count`
 |count
-|the number of `TcpServerConnection`
+|Number of `TcpServerConnection`
 
 |`tcp.connection.inProgressCount`
 |count
-|the number of connections establishments in progress.
+|Number of connections establishments in progress
 
 |`tcp.connection.openedCount`
 |count
-|the number of opened connections
+|Number of opened connections
 
 |`tcp.connection.textCount`
 |count
-|the number of connections used by text-based protocols (REST, Memcache).
+|Number of connections used by text-based protocols (REST, Memcache)
 
 |`tcp.connection.in/out.completedMigrations`
 |count
-|the number of completed migrations on this pipeline (migrates this pipeline to a different owner)
+|Number of completed migrations on this pipeline (migrates this pipeline to a different NioThread)
 
 |`tcp.connection.in/out.opsInterested`
 |count
@@ -1425,254 +1425,254 @@ name=flake-id-gen,|count
 
 |`tcp.connection.in/out.ownerId`
 |count
-|the owner id of this nio pipeline, -1 if the pipeline is being migrated (owner is null)
+|Owner ID of this `NioPipeline`, -1 if the pipeline is being migrated (owner is null)
 
 |`tcp.connection.in/out.processCount`
 |count
-|the number of time the `NioPipeline.process()` method has been called
+|Number of time the `NioPipeline.process()` method has been called
 
 |`tcp.connection.in/out.startedMigrations`
 |count
-|the number of started migrations on this pipeline
+|Number of started migrations on this pipeline
 
 |`tcp.connection.in.bytesRead`
 |bytes
-|the total size of frames read on this inbound pipeline
+|Total size of frames read on this inbound pipeline
 
 |`tcp.connection.in.idleTimeMs`
 |ms
-|the idle time that indicates how long since the last read on this inbound nio pipeline
+|Idle time that indicates how long since the last read on this inbound nio pipeline
 
 |`tcp.connection.in.normalFramesRead`
 |count
-|the number of priority frames read on this inbound nio pipeline
+|Number of priority frames read on this inbound nio pipeline
 
 |`tcp.connection.in.priorityFramesRead`
 |count
-|the number of priority frames read 
+|Number of priority frames read
 
 |`tcp.connection.out.bytesWritten`
 |bytes
-|the total amount of written frames on this outbound pipeline
+|Total amount of written frames on this outbound pipeline
 
 |`tcp.connection.out.idleTimeMillis`
 |ms
-|the idle time that indicates how long since the last write on this outbound nio pipeline
+|Idle time that indicates how long since the last write on this outbound nio pipeline
 
 |`tcp.connection.out.normalFramesWritten`
 |count
-|the number of written normal frames on this outbound nio pipeline
+|Number of written normal frames on this outbound nio pipeline
 
 |`tcp.connection.out.priorityFramesWritten`
 |count
-|the number of priority frames written into this nio pipeline
+|Number of priority frames written into this nio pipeline
 
 |`tcp.connection.out.priorityWriteQueuePendingBytes`
 |bytes
-|the total size of priority frames pending in the write queue
+|Total size of priority frames pending in the write queue
 
 |`tcp.connection.out.priorityWriteQueueSize`
 |count
-|the number of priority frames pending in the write queue
+|Number of priority frames pending in the write queue
 
 |`tcp.connection.out.scheduled`
 |count
-|the ordinal of enum state of this outbound pipeline: 0 -> UNSCHEDULED, 1 -> SCHEDULED, 2 -> BLOCKED, 3 -> RESCHEDULE
+|Ordinal of enum state of this outbound pipeline: 0 -> UNSCHEDULED, 1 -> SCHEDULED, 2 -> BLOCKED, 3 -> RESCHEDULE
 
 |`tcp.connection.out.writeQueuePendingBytes`
 |bytes
-|the total size of normal frames pending in the write queue
+|Total size of normal frames pending in the write queue
 
 |`tcp.connection.out.writeQueueSize`
 |count
-|the number of normal frames pending in the write queue
+|Number of normal frames pending in the write queue
 
 |`tcp.inputThread/outputThread.bytesTransceived`
 |bytes
-|the amount of transceived data on this NioThread
+|Amount of transceived data on this NioThread
 
 |`tcp.inputThread/outputThread.completedTaskCount`
 |count
-|the total number of completed tasks on this NioThread
+|Total number of completed tasks on this NioThread
 
 |`tcp.inputThread/outputThread.eventCount`
 |count
-|the total number of the connections accepted by TcpServerAcceptor
+|Total number of the connections accepted by TcpServerAcceptor
 
 |`tcp.inputThread/outputThread.framesTransceived`
 |count
-|the number of transceived frames on this NioThread
+|Number of transceived frames on this NioThread
 
 |`tcp.inputThread/outputThread.idleTimeMillis`
 |ms
-|the idle time that indicates how long since the last read/write 
+|Idle time that indicates how long since the last read/write
 
 |`tcp.inputThread/outputThread.ioThreadId`
 |count
-|the thread id of this NioThread
+|Thread ID of this NioThread
 
 |`tcp.inputThread/outputThread.priorityFramesTransceived`
 |count
-|the number of transceived priority frames
+|Number of transceived priority frames
 
 |`tcp.inputThread/outputThread.processCount`
 |count
-|the number of processed `NioPipeline`s on this NioThread
+|Number of processed `NioPipeline`s on this NioThread
 
 |`tcp.inputThread/outputThread.selectorIOExceptionCount`
 |count
-|the number of times that io exceptions are thrown during selection
+|Number of times that io exceptions are thrown during selection
 
 |`tcp.inputThread/outputThread.taskQueueSize`
 |count
-|the number of pending tasks on the queue of NioThread
+|Number of pending tasks on the queue of NioThread
 
 |`thread.daemonThreadCount`
 |count
-|the current number of live daemon thread in the JVM
+|Current number of live daemon thread in the JVM
 
 |`thread.peakThreadCount`
 |count
-|the peak live thread count since the JVM started
+|Peak live thread count since the JVM started
 
 |`thread.threadCount`
 |count
-|the current number of live threads including both daemon and non-daemon threads in the JVM
+|Current number of live threads including both daemon and non-daemon threads in the JVM
 
 |`thread.totalStartedThreadCount`
 |count
-|the total number of threads started since the JVM started
+|Total number of threads started since the JVM started
 
 |`topic.creationTime`
 |ms
-|the creation time of the topic on the member
+|Creation time of the topic on the member
 
 |`topic.totalPublishes`
 |count
-|the total number of published messages of this topic on this member
+|Total number of published messages of this topic on this member
 
 |`topic.totalReceivedMessages`
 |count
-|the total number of received messages of this topic on this member
+|Total number of received messages of this topic on this member
 
 |`transactions.commitCount`
 |count
-|the number of committed transactions
+|Number of committed transactions
 
 |`transactions.rollbackCount`
 |count
-|the number of rollbacked transactions
+|Number of rollbacked transactions
 
 |`transactions.startCount`
 |count
-|the number of started transactions
+|Number of started transactions
 
 |`wan.ackDelayCurrentMillis`
 |ms
-|the duration of ongoing delaying, -1 if there is no current delaying
+|Duration of ongoing delaying, -1 if there is no current delaying
 
 |`wan.ackDelayLastEnd`
 |ms
-|the timestamp of the last end of delaying the acknowledgments. If this value is bigger than `wan.ackDelayLastStart`, then there is no delaying.
+|Timestamp of the last end of delaying the acknowledgments; if this value is bigger than `wan.ackDelayLastStart`, then there is no delaying
 
 |`wan.ackDelayLastStart`
 |ms
-|the timestamp of the last start of delaying the acknowledgments
+|Timestamp of the last start of delaying the acknowledgments
 
 |`wan.ackDelayTotalCount`
 |count
-|the total number of the triggering delaying the WAN acknowledgments (exceeding the invocation threshold)
+|Total number of the triggering delaying the WAN acknowledgments (exceeding the invocation threshold)
 
 |`wan.ackDelayTotalMillis`
 |ms
-|the total amount of time delaying the WAN acknowledgments was taking place
+|Total amount of time delaying the WAN acknowledgments was taking place
 
 |`wan.consistencyCheck.lastCheckedPartitionCount`
 |count
-|the number of checked partitions on the last WAN consistency check
+|Number of checked partitions on the last WAN consistency check
 
 |`wan.consistencyCheck.lastCheckedLeafCount`
 |count
-|the number of checked partitions on the last WAN consistency check
+|Number of checked partitions on the last WAN consistency check
 
 |`wan.consistencyCheck.lastDiffLeafCount`
 |count
-|the number of different Merkle tree leaves on the last WAN consistency check
+|Number of different Merkle tree leaves on the last WAN consistency check
 
 |`wan.consistencyCheck.lastDiffPartitionCount`
 |count
-|the number of partitions found to be inconsistent on the last WAN consistency check
+|Number of partitions found to be inconsistent on the last WAN consistency check
 
 |`wan.consistencyCheck.lastEntriesToSync`
 |count
-|the number of entries to synchronize to get the clusters into sync on the last WAN consistency check
+|Number of entries to synchronize to get the clusters into sync on the last WAN consistency check
 
 |`wan.droppedCount`
 |count
-|the number of dropped entry events
+|Number of dropped entry events
 
 |`wan.outboundQueueSize`
 |count
-|the outbound wan queue size on this member
+|Outbound WAN queue size on this member
 
 |`wan.removeCount`
 |count
-|the number of entry remove events
+|Number of entry remove events
 
 |`wan.syncCount`
 |count
-|the number of entry sync events
+|Number of entry sync events
 
 |`wan.sync.avgEntriesPerLeaf`
 |count
-|the average of the number of records belong the synchronized Merkle tree nodes have
+|Average of the number of records belong the synchronized Merkle tree nodes have
 
 |`wan.sync.maxLeafEntryCount`
 |count
-|the maximum of the number of records belong the synchronized Merkle tree nodes have
+|Maximum of the number of records belong the synchronized Merkle tree nodes have
 
 |`wan.sync.minLeafEntryCount`
 |count
-|the minimum of the number of records belong the synchronized Merkle tree nodes have
+|Minimum of the number of records belong the synchronized Merkle tree nodes have
 
 |`wan.sync.nodesSynced`
 |count
-|the number of the synchronized Merkle tree nodes
+|Number of the synchronized Merkle tree nodes
 
 |`wan.sync.partitionsSynced`
 |count
-|the number of synchronized partitions
+|Number of synchronized partitions
 
 |`wan.sync.partitionsToSync`
 |count
-|the number of partitions to synchronize
+|Number of partitions to synchronize
 
 |`wan.sync.recordsSynced`
 |count
-|the number of synchronized records
+|Number of synchronized records
 
 |`wan.sync.syncDurationNanos`
 |ns
-|the duration of the last synchronization
+|Duration of the last synchronization
 
 |`wan.sync.stdDevEntriesPerLeaf`
 |count
-|the standard deviation of the number of records belong the synchronized Merkle tree nodes have
+|Standard deviation of the number of records belong the synchronized Merkle tree nodes have
 
 |`wan.sync.syncStartNanos`
 |ns
-|the start time for the synchronization
+|Start time of this WAN synchronization
 
 |`wan.totalPublishLatency`
 |ms
-|the total latency of published WAN events from this member
+|Total latency of published WAN events from this member
 
 |`wan.totalPublishedEventCount`
 |count
-|the total number of published WAN events from this member
+|Total number of published WAN events from this member
 
 |`wan.updateCount`
 |count
-|the number of entry update events
+|Number of entry update events
 
 |===
