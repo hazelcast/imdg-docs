@@ -47,7 +47,8 @@ fields depends on the serialization format, as described below:
 * For Java objects (`Serializable`, `DataSerializable`, `IdentifiedDataSerializable`),
 the object is deserialized if needed and then analyzed using the reflection mechanism. Only public
 fields and getters are taken into account. A public field is exposed using its exact name.
-A getter is exposed using the JavaBean naming conventions.
+A getter is exposed using the JavaBean naming conventions, i.e getter method names are composed of the
+ word get plus the property name with the first character of each word capitalized.
 * For `Portable` objects, the fields that are written in the `Portable.writePortable`
 method are exposed using their exact names.
 * For `HazelcastJsonValue` objects, see the xref:query:how-distributed-query-works.adoc#querying-json-strings[Querying JSON Strings section].
