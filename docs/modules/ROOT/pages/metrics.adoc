@@ -276,12 +276,12 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`executor.internal.remainingQueueCapacity`
 |count
-|Remaining capacity on the executor's work queue
+|Remaining capacity on the executor's task queue
 
 // TODO: Validate this file.partition metrics 
 |`file.partition.freeSpace`
 |bytes
-|amoun of free space in the given directory, user.home
+|Amount of free space in the given directory, user.home
 
 |`file.partition.totalSpace`
 |bytes
@@ -293,11 +293,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`flakeIdGenerator.batchCount`
 |count
-|Total number of times the ID generator has been used to generate a new ID batch
+|Total number of times the Flake ID generator has been used to generate a new ID batch
 
 |`flakeIdGenerator.creationTime`
 |ms
-|Creation time of this flakeIdGenerator on the member
+|Creation time of this Flake ID Generator on the member
 
 |`flakeIdGenerator.idCount`
 |count
@@ -305,35 +305,35 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`gc.majorCount`
 |count
-|Total number of major garbage collections that have occurred
+|Total number of major garbage collections (GCs) that have occurred
 
 |`gc.majorTime`
 |ms
-|Accumulated elapsed time in major gc's 
+|Accumulated elapsed time in major GCs
 
 |`gc.minorCount`
 |count
-|Total number of minor garbage collections that have occurred
+|Total number of minor GCs that have occurred
 
 |`gc.minorTime`
 |ms
-|Accumulated elapsed time in minor gc's 
+|Accumulated elapsed time in minor GCs
 
 |`gc.unknownCount`
 |count
-|Number of unknown garbage collections that cannot be determined to be as a minor or major (this is usually due to the lack of support of the used garbage collector)
+|Number of unknown GCs that cannot be determined to be as a minor or major (this is usually due to the lack of support of the used garbage collector)
 
 |`gc.unknownTime`
 |ms
-|Accumulated elapsed time in unknown gc's
+|Accumulated elapsed time in unknown GCs
 
 |`hot-restart.liveTombstones`
 |count
-|Number of live tombstones in the store
+|Number of live tombstones in the Hot Restart store
 
 |`hot-restart.liveValues`
 |count
-|Number of live values in the store
+|Number of live values in the Hot Restart store
 
 |`hot-restart.tombGarbage`
 |bytes
@@ -433,11 +433,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.merkleTreesCost`
 |count
-|heap cost of the Merkle trees
+|Total heap cost of the Merkle trees used
 
 |`map.numberOfEvents`
 |count
-|Number of local events received
+|Number of local events received on the map
 
 |`map.numberOfOtherOperations`
 |count
@@ -445,11 +445,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.ownedEntryCount`
 |count
-|Number of entries owned by the member
+|Number of map entries owned by the member
 
 |`map.ownedEntryMemoryCost`
 |bytes
-|Memory cost of owned entries on this member
+|Memory cost of owned map entries on this member
 
 |`map.putCount`
 |count
@@ -469,35 +469,35 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.totalGetLatency`
 |ms
-|Total latency of local get operations
+|Total latency of local get operations on the map
 
 |`map.totalMaxGetLatency`
 |ms
-|Maximum latency of local get operations
+|Maximum latency of local get operations on the map
 
 |`map.totalMaxPutLatency`
 |ms
-|Maximum latency of local put operations
+|Maximum latency of local put operations on the map
 
 |`map.totalMaxRemoveLatency`
 |ms
-|Maximum latency of local remove operations
+|Maximum latency of local remove operations on the map
 
 |`map.totalMaxSetLatency`
 |ms
-|Maximum latency of local set operations
+|Maximum latency of local set operations on the map
 
 |`map.totalPutLatency`
 |ms
-|Total latency of local put operations
+|Total latency of local put operations on the map
 
 |`map.totalRemoveLatency`
 |ms
-|Total latency of local remove operations
+|Total latency of local remove operations on the map
 
 |`map.totalSetLatency`
 |ms
-|Total latency of local set operations
+|Total latency of local set operations on the map
 
 |`map.index.averageHitLatency`
 |ns
@@ -505,7 +505,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.index.averageHitSelectivity`
 |percent
-|Average selectivity of the hits served by the index on this member (The returned value is in the range from 0.0 to 1.0. Values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan.)
+|Average selectivity of the hits served by the index on this member (the returned value is in the range from 0.0 to 1.0 - values close to 1.0 indicate a high selectivity meaning the index is efficient; values close to 0.0 indicate a low selectivity meaning the index efficiency is approaching an efficiency of a simple full scan)
 
 |`map.index.creationTime`
 |ms
@@ -513,7 +513,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.index.hitCount`
 |count
-|Total number of hits into the index (the value of this metric may be greater than the `map.index.queryCount` since a single query may hit the same index more than once)
+|Total number of index hits (the value of this metric may be greater than the `map.index.queryCount` since a single query may hit the same index more than once)
 
 |`map.index.insertCount`
 |count
@@ -521,7 +521,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.index.memoryCost`
 |bytes
-|Local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index.)
+|Local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index)
 
 |`map.index.queryCount`
 |count
@@ -573,7 +573,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`memory.maxMetadata`
 |bytes
-|Amount of native memory reserved for metadata. This memory is separate and not accounted for by the NativeMemory statistics.
+|Amount of native memory reserved for metadata (this memory is separate and not accounted for by the NativeMemory statistics)
 
 |`memory.maxNative`
 |bytes
@@ -657,11 +657,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`multiMap.ownedEntryCount`
 |count
-|Number of entries owned by the member
+|Number of multimap entries owned by the member
 
 |`multiMap.ownedEntryMemoryCost`
 |bytes
-|Memory cost of owned entries on this member
+|Memory cost of owned multimap entries on this member
 
 |`multiMap.putCount`
 |count
@@ -801,15 +801,15 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.genericThreadCount`
 |count
-|Number of generic operation handler threads in the member.
+|Number of generic operation handler threads in the member
 
 |`operation.invocations.backupTimeoutMillis`
 |ms
-|Operation backup timeout that specifies how long the invocation will wait for acknowledgements from the backup replicas (If acks are not received from some backups, there will not be any rollback on other successful replicas)
+|Operation backup timeout that specifies how long the invocation will wait for acknowledgements from the backup replicas (if acks are not received from some backups, there will not be any rollback on other successful replicas)
 
 |`operation.invocations.backupTimeouts`
 |count
-|Number of operation invocations that acknowledgment from backups has timeout.
+|Number of operation invocations that acknowledgment from backups has timeout
 
 |`operation.invocations.delayedExecutionCount`
 |count
@@ -841,7 +841,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`operation.invocations.normalTimeouts`
 |count
-|Number of times that the operation invocations timeout
+|Number of times that the operation invocations have timed out
 
 |`operation.invocations.pending`
 |count
@@ -977,7 +977,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`os.processCpuLoad`
 |percent
-|Recent cpu usage for the JVM process; a negative value if not available
+|Recent CPU usage for the JVM process; a negative value if not available
 
 |`os.processCpuTime`
 |ms
@@ -985,7 +985,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`os.systemCpuLoad`
 |percent
-|Recent cpu usage for the whole system; a negative value if not available
+|Recent CPU usage for the whole system; a negative value if not available
 
 |`os.systemLoadAverage`
 |percent
@@ -1177,7 +1177,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`raft.destroyedGroupIds`
 |count
-|Destroyed raft node group ids
+|Destroyed raft node group IDs
 
 |`raft.group.availableLogCapacity`
 |count
@@ -1233,11 +1233,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`raft.terminatedRaftNodeGroupIds`
 |count
-|terminated raft node group ids
+|Terminated raft node group IDs
 
 |`replicatedMap.creationTime`
 |ms
-|Creation time of this replicated map on this member.
+|Creation time of this replicated map on this member
 
 |`replicatedMap.getCount`
 |count
@@ -1345,11 +1345,11 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.acceptor.eventCount`
 |count
-|Total number of the connections accepted by TcpServerAcceptor
+|Total number of the connections accepted by `TcpServerAcceptor`
 
 |`tcp.acceptor.exceptionCount`
 |count
-|Number of thrown exception on this TcpServerAcceptor
+|Number of thrown exceptions on this `TcpServerAcceptor`
 
 |`tcp.acceptor.idleTimeMillis`
 |ms
@@ -1401,7 +1401,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.connection.inProgressCount`
 |count
-|Number of connections establishments in progress
+|Number of connection establishments in progress
 
 |`tcp.connection.openedCount`
 |count
@@ -1505,7 +1505,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.inputThread/outputThread.idleTimeMillis`
 |ms
-|Idle time that indicates how long since the last read/write
+|Idle time that indicates the duration since the last read/write
 
 |`tcp.inputThread/outputThread.ioThreadId`
 |count
@@ -1521,7 +1521,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`tcp.inputThread/outputThread.selectorIOExceptionCount`
 |count
-|Number of times that io exceptions are thrown during selection
+|Number of times that I/O exceptions are thrown during selection
 
 |`tcp.inputThread/outputThread.taskQueueSize`
 |count
