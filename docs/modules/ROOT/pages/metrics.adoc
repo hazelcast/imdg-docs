@@ -140,7 +140,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cp.countdownlatch.count`
 |count
-|Initial count of the `ICountDownLatch`
+|Initial count of `ICountDownLatch`
 
 |`cp.countdownlatch.remaining`
 |count
