@@ -136,7 +136,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cp.atomiclong.value`
 |count
-|Value of this `AtomicLong`
+|Value of this `IAtomicLong`
 
 |`cp.countdownlatch.count`
 |count
