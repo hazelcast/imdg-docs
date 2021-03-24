@@ -272,7 +272,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`executor.internal.queueSize`
 |count
-|Number 
+|Number of pending tasks in this executor's task queue
 
 |`executor.internal.remainingQueueCapacity`
 |count
