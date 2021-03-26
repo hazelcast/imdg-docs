@@ -5,8 +5,9 @@
   "author": "Jake Cahill",
   "license": "ISC",
   "scripts": {
-    "build-local": "cross-env DOCSEARCH_ENABLED=true GOOGLE_ANALYTICS_KEY=GTM-M267KFN antora --to-dir test --fetch --generator @antora/site-generator-default antora-playbook-local.yml",
-    "check-links-local": "antora --fetch --generator @antora/xref-validator antora-playbook-local.yml",
+    "build": "antora --to-dir docs --fetch --generator @antora/site-generator-default antora-playbook.yml && cp robots.txt docs",
+    "build-local": "antora --to-dir test --fetch --generator @antora/site-generator-default antora-playbook-local.yml",
+    "check-links-local": "antora --fetch --generator @antora/xref-validator check-links-playbook.yml",
     "serve": "serve test",
     "expose": "ngrok http 5000"
   },
@@ -14,7 +15,6 @@
     "@antora/cli": "^2.3.4",
     "@antora/site-generator-default": "^2.3.4",
     "@antora/xref-validator": "gitlab:antora/xref-validator",
-    "cross-env": "^7.0.2",
     "ngrok": "^3.3.0",
     "serve": "^11.3.2"
   }
