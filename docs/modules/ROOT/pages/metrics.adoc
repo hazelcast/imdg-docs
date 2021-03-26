@@ -96,7 +96,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterTime`
 |ms
-|Elapsed time since the cluster was created
+|Elapsed time since the master member was created (<<clusterStartTime,`cluster.clock.clusterStartTime`>>)
 
 |`cluster.clock.clusterTimeDiff`
 |ms
