@@ -92,7 +92,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterStartTime`
 |ms
-|Start time of the cluster (when the first member in cluster becomes master, its localClockTime value is saved as clusterStartTime)
+|[[clusterStartTime]]Start time of the cluster (when the first member in cluster becomes master, its localClockTime value is saved as clusterStartTime)
 
 |`cluster.clock.clusterTime`
 |ms
