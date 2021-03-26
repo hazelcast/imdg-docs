@@ -104,7 +104,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterUpTime`
 |ms
-|Uptime of the cluster (current time - cluster start time)
+|Uptime of the cluster (current time - <<clusterStartTime, `cluster.clock.clusterStartTime`>>)
 
 |`cluster.clock.localClockTime`
 |ms
