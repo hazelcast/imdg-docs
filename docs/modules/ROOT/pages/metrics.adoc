@@ -128,7 +128,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.heartbeat.lastHeartbeat`
 |ms
-|Last timestamp of sending heartbeats to the other known cluster members
+|Last time that this member sent a heartbeat to other known cluster members
 
 |`cluster.size`
 |count
