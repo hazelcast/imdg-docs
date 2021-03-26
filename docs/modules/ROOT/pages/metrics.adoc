@@ -100,7 +100,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.clock.clusterTimeDiff`
 |ms
-|Difference between this member's local clock timestamp and the cluster clock timestamp sent by the master member
+|Difference between the local time (`cluster.clock.localClockTime`) of the local member and the master member
 
 |`cluster.clock.clusterUpTime`
 |ms
