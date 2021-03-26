@@ -1,0 +1,29 @@
+= Intercepting Map Entries
+:description: With the Java embedded API, you can intercept map methods before they are executed and add your own business logic by synchronously blocking them. For example, you can change the value returned from a `get()` method or change the value in a `put()` method.
+
+{description}
+
+[[adding-interceptors]]
+
+Interceptors are different to xref:listening-for-map-entries.adoc[listeners]. With listeners, you take an action
+after a method has been completed. Interceptor actions are synchronous and
+you can alter the behavior of method, change its values, or totally cancel it.
+
+Map interceptors are chained, so adding the same interceptor to the same map more than once results in duplicated effects. This can easily happen when the interceptor is added to the map at member initialization, so that each member adds the same interceptor.
+
+When you add the interceptor in this way, be sure to implement the `hashCode()`
+method to return the same value for every instance of the interceptor.
+It is not strictly necessary, but it is a good idea to also implement `equals()`
+as this ensures that the map interceptor can be removed reliably.
+
+The map API has two methods for adding and removing an interceptor to the map:
+`addInterceptor` and `removeInterceptor`. See also the
+https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/map/MapInterceptor.html[`MapInterceptor` interface^]
+to learn about the methods used to intercept the changes in a map.
+
+The following is an example usage.
+
+[source,java]
+----
+include::{javasource}/dds/map/MapInterceptorMember.java[tag=mim]
+----
