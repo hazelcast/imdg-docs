@@ -1,7 +1,9 @@
 = Hazelcast Clients
+:description: Hazelcast has clients in Java, C++, .NET, Node.js, Go, Python, and Memcache. You can use these clients to communicate with cluster members.
 
-This chapter provides information about Hazelcast's client and language implementations,
-which are listed below:
+{description}
+
+For documentation and code samples for each client, see the following:
 
 * xref:java.adoc[Java]
 * xref:cplusplus.adoc[C++]
@@ -12,11 +14,16 @@ which are listed below:
 * xref:go.adoc[Go]
 * xref:python.adoc[Python]
 
-**Feature Comparison for Hazelcast Clients:**
+== Feature Comparison for Hazelcast Clients
 
-See the https://hazelcast.org/clients-languages/[feature comparison matrix^]
-to learn about the features implemented across the clients and language APIs.
+Not all features are available in all clients.
 
-**Code Samples:**
+To find out which features are available in each client,
+see the https://hazelcast.org/clients-languages/[feature comparison matrix^]
+.
 
-In the following client sections, you will find links to each client's code samples.
+== Serialization in Client/Server Mode
+
+In xref:overview:topology.adoc[client/server topologies], you can serialize your data on the client side before sending it to a member. For example, you can serialize data in JSON and add it to a map. This option is useful if you plan on using Hazelcast to store your data in binary. Clients can handle serialization without the members needing to know how to do so.
+
+For details about why you need to serialize data and the options for doing so, see xref:serialization:serialization.adoc[Serialization].
