@@ -1,0 +1,82 @@
+= Acting Upon Changes to Specific Map Entries
+:description: When a specific map entry is added, updated, removed, or evicted you can trigger an event that your application can act upon. To trigger this event, register an entry listener that filters entries by a given predicate.
+
+{description}
+
+[[listening-to-map-entries-with-predicates]]
+
+NOTE: If you want to listen to changes to all map entries, see xref:events:object-events.adoc#listening-for-map-events[Listening for Map Events].
+
+As an example, let's listen to the changes made on an employee
+with the surname "Smith". First, let's create the `Employee` class.
+
+[source,java]
+----
+include::{javasource}/dds/map/Employee.java[tag=emp]
+----
+
+Then, let's create a listener
+that tracks the `ADDED`, `UPDATED` and `REMOVED` entry events with the `surname` predicate.
+
+[source,java]
+----
+include::{javasource}/dds/map/ListenerWithPredicate.java[tag=lwp]
+----
+
+
+And now, let's play with the employee "smith" and see how that employee is listened to.
+
+[source,java]
+----
+include::{javasource}/dds/map/Modify.java[tag=modify]
+----
+
+
+When you first run the class `ListenerWithPredicate` and then run `Modify`,
+an output similar to the one below appears.
+
+```
+entryAdded:EntryEvent {Address[192.168.178.10]:5702} key=1,oldValue=null,
+value=Person{name= smith }, event=ADDED, by Member [192.168.178.10]:5702
+```
+
+NOTE: See the xref:query:continuous-query-cache.adoc[Continuous Query Cache section]
+for more information.
+
+NOTE: The default backwards-compatible event publishing strategy only publishes `UPDATED` events when map entries are updated to a value that
+matches the predicate with which the listener was registered.
+This implies that when using the default event publishing strategy,
+your listener is not notified about an entry whose
+value is updated from one that matches the predicate to a new value
+that does not match the predicate.
+
+When you configure Hazelcast members with property
+`hazelcast.map.entry.filtering.natural.event.types` set to `true`,
+handling of entry updates conceptually treats value transition as entry,
+update or exit with regards to the predicate value space.
+The following table compares how a listener is notified about an update
+to a map entry value under the default
+backwards-compatible Hazelcast behavior (when property
+`hazelcast.map.entry.filtering.natural.event.types` is not set or is set
+to `false`) versus when set to `true`:
+
+|===
+
+|| Default | `hazelcast.map.entry.filtering.natural.event.types = true`
+
+| When old value matches predicate, new value does not match predicate
+| No event is delivered to entry listener
+| `REMOVED` event is delivered to entry listener
+
+| When old value matches predicate, new value matches predicate
+| `UPDATED` event is delivered to entry listener
+| `UPDATED` event is delivered to entry listener
+
+| When old value does not match predicate, new value does not match predicate
+| No event is delivered to entry listener
+| No event is delivered to entry listener
+
+| When old value does not match predicate, new value matches predicate
+| `UPDATED` event is delivered to entry listener
+| `ADDED` event is delivered to entry listener
+|===
