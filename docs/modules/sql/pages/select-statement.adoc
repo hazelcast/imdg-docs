@@ -19,12 +19,89 @@ Expressions may have optional aliases.
 An optional `WHERE` clause defines a `condition`, that is any expression that evaluates to a result of type boolean.
 Any row that doesn't satisfy the condition is eliminated from the result.
 
+== Sorting
+
+You can use the standard SQL clauses `ORDER BY`, `LIMIT`, and `OFFSET` to sort and limit the result set.
+
+WARNING: Note that, you must add sorted indexes to the map object's fields to be sorted by.
+See the xref:query:how-distributed-query-works.adoc#indexing-queries[indexing section]
+for information on adding and configuring indexes. For example, for the `SELECT * FROM persons ORDER BY name ASC` query,
+there has to be a sorted index on the `name` field as shown below:
++
+[tabs] 
+==== 
+XML:: 
++ 
+-- 
+[source,xml]
+----
+<hazelcast>
+    <map name="default">
+        <indexes>
+            <index type="SORTED">
+                <attributes>
+                    <attribute>name</attribute>
+                </attributes>
+            </index>
+    </map>
+</hazelcast>
+----
+--
+
+YAML::
++
+[source,yaml]
+----
+hazelcast:
+  map:
+    default:
+      indexes:
+        - type: SORTED
+            attributes:
+              - "name"
+----
+
+Java::
++
+[source,java]
+----
+HazelcastInstance hz = Hazelcast.newHazelcastInstance();
+IMap map = hz.getMap( "default" );
+map.addIndex(new IndexConfig(IndexType.SORTED, "name"));
+----
+====
+
+See the below examples for sorting.
+
+The following statement gets the top five employees ordered by the
+`first_name` field and skipping the first three ones:
+
+[source,sql]
+----
+SELECT 
+    employee_id, first_name, last_name
+FROM
+    employees
+ORDER BY first_name
+LIMIT 5 OFFSET 3;
+----
+
+The following statement gets the top five employees with the highest salaries.
+
+[source,sql]
+----
+SELECT 
+    employee_id, first_name, last_name, salary
+FROM
+    employees
+ORDER BY salary DESC
+LIMIT 5;
+----
+
 == Unsupported Features
 
 The following features are *not supported* and are planned for future releases:
 
-* `ORDER BY`
-* `LIMIT`/`OFFSET`
 * `GROUP BY`/`HAVING`
 * `JOIN`
 * set operators (`UNION`, `INTERSECT`, `MINUS`)
