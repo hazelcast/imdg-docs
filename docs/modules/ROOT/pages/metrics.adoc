@@ -132,7 +132,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cluster.size`
 |count
-|Size of the cluster
+|Number of members in the cluster
 
 |`cp.atomiclong.value`
 |count
@@ -156,7 +156,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`cp.lock.lockCount`
 |count
-|Number that shows how many times this `FencedLock` acquired
+|Total number of times this `FencedLock` has been acquired since its creation
 
 |`cp.lock.owner`
 |count
