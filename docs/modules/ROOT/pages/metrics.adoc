@@ -321,7 +321,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`gc.unknownCount`
 |count
-|Number of unknown GCs that cannot be determined to be as a minor or major (this is usually due to the lack of support of the used garbage collector)
+|Number of unknown GCs that cannot be determined as minor or major (this is usually due to the lack of support of the used garbage collector)
 
 |`gc.unknownTime`
 |ms
