@@ -251,10 +251,11 @@ mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
 
 You can do a lot more with maps than simply writing data to them. Explore the following topics to find out what else you can do with maps:
 
+- xref:backing-up-maps.adoc[Backing Up Maps]
 - xref:locking-maps.adoc[Locking Maps]
-- xref:expiration-and-eviction.adoc[Expiration and Eviction]
+- xref:managing-map-memory.adoc[Managing Map Memory]
 - xref:working-with-external-data.adoc[Working with External Data]
-- xref:reading-map-statistics.adoc[Reading Map Statistics]
+- xref:reading-map-metrics.adoc[Reading Map Metrics]
 - xref:listening-for-map-entries.adoc[Listening to Map Entries with Predicates]
 - xref:intercepting-map-entries.adoc[Intercepting Map Entries]
 - xref:preventing-out-of-memory.adoc[Preventing Out of Memory Exceptions]

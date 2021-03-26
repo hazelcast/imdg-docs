@@ -1,4 +1,4 @@
-= Setting In-Memory Format
+= Setting In-Memory Format of Map Entries
 :description: By default, Hazelcast stores map entries in binary (serialized) format in on-heap memory. This option is useful if you mainly read and write data to a map. However, for other use cases it may be more efficient to store entries in their object form or even in off-heap memory.
 of local processing, such as entry processor and queries.
 

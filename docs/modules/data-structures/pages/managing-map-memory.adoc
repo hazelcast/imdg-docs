@@ -1,4 +1,4 @@
-= Expiration and Eviction
+= Managing Map Memory
 :description: Depending on how you use maps, they may become too large for your cluster's memory or the data may become stale and useless to your applications. To handle these situations, you can set expiration and eviction policies.
 
 {description}

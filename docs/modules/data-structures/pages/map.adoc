@@ -20,7 +20,7 @@ For example, if you have a map with 1000 entries on one member, then you start a
 
 By default, all maps are backed up by one other member to avoid data loss. This way, if a member goes down, that member's partition is available on another.
 
-In terms of the link:{url-cap-theorem}[CAP theorem], maps are ideal for applications that rely on data being _available_ rather than _consistent_. However, you can configure maps to xref:expiration-and-eviction.adoc[reduce the chances of data becoming stale].
+In terms of the link:{url-cap-theorem}[CAP theorem], maps are ideal for applications that rely on data being _available_ rather than _consistent_. However, you can configure maps to xref:managing-map-memory.adoc[reduce the chances of data becoming stale].
 
 == Learn More
 
