@@ -521,7 +521,7 @@ The table below lists the metrics with their explanations in alphabetical order.
 
 |`map.index.memoryCost`
 |bytes
-|Local memory cost of the index (for on-heap indexes (OBJECT and BINARY storages), the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index)
+|Local memory cost of the index (for on-heap indexes in OBJECT or BINARY formats, the returned value is just a best-effort approximation and doesn't indicate a precise on-heap memory usage of the index)
 
 |`map.index.queryCount`
 |count
