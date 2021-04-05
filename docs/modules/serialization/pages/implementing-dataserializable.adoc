@@ -219,8 +219,8 @@ the client side. For a Java client, the process is the same as described above t
 in the client configuration, e.g., `hazelcast-client.xml/yaml`.
 For the other Hazelcast clients, see the following for details:
 
-* https://github.com/hazelcast/hazelcast-csharp-client#41-identifieddataserializable-serialization[.NET^]
-* https://github.com/hazelcast/hazelcast-cpp-client#41-identifieddataserializable-serialization[C++^]
-* https://github.com/hazelcast/hazelcast-nodejs-client#41-identifieddataserializable-serialization[Node.js^]
-* https://github.com/hazelcast/hazelcast-python-client#41-identifieddataserializable-serialization[Python^]
+* https://hazelcast.github.io/hazelcast-csharp-client/4.0.1/doc/options.html#serialization[.NET^]
+* https://github.com/hazelcast/hazelcast-cpp-client/blob/master/Reference_Manual.md#41-identified_data_serializer-serialization[C++^]
+* https://github.com/hazelcast/hazelcast-nodejs-client/blob/master/DOCUMENTATION.md#41-identifieddataserializable-serialization[Node.js^]
+* https://hazelcast.readthedocs.io/en/stable/serialization.html#identifieddataserializable-serialization[Python^]
 * https://github.com/hazelcast/hazelcast-go-client#41-identifieddataserializable-serialization[Go^]
