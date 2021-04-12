@@ -23,11 +23,11 @@ for more information.
 Follow the below links to learn how to configure the event listeners on other
 Hazelcast clients:
 
-* https://github.com/hazelcast/hazelcast-csharp-client#75-distributed-events[.NET client^]
-* https://github.com/hazelcast/hazelcast-cpp-client#75-distributed-events[C++ client^]
-* https://github.com/hazelcast/hazelcast-nodejs-client/blob/master/DOCUMENTATION.md#75-distributed-events[Node.js client^]
+* https://hazelcast.github.io/hazelcast-csharp-client/4.0.1/doc/events.html[.NET client^]
+* https://github.com/hazelcast/hazelcast-cpp-client/blob/master/Reference_Manual.md#75-distributed-events[C++ client^]
+* https://github.com/hazelcast/hazelcast-nodejs-client/blob/master/DOCUMENTATION.md#85-distributed-events[Node.js client^]
+* https://hazelcast.readthedocs.io/en/stable/using_python_client_with_hazelcast_imdg.html#distributed-events[Python client^]
 * https://github.com/hazelcast/hazelcast-go-client#75-distributed-events[Go client^]
-* https://github.com/hazelcast/hazelcast-python-client#75-distributed-events[Python client^]
 
 Note that you can simply add a listener to your client that you already configured
 and registered on the member side. You do not need to configure the listener on the client.
