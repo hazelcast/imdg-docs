@@ -1,6 +1,7 @@
 name: imdg
 title: Hazelcast IMDG
 version: 3.7.8
+display_version: '3.7'
 asciidoc:
   attributes:    
     page-ghissue: https://github.com/hazelcast/hazelcast-docs/issues/new

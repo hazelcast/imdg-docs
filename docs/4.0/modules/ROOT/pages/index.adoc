@@ -1,3 +1,0 @@
-= {page-component-title} Reference Manual {page-component-display-version}
-
-The documentation for this version of {page-component-title} is hosted at https://docs.hazelcast.org/docs/{page-component-display-version}/manual/html-single/index.html.
