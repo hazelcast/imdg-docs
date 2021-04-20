@@ -256,7 +256,7 @@ blocking fashion.
 
 There are more options available for job configurations, such as defining a general chunk
 size or on what keys the operation will operate. See Hazelcast source code for
-the https://docs.hazelcast.org/docs/{page-component-display-version}/javadoc/com/hazelcast/mapreduce/Job.html[Job.java] for more information.
+the https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/mapreduce/Job.html[Job.java] for more information.
 
 === Creating Key-Value Input Sources with KeyValueSource
 

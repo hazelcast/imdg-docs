@@ -185,7 +185,7 @@ NOTE: Note that caching and removing the proxy instance are done outside of this
 
 === Implementing CounterProxy
 
-Now, it is time to implement the `CounterProxy` as shown below. `CounterProxy` extends `AbstractDistributedObject`, source code is https://docs.hazelcast.org/docs/{page-component-display-version}/javadoc/com/hazelcast/spi/AbstractDistributedObject.html[here].
+Now, it is time to implement the `CounterProxy` as shown below. `CounterProxy` extends `AbstractDistributedObject`, source code is https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spi/AbstractDistributedObject.html[here].
 
 [source,java]
 ----
@@ -222,7 +222,7 @@ If it is an `InterruptedException`, we have two options: either propagate the ex
 
 === Implementing the PartitionAwareOperation Interface
 
-Now, let's write the `IncOperation`. It implements the `PartitionAwareOperation` interface, meaning that it will be executed on the partition that hosts the counter. See the `PartitionAwareOperation` source code https://docs.hazelcast.org/docs/{page-component-display-version}/javadoc/com/hazelcast/spi/PartitionAwareOperation.html[here].
+Now, let's write the `IncOperation`. It implements the `PartitionAwareOperation` interface, meaning that it will be executed on the partition that hosts the counter. See the `PartitionAwareOperation` source code https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spi/PartitionAwareOperation.html[here].
 
 The method `run` does the actual execution. Since `IncOperation` returns a response, the method `returnsResponse` returns `true`. If your method is asynchronous and does not need to return a response, it is better to return `false` since it will be faster. The actual response is stored in the field `returnValue`; retrieve it with the method `getResponse`.
 
@@ -550,7 +550,7 @@ NOTE: During a partition migration, no other operations are executed on the rela
 
 We need to make our `CounterService` class implement the `MigrationAwareService` interface, so that Hazelcast knows that the `CounterService` can perform partition migrations.
 
-With the `MigrationAwareService` interface, some additional methods are exposed. For example, the method `prepareMigrationOperation` returns all the data of the partition that is going to be moved. You can check the `MigrationAwareService` source code https://docs.hazelcast.org/docs/{page-component-display-version}/javadoc/com/hazelcast/spi/MigrationAwareService.html[here].
+With the `MigrationAwareService` interface, some additional methods are exposed. For example, the method `prepareMigrationOperation` returns all the data of the partition that is going to be moved. You can check the `MigrationAwareService` source code https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spi/MigrationAwareService.html[here].
 
 The method `commitMigration` commits the data, meaning that in this case, it clears the partition container of the old owner.
 
@@ -747,7 +747,7 @@ If a backup should be made and `getSyncBackupCount` returns **3**, then three `I
 === Performing the Backup with IncBackupOperation
 
 Now, let's have a look at the `IncBackupOperation`. It implements `BackupOperation`, you can see the source code for `BackupOperation`
-https://docs.hazelcast.org/docs/{page-component-display-version}/javadoc/com/hazelcast/spi/BackupOperation.html[here].
+https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/spi/BackupOperation.html[here].
 
 [source,java]
 ----
