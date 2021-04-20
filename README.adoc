@@ -28,9 +28,9 @@ This section describes some important information about how this repository is s
 
 Documentation for new releases is hosted in versioned branches that are prefixed with `v/`.
 
-We support documentation for the latest patch releases of minor versions.For example, content for the `4.1` version is hosted in the `v/4.1` branch. This branch contains content for the latest patch release of version 4.1.
+We support documentation for the latest patch releases of minor versions. For example, content for the `4.1` version is hosted in the `v/4.1` branch. This branch contains content for the latest patch release of version 4.1.
 
-The `latest-dev` content (snapshot content) is stored in the `master` branch
+The `latest-dev` content (snapshot content) is stored in the `master` branch.
 
 The documentation build process is triggered whenever you create a new branch with the `v/` prefix, push to an existing `v/` branch, or push to the `master` branch.
 
