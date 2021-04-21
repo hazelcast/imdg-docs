@@ -1,5 +1,5 @@
 = Serialization
-:description: To be able to send data over a network between cluster members and/or clients, you have to serialize it into raw bytes. Hazelcast has many serialization methods to choose from, depending on which Hazelcast topology you are using and what you plan on doing with your data.
+:description: Before data can be sent over a network between cluster members and/or clients, that data must be serialized into raw bytes. Hazelcast has many serialization methods to choose from, depending on which Hazelcast topology you are using and what you plan on doing with your data.
 
 {description}
 
@@ -23,7 +23,7 @@ However, in the following cases, you must configure members to be able to serial
 |When you want to xref:computing:entry-processor.adoc[process map entries] or use an xref:computing:executor-service.adoc[executor service]
 |All clients
 |Members need to serialize the tasks
-|When using the Java client with xref:implementing-portable-serialization.adoc[`Portable`] serialization, you don't need to configure serialization on the member. For details, see xref:clusters:accessing-domain-objects.adoc[].
+|When using the Java client, you can configure map entries with xref:implementing-portable-serialization.adoc[`Portable`] serialization, in which case you don't need to configure serialization on the member. For details, see xref:clusters:accessing-domain-objects.adoc[].
 
 |When you use xref:sql:querying-imap.adoc#key-and-value-fields[SQL queries on nested fields] whose values are not primitives
 |Java only
@@ -33,17 +33,11 @@ However, in the following cases, you must configure members to be able to serial
 
 === Serialization Options for Clients
 
-The following serialization options are available for clients:
-
-- IdentifiedDataSerializable
-- Portable
-- Custom Serialization
-
-For a comparison of these options, see xref:comparing-interfaces.adoc[].
+For a full list of serialization options, see xref:comparing-interfaces.adoc[].
 
 == Serialization in Embedded Mode
 
-In xref:overview:topology.adoc[embedded mode], because data is partitioned across members in a cluster, each member must be able to serialize and deserialize data in the following cases:
+In xref:overview:topology.adoc[embedded mode] data is partitioned across members in a cluster. As a result, each member must be able to serialize and deserialize all data in the cluster in order to send and receive it. For example:
 
 - Adding key/value objects to a map
 

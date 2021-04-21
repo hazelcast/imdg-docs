@@ -15,7 +15,7 @@ to help you in deciding which interface to use in your applications.
 
 * More space occupancy
 
-* Not supported by Native clients
+* Supported only by members and Java clients
 
 | Externalizable
 | * A standard Java interface
@@ -23,20 +23,20 @@ to help you in deciding which interface to use in your applications.
 * More CPU and memory usage efficient than Serializable
 | * Serialization interface must be implemented
 
-* Not supported by Native clients
+* Supported only by members and Java clients
 
 | DataSerializable
 | * More CPU and memory usage efficient than Serializable
 | * Specific to Hazelcast
 
-*  Not supported by Native clients
+*  Supported only by members and Java clients
 
 | IdentifiedDataSerializable
 | * More CPU and memory usage efficient than Serializable
 
 * Reflection is not used during deserialization
 
-* Supported by all Native Clients
+* Supported by members and all clients
 | * Specific to Hazelcast
 
 * Serialization interface must be implemented
@@ -52,7 +52,7 @@ to help you in deciding which interface to use in your applications.
 
 * Partial deserialization is supported during Queries
 
-* Supported by all Native Clients
+* Supported by members and all clients
 | * Specific to Hazelcast
 
 * Serialization interface must be implemented
@@ -71,6 +71,3 @@ to help you in deciding which interface to use in your applications.
 
 * Plug in and configuration is required
 |===
-
-
-Let's dig into the details of the above serialization mechanisms in the following sections.
