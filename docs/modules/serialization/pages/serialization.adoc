@@ -28,7 +28,7 @@ However, in the following cases, you must configure members to be able to serial
 |When you use xref:sql:querying-imap.adoc#key-and-value-fields[SQL queries on nested fields] whose values are not primitives
 |Java only
 |Members need to deserialize underlying objects to be able to read nested fields
-|You can query nested fields whose values are primitives because these data types are serialized by Hazelcast by default. See << data-types-with-built-in-serialization, Data Types with Built-In Serialization>>
+|You can query nested fields whose values are primitives because these data types are serialized by Hazelcast by default. See <<data-types-with-built-in-serialization, Data Types with Built-In Serialization>>
 |===
 
 === Serialization Options for Clients
