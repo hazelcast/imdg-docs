@@ -5,9 +5,11 @@
 
 == Serialization in Client/Server Mode
 
-In xref:overview:topology.adoc[client/server topologies], you can serialize your data on the client side. For example, you can serialize data in JSON and add it to a map. This option is useful if you plan on using Hazelcast to store your data in binary. Clients can handle serialization without the members needing to know how to do so.
+In xref:overview:topology.adoc[client/server mode], you can serialize your data on the client side and/or the xref:ROOT:glossary.adoc#member[member] (server) side.
 
-However, in the following cases, you must configure your serialization method on the member as well:
+If you just want to store data on members, clients can handle serialization without the members needing to know how to do so. For example, you can serialize data as JSON and add it to a map. Then you can later request that information and deserialize on the client.
+
+However, in the following cases, you must configure members to be able to serialize and deserialize your data:
 
 [cols="a,a,a,a"]
 |===

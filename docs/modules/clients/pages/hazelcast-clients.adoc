@@ -24,6 +24,6 @@ see the https://hazelcast.org/clients-languages/[feature comparison matrix^]
 
 == Serialization in Client/Server Mode
 
-In xref:overview:topology.adoc[client/server topologies], you can serialize your data on the client side before sending it to a member. For example, you can serialize data in JSON and add it to a map. This option is useful if you plan on using Hazelcast to store your data in binary. Clients can handle serialization without the members needing to know how to do so.
+To be able to send data over a network between cluster members and/or clients, you have to serialize it into raw bytes.
 
-For details about why you need to serialize data and the options for doing so, see xref:serialization:serialization.adoc[Serialization].
+For details, see xref:serialization:serialization.adoc[Serialization].
