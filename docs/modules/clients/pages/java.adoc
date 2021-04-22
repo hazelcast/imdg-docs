@@ -821,7 +821,7 @@ Programmatic Configuration:
 ----
 ClientConfig clientConfig = new ClientConfig();
 ClientNetworkConfig networkConfig = clientConfig.getNetworkConfig();
-networkConfig().setSmartRouting(true);
+networkConfig.setSmartRouting(true);
 ----
 
 Its default value is `true` (smart client mode).
