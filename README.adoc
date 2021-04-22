@@ -38,19 +38,6 @@ The documentation build process is triggered whenever you create a new branch wi
 
 This section guides you through the steps for releasing documentation for patch releases.
 
-. Find the branch for your minor version. For example, if you're working on content for version 4.1.2, find the branch named `v/4.1`.
-+
-NOTE: If a branch for your major or minor version does not exist, see <<major-and-minor-releases, Major and Minor Releases>>.
-
-. In the `antora.yml` file of the branch, update the `version` field with the version of IMDG that you are working on.  For example from `4.1.1` to `4.1.2`.
-+
-[source,yaml]
-----
-version: 4.1.2
-----
-+
-NOTE: As soon as you push to this branch, GitHub will trigger a new build of the site, which will include your new content.
-
 . If you are releasing a new `latest` version, submit a pull request to the `develop` branch of the link:{url-playbook}[`hazelcast/hazelcast-docs`] repository to do the following:
 +
 - Update the `_redirects` file with your release version of IMDG.
@@ -63,7 +50,7 @@ NOTE: This file is where we alias the `latest` path in URLs.
 /imdg/latest/*  /imdg/4.1.2/:splat 200!
 ----
 +
-- Update the `search-config.json` file with your release version of IMDG.
+- In the `search-config.json` file, change the value of the `variables.version` field to your release version.
 +
 NOTE: This file is where we specify which documentation version to index for the search.
 +
@@ -87,8 +74,6 @@ NOTE: This file is where we specify which documentation version to index for the
 This section guides you through the steps for releasing documentation for major and minor releases.
 
 . Create a new branch from the `master` branch. For example if you're working on content for version 5.0, create a branch named `v/5.0`.
-+
-NOTE: As soon as you push your new branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . In the `antora.yml` file of your branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
@@ -96,6 +81,8 @@ NOTE: As soon as you push your new branch to the repository, GitHub will trigger
 ----
 version: 5.0
 ----
++
+NOTE: As soon as you push your new branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1-SNAPSHOT`.
 
