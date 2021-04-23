@@ -44,14 +44,14 @@ SELECT __key, this FROM employee
 You may also access the nested fields of a key or a value. The list of exposed
 fields depends on the serialization format, as described below:
 
-* For Java objects (`Serializable`, `DataSerializable`, `IdentifiedDataSerializable`),
+* For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]),
 the object is deserialized if needed and then analyzed using the reflection mechanism. Only public
 fields and getters are taken into account. A public field is exposed using its exact name.
 A getter is exposed using the JavaBean naming conventions.
-* For `Portable` objects, the fields that are written in the `Portable.writePortable`
+* For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, the fields that are written in the `Portable.writePortable`
 method are exposed using their exact names.
-* `HazelcastJsonValue` objects cannot be queried at the moment. This limitation will be
-removed in future releases.
+
+NOTE: You cannot query JSON fields in SQL. If you want to query JSON, see xref:query:how-distributed-query-works.adoc#querying-json-strings[Querying JSON Strings].
 
 Consider the `Employee` class from the example above; the SQL service can access
 the following fields:
