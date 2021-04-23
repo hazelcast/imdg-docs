@@ -535,7 +535,8 @@ YAML::
 +
 [source,yaml]
 ----
-network:
+hazelcast-client:
+  network:
     cluster-members:
       - 127.0.0.1
       - 127.0.0.2
