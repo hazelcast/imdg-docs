@@ -5,7 +5,7 @@ content:
   sources: 
   - url: .
     branches: HEAD
-    start_path: docs
+    start_paths: docs/*
 ui: 
   bundle:
     url: https://github.com/hazelcast/hazelcast-docs-ui/releases/download/v1.6.2/ui-bundle.zip #../hazelcast-docs-ui/build/ui-bundle.zip
