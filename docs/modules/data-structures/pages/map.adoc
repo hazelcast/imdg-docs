@@ -865,8 +865,8 @@ In some cases, you may want to load and store distributed map entries
 from/to a persistent data store such as a relational database. For example,
 if you want to back up your map entries or if you want to check your database
 for updated data entries. To do this,
-you can use Hazelcast's link:{javadocBaseUrl}{page-component-version}/javadoc/com/hazelcast/map/MapStore.html[`MapStore`] and
-link:{javadocBaseUrl}{page-component-version}/javadoc/com/hazelcast/map/MapLoader.html[`MapLoader`] interfaces.
+you can use Hazelcast's link:{javadocBaseUrl}{full-version}/javadoc/com/hazelcast/map/MapStore.html[`MapStore`] and
+link:{javadocBaseUrl}{full-version}/javadoc/com/hazelcast/map/MapLoader.html[`MapLoader`] interfaces.
 
 [cols="1m,5a"]
 |===
@@ -1139,7 +1139,7 @@ mapStoreConfig.setFactoryImplementation( new MapStoreFactory<Object, Object>() {
 
 To initialize the `MapLoader` implementation with the given map name, configuration
 properties and the Hazelcast instance, implement the
-https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/map/MapLoaderLifecycleSupport.html[`MapLoaderLifecycleSupport` interface^]
+https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/map/MapLoaderLifecycleSupport.html[`MapLoaderLifecycleSupport` interface^]
 which is described in the previous section.
 
 [[initializing-map-on-startup]]
@@ -1838,7 +1838,7 @@ as this ensures that the map interceptor can be removed reliably.
 
 The IMap API has two methods for adding and removing an interceptor to the map:
 `addInterceptor` and `removeInterceptor`. See also the
-https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/map/MapInterceptor.html[`MapInterceptor` interface^]
+https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/map/MapInterceptor.html[`MapInterceptor` interface^]
 to learn about the methods used to intercept the changes in a map.
 
 The following is an example usage.
