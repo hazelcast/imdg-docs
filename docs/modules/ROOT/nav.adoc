@@ -33,8 +33,6 @@ include::integrated-clustering:partial$integrated-clustering-nav.adoc[]
 
 include::storage:partial$storage-nav.adoc[]
 
-* xref:striim-cdc.adoc[Database CDC Integration Using Striim Hot Cache]
-
 include::clients:partial$clients-nav.adoc[]
 
 include::serialization:partial$serialization-nav.adoc[]

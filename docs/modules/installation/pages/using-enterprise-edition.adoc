@@ -16,7 +16,6 @@ Hazelcast, Enterprise features are the following:
 ** xref:wan:wan.adoc[]
 ** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered REST]
 ** xref:management:management-center.adoc#clustered-jmx-and-rest-via-management-center[Clustered JMX]
-** xref:ROOT:striim-cdc.adoc[Striim Hot Cache]
 ** xref:rolling-upgrades.adoc[Rolling Upgrades]
 ** xref:storage:high-density-memory.adoc[]
 ** xref:storage:hot-restart-persistence.adoc[]
