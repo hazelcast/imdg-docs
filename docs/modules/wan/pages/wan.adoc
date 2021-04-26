@@ -30,7 +30,7 @@ This chapter explains how you can replicate the state of your clusters over wide
 networks through Hazelcast's WAN Replication.
 
 NOTE: WAN Replication is a Hazelcast IMDG Enterprise Edition feature. However,
-its API is available publicly https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/wan/package-summary.html[here^] and,
+its API is available publicly https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/wan/package-summary.html[here^] and,
 benefiting from it, you may write your own replication logic.
 
 [[wr-concepts]]

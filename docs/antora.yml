@@ -1,9 +1,10 @@
 name: imdg
 title: Hazelcast IMDG
-version: 3.12.12
+version: 3.12
 display_version: '3.12'
 asciidoc:
   attributes:
+    full-version: '3.12.12'
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new

@@ -52,7 +52,7 @@ If you use `hazelcast-all.jar`:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-all</artifactId>
-    <version>{page-component-version}</version>
+    <version>{full-version}</version>
 </dependency>
 ----
 
@@ -63,7 +63,7 @@ If you use `hazelcast.jar`:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast</artifactId>
-    <version>{page-component-version}</version>
+    <version>{full-version}</version>
 </dependency>
 ----
 
@@ -82,7 +82,7 @@ it contains the client libraries, too:
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast</artifactId>
-    <version>{page-component-version}</version>
+    <version>{full-version}</version>
 </dependency>
 ----
 
