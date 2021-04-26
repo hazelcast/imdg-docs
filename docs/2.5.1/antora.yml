@@ -1,7 +1,8 @@
 name: imdg
 title: Hazelcast IMDG
-version: 2.5.1
+version: 2.5
 display_version: '2.5'
 asciidoc:
-  attributes:    
+  attributes: 
+    full-version: '2.5.1' 
     page-ghissue: https://github.com/hazelcast/hazelcast-docs/issues/new
