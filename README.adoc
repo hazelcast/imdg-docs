@@ -38,6 +38,10 @@ The documentation build process is triggered whenever you create a new branch wi
 
 This section guides you through the steps for releasing documentation for patch releases.
 
+. In the `v/` branch for the minor version whose patch you are releasing, update the `version` field in the `antora.yml` file to the new patch version. For example, if you are releasing version 4.1.3, find the `v/4.1` branch and update the `version` field in the `antora.yml` file with 4.1.3.
++
+NOTE: As soon as you push content to this branch, GitHub will trigger a new build of the site, which will include your new content.
+
 . If you are releasing a new `latest` version, submit a pull request to the `develop` branch of the link:{url-playbook}[`hazelcast/hazelcast-docs`] repository to do the following:
 +
 - Update the `_redirects` file with your release version of IMDG.
@@ -73,18 +77,20 @@ NOTE: This file is where we specify which documentation version to index for the
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. Create a new branch from the `master` branch. For example if you're working on content for version 5.0, create a branch named `v/5.0`.
+. Create a new temporary branch from the `master` branch. For example if you’re working on content for version 5.0, create a branch named `5.0`. You can add the new content and/or fixes to this branch before the release.
 
-. In the `antora.yml` file of your branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
+. In the `antora.yml` file of your temporary branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
 [source,yaml]
 ----
 version: 5.0
 ----
-+
-NOTE: As soon as you push your new branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1-SNAPSHOT`.
+
+. When you're ready to release, create the release branch from the temporary branch. For example if you are releasing version 5.0, create a release branch called `v/5.0` from the `5.0` branch.
++
+NOTE: As soon as you push the release branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . In the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `_redirects` file with the new versions of IMDG.
 +
