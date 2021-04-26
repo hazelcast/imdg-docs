@@ -123,6 +123,8 @@ NOTE: This file is where we specify which documentation version to index for the
       },
 ----
 
+. Delete the temporary branch. For example, if you released version `5.0`, delete the `5.0` branch. This step helps to keep the repository clean of temporary branches.
+
 
 == GitHub Actions
 
