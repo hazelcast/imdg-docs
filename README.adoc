@@ -38,7 +38,7 @@ The documentation build process is triggered whenever you create a new branch wi
 
 This section guides you through the steps for releasing documentation for patch releases.
 
-. In the `v/` branch for the minor version whose patch you are releasing, update the `version` field in the `antora.yml` file to the new patch version. For example, if you are releasing version 4.1.3, find the `v/4.1` branch and update the `version` field in the `antora.yml` file with 4.1.3.
+. In the `v/` branch for the minor version whose patch you are releasing, update the `attributes.full-version` field in the `antora.yml` file to the new patch version. For example, if you are releasing version 4.1.3, find the `v/4.1` branch and update the `attributes.full-version` field in the `antora.yml` file with 4.1.3.
 +
 NOTE: As soon as you push content to this branch, GitHub will trigger a new build of the site, which will include your new content.
 
@@ -81,7 +81,7 @@ This section guides you through the steps for releasing documentation for major 
 
 . In the `antora.yml` file of your temporary branch, do the following:
 +
-- Update the `version` and `display_version` fields with the major and minor version of IMDG that you are releasing.
+- Update the `version`, `display_version`, and `attributes.full-version` fields with the major and minor version of IMDG that you are releasing.
 +
 - Delete the `prerelease` field.
 +
@@ -90,6 +90,9 @@ For example version `5.0-SNAPSHOT` becomes `5.0`.
 [source,yaml]
 ----
 version: 5.0
+display_version: '5.0'
+attributes:
+  full-version: '5.0'
 ----
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1-SNAPSHOT`.

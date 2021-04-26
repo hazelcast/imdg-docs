@@ -1,10 +1,11 @@
 name: imdg
 title: Hazelcast IMDG
 version: 5.0-SNAPSHOT
-display_version: '5.0-SNAPSHOT'
+display_version: 5.0-SNAPSHOT
 prerelease: true
 asciidoc:
   attributes:
+    full-version: '5.0-SNAPSHOT'
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
