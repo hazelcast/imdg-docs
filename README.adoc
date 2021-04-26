@@ -79,7 +79,13 @@ This section guides you through the steps for releasing documentation for major 
 
 . Create a new temporary branch from the `master` branch. For example if you’re working on content for version 5.0, create a branch named `5.0`. You can add the new content and/or fixes to this branch before the release.
 
-. In the `antora.yml` file of your temporary branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
+. In the `antora.yml` file of your temporary branch, do the following:
++
+- Update the `version` and `display_version` fields with the major and minor version of IMDG that you are releasing.
++
+- Delete the `prerelease` field.
++
+For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
 [source,yaml]
 ----
