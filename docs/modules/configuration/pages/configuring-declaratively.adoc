@@ -2,7 +2,7 @@
 [[configuring-declaratively]]
 
 This is the configuration option where you use an XML or a YAML configuration
-file. When you download and unzip `hazelcast-{page-component-display-version}.zip`,
+file. When you download and unzip `hazelcast-{full-version}.zip`,
 you see the following files present in the  `/bin` folder, which are
 standard configuration files:
 

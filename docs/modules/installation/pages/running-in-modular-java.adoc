@@ -6,11 +6,11 @@ If you're using JDK 11 or later, you can use Hazelcast as a module in the http:/
 To run your application with Hazelcast
 libraries on the modulepath, use the following module name:
 
-* `com.hazelcast.core` for `hazelcast-{page-component-display-version}.jar` and
-`hazelcast-enterprise-{page-component-display-version}.jar`
+* `com.hazelcast.core` for `hazelcast-{full-version}.jar` and
+`hazelcast-enterprise-{full-version}.jar`
 
-Don't use `hazelcast-all-{page-component-display-version}.jar` or
-`hazelcast-enterprise-all-{page-component-display-version}.jar` on the modulepath as it could
+Don't use `hazelcast-all-{full-version}.jar` or
+`hazelcast-enterprise-all-{full-version}.jar` on the modulepath as it could
 lead to problems in module dependencies for your application. You can
 still use them on the classpath.
 
@@ -43,7 +43,7 @@ java --add-modules java.se \
   --add-opens java.management/sun.management=ALL-UNNAMED \
   --add-opens jdk.management/com.ibm.lang.management.internal=ALL-UNNAMED \
   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
-  -jar hazelcast-{page-component-display-version}.jar
+  -jar hazelcast-{full-version}.jar
 ----
 
 **Example: Running a member on the modulepath**
@@ -62,4 +62,4 @@ java --add-modules java.se \
   --module com.hazelcast.core/com.hazelcast.core.server.HazelcastMemberStarter
 ----
 
-_This example expects `hazelcast-{page-component-display-version}.jar` placed in the `lib` directory._
+_This example expects `hazelcast-{full-version}.jar` placed in the `lib` directory._

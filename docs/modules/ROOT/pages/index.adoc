@@ -1,4 +1,4 @@
-= Hazelcast IMDG Reference Manual {page-component-display-version}
+= Hazelcast IMDG Reference Manual {full-version}
 [[preface]]
 
 Welcome to the Hazelcast IMDG (In-Memory Data Grid) Reference Manual.
