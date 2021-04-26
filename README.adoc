@@ -1,3 +1,15 @@
 = Hazelcast IMDG Documentation
+// Settings:
+ifdef::env-github[]
+:warning-caption: :warning:
+endif::[]
+// URLs:
+:url-org: https://github.com/hazelcast
+:url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
+:url-ui: {url-org}/hazelcast-docs-ui
+:url-playbook: {url-org}/hazelcast-docs
+:url-staging: https://develop--nifty-wozniak-71a44b.netlify.app/home/index.html
 
-This branch hosts the latest source content for version 4.1 of the Hazelcast IMDG documentation.
+This repository contains the Antora components for the Hazelcast IMDG documentation.
+
+See the `master` branch for the full README.

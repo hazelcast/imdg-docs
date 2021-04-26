@@ -431,7 +431,7 @@ hazelcast:
 ----
 
 You can refer to the full example YAML configuration files placed in the `/bin` folder
-of the downloadable `hazelcast-{page-component-version}.zip` after unzipping it. Please see the
+of the downloadable `hazelcast-{full-version}.zip` after unzipping it. Please see the
 complete list of the full example YAML configurations link:https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.yaml[here^].
 
 == Setting the Path to a Configuration File

@@ -486,7 +486,7 @@ you can use to allow or restrict the designated cluster/member operations.
 By changing the state of your cluster, you can allow/restrict several
 cluster operations or change the behavior of those operations.
 You can use the methods `changeClusterState()` and `shutdown()` which are in the
-https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/cluster/Cluster.html[Cluster interface^] to change your cluster's state.
+https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/cluster/Cluster.html[Cluster interface^] to change your cluster's state.
 
 Hazelcast clusters have the following states:
 
@@ -539,7 +539,7 @@ removed from the partition table if cluster state moves back to `ACTIVE`.
 `map.get()` and `cache.get()`, replication and cluster heartbeat tasks.
 ** You cannot change the state of a cluster to `PASSIVE` when migration/replication tasks are being performed.
 ** You can make use of `PASSIVE` state along with the xref:storage:hot-restart-persistence.adoc[Hot Restart Persistence]
-feature. See the https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/cluster/Cluster.html#shutdown--[Cluster Shutdown API^]
+feature. See the https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/cluster/Cluster.html#shutdown--[Cluster Shutdown API^]
 for more info.
 * **`IN_TRANSITION`**:
 ** This state shows that the state of the cluster is in transition.
@@ -565,7 +565,7 @@ public interface Cluster {
 }
 ----
 
-See the https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/cluster/Cluster.html[Cluster interface Javadoc^] for information on these methods.
+See the https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/cluster/Cluster.html[Cluster interface Javadoc^] for information on these methods.
 
 === Cluster Member States
 
