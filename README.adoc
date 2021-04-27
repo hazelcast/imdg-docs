@@ -89,7 +89,7 @@ For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
 [source,yaml]
 ----
-version: 5.0
+version: '5.0'
 display_version: '5.0'
 asciidoc:
   attributes:
