@@ -3,11 +3,12 @@
 The table below provides a comparison between the interfaces listed in the previous section
 to help you in deciding which interface to use in your applications.
 
-[cols="3,3a,4a"]
+[cols="3m,4a,3a,4a"]
 |===
-| Serialization Interface| Advantages| Disadvantages
+| Serialization Interface| Supported Clients|Advantages| Disadvantages
 
 | Serializable
+| Members and Java clients
 | * A standard and basic Java interface
 
 * Requires no implementation
@@ -15,28 +16,24 @@ to help you in deciding which interface to use in your applications.
 
 * More space occupancy
 
-* Supported only by members and Java clients
-
 | Externalizable
+| Members and Java clients
 | * A standard Java interface
 
-* More CPU and memory usage efficient than Serializable
+* More CPU and memory usage efficient than `Serializable`
 | * Serialization interface must be implemented
 
-* Supported only by members and Java clients
-
 | DataSerializable
-| * More CPU and memory usage efficient than Serializable
+| Members and Java clients
+| * More CPU and memory usage efficient than `Serializable`
 | * Specific to Hazelcast
 
-*  Supported only by members and Java clients
-
 | IdentifiedDataSerializable
-| * More CPU and memory usage efficient than Serializable
+| Members and all clients
+| * More CPU and memory usage efficient than `Serializable`
 
 * Reflection is not used during deserialization
 
-* Supported by members and all clients
 | * Specific to Hazelcast
 
 * Serialization interface must be implemented
@@ -44,15 +41,15 @@ to help you in deciding which interface to use in your applications.
 * A Factory and configuration must be implemented
 
 | Portable
-| * More CPU and memory usage efficient than Serializable
+| Members and all clients
+| * More CPU and memory usage efficient than `Serializable`
 
 * Reflection is not used during deserialization
 
 * Versioning is supported
 
-* Partial deserialization is supported during Queries
+* Faster queries than `Custom Serialization` thanks to partial deserialization support during queries
 
-* Supported by members and all clients
 | * Specific to Hazelcast
 
 * Serialization interface must be implemented
@@ -62,12 +59,14 @@ to help you in deciding which interface to use in your applications.
 * Class definition is also sent with data but stored only once per class
 
 | Custom Serialization
+|Members and all clients
 | * Does not require class to implement an interface
 
-* Convenient and flexible
+* Can be based on `StreamSerializer` `ByteArraySerializer`
 
-* Can be based on StreamSerializer ByteArraySerializer
 |* Serialization interface must be implemented
 
-* Plug in and configuration is required
+* Slower queries compared to `Portable` because partial deserialization is not supported for queries
+
+* Requires a plugin and configuration
 |===
