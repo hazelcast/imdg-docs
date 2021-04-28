@@ -535,7 +535,8 @@ YAML::
 +
 [source,yaml]
 ----
-network:
+hazelcast-client:
+  network:
     cluster-members:
       - 127.0.0.1
       - 127.0.0.2
@@ -821,7 +822,7 @@ Programmatic Configuration:
 ----
 ClientConfig clientConfig = new ClientConfig();
 ClientNetworkConfig networkConfig = clientConfig.getNetworkConfig();
-networkConfig().setSmartRouting(true);
+networkConfig.setSmartRouting(true);
 ----
 
 Its default value is `true` (smart client mode).

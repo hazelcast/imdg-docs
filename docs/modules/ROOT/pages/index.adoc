@@ -84,6 +84,6 @@ code is developed, issues and pull requests are managed.
 [[partners]]
 == Partners
 
-Hazelcast partners with leading hardware and software technologies, system integrators, resellers
+Hazelcast collaborates with leading hardware and software technologies, system integrators, resellers
 and OEMs including Amazon Web Services, Vert.x, Azul Systems, C2B2. See the
-https://hazelcast.com/partners/[Partners^] page for the full list of and information on our partners.
+full list of our partners https://hazelcast.com/partners/find-a-partner/[here].

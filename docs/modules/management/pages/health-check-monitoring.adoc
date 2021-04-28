@@ -18,7 +18,7 @@ XML::
     ...
     <network>
         <rest-api enabled="true">
-            <endpoint-group name=“HEALTH_CHECK” enabled=“true”/>
+            <endpoint-group name="HEALTH_CHECK" enabled="true"/>
         </rest-api>
     </network>
     ...
