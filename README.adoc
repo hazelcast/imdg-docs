@@ -77,9 +77,9 @@ NOTE: This file is where we specify which documentation version to index for the
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. Create a new temporary branch from the `master` branch. For example if you’re working on content for version 5.0, create a branch named `5.0`. You can add the new content and/or fixes to this branch before the release.
+. Create a new release branch from the `master` branch. For example if you’re working on content for version 5.0, create a branch named `5.0`. You can add the new content and/or fixes to this branch before the release.
 
-. In the `antora.yml` file of your temporary branch, do the following:
+. In the `antora.yml` file of your release branch, do the following:
 +
 - Update the `version`, `display_version`, and `asciidoc.attributes.full-version` fields with the major and minor version of IMDG that you are releasing.
 +
@@ -98,9 +98,9 @@ asciidoc:
 
 . If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1-SNAPSHOT`.
 
-. When you're ready to release, create the release branch from the temporary branch. For example if you are releasing version 5.0, create a release branch called `v/5.0` from the `5.0` branch.
+. When you're ready to release, create the maintenance branch from the release branch. For example if you are releasing version 5.0, create a maintenance branch called `v/5.0` from the `5.0` branch.
 +
-NOTE: As soon as you push the release branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
+NOTE: As soon as you push the maintenance branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . In the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `_redirects` file with the new versions of IMDG.
 +
@@ -133,7 +133,7 @@ NOTE: This file is where we specify which documentation version to index for the
       },
 ----
 
-. Delete the temporary branch. For example, if you released version `5.0`, delete the `5.0` branch. This step helps to keep the repository clean of temporary branches.
+. Delete the release branch. For example, if you released version `5.0`, delete the `5.0` branch. This step helps to keep the repository clean of release branches.
 
 
 == GitHub Actions
