@@ -36,7 +36,7 @@ to help you in deciding which interface to use in your applications.
 
 | * Specific to Hazelcast
 
-* Serialization interface must be implemented
+* You must implement this serialization interface
 
 * A Factory and configuration must be implemented
 
@@ -52,7 +52,7 @@ to help you in deciding which interface to use in your applications.
 
 | * Specific to Hazelcast
 
-* Serialization interface must be implemented
+* You must implement this serialization interface
 
 * A Factory and configuration must be implemented
 
@@ -64,7 +64,7 @@ to help you in deciding which interface to use in your applications.
 
 * Can be based on `StreamSerializer` `ByteArraySerializer`
 
-|* Serialization interface must be implemented
+|* You must implement your own serializer
 
 * Slower queries compared to `Portable` because partial deserialization is not supported for queries
 
