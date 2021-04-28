@@ -1,15 +1,15 @@
-= Querying IMap
+= Querying IMap with SQL
 
 The following subsections describe how you can access Hazelcast map objects
 and perform queries on them.
 
-== Names
+== Accessing Maps by Name
 
-The SQL service exposes `IMap` objects as tables in the predefined `partitioned`
+The SQL service exposes map objects as tables in the predefined `partitioned`
 schema using exact names. This schema is in the SQL service search path so that
-you can access the `IMap` objects with or without the schema name.
+you can access the map objects with or without the schema name.
 
-Schema and table names are case-sensitive; you can access the `employee` map, for example,
+Schema and table names are case-sensitive. For example, you can access the `employee` map
 as `employee` or `partitioned.employee`, but not as `Employee`:
 
 [source,sql]
@@ -18,42 +18,39 @@ SELECT * FROM employee
 SELECT * FROM partitioned.employee
 ----
 
-== Fields
+== Querying Map Entries
 
-The SQL service resolves fields accessible from the SQL automatically. The
-service reads the first local entry pair of the `IMap` to construct the
-list of fields. If the `IMap` does not have local entries on the member where
-the query is started, then the list of fields cannot be resolved, and an
-exception is thrown.
+A map entry consists of a key and a value, both of which are accessible
+through the `__key` and `this` aliases respectively.
 
-Field names are case-sensitive.
-
-=== Key and Value Objects
-
-An `IMap` entry consists of a key and a value. These are accessible
-through the `__key` and `this` aliases. The following query returns
-the keys and values of all entries in a map:
+For example, the following query returns the keys and values of all entries in a map called `employee`:
 
 [source,sql]
 ----
 SELECT __key, this FROM employee
 ----
 
-=== Key and Value Fields
+To allow you to query map entries, the SQL
+service reads a map's first local entry pair to construct its
+list of fields. If the map does not have local entries on the member where
+the query is started, then the list of fields cannot be resolved, and an
+exception is thrown.
 
-You may also access the nested fields of a key or a value. The list of exposed
-fields depends on the serialization format, as described below:
+NOTE: Field names are case-sensitive.
 
-* For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]),
-the object is deserialized if needed and then analyzed using the reflection mechanism. Only public
-fields and getters are taken into account. A public field is exposed using its exact name.
-A getter is exposed using the JavaBean naming conventions.
-* For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, the fields that are written in the `Portable.writePortable`
+=== Querying Nested Key and Value Fields
+
+If a map entry contains nested fields in its keys or values, you may be able to query them, depending on how those entries are serialized:
+
+* For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]), only public
+fields and getters are taken into account. Public fields are exposed using their exact name, and getters are exposed using the JavaBean naming conventions.
+
+* For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, the fields that are written in the `Portable.writePortable()`
 method are exposed using their exact names.
 
 NOTE: You cannot query JSON fields in SQL. If you want to query JSON, see xref:query:how-distributed-query-works.adoc#querying-json-strings[Querying JSON Strings].
 
-Consider the `Employee` class from the example above; the SQL service can access
+For example, in this `Employee` object, the SQL service has access
 the following fields:
 
 [cols="1,1"]
@@ -68,16 +65,78 @@ the following fields:
 |`INTEGER`
 |===
 
-Together with the key and value objects, you may query the following fields from
-`IMap<Long, Employee>`:
+If you create a map whose values are `Employee` objects, you can query the following fields from it:
 
 [source,sql]
 ----
 SELECT __key, this, name, age FROM employee
 ----
 
-If both the key and value have fields with the same name, then the field of the
-value is exposed.
+NOTE: If both the key and the value share a field with the same name, then you may only query the value's field and not the key's field.
+
+=== Using Parameterized Queries
+
+A parameterized query is a type of SQL query that requires at least one parameter for execution. Instead of putting data straight into an SQL statement, parameterized queries allow you to use the `?` placeholder. This type of query is often used to mitigate SQL injection attacks. For a discussion on this topic, see this answer on https://stackoverflow.com/a/33033576[StackOverflow].
+
+For example, consider the following example of an `Employee` object.
+
+[cols="1,1"]
+|===
+| Name
+| Type
+
+|`name`
+|`VARCHAR`
+
+|`age`
+|`INTEGER`
+
+|`paycheckInfo`
+|`PayCheckInfo`
+|===
+
+You could create a parameterized query that finds employees who are older than a given integer:
+
+[source,java]
+----
+int ageToCompare = 30;
+sql.execute("SELECT name FROM employee WHERE employee.age > ?", ageToCompare);
+----
+
+In this `Employee` object, the last value is an instance of a `payCheckInfo` class. Here is the structure of that class:
+
+[cols="1,1"]
+|===
+| Name
+| Type
+
+|`startDate`
+|`INTEGER`
+
+|`amount`
+|`INTEGER`
+|===
+
+Whether you can query nested fields in this object depends on how your map entries are serialized:
+
+- For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]), you must xref:clusters:deploying-code-on-member.adoc[add the object's class to the classpath of the member] you are sending the query to.
+
+- For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, you do not need to add the object's class to the classpath of the member, unless you want to use parameterized queries to compare one object against another.
++
+For example, you could run the following query without adding the `payCheckInfo` class to the member's classpath:
+[source,sql]
+----
+SELECT paycheckInfo FROM employee WHERE employee.age > 10
+SELECT paycheckInfo FROM employee WHERE employee.paycheckInfo.amount > 1000
+----
++
+But, to use parameterized queries to compare one `payCheckInfo` object to another, you must add the `payCheckInfo` class to the member. Doing so allows the member to convert the parameter to a `payCheckInfo` object.
++
+[source,java]
+----
+PayCheckInfo payCheckInfo = new PayCheckInfo(10102021, 1212);
+sql.execute("SELECT name FROM employee WHERE employee.paycheckInfo > ?", payCheckInfo);
+----
 
 === "SELECT *" Queries
 
@@ -95,16 +154,16 @@ SELECT * FROM employee
 
 == Indexes
 
-The SQL service can use `IMap` indexes to speed up the execution of certain queries.
+The SQL service can use map indexes to speed up the execution of certain queries.
 `SORTED` and `HASH` indexes are supported.
 
-See the xref:query:how-distributed-query-works.adoc#indexing-queries[Indexing Queries section] for more information on `IMap`
-index creation.
+See the xref:query:how-distributed-query-works.adoc#indexing-queries[Indexing Queries section] for more information creating indexes for maps.
 
-== High-Density Memory Store
-
-You can query the `IMap` objects with `InMemoryFormat.NATIVE` if they have
+[NOTE]
+====
+To query map objects that are stored in xref:data-structures:map.adoc#setting-in-memory-format[`NATIVE` in-memory format], those objects must have
 at least one index.
 
 See xref:configuration:configuring-with-system-properties.adoc[Configuring with System Properties] for
 more information on setting system properties.
+====
