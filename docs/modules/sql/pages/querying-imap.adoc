@@ -76,7 +76,7 @@ NOTE: If both the key and the value share a field with the same name, then you m
 
 === Using Parameterized Queries
 
-A parameterized query is a type of SQL query that requires at least one parameter for execution. Instead of putting data straight into an SQL statement, parameterized queries allow you to use the `?` placeholder. This type of query is often used to mitigate SQL injection attacks. For a discussion on this topic, see this answer on https://stackoverflow.com/a/33033576[StackOverflow].
+A parameterized query is a type of SQL query that requires at least one parameter for execution. Instead of putting data straight into an SQL statement, parameterized queries allow you to use the `?` placeholder. This type of query is often used to mitigate SQL injection attacks. For a discussion on this topic, see this answer on link:https://stackoverflow.com/a/33033576[StackOverflow].
 
 For example, consider the following example of an `Employee` object.
 
