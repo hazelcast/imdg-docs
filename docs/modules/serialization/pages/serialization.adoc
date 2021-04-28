@@ -13,22 +13,19 @@ However, in the following cases, you must configure members to be able to serial
 
 [cols="a,a,a,a"]
 |===
-|Case|Clients|Reason|Exceptions
+|Case|Reason|Exceptions
 
-|When the data structure's values are xref:data-structures:map.adoc#setting-in-memory-format[stored as objects]
-|All clients
-|Members must be able to serialize or deserialize the object in order to send it to other members or receive it from other members
+|When the data structure's values are xref:data-structures:map.adoc#setting-in-memory-format[stored as objects].
+|Members must be able to serialize or deserialize the object to send it to other members/clients or receive it from other members/clients. 
 |
 
-|When you want to xref:computing:entry-processor.adoc[process map entries] or use an xref:computing:executor-service.adoc[executor service]
-|All clients
-|Members need to serialize the tasks
-|When using the Java client, you can configure map entries with xref:implementing-portable-serialization.adoc[`Portable`] serialization, in which case you don't need to configure serialization on the member. For details, see xref:clusters:accessing-domain-objects.adoc[].
+|When you want to xref:computing:entry-processor.adoc[process map entries] or use an xref:computing:executor-service.adoc[executor service].
+|Members need to serialize the tasks.
+|When using the Java client, you can configure map entries with xref:implementing-portable-serialization.adoc[`Portable`] serialization, in which case you don't need to configure serialization for map entries on the member. For details, see xref:clusters:accessing-domain-objects.adoc[].
 
-|When you use xref:sql:querying-imap.adoc#key-and-value-fields[SQL queries on nested fields] whose values are not primitives
-|Java only
-|Members need to deserialize underlying objects to be able to read nested fields
-|You can query nested fields whose values are primitives because these data types are serialized by Hazelcast by default. See <<data-types-with-built-in-serialization, Data Types with Built-In Serialization>>
+|When you use SQL to run xref:sql:querying-imap.adoc#using-parameterized-queries[parameterized queries] on nested objects.
+|Members need to deserialize underlying objects to be able to read nested fields.
+|You can query nested fields whose values are primitives because these data types are serialized by Hazelcast by default. See <<data-types-with-built-in-serialization, Data Types with Built-In Serialization>>.
 |===
 
 === Serialization Options for Clients
