@@ -1,9 +1,12 @@
-= Distributed Map
-:description: Distributed maps, also known as maps or IMaps, are key-value pairs that are partitioned across a cluster. Use maps to distribute data across a cluster and make it easy to scale your applications while protecting data against member failures.
+= Configuring Maps
+:description: Map configuration is part of the overall Hazelcast server configuration. When you create your map, it "inherits" the configuration that's set up on the server. It's important to plan your map configuration ahead of time, as you cannot change the configuration of a map once it is created.
 :url-cap-theorem: https://en.wikipedia.org/wiki/CAP_theorem
-[[map]]
+[[map-config]]
 
 {description}
+
+(Complete configuration examples, with cross-links to the relevant pages (memory mgmt, in-memory format, etc.))
+
 
 Distributed maps store values that you can access, using a unique key. These values can be objects as well as serialized data such as JSON values. For example, the following map stores the names of captial cities. The key is just an incrementing integer to make sure that each one is unique.
 

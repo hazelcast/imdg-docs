@@ -1,9 +1,15 @@
-= Creating a Map
-:description: Maps store data in key/value pairs called entries, which can be one of many data types. To create a map, you just need to give it a name, then write some data to it.
+= Reading Data From a Map
+:description: Once you have data stored in your map, you'll need to retrieve it.
 
-[[getting-a-map-and-putting-an-entry]]
+[retrieving-data-in-map]]
 
 {description}
+
+== Reading Individual Entries
+
+== Queries
+
+MORE TEXT TO FOLLOW HERE
 
 To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 

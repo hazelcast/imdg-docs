@@ -1,9 +1,17 @@
-= Creating a Map
-:description: Maps store data in key/value pairs called entries, which can be one of many data types. To create a map, you just need to give it a name, then write some data to it.
+= Updating Map Entries
+:description: Maps are not static. You can update or remove individual map entries, a group of map entries, or the entire map.
 
-[[getting-a-map-and-putting-an-entry]]
+[[updating-map-entries]]]
 
 {description}
+
+== Updating Individual Entries
+
+== Batch Updates
+
+== Entry Processor
+
+== Deleting Map Data
 
 To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 
