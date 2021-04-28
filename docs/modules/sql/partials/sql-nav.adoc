@@ -1,5 +1,5 @@
 * xref:sql:distributed-sql.adoc[]
-** xref:sql:querying-imap.adoc[]
+** xref:sql:querying-imap.adoc[Querying Maps]
 ** xref:sql:data-types.adoc[]
 ** xref:sql:select-statement.adoc[]
 ** xref:sql:expressions.adoc[]

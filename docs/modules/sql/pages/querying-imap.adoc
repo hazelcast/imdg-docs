@@ -1,4 +1,4 @@
-= Querying IMap with SQL
+= Querying Maps with SQL
 
 The following subsections describe how you can access Hazelcast map objects
 and perform queries on them.
@@ -76,7 +76,7 @@ NOTE: If both the key and the value share a field with the same name, then you m
 
 === Using Parameterized Queries
 
-A parameterized query is a type of SQL query that requires at least one parameter for execution. Instead of putting data straight into an SQL statement, parameterized queries allow you to use the `?` placeholder. This type of query is often used to mitigate SQL injection attacks. For a discussion on this topic, see this answer on link:https://stackoverflow.com/a/33033576[StackOverflow].
+A parameterized query is a type of SQL query that requires at least one parameter for execution. Instead of putting data straight into an SQL statement, parameterized queries allow you to use the `?` placeholder. This type of query is often used to mitigate SQL injection attacks. For a discussion on this topic, see this answer on link:https://stackoverflow.com/a/33033576[StackOverflow^].
 
 For example, consider the following example of an `Employee` object.
 
@@ -122,16 +122,16 @@ Whether you can query nested fields in this object depends on how your map entri
 - For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]), you must xref:clusters:deploying-code-on-member.adoc[add the object's class to the classpath of the member] you are sending the query to.
 
 - For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, you do not need to add the object's class to the classpath of the member, unless you want to use parameterized queries to compare one object against another.
-+
-For example, you could run the following query without adding the `payCheckInfo` class to the member's classpath:
+
+For example, with `Portable` objects, you could run the following queries without adding the `payCheckInfo` class to the member's classpath:
 [source,sql]
 ----
 SELECT paycheckInfo FROM employee WHERE employee.age > 10
 SELECT paycheckInfo FROM employee WHERE employee.paycheckInfo.amount > 1000
 ----
-+
+
 But, to use parameterized queries to compare one `payCheckInfo` object to another, you must add the `payCheckInfo` class to the member. Doing so allows the member to convert the parameter to a `payCheckInfo` object.
-+
+
 [source,java]
 ----
 PayCheckInfo payCheckInfo = new PayCheckInfo(10102021, 1212);
