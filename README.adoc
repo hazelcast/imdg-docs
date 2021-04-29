@@ -22,44 +22,29 @@ This section describes some important information about how this repository is s
 
 - The component name, version, and start page are configured in each branch's `antora.yml` file.
 - The navigation for all modules is stored in the ROOT module's `nav.adoc` file.
-- The {url-playbook}[docs site playbook] instructs Antora to automatically build the site using content in the `master` branch as well as any tags that are prefixed with *v*.
+- The {url-playbook}[docs site playbook] instructs Antora to automatically build the site using content in the `master` branch as well as any branches that are prefixed with `v/`.
 
 == Release Workflow
 
-Documentation for new releases is hosted in versioned tags that are prefixed with `v`. For example, content for the `4.1.1` version is hosted in the `v4.1.1` tag. The `latest-dev` content is stored in the `master` branch
+Documentation for new releases is hosted in versioned branches that are prefixed with `v/`.
 
-The documentation build process is triggered whenever you push a new tag to this repository or commit to the `master` branch.
+We support documentation for the latest patch releases of minor versions. For example, content for the `4.1` version is hosted in the `v/4.1` branch. This branch contains content for the latest patch release of version 4.1.
+
+The `latest-dev` content (snapshot content) is stored in the `master` branch.
+
+The documentation build process is triggered whenever you create a new branch with the `v/` prefix, push to an existing `v/` branch, or push to the `master` branch.
 
 === Patch Releases
 
 This section guides you through the steps for releasing documentation for patch releases.
 
-. Find the `.z` branch for your version. For example, if you're working on content for version 4.1.2, find the branch named `4.1.z`.
+. In the `v/` branch for the minor version whose patch you are releasing, update the `asciidoc.attributes.full-version` field in the `antora.yml` file to the new patch version. For example, if you are releasing version 4.1.3, find the `v/4.1` branch and update the `asciidoc.attributes.full-version` field in the `antora.yml` file with 4.1.3.
 +
-TIP: For guidance on writing content, see the {url-contribute}[contribution guidelines].
+NOTE: As soon as you push content to this branch, GitHub will trigger a new build of the site, which will include your new content.
+
+. If you are releasing a new `latest` version, submit a pull request to the `develop` branch of the link:{url-playbook}[`hazelcast/hazelcast-docs`] repository to do the following:
 +
-NOTE: If a branch for your major or minor version does not exist, see <<major-and-minor-releases, Major and Minor Releases>>.
-
-. When you are ready to release, create a new release branch from the `.z` branch and name it with the full version number that you are releasing. For example, if you are releasing version 4.1.2, name the branch 4.1.2.
-
-. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on.  For example from `4.1.2-SNAPSHOT` to `4.1.2`.
-+
-[source,yaml]
-----
-version: 4.1.2
-----
-
-. Tag the latest commit in your release branch with a `v` followed by the version number.
-
-. If you have made any changes since creating your release branch, merge those changes back into the `.z` branch.
-
-. Delete your release branch.
-+
-WARNING: Do not delete the `.z` branch. This branch is for writing content for future patch releases.
-
-. In the `antora.yml` file of the `.z` branch, increment the `version` field. For example, `4.1.2-SNAPSHOT` becomes `4.1.3-SNAPSHOT`.
-
-. If you are releasing a new latest version, in the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `_redirects` file with your release version of IMDG.
+- Update the `_redirects` file with your release version of IMDG.
 +
 NOTE: This file is where we alias the `latest` path in URLs.
 +
@@ -68,41 +53,54 @@ NOTE: This file is where we alias the `latest` path in URLs.
 # Redirect latest imdg alias to the latest version
 /imdg/latest/*  /imdg/4.1.2/:splat 200!
 ----
-
-The documentation site will now be built, including content from your tagged version.
++
+- In the `search-config.json` file, change the value of the `variables.version` field to your release version.
++
+NOTE: This file is where we specify which documentation version to index for the search.
++
+[source,json]
+----
+{
+  "index_name": "prod_hazelcast_docs",
+  "start_urls": [
+    {
+      "url": "https://docs.hazelcast.com/imdg/(?P<version>.*?)/",
+      "tags": [
+        "imdg"
+      ],
+      "variables": {
+        "version": ["4.2"]
+      },
+----
 
 == Major and Minor Releases
 
 This section guides you through the steps for releasing documentation for major and minor releases.
 
-. If you're writing content for a new major or minor release, make your changes in the `master` branch.
+. Create a new release branch from the `master` branch. For example if you’re working on content for version 5.0, create a branch named `5.0`. You can add the new content and/or fixes to this branch before the release.
 
-. If you're writing content for a new minor version of a previous major release, create a `\{version\}.y` branch and make your changes in that branch. For example if version 5.0 was already released and you plan to add content for version 4.3 then you need to create a branch named`4.y`.
+. In the `antora.yml` file of your release branch, do the following:
 +
-TIP: For guidance on writing content, see the {url-contribute}[contribution guidelines].
-
-. When you are ready to release, create a new release branch from the `master` or `.y` branch and name it with the full version number that you are releasing. For example, if you are releasing version 5.0, name the branch 5.0.
-
-. If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1.0-SNAPSHOT`.
-
-. To make it easier to amend your release for future patch versions or to fix typos,  create a `\{version\}.z` branch from your release branch. For example if your release branch is named `5.0`, create a branch named `5.0.z`.
-
-. In the `antora.yml` file of the `.z` branch, increment the `version` field. For example, `5.0` becomes `5.0.1-SNAPSHOT`.
-
-. In the `antora.yml` file of your release branch, update the `version` field with the version of IMDG that you are working on, and delete the `prerelease` field. For example version `5.0-SNAPSHOT` becomes `5.0`.
+- Update the `version`, `display_version`, and `asciidoc.attributes.full-version` fields with the major and minor version of IMDG that you are releasing.
++
+- Delete the `prerelease` field.
++
+For example version `5.0-SNAPSHOT` becomes `5.0`.
 +
 [source,yaml]
 ----
-version: 5.0
+version: '5.0'
+display_version: '5.0'
+asciidoc:
+  attributes:
+    full-version: '5.0'
 ----
 
-. Tag the latest commit in your release branch with a `v` followed by the version number.
+. If you are releasing a new `latest-dev` version, in the `antora.yml` file of the `master` branch, increment the `version` field to the `latest-dev` version. For example, `5.0-SNAPSHOT` becomes `5.1-SNAPSHOT`.
 
-. If you have made any changes since creating your release branch, merge those changes back into the `.z` branch (and if applicable also to `master` branch).
-
-. Delete your release branch.
+. When you're ready to release, create the maintenance branch from the release branch. For example if you are releasing version 5.0, create a maintenance branch called `v/5.0` from the `5.0` branch.
 +
-WARNING: Do not delete the `.z` branch. This branch is for writing content for future patch releases.
+NOTE: As soon as you push the maintenance branch to the repository, GitHub will trigger a new build of the site, which will include your new content.
 
 . In the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `_redirects` file with the new versions of IMDG.
 +
@@ -116,7 +114,27 @@ NOTE: This file is where we alias the `latest-dev` and `latest` paths in URLs.
 /imdg/latest-dev/*  /imdg/5.1-snapshot/:splat 200!
 ----
 
-The documentation site will now be built, including content from your tagged version.
+- In the `develop` branch of the `hazelcast/hazelcast-docs` repository, submit a pull request to update the `search-config.json` file with the new versions of IMDG.
++
+NOTE: This file is where we specify which documentation version to index for the search.
++
+[source,json]
+----
+{
+  "index_name": "prod_hazelcast_docs",
+  "start_urls": [
+    {
+      "url": "https://docs.hazelcast.com/imdg/(?P<version>.*?)/",
+      "tags": [
+        "imdg"
+      ],
+      "variables": {
+        "version": ["4.2"]
+      },
+----
+
+. Delete the release branch. For example, if you released version `5.0`, delete the `5.0` branch. This step helps to keep the repository clean of release branches.
+
 
 == GitHub Actions
 
@@ -129,19 +147,15 @@ To automate some elements of the build process, this repository includes the fol
 
 |validate-site.yml
 |Validates that all internal and external links are working
-|On a pull request to the `master`, `archive`, and `*.z` branches
-
-|build-staging.yml
-|Builds the staging documentation site by sending a build hook to Netlify (the hosting platform that we use)
-|On a pull request to the `master`, `archive`, and `*.z` branches
+|On a pull request to the `master`, `archive`, and `v/` branches
 
 |build-site.yml
 |Builds the production documentation site by sending a build hook to Netlify (the hosting platform that we use)
-|On a push to the `master` branch and any tags whose names start with `v`
+|On a push to the `master` branch and any `v/` branches
 |===
 
 == Contributing
 
 If you want to add a change or contribute new content, see our {url-contribute}[contributing guide].
 
-To let us know about something that you'd like us to change, consider {url-org}/hazelcast-reference-manual/issues/new[creating an issue].
+To let us know about something that you'd like us to change, consider {url-org}/imdg-docs/issues/new[creating an issue].

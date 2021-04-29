@@ -7,11 +7,10 @@ content:
     branches: HEAD
     start_path: docs
   - url: https://github.com/hazelcast/management-center-docs
-    branches: [main]
-    tags: [v*]
+    branches: [main, v/*]
     start_path: docs
   - url: https://github.com/hazelcast/management-center-docs
-    branches: [archive]
+    branches: [archived-versions]
     start_paths: docs/*
 ui: 
   bundle:
