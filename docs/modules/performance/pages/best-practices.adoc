@@ -1,5 +1,5 @@
-= Performance Anti Patterns
-[[performance-anti-patterns]]
+= Performance Best Practices
+[[performance-best-practices]]
 
 This section covers various recommendations to improve the performance of your Hazelcast IMDG clusters.
 
