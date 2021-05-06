@@ -26,7 +26,7 @@ XML::
         <max-idle-seconds>0</max-idle-seconds>
         <!-- eviction settings -->
         <eviction eviction-policy="NONE" max-size-policy="PER_NODE" size="0"/>
-        <!--
+        <!-- other map settings as needed -->
 
     </map>
     ...
@@ -54,11 +54,22 @@ hazelcast:
                 eviction-policy: NONE
                 max-size-policy: PER_NODE
                 size: 0
+            #other map settings as needed
 
 ----
 ====
 
+Each configuration option is covered in detail in the relevant section of the documentation. For example, the expiration and eviction settings are discussed in the xref:managing-map-memory.adoc[managing map mempry] section. 
 
+== Applying Configurations to Maps
+
+The Hazelcast cluster applies the stored configuration to each map when the map is created, based on the name of the map. If there's no name match, the map will use the settings in the default configuration. If you do not define any defaults in your configuration file, the cluster will use the default settings for each map feature. We explain these defaults in the relevant feature sections of the documentation. s
+
+Depending on your application requirements, you may want to create multiple map configurations. For example, you may want to apply different expiration policies to different maps.
+
+image::ROOT:MapConfig1.jpg[map multi-config example]
+
+Here we have two map configurations. One sets the eviction timer to mark entries for removal after being untouched for one hour (3600 seconds). The other has no eviction policy. When you create the maps in your code, the name you create on the cluster needs to match the configuration name. In this example, we used a wildcard in the configuration, so any map name beginning with Evict1Hr will use this configuration. Any other map will use whatever settings are part of the default configuration. 
 
 == Learn More
 

@@ -5,11 +5,11 @@
 
 {description}
 
-To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
+To create a map, use the 'HazelcastInstance.getMap()' method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 
-After creating a map, you can write data to it, using the map's `put()` method. This method takes a key and a value.
+After creating a map, you can write data to it, using the map's 'put()'' method. This method takes a key and a value.
 
-In this example, we create a map called `captials`, which stores the names of capital cities as strings. The key is just an incrementing integer to make it unique.
+In this example, we create a map called 'captials', which stores the names of capital cities as strings. The key is a unique integer for each entry.
 
 [tabs] 
 ==== 
@@ -94,6 +94,14 @@ capitalcities.Put( 5, "Brussels" );
 ----
 --
 ====
+
+== Writing Primitives to a Map
+
+If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer, String, or Double, depending on the data in the value field. If you are loading numeric data but want it saved as a String, include the primitive specification in the "get map" statement.
+
+== Writing Objects to a Map
+
+You can load 
 
 == Writing JSON to a Map
 
