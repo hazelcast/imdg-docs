@@ -20,8 +20,7 @@ SELECT * FROM partitioned.employee
 
 == Querying Map Entries
 
-A map entry consists of a key and a value, both of which are accessible
-through the `__key` and `this` aliases respectively.
+A map entry consists of a key and a value. To query the key, you must use the `__key` alias. To query a value, you can use the `this` alias.
 
 For example, the following query returns the keys and values of all entries in a map called `employee`:
 
@@ -42,8 +41,8 @@ NOTE: Field names are case-sensitive.
 
 If a map entry contains nested fields in its keys or values, you may be able to query them, depending on how those entries are serialized:
 
-* For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]), only public
-fields and getters are taken into account. Public fields are exposed using their exact name, and getters are exposed using the JavaBean naming conventions.
+* For Java objects (xref:serialization:implementing-java-serializable.adoc[`Serializable`], xref:serialization:implementing-dataserializable.adoc[`DataSerializable`], xref:serialization:implementing-java-serializable.adoc#identifieddataserializable[`IdentifiedDataSerializable`]), you may query only public
+fields and getter methods. To query public fields, use their exact name, and to query getter methods, use the JavaBean naming conventions.
 
 * For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, the fields that are written in the `Portable.writePortable()`
 method are exposed using their exact names.
@@ -51,7 +50,7 @@ method are exposed using their exact names.
 NOTE: You cannot query JSON fields in SQL. If you want to query JSON, see xref:query:how-distributed-query-works.adoc#querying-json-strings[Querying JSON Strings].
 
 For example, in this `Employee` object, the SQL service has access
-the following fields:
+to the following fields:
 
 [cols="1,1"]
 |===
@@ -72,7 +71,7 @@ If you create a map whose values are `Employee` objects, you can query the follo
 SELECT __key, this, name, age FROM employee
 ----
 
-NOTE: If both the key and the value share a field with the same name, then you may only query the value's field and not the key's field.
+NOTE: If both the key and the value share a field with the same name, you may only query the value's field and not the key's field.
 
 === Using Parameterized Queries
 
