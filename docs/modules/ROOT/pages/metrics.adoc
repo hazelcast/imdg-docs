@@ -786,10 +786,6 @@ with the master.
 |count
 |Number of current executing async operations on the operation service of the member
 
-|`operation.callTimeoutCount`
-|count
-|possibly a leftover (AFAIU its value is never updated)
-
 |`operation.completedCount`
 |count
 |Number of completed operations
@@ -861,10 +857,6 @@ with the master.
 |`operation.invocations.usedPercentage`
 |percent
 |Usage percentage of the operation invocation capacity (pending invocations/ max concurrent invocations)
-
-|`operation.operationTimeoutCount`
-|count
-|possibly a leftover (AFAIU its value is never updated)
 
 |`operation.parker.parkQueueCount`
 |count
