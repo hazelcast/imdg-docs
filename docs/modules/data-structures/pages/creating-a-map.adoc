@@ -5,9 +5,9 @@
 
 {description}
 
-To create a map, use the 'HazelcastInstance.getMap()' method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
+To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 
-After creating a map, you can write data to it, using the map's 'put()'' method. This method takes a key and a value.
+After creating a map, you can write data to it. See the xref:adding-data-to-map.adoc[Adding Data to a Map] page for details on various methods for adding data. The simplest method is the map's `put()` method, which we will use in the following examples. This method takes a key and a value. 
 
 In this example, we create a map called 'captials', which stores the names of capital cities as strings. The key is a unique integer for each entry.
 
@@ -95,19 +95,218 @@ capitalcities.Put( 5, "Brussels" );
 --
 ====
 
-== Writing Primitives to a Map
+== Adding Data to A Map
 
-If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer, String, or Double, depending on the data in the value field. If you are loading numeric data but want it saved as a String, include the primitive specification in the "get map" statement.
+In the example code above, we not only created a map, but we added data to it using the `map.put` method. This method returns the old value of the map entry upon completion. For a new map, of course, this value will be null. 
 
-== Writing Objects to a Map
+An alternative is to use the `map.set` method. This method adds the data to the map, but does not return the old value. If you do not need the value - for example, if you are performing a bulk load operation - you will improve the performance of the operation by using the  `map.set` method. 
 
-You can load 
+(Need client syntax for map.set for C++, C Sharp, nodejs, Python, Go)
 
-== Writing JSON to a Map
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzInstance.getMap("capitals");
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzInstance.GetMap("capitals");
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const capitalcities = await hzInstance.getMap('capitals');
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+captial_cities = hzInstance.get_map("capitals").blocking()
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzInstance.GetMap("capitals")
+
+----
+--
+====
+
+=== Writing Primitives to a Map
+
+If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer/Long, String, or Double, depending on the data in the value field. If you are loading numeric data but want it saved as a String, include the primitive specification when you create the map. 
+
+(Need client syntax for specifying primitive types for C++, C Sharp, nodejs, Python, Go)
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzInstance.getMap("capitals");
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzInstance.GetMap("capitals");
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const capitalcities = await hzInstance.getMap('capitals');
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+captial_cities = hzInstance.get_map("capitals").blocking()
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzInstance.GetMap("capitals")
+
+----
+--
+====
+
+Hazelcast serializes - that is, converts to binary format - primitves using built-in serializers optimized for each primitive type. You can override these built-in serializers if desired. Refer to the xref:serialization.serialization.adoc[Serialization] section of the documentation for details.
+
+=== Writing Objects to a Map
+
+You can load objects into a map. When you define a map that holds objects, you need to invoke the serialization method that you want used to convert your objects into binary format. Hazelcast offers several different serialization methods, which are discussed in detail in the xref:serialization.serialization.adoc[Serialization] section of the documentation. For all programmimg languages, you can choose between the following methods:
+* `com.hazelcast.nio.serialization.IdentifiedDataSerializable`: provides fast serialization, avoids reflection and long class names. See the xref:serialization:implementing-dataserializable.adoc#identifieddataserializable[IdentifiedDataSerializable section].
+* `com.hazelcast.nio.serialization.Portable`: Provides partial deserialization for queries, improving query performamce. Needs more memory to store metadata. See the xref:serialization:implementing-portable-serialization.adoc[Implementing Portable Serialization section].
+* Custom Serialization (using xref:serialization:custom-serialization.adoc#implementing-streamserializer[StreamSerializer] and xref:serialization:custom-serialization.adoc#implementing-bytearrayserializer[ByteArraySerializer]).
+
+There are additional options for Java clients, as detailed in the documentation. 
+
+(Need client syntax for serialization method for C++, C Sharp, nodejs, Python, Go)
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzInstance.getMap("capitals");
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzInstance.GetMap("capitals");
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const capitalcities = await hzInstance.getMap('capitals');
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+captial_cities = hzInstance.get_map("capitals").blocking()
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzInstance.GetMap("capitals")
+
+----
+--
+====
+
+=== Writing JSON to a Map
 
 You can use JSON values both as keys and values in a map.
 
-If you plan on querying your JSON data, it's best practice to write it to a map using the `HazelcastJsonValue` object because it adds metadata to your map to make queries faster.
+If you plan on querying your JSON data, it is best practice to write it to a map using the `HazelcastJsonValue` object because it adds metadata to your map to make queries faster.
 
 However, this metadata also adds some processing and memory overhead because Hazelcast must preprocess JSON values and store metadata in memory.
 
@@ -254,11 +453,21 @@ hazelcast:
 MapConfig mapConfig = new MapConfig();
 mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
 ----
+====
+
+== Other Methods to Add Data
+
+If you are working with external data stores (e.g. a database), you can use the MapLoader interface to bulk-load the data into Hazelcast. This interface also provides write-through capabilities to keep your external data up to date. See the - xref:working-with-external-data.adoc[Working with External Data] page.
+
+A map can also be a sink for Hazelcast's Jet processing engine. In this case, Jet creates the map and performs the `map.put` operations for data as it is processed. 
+
 
 == Learn More
 
 You can do a lot more with maps than simply writing data to them. Explore the following topics to find out what else you can do with maps:
 
+- xref:reading-a-map.adoc[Reading Map Data]
+- xref:updating-map-entries.adoc[Updating Map Entries]
 - xref:backing-up-maps.adoc[Backing Up Maps]
 - xref:locking-maps.adoc[Locking Maps]
 - xref:managing-map-memory.adoc[Managing Map Memory]
@@ -266,4 +475,4 @@ You can do a lot more with maps than simply writing data to them. Explore the fo
 - xref:reading-map-metrics.adoc[Reading Map Metrics]
 - xref:listening-for-map-entries.adoc[Listening to Map Entries with Predicates]
 - xref:intercepting-map-entries.adoc[Intercepting Map Entries]
-- xref:preventing-out-of-memory.adoc[Preventing Out of Memory Exceptions]
+

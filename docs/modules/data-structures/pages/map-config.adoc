@@ -67,10 +67,10 @@ The Hazelcast cluster applies the stored configuration to each map when the map 
 
 Depending on your application requirements, you may want to create multiple map configurations. For example, you may want to apply different expiration policies to different maps.
 
-image::ROOT:MapConfig1.jpg[map multi-config example]
+image::ROOT:MapConfig1.png[map multi-config example]
 
 Here we have two map configurations. One sets the eviction timer to mark entries for removal after being untouched for one hour (3600 seconds). The other has no eviction policy. When you create the maps in your code, the name you create on the cluster needs to match the configuration name. In this example, we used a wildcard in the configuration, so any map name beginning with Evict1Hr will use this configuration. Any other map will use whatever settings are part of the default configuration. 
 
 == Learn More
 
-For a complete discussion of Hazelcast configuration options and operations, go to the xref:configuration/understanding-configuration.adoc[configuration] section of the documentation. 
+For a complete discussion of Hazelcast configuration options and operations, go to the xref:configuration:understanding-configuration.adoc[configuration] section of the documentation. 
