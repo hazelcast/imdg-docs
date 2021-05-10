@@ -1,4 +1,4 @@
-= Backing Up Maps
+= Making My Data Safe
 :description: Backing up maps helps to protect your data in case a cluster member goes down. For each backup, Hazelcast creates a copy of the map entries and distributes them to another member. Because each backup is a copy, the number of backups in your cluster affects the amount of memory that your members need.
 :url-monotonic-reads: https://en.wikipedia.org/wiki/Consistency_model#Monotonic_read_consistency
 
