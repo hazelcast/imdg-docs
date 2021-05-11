@@ -7,7 +7,7 @@
 
 To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 
-After creating a map, you can write data to it. See the xref:adding-data-to-map.adoc[Adding Data to a Map] page for details on various methods for adding data. The simplest method is the map's `put()` method, which we will use in the following examples. This method takes a key and a value. 
+After creating a map, you can write data to it. The simplest method is the map's `put()` method, which we will use in the following examples. This method takes a key and a value. 
 
 In this example, we create a map called 'captials', which stores the names of capital cities as strings. The key is a unique integer for each entry.
 
