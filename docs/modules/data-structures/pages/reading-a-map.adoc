@@ -5,16 +5,92 @@
 
 {description}
 
-== Retrieving Individual Entries
+== Retrieving Entries
+
+You can retrieve map data using the following methods:
+
+* `map.get(K)` - returns the value associated with the specified key
+* `map.values` - returns all values in the map
+* `map.keySet` - returns all keys in the map
+* `map.entrySet` - returns all key/value pairs in the map
+
+All of these methods return data to your application without altering the contents of the map itself. 
+
+In the code sample below, we're using the `map.entrySet` method to retrieve the entire contents of the map, then printing out each entry.
+
+(Need code samples of using entrySet for C++, C Sharp, node.js, Python, Go)
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+  for (Map.Entry<Integer, String> entry : myMap.entrySet()) {
+      System.out.println(entry.getKey() + " " + entry.getValue());
+
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzClient.getMap("capitals");
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzClient.GetMap("capitals");
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+const capitalcities = await hzClient.getMap('capitals');
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+captial_cities = hzClient.get_map("capitals").blocking()
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzClient.GetMap("capitals")
+
+----
+--
+====
+NOTE: The set returned by this method is not in any particular order. Because the map is distributed across multiple Hazelcast nodes, the set will be assembled in the order in which cluster members respond to the request. 
 
 == Queries
 
+A map query allows you to retrieve a subset of the map data that matches one or more criteria. You specify this criteria in a predicate. Hazelcast provides two query formats (Criteria API and SQL-like Predicates) to embed in your application code, as well as direct SQL query support. 
 
+== Reading Data into Pipelines
 
-== Reading Data into Jet
-
-In-memory data can be used as a source for a Jet pipeline, or as a store for enrichment data. In this case, the instructions for data retrieval are part of the Jet pipline code. Refer to the Jet documentation for details on using in-memory maps as either pipeline sources or as enrichment sources. 
+In-memory data can be used as a source for a Jet engine pipeline, or as a store for enrichment data. In this case, the instructions for data retrieval are part of the Jet pipline code. Refer to the Jet engine documentation for details on using in-memory maps as either pipeline sources or as enrichment sources. 
 
 == Optimizing Data Retrieval
 
-If you are doing frequent `map.get` operations from a relatively static map, you can employ the Near Cache feature to improve performance. Near Cache creates a copy of the map data locally on the client, and all `map.get` operations are executed on the cached data rather than the map in the Hazelcast cluster. The cluster will synchronize the cached data with the cluster data at regular, configured intervals. This solution is most suitable when your maps do not change often and when the map operations are mostly reads. Refer to the xref:performance:nearcache.adoc[Near Cache] section of the documentation for details on operations, configuration, and limitations of this feature.
+If you are doing frequent `map.get` operations from a relatively static map, you can employ the Near Cache feature to improve performance. Near Cache creates a copy of the map data locally on the client, and all `map.get` operations are executed on the cached data rather than the map in the Hazelcast cluster. The cluster will synchronize the cached data with the cluster data at regular, configured intervals. This solution is most suitable when your maps do not change often and when the map operations are mostly reads. Refer to the xref:performance:near-cache.adoc[Near Cache] section of the documentation for details on operations, configuration, and limitations of this feature.

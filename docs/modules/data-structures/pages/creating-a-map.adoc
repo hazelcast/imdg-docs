@@ -18,7 +18,7 @@ Java::
 --
 [source,java]
 ----
-Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+Map<Integer, String> capitalcities = hzClient.getMap( "capitals" );
 capitalcities.put( 1, "Tokyo" );
 capitalcities.put( 2, "Paris" );
 capitalcities.put( 3, "Washington" );
@@ -31,7 +31,7 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzInstance.getMap("capitals");
+IMap capitalcities = hzClient.getMap("capitals");
 capitalcities.put( 1, "Tokyo" );
 capitalcities.put( 2, "Paris" );
 capitalcities.put( 3, "Washington" );
@@ -45,7 +45,7 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzInstance.GetMap("capitals");
+var capitalcities = hzClient.GetMap("capitals");
 capitalcities.put( 1, "Tokyo" );
 capitalcities.put( 2, "Paris" );
 capitalcities.put( 3, "Washington" );
@@ -59,7 +59,7 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const capitalcities = await hzInstance.getMap('capitals');
+const capitalcities = await hzClient.getMap('capitals');
 await capitalcities.put( 1, "Tokyo" );
 await capitalcities.put( 2, "Paris" );
 await capitalcities.put( 3, "Washington" );
@@ -72,7 +72,7 @@ Python::
 -- 
 [source,python]
 ----
-captial_cities = hzInstance.get_map("capitals").blocking()
+captial_cities = hzClient.get_map("capitals").blocking()
 capital_cities.put( 1, "Tokyo" )
 capital_cities.put( 2, "Paris" )
 capital_cities.put( 3, "Washington" )
@@ -85,7 +85,7 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzInstance.GetMap("capitals")
+capitalcities, _ := hzClient.GetMap("capitals")
 capitalcities.Put( 1, "Tokyo" );
 capitalcities.Put( 2, "Paris" );
 capitalcities.Put( 3, "Washington" );
@@ -101,7 +101,7 @@ In the example code above, we not only created a map, but we added data to it us
 
 An alternative is to use the `map.set` method. This method adds the data to the map, but does not return the old value. If you do not need the value - for example, if you are performing a bulk load operation - you will improve the performance of the operation by using the  `map.set` method. 
 
-(Need client syntax for map.set for C++, C Sharp, nodejs, Python, Go)
+(Need client syntax for map.set for Java, C++, C Sharp, nodejs, Python)
 
 [tabs] 
 ==== 
@@ -110,7 +110,7 @@ Java::
 --
 [source,java]
 ----
-Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+Map<Integer, String> capitalcities = hzClient.getMap( "capitals" );
 
 ----
 --
@@ -119,7 +119,7 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzInstance.getMap("capitals");
+IMap capitalcities = hzClient.getMap("capitals");
 
 ----
 --
@@ -129,7 +129,7 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzInstance.GetMap("capitals");
+var capitalcities = hzClient.GetMap("capitals");
 
 ----
 --
@@ -139,7 +139,7 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const capitalcities = await hzInstance.getMap('capitals');
+const capitalcities = await hzClient.getMap('capitals');
 
 ----
 --
@@ -148,7 +148,7 @@ Python::
 -- 
 [source,python]
 ----
-captial_cities = hzInstance.get_map("capitals").blocking()
+captial_cities = hzClient.get_map("capitals").blocking()
 
 ----
 --
@@ -157,7 +157,13 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzInstance.GetMap("capitals")
+// error handling is omitted for brevity
+capitalCities, _ := hzClient.GetMap("capitals")
+capitalCities.Set(1, "Tokyo")
+capitalCities.Set(2, "Paris")
+capitalCities.Set(3, "Washington")
+capitalCities.Set(4, "Ankara")
+capitalCities.Set(5, "Brussels")
 
 ----
 --
@@ -165,82 +171,20 @@ capitalcities, _ := hzInstance.GetMap("capitals")
 
 === Writing Primitives to a Map
 
-If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer/Long, String, or Double, depending on the data in the value field. If you are loading numeric data but want it saved as a String, include the primitive specification when you create the map. 
+If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer/Long, String, or Double, depending on the data in the value field. If your preferred language does not have the concept of primitive types, you need to be aware of these assumptions, particularly if you have numeric data you want to handle as strings rather than integers.
 
-(Need client syntax for specifying primitive types for C++, C Sharp, nodejs, Python, Go)
-
-[tabs] 
-==== 
-Java:: 
-+ 
---
-[source,java]
-----
-Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
-
-----
---
-C++:: 
-+ 
--- 
-[source,cpp]
-----
-IMap capitalcities = hzInstance.getMap("capitals");
-
-----
---
-
-C Sharp:: 
-+ 
--- 
-[source,cs]
-----
-var capitalcities = hzInstance.GetMap("capitals");
-
-----
---
-
-Node.js:: 
-+ 
--- 
-[source,javascript]
-----
-const capitalcities = await hzInstance.getMap('capitals');
-
-----
---
-Python:: 
-+ 
--- 
-[source,python]
-----
-captial_cities = hzInstance.get_map("capitals").blocking()
-
-----
---
-Go:: 
-+ 
--- 
-[source,go]
-----
-capitalcities, _ := hzInstance.GetMap("capitals")
-
-----
---
-====
-
-Hazelcast serializes - that is, converts to binary format - primitves using built-in serializers optimized for each primitive type. You can override these built-in serializers if desired. Refer to the xref:serialization.serialization.adoc[Serialization] section of the documentation for details.
+Hazelcast serializes - that is, converts to binary format - primitves using built-in serializers optimized for each primitive type. You can override these built-in serializers if desired. Refer to the xref:serialization:serialization.adoc[Serialization] section of the documentation for details.
 
 === Writing Objects to a Map
 
-You can load objects into a map. When you define a map that holds objects, you need to invoke the serialization method that you want used to convert your objects into binary format. Hazelcast offers several different serialization methods, which are discussed in detail in the xref:serialization.serialization.adoc[Serialization] section of the documentation. For all programmimg languages, you can choose between the following methods:
+You can load objects into a map. When you define a map that holds objects, you need to invoke the serialization method that you want used to convert your objects into binary format. Hazelcast offers several different serialization methods, which are discussed in detail in the xref:serialization:serialization.adoc[Serialization] section of the documentation. For all programmimg languages, you can choose between the following methods:
 * `com.hazelcast.nio.serialization.IdentifiedDataSerializable`: provides fast serialization, avoids reflection and long class names. See the xref:serialization:implementing-dataserializable.adoc#identifieddataserializable[IdentifiedDataSerializable section].
 * `com.hazelcast.nio.serialization.Portable`: Provides partial deserialization for queries, improving query performamce. Needs more memory to store metadata. See the xref:serialization:implementing-portable-serialization.adoc[Implementing Portable Serialization section].
 * Custom Serialization (using xref:serialization:custom-serialization.adoc#implementing-streamserializer[StreamSerializer] and xref:serialization:custom-serialization.adoc#implementing-bytearrayserializer[ByteArraySerializer]).
 
 There are additional options for Java clients, as detailed in the documentation. 
 
-(Need client syntax for serialization method for C++, C Sharp, nodejs, Python, Go)
+(Need client syntax for serialization method for C++, C Sharp, nodejs, Python)
 
 [tabs] 
 ==== 
@@ -249,7 +193,7 @@ Java::
 --
 [source,java]
 ----
-Map<Integer, String> capitalcities = hzInstance.getMap( "capitals" );
+Map<Integer, String> capitalcities = hzClient.getMap( "capitals" );
 
 ----
 --
@@ -258,7 +202,7 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzInstance.getMap("capitals");
+IMap capitalcities = hzClient.getMap("capitals");
 
 ----
 --
@@ -268,7 +212,7 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzInstance.GetMap("capitals");
+var capitalcities = hzClient.GetMap("capitals");
 
 ----
 --
@@ -278,7 +222,7 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const capitalcities = await hzInstance.getMap('capitals');
+const capitalcities = await hzClient.getMap('capitals');
 
 ----
 --
@@ -287,7 +231,7 @@ Python::
 -- 
 [source,python]
 ----
-captial_cities = hzInstance.get_map("capitals").blocking()
+captial_cities = hzClient.get_map("capitals").blocking()
 
 ----
 --
@@ -296,7 +240,48 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzInstance.GetMap("capitals")
+type Country struct {
+	Name string
+	Population int64
+}
+func (c Country) FactoryID() (factoryID int32) {
+	return 1
+}
+func (c Country) ClassID() (classID int32) {
+	return 1
+}
+func (c Country) WritePortable(writer serialization.PortableWriter) error {
+	writer.WriteString("name", c.Name)
+	writer.WriteInt64("population", c.Population)
+	return nil
+}
+func (c *Country) ReadPortable(reader serialization.PortableReader) error {
+	c.Name = reader.ReadString("name")
+	c.Population = reader.ReadInt64("population")
+	return nil
+}
+type CountryPortableFactory struct {
+}
+func (c CountryPortableFactory) Create(classID int32) (instance serialization.Portable) {
+	if classID == 1 {
+		return &Country{}
+	}
+	panic("factory not found")
+}
+func (c CountryPortableFactory) FactoryID() int32 {
+	return 1
+}
+// ...
+// error handling is omitted for brevity
+cb := hazelcast.ConfigBuilder{}
+cb.Serialization().AddPortableFactory(&CountryPortableFactory{})
+client, _ := hazelcast.StartNewClientWithConfig(cb)
+countries, _ := client.GetMap("countries")
+countries.Set(1, &Country{"Tokyo", 13_960_236})
+countries.Set(2, &Country{"Paris", 2_175_601})
+countries.Set(3, &Country{"Washington", 689_545})
+countries.Set(4, &Country{"Ankara", 5_663_322})
+countries.Set(5, &Country{"Brussels", 1_208_542})
 
 ----
 --
@@ -453,13 +438,12 @@ hazelcast:
 MapConfig mapConfig = new MapConfig();
 mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
 ----
-====
 
 == Other Methods to Add Data
 
 If you are working with external data stores (e.g. a database), you can use the MapLoader interface to bulk-load the data into Hazelcast. This interface also provides write-through capabilities to keep your external data up to date. See the - xref:working-with-external-data.adoc[Working with External Data] page.
 
-A map can also be a sink for Hazelcast's Jet processing engine. In this case, Jet creates the map and performs the `map.put` operations for data as it is processed. 
+A map can also be a sink for Hazelcast's Jet processing engine. In this case, Jet creates the map and performs the `map.put` operations for data as it is processed. Refer to the Jet engine documententation for details on using in-memory storage as a data sink.
 
 
 == Learn More
@@ -468,7 +452,7 @@ You can do a lot more with maps than simply writing data to them. Explore the fo
 
 - xref:reading-a-map.adoc[Reading Map Data]
 - xref:updating-map-entries.adoc[Updating Map Entries]
-- xref:backing-up-maps.adoc[Backing Up Maps]
+- xref:backing-up-maps.adoc[Making Your Map Data Safe]
 - xref:locking-maps.adoc[Locking Maps]
 - xref:managing-map-memory.adoc[Managing Map Memory]
 - xref:working-with-external-data.adoc[Working with External Data]
