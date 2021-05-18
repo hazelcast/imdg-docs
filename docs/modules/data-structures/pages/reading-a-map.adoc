@@ -10,9 +10,10 @@
 You can retrieve map data using the following methods:
 
 * `map.get(K)` - returns the value associated with the specified key
-* `map.values` - returns all values in the map
-* `map.keySet` - returns all keys in the map
-* `map.entrySet` - returns all key/value pairs in the map
+* `map.values` - returns a collection of all values in the map
+* `map.keySet` - returns a set of all keys in the map
+* `map.entrySet` - returns a set of all key/value pairs in the map
+* `map.containsKey()`  and `map.containsValue()` - checks whether specified key or value is contained in the map and returns a true or false
 
 All of these methods return data to your application without altering the contents of the map itself. 
 
@@ -86,6 +87,8 @@ NOTE: The set returned by this method is not in any particular order. Because th
 == Queries
 
 A map query allows you to retrieve a subset of the map data that matches one or more criteria. You specify this criteria in a predicate. Hazelcast provides two query formats (Criteria API and SQL-like Predicates) to embed in your application code, as well as direct SQL query support. 
+
+Hazelcast runs queries as a distributed process. You can read the details of query operations and formatting in the xref:query:distributed-query.adoc[Distributed Query] section of the documentation.
 
 == Reading Data into Pipelines
 
