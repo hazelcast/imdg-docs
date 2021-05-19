@@ -19,7 +19,7 @@ All of these methods return data to your application without altering the conten
 
 In the code sample below, we're using the `map.entrySet` method to retrieve the entire contents of the map, then printing out each entry.
 
-(Need code samples of using entrySet for C++, C Sharp, node.js, Python, Go)
+(Need code samples of using entrySet for node.js)
 
 [tabs] 
 ==== 
@@ -39,7 +39,9 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzClient.getMap("capitals");
+    for (const auto &entry : my_map->entry_set<int, std::string>().get()) {
+        std::cout << entry.first << " " << entry.second << std::endl;
+    }
 
 ----
 --
@@ -49,7 +51,10 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzClient.GetMap("capitals");
+foreach (var (key, value) in await map.GetEntriesAsync())
+{
+  Console.WriteLine(key + " " + value);
+}
 
 ----
 --
@@ -68,7 +73,8 @@ Python::
 -- 
 [source,python]
 ----
-captial_cities = hzClient.get_map("capitals").blocking()
+for key, value in my_map.entry_set():
+    print(key, value)
 
 ----
 --
@@ -77,7 +83,11 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzClient.GetMap("capitals")
+// error handling is omitted for brevity
+entries, _ := myMap.GetEntrySet()
+for _, entry := range entries {
+    fmt.Printf("%d %s\n", entry.Key, entry.Value)
+}
 
 ----
 --

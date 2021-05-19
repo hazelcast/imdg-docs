@@ -67,13 +67,13 @@ Your application may require multiple maps with different settings. To accomplis
 
 In this example, we're creating a configuration for the Customers map and setting the in-memory format to OBJECT. When we run our code, Hazelcast will match the map name to the configuration name and apply all the settings included under Customers. 
 
-image::ROOT:MapConfig2.png[map multi-config example]
+image::ROOT:MapConfig2.png[map multi-config example, 433]
 
 Note that we specified the number of backups as well as the in-memory format. Hazelcast will only apply settings under the Customers configuration and ignore all others, including the default configuration. We want our data backed up, so we have to include this in the Customers configuration as well as the in-memory format. 
 
 == Using Wildcards
 
-image::ROOT:MapConfig1.png[map wildcard example]
+image::ROOT:MapConfig1.png[map wildcard example, 468]
 
 Wildcards allow you to create one configuration and apply it to multiple maps. Here we have two map configurations. One sets the eviction timer to mark entries for removal after being untouched for one hour (3600 seconds). The other has no eviction policy. Because we used a wildcard in the configuration name, any map name beginning with Evict1Hr will use the Evict1Hr* configuration. Any other map will use whatever settings are part of the default configuration. 
 

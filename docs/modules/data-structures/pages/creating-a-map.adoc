@@ -173,119 +173,19 @@ capitalCities.Set(5, "Brussels")
 
 If you are loading primitives to a map and do not specify the primitive type, the Hazelcast cluster will assume that the key is Integer and the value is either Integer/Long, String, or Double, depending on the data in the value field. If your preferred language does not have the concept of primitive types, you need to be aware of these assumptions, particularly if you have numeric data you want to handle as strings rather than integers.
 
-Hazelcast serializes - that is, converts to binary format - primitves using built-in serializers optimized for each primitive type. You can override these built-in serializers if desired. Refer to the xref:serialization:serialization.adoc[Serialization] section of the documentation for details.
+Hazelcast serializes - that is, converts to binary format - primitives using built-in serializers optimized for each primitive type. You can override these built-in serializers if desired. Refer to the xref:serialization:serialization.adoc[Serialization] section of the documentation for details.
 
 === Writing Objects to a Map
 
 You can load objects into a map. When you define a map that holds objects, you need to invoke the serialization method that you want used to convert your objects into binary format. Hazelcast offers several different serialization methods, which are discussed in detail in the xref:serialization:serialization.adoc[Serialization] section of the documentation. For all programmimg languages, you can choose between the following methods:
+
 * `com.hazelcast.nio.serialization.IdentifiedDataSerializable`: provides fast serialization, avoids reflection and long class names. See the xref:serialization:implementing-dataserializable.adoc#identifieddataserializable[IdentifiedDataSerializable section].
+
 * `com.hazelcast.nio.serialization.Portable`: Provides partial deserialization for queries, improving query performamce. Needs more memory to store metadata. See the xref:serialization:implementing-portable-serialization.adoc[Implementing Portable Serialization section].
+
 * Custom Serialization (using xref:serialization:custom-serialization.adoc#implementing-streamserializer[StreamSerializer] and xref:serialization:custom-serialization.adoc#implementing-bytearrayserializer[ByteArraySerializer]).
 
-There are additional options for Java clients, as detailed in the documentation. 
-
-(Need client syntax for serialization method for C++, C Sharp, nodejs, Python)
-
-[tabs] 
-==== 
-Java:: 
-+ 
---
-[source,java]
-----
-Map<Integer, String> capitalcities = hzClient.getMap( "capitals" );
-
-----
---
-C++:: 
-+ 
--- 
-[source,cpp]
-----
-IMap capitalcities = hzClient.getMap("capitals");
-
-----
---
-
-C Sharp:: 
-+ 
--- 
-[source,cs]
-----
-var capitalcities = hzClient.GetMap("capitals");
-
-----
---
-
-Node.js:: 
-+ 
--- 
-[source,javascript]
-----
-const capitalcities = await hzClient.getMap('capitals');
-
-----
---
-Python:: 
-+ 
--- 
-[source,python]
-----
-captial_cities = hzClient.get_map("capitals").blocking()
-
-----
---
-Go:: 
-+ 
--- 
-[source,go]
-----
-type Country struct {
-	Name string
-	Population int64
-}
-func (c Country) FactoryID() (factoryID int32) {
-	return 1
-}
-func (c Country) ClassID() (classID int32) {
-	return 1
-}
-func (c Country) WritePortable(writer serialization.PortableWriter) error {
-	writer.WriteString("name", c.Name)
-	writer.WriteInt64("population", c.Population)
-	return nil
-}
-func (c *Country) ReadPortable(reader serialization.PortableReader) error {
-	c.Name = reader.ReadString("name")
-	c.Population = reader.ReadInt64("population")
-	return nil
-}
-type CountryPortableFactory struct {
-}
-func (c CountryPortableFactory) Create(classID int32) (instance serialization.Portable) {
-	if classID == 1 {
-		return &Country{}
-	}
-	panic("factory not found")
-}
-func (c CountryPortableFactory) FactoryID() int32 {
-	return 1
-}
-// ...
-// error handling is omitted for brevity
-cb := hazelcast.ConfigBuilder{}
-cb.Serialization().AddPortableFactory(&CountryPortableFactory{})
-client, _ := hazelcast.StartNewClientWithConfig(cb)
-countries, _ := client.GetMap("countries")
-countries.Set(1, &Country{"Tokyo", 13_960_236})
-countries.Set(2, &Country{"Paris", 2_175_601})
-countries.Set(3, &Country{"Washington", 689_545})
-countries.Set(4, &Country{"Ankara", 5_663_322})
-countries.Set(5, &Country{"Brussels", 1_208_542})
-
-----
---
-====
+The documentation sections linked above include code samples for all client languages. There are additional serialization options for Java clients, which are also documented in the xref:serialization:serialization.adoc[Serialization] section.
 
 === Writing JSON to a Map
 
