@@ -1,7 +1,7 @@
 = Updating Map Entries
 :description: Maps are not static. You can update or remove individual map entries, a group of map entries, or the entire map.
 
-[[updating-map-entries]]]
+[[updating-map-entries]]
 
 {description}
 
@@ -109,6 +109,7 @@ Java::
 countries.replace( 1, "Korea" ); // <1>
 countries.replace( 2, "France", "Spain" ); // <2>
 countries.replace( 3, "United States", "Canada"); // <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
@@ -123,6 +124,7 @@ C++::
 countries.replace( 1, "Korea" ); // <1>
 countries.replace( 2, "France" ); // <2>
 countries.replace( 3, "United States", "Canada" ); // <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
@@ -137,6 +139,7 @@ C Sharp::
 countries.replace( 1, "Korea" ); // <1>
 countries.replace( 2, "France", "Spain" ); // <2>
 countries.replace( 3, "United States", "Canada" ); // <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
@@ -151,6 +154,7 @@ Node.js::
 await countries.replace( 1, "Korea" ); // <1>
 await countries.replace( 2, "France", "Spain" ); // <2>
 await countries.replace( 3, "United States", "Canada" ); // <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
@@ -164,6 +168,7 @@ Python::
 countries.replace( 1, "Korea" ) # <1>
 countries.replace( 2, "France", "Spain" ) # <2>
 countries.replace( 3, "United States", "Canada" ) # <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
@@ -177,6 +182,7 @@ Go::
 countries.Put( 1, "Korea" ); // <1>
 countries.Put( 2, "France", "Spain" ); // <2>
 countries.Put( 3, "United States", "Canada" ); // <3>
+----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
 <3> Replaces only if current value is "United States". Value is "USA", so replace fails and returns `false.`
