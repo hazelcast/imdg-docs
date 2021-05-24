@@ -52,13 +52,13 @@ Hazelcast Enterprise Edition::
     <dependency>
         <groupId>com.hazelcast</groupId>
         <artifactId>hazelcast-enterprise-all</artifactId>
-        <version>4.1.1</version>
+        <version>{full-version}</version>
     </dependency>
     <!-- Optional dependency for including JavaDoc -->
     <dependency>
         <groupId>com.hazelcast</groupId>
         <artifactId>hazelcast-enterprise-all</artifactId>
-        <version>4.1.1</version>
+        <version>{full-version}</version>
         <classifier>javadoc</classifier>
     </dependency>
 </dependencies>
