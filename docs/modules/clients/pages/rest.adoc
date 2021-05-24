@@ -60,7 +60,7 @@ An example `POST` call is shown below.
 
 [source,plain]
 ----
-$ curl -v -X POST -H "Content-Type: text/plain" -d "bar"
+curl -v -X POST -H "Content-Type: text/plain" -d "bar"
     http://10.20.17.1:5701/hazelcast/rest/maps/mapName/foo
 ----
 
@@ -112,7 +112,7 @@ You can use a `DELETE` call to remove an entry. An example `DELETE` call is show
 
 [source,plain]
 ----
-$ curl -v -X DELETE http://10.20.17.1:5701/hazelcast/rest/maps/mapName/foo
+curl -v -X DELETE http://10.20.17.1:5701/hazelcast/rest/maps/mapName/foo
 ----
 
 ```
@@ -125,7 +125,7 @@ If you leave the key empty as follows, the `DELETE` call deletes all entries fro
 
 [source,plain]
 ----
-$ curl -v -X DELETE http://10.20.17.1:5701/hazelcast/rest/maps/mapName
+curl -v -X DELETE http://10.20.17.1:5701/hazelcast/rest/maps/mapName
 ----
 
 [source,plain]
@@ -141,7 +141,7 @@ You can use a `POST` call to create an item on the queue. An example is shown be
 
 [source,plain]
 ----
-$ curl -v -X POST -H "Content-Type: text/plain" -d "foo"
+curl -v -X POST -H "Content-Type: text/plain" -d "foo"
     http://10.20.17.1:5701/hazelcast/rest/queues/myEvents
 ----
 
@@ -172,7 +172,7 @@ An example is shown below (**10** being the timeout value).
 
 [source,plain]
 ----
-$ curl -v -X DELETE \http://10.20.17.1:5701/hazelcast/rest/queues/myEvents/10
+curl -v -X DELETE \http://10.20.17.1:5701/hazelcast/rest/queues/myEvents/10
 ----
 
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").poll(10, SECONDS);`. Below is the response.
@@ -197,7 +197,7 @@ When the timeout is reached, the response is `No Content` success, i.e., there i
 
 [source,plain]
 ----
-$ curl -v -X GET \http://10.20.17.1:5701/hazelcast/rest/queues/myEvents/size
+curl -v -X GET \http://10.20.17.1:5701/hazelcast/rest/queues/myEvents/size
 ----
 
 The above call is equivalent to `HazelcastInstance.getQueue("myEvents").size();`. Below is an example response.
@@ -216,7 +216,7 @@ Besides the above operations, you can check the status of your cluster, an examp
 
 [source,plain]
 ----
-$ curl -v http://127.0.0.1:5701/hazelcast/rest/cluster
+curl -v http://127.0.0.1:5701/hazelcast/rest/cluster
 ----
 
 The response is as follows:
