@@ -168,9 +168,9 @@ YAML::
 --
 [source,yaml]
 ----
-hazelcast:
-  somemap:
-    map:
+hazelcast: 
+  map:
+    somemap:
       entry-listeners:
         - class-name: com.your-package.MyEntryListener
           include-value: false
