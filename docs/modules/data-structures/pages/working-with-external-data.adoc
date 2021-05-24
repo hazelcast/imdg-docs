@@ -6,7 +6,7 @@
 [[loading-and-storing-persistent-data]]
 
 To load data from external systems in a map you can use the Java
-link:{javadocBaseUrl}/javadoc/com/hazelcast/map/MapLoader.html[`MapLoader`] interface.
+link:{javadocBaseUrl}/javadoc/com/hazelcast/map/MapLoader.html[`MapLoader`] interface. somehing here about it's on the cluster so it has to be java blah blah blah
 
 To save map entries to an external system, you can use the Java link:{javadocBaseUrl}/javadoc/com/hazelcast/map/MapStore.html[`MapStore`] interface.
 

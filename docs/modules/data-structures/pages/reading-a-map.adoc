@@ -94,6 +94,8 @@ for _, entry := range entries {
 ====
 NOTE: The set returned by this method is not in any particular order. Because the map is distributed across multiple Hazelcast nodes, the set will be assembled in the order in which cluster members respond to the request. 
 
+someting here about external data, cache miss, etc. 
+
 == Queries
 
 A map query allows you to retrieve a subset of the map data that matches one or more criteria. You specify this criteria in a predicate. Hazelcast provides two query formats (Criteria API and SQL-like Predicates) to embed in your application code, as well as direct SQL query support. 

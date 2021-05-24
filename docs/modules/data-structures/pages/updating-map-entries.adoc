@@ -190,10 +190,13 @@ countries.Put( 3, "United States", "Canada" ); // <3>
 --
 ====
 
+If you are working with an external system of record e.g. a database, you can use the MapLoader feature to automatically push updates and maintain synchronization between in-memory data and the external store. This feature, called MapLoader, is described fully in the xref:working-with-external-data.adoc[Working with External Data] page.
 
-== Batch Updates 
+== Bulk Updates 
 
-The `map.putAll` and `map.replaceAll` methods can be used to update multiple entries in a map. These methods can be used to copy one map to another, or in conjunction with MapLoader to load data into a map from an external source. See the xref:working-with-external-data.adoc[Working with External Data] page for more details.
+The `map.putAll` and `map.replaceAll` methods can be used to update multiple entries in a map. 
+
+(Need code samples in order to further explain this feature and how it works. )
 
 == Entry Processor
 
@@ -207,7 +210,7 @@ There are several methods availble for removing individual entries from a map. T
 |===
 |Method
 |Erase in-memory
-|Erase from data store
+|Erase from external data store
 |Returns
 
 |`map.evict(K)`
@@ -232,13 +235,13 @@ There are several methods availble for removing individual entries from a map. T
 
 |===
 
-If you are not working with a external data store using the MapLoader feature, `map.evict` and `map.delete` have the same effect.
+If you are not working with a external data store (e.g. database) using the MapLoader feature, `map.evict` and `map.delete` have the same effect. This feature is described in detail in the xref:working-with-external-data.adoc[Working With External Data] section of the documentation.  
 
 == Deleting Selected Map Entries
 
 To remove multiple entries from a map, you can use `map.removeAll` in combination with a predicate to remove entries that match a given criteria. If you are working with an external data store, this will remove the entries from both the in-memory store and the external store. Unlike the `map.remove` method, this does not return the removed values. 
 
-In the example below, assume a data set called Students. The data set has a field called GradYear. We want to remove all records of students with a GradYear of 2020.
+In the example below, assume a data set called Students. The data set has a field called gradYear. We want to remove all records of students with a gradYear of 2020.
 
 [tabs] 
 ==== 
@@ -276,7 +279,8 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const studentmap = await hzClient.getMap('studentmap');
+
+studentmap.removeAll(Predicates.sql("gradYear = 2020"));
 
 ----
 --
