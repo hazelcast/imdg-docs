@@ -16,15 +16,15 @@ When you write an entry to a map, Hazelcast assigns that entry to a specific par
 
 For example, if we have a map that contains a list of capital cities, individual map entries could be distributed across cluster members as shown. The partitions that are active for read/writes/queries/etc. are the primary or active partitions.
 
-image::ROOT:images:backup1.png[Map data, partitioned]
+image::ROOT:backup1.png[Map data, partitioned]
 
 When we add a backup, Hazelcast stores a copy of each partition, making sure that no member holds both the primary and the backup of any given partition. 
 
-image::ROOT:images:backup2.png[Map data with backup]
+image::ROOT:backup2.png[Map data with backup]
 
 If a member goes down, the remaining members holding the backup partitions promote them to primary. New backup partitions are created for the affected partitions. This instantaneous promotion means that there's no interruption in the availability of your data.
 
-image::ROOT:images:backup3.png[Map data after failover]
+image::ROOT:backup3.png[Map data after failover]
 
 == In-Memory Backup Types
 
