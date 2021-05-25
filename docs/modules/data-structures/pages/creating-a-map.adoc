@@ -111,6 +111,11 @@ Java::
 [source,java]
 ----
 Map<Integer, String> capitalcities = hzClient.getMap( "capitals" );
+capitalcities.set( 1, "Tokyo" );
+capitalcities.set( 2, "Paris" );
+capitalcities.set( 3, "Washington" );
+capitalcities.set( 4, "Ankara" );
+capitalcities.set( 5, "Brussels" );
 
 ----
 --
@@ -139,7 +144,12 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const capitalcities = await hzClient.getMap('capitals');
+const capitalCities = await hzInstance.getMap('capitals');
+await capitalCities.set( 1, "Tokyo" );
+await capitalCities.set( 2, "Paris" );
+await capitalCities.set( 3, "Washington" );
+await capitalCities.set( 4, "Ankara" );
+await capitalCities.set( 5, "Brussels" );
 
 ----
 --
