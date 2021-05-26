@@ -31,12 +31,12 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzClient.getMap("capitals");
-capitalcities.put( 1, "Tokyo" );
-capitalcities.put( 2, "Paris" );
-capitalcities.put( 3, "Washington" );
-capitalcities.put( 4, "Ankara" );
-capitalcities.put( 5, "Brussels" );
+auto capital_cities = hz_client.get_map("capitals").get();
+capital_cities->put<int, std::string>(1, "Tokyo").get();
+capital_cities->put<int, std::string>(2, "Paris").get();
+capital_cities->put<int, std::string>(3, "Washington").get();
+capital_cities->put<int, std::string>(4, "Ankara").get();
+capital_cities->put<int, std::string>(5, "Brussels").get();
 ----
 --
 
@@ -124,8 +124,12 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzClient.getMap("capitals");
-
+auto capital_cities = hz_client.get_map("capitals").get();
+capital_cities->set<int, std::string>(1, "Tokyo").get();
+capital_cities->set<int, std::string>(2, "Paris").get();
+capital_cities->set<int, std::string>(3, "Washington").get();
+capital_cities->set<int, std::string>(4, "Ankara").get();
+capital_cities->set<int, std::string>(5, "Brussels").get();
 ----
 --
 
@@ -228,11 +232,13 @@ C++::
 -- 
 [source,cpp]
 ----
-idPersonMap->put(1, hazelcast::client::hazelcast_json_value("{ \"name\": \"John\", \"age\": 35 }")).get();
+std::string person1 = R"({ "name": "John", "age": 35 })";
+std::string person2 = R"({ "name": "Jane", "age": 24 })";
+std::string person3 = R"({ "name": "Trey", "age": 17 })";
 
-idPersonMap->put(2, hazelcast::client::hazelcast_json_value("{ \"name\": \"Jane\", \"age\": 24 }")).get();
-
-idPersonMap->put(3, hazelcast::client::hazelcast_json_value("{ \"name\": \"Trey\", \"age\": 17 }")).get();
+id_person_map->put<int, hazelcast::client::hazelcast_json_value>(1, person1).get();
+id_person_map->put<int, hazelcast::client::hazelcast_json_value>(2, person2).get();
+id_person_map->put<int, hazelcast::client::hazelcast_json_value>(3, person3).get();
 ----
 --
 

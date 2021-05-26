@@ -39,10 +39,9 @@ C++::
 -- 
 [source,cpp]
 ----
-    for (const auto &entry : my_map->entry_set<int, std::string>().get()) {
-        std::cout << entry.first << " " << entry.second << std::endl;
-    }
-
+for (const auto &entry : my_map->entry_set<int, std::string>().get()) {
+    std::cout << entry.first << ' ' << entry.second << std::endl;
+}
 ----
 --
 

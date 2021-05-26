@@ -29,12 +29,12 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap countries = hzClient.getMap("countries");
-countries.put( 1, "Japan" );
-countries.put( 2, "France" );
-countries.put( 3, "USA" );
-countries.put( 4, "Turkey" );
-countries.put( 5, "Ukraine" );
+auto countries = hz_client.get_map("countries").get();
+countries->put<int, std::string>(1, "Japan").get();
+countries->put<int, std::string>(2, "France").get();
+countries->put<int, std::string>(3, "USA").get();
+countries->put<int, std::string>(4, "Turkey").get();
+countries->put<int, std::string>(5, "Ukraine").get();
 ----
 --
 
@@ -121,9 +121,9 @@ C++::
 -- 
 [source,cpp]
 ----
-countries.replace( 1, "Korea" ); // <1>
-countries.replace( 2, "France" ); // <2>
-countries.replace( 3, "United States", "Canada" ); // <3>
+countries->replace<int, std::string>(1, "Korea").get(); // <1>
+countries->replace<int, std::string>(2, "France").get(); // <2>
+countries->replace<int, std::string>(3, "United States", "Canada").get(); // <3>
 ----
 <1> Replaces any value for key 1 with "Korea". Key exists, so returns `true`. 
 <2> Replaces only if current value is "France". Value is "France", so returns `true`.
@@ -259,8 +259,8 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap studentmap = hzClient.getMap("studentmap");
-
+student_map->remove_all(
+        hazelcast::client::query::equal_predicate(hz_client, "gradYear", 2020)).get();
 ----
 --
 
