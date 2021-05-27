@@ -3,9 +3,7 @@
 
 {description}
 
-Hazelcast uses and manages its own partition threads, where each thread manages more than one partition, and each partition is managed by a single thread.
-
-Therefore each method is handled one at a time in first-in-first-out order, preventing the same entry from being updated at the same time.
+Hazelcast uses and manages its own partition threads. Each partition is managed by a single thread, ensuring that write operations to a given partition are handled one at a time in first-in-first-out order. In other words, it is not possible for multiple simultaneous write attempts to any given map entry. In most cases, this operational model is sufficient in preventing race conditions. (For more on threading operations, refer to the xref:performance:threading-model.adoc[Threading Model]. )
 
 However, in some circumstances, you may need manual control over access to map entries. Consider the following example:
 
@@ -14,9 +12,7 @@ However, in some circumstances, you may need manual control over access to map e
 include::{javasource}/dds/map/RacyUpdateMember.java[tag=racy]
 ----
 
-If this code is run by more than one cluster member simultaneously,
-a race condition is likely. You can solve this condition,
-using either pessimistic or optimistic locking.
+If this code is run by more than one cluster member simultaneously, it can cause a race condition. You can solve this condition using either pessimistic or optimistic locking to manually ensure that the map entry cannot be overwritten until the locking operation is complete. 
 
 [[pessimistic-locking]]
 == Pessimistic Locking
@@ -30,19 +26,13 @@ To perform pessimistic locking, use the map's `lock()` and `unlock()` methods.
 include::{javasource}/dds/map/PessimisticUpdateMember.java[tag=pum]
 ----
 
-The lock will automatically be collected by the garbage collector
-when the lock is released and no other waiting conditions exist on the lock.
+The lock will automatically be collected by the garbage collector when the lock is released and no other waiting conditions exist on the lock.
 
 The lock is reentrant, but it does not support fairness.
 
-WARNING: In some cases, a client application connected to your
-cluster may cause the entries in a map to remain locked
-after the application has been restarted (which were already locked
-before such a restart). This can be due to the
-reasons such as incomplete/incorrect client implementations. In these cases,
-you can unlock the entries, either from the thread which locked them
-using the `IMap.unlock()` method, or check if the entry is locked
-using the `IMap.isLock()` method and then call `IMap.forceUnlock()`.
+WARNING: In some cases, a client application connected to your cluster may cause the entries in a map to remain locked after the application has been restarted (which were already locked
+before such a restart). This can be due to the reasons such as incomplete/incorrect client implementations. In these cases, you can unlock the entries, either from the thread which locked them
+using the `IMap.unlock()` method, or check if the entry is locked using the `IMap.isLock()` method and then call `IMap.forceUnlock()`.
 
 TIP: For the above case, as a workaround, you can also kill all the applications connected
 to the cluster and use the Management Center's scripting functionality to clear the map and

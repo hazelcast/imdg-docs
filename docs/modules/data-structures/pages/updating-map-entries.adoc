@@ -194,9 +194,139 @@ If you are working with an external system of record e.g. a database, you can us
 
 == Bulk Updates 
 
-The `map.putAll` and `map.replaceAll` methods can be used to update multiple entries in a map. 
+You can use `map.putAll` to copy the contents of one key/value store to another. Any keys that already exist in the map will be overwritten. 
 
-(Need code samples in order to further explain this feature and how it works. )
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+HazelcastInstance client = HazelcastClient.newHazelcastClient();
+IMap<Integer, String> distributedMap = client.getMap("map");
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "John");
+map.put(2, "Jack");
+map.put(3, "David");
+distributedMap.putAll(map);
+//size should be 3
+System.out.println(distributedMap.size());
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+
+----
+--
+====
+
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+HazelcastInstance client = HazelcastClient.newHazelcastClient();
+IMap<Integer, String> distributedMap = client.getMap("map");
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "John");
+map.put(2, "Jack");
+map.put(3, "David");
+distributedMap.putAll(map);
+distributedMap.replaceAll(new ToLowerCaseFunction());
+//prints john
+System.out.println(distributedMap.get(1));
+//prints jack
+System.out.println(distributedMap.get(2));
+//prints david
+System.out.println(distributedMap.get(3));
+
+
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+
+----
+--
+====
 
 == Entry Processor
 
