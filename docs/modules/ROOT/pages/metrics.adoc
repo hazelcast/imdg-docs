@@ -1,4 +1,4 @@
-= Metrics
+= List of Hazelcast Metrics
 [[appendix]]
 
 The table below lists the metrics with their explanations in
