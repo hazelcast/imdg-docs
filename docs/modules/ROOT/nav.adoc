@@ -63,6 +63,7 @@ include::network-partitioning:partial$network-partitioning-nav.adoc[]
 * xref:licenses.adoc[Appendix D: License Questions]
 * xref:phone-homes.adoc[Appendix E: Phone Homes]
 * xref:faq.adoc[Appendix F: Frequently Asked Questions]
+* xref:metrics.adoc[Appendix G: Metrics]
 * xref:glossary.adoc[Glossary]
 
 
