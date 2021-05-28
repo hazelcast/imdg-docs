@@ -115,7 +115,7 @@ You can configure the frequency of dumping information to the log file using the
 * `hazelcast.diagnostics.metrics.period.seconds`: Set a value in seconds.
 Its default value is `60` seconds.
 
-NOTE: See the xref:list-of-hazelcast-metrics.adoc[List of Hazelcast Metrics appendix] for the full list
+NOTE: See the xref:ROOT:list-of-hazelcast-metrics.adoc[List of Hazelcast Metrics appendix] for the full list
 of metrics with their descriptions.
 
 === SlowOperations
