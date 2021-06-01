@@ -1184,9 +1184,9 @@ Here is the `MapLoader` initialization flow:
 . When `getMap()` is first called from any member, initialization starts
 depending on the value of the `initial-mode` property. If it is set to `EAGER`,
 initialization starts on all partitions as soon as the map is created,
-i.e., all partitions are loaded when `getMap` is called.  If it is set to
-`LAZY`, data is loaded partition by partition, i.e., each partition is
-loaded with its first touch.
+i.e., all partitions are loaded when `getMap` is called.  A map is loaded when
+the `IMap#getMap` method is called in the `EAGER` mode; otherwise, it is loaded
+after the first operation, e.g., `IMap#size`, `IMap#get`, etc. of the map in the `LAZY` mode.
 . Hazelcast calls the `MapLoader.loadAllKeys()` to get all your
 keys on one of the members.
 . That member distributes keys to all other members in batches.
