@@ -5,6 +5,9 @@
 
 [[listening-to-map-entries-with-predicates]]
 
+
+NOTE: This feature is a server-side feature. Because these operations run within the Hazelcast cluster natively, the interfaces that perform these functions are only available in Java.
+
 NOTE: If you want to listen to changes to all map entries, see xref:events:object-events.adoc#listening-for-map-events[Listening for Map Events].
 
 As an example, let's listen to the changes made on an employee
