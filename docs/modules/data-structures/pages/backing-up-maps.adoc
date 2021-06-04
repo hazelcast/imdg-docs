@@ -1,5 +1,4 @@
 = Making Your Map Data Safe
-
 :description: Maps are in-memory data structures, which means they are potentially vulnerable to data loss in the event of a system failure. Hazelcast offers several features to minimize the chances of data loss, including in-memory backups and hot restart data stores. 
  
 :url-monotonic-reads: https://en.wikipedia.org/wiki/Consistency_model#Monotonic_read_consistency
