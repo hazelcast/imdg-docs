@@ -11,7 +11,8 @@ If you just want to store data on members, clients can handle serialization with
 
 However, in the following cases, you must configure members to be able to serialize and deserialize your data:
 
-[cols="a,a,a,a"]
+[cols="a,a,a"]
+
 |===
 |Case|Reason|Exceptions
 
@@ -63,4 +64,3 @@ By default, Hazelcast optimizes the serialization for the following data types. 
 `ArrayBlockingQueue`, `PriorityBlockingQueue`, `PriorityQueue`, `DelayQueue`, `SynchronousQueue`, `LinkedTransferQueue`
 
 If you would rather implement your own serialization for these types, see xref:overriding-built-in-serializers.adoc[Overriding the Default Serializers].
-
