@@ -24,6 +24,7 @@ see the https://hazelcast.org/clients-languages/[feature comparison matrix^]
 
 == Serialization in Client/Server Mode
 
-To be able to send data over a network between cluster members and/or clients, you have to serialize it into raw bytes.
+To be able to send objects between cluster members and/or clients, you have to serialize it into raw bytes.
+
 
 For details, see xref:serialization:serialization.adoc[Serialization].
