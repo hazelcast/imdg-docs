@@ -1,5 +1,5 @@
 = Overriding the Built-in Serializers
-:description: Hazelcast serializes basic data types such as `Byte` and `Boolean` using a built-in serializer. If you would prefer to implement your own serializer for these data types, you can overrise the built-in serializer.
+:description: Hazelcast serializes basic data types such as `Byte` and `Boolean` using a built-in serializer. If you would prefer to implement your own serializer for these data types, you can override the built-in serializer.
 
 {description}
 
@@ -63,5 +63,4 @@ SerializationConfig{
 ----
 --
 ====
-
 
