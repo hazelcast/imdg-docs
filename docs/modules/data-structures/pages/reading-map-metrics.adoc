@@ -1,5 +1,5 @@
 = Reading Map Metrics
-:description: By default, you can read metrics for a given map, such as the primary and backup entry count, last update time, and locked entry count on each member of your cluster. You can access these statistics about either all map entries that are owned by a member or specific entries.
+:description: By default, you can read metrics for a given map, such as the primary and backup entry count, last update time, and locked entry count on each member of your cluster. You can access these statistics for the entire map, for the map entries on a specific cluster member, or specific map entries. 
 
 {description}
 
@@ -7,8 +7,9 @@
 
 == Getting Statistics about All Map Entries
 
-To get statistics for all map entries that are owned by a member, use the
-`getLocalMapStats()` method of the Java member API (xref:overview:topology.adoc[embedded mode]). This method returns data only if the `statistics-enabled` element is set to `true`, which is the default. If this element is set to `false`, statistics are not available in the xref:management-center:ROOT:index.adoc[Hazelcast Management Center] or the API.
+To get statistics for all map entries that are owned by a member, use the `getLocalMapStats()` method of the Java member API (xref:overview:topology.adoc[embedded mode]). This method returns data only if the `statistics-enabled` element is set to `true`, which is the default. 
+
+NOTE: If you disable map statistics, statistics will not be available via the API, or in xref:management-center:ROOT:index.adoc[Hazelcast Management Center].
 
 [tabs] 
 ==== 
@@ -46,8 +47,7 @@ System.out.println( "Number of entries owned by this member = "
     + mapStatistics.getOwnedEntryCount() );
 ----
 
-NOTE: If you need cluster-wide map statistics, you can
-get the local map statistics from all members of the cluster and combine them. Alternatively, you can see all map statistics in xref:management-center:monitor-imdg:monitor-dds.adoc#managing-maps[Hazelcast Management Center].
+NOTE: If you need cluster-wide map statistics, you can get the local map statistics from all members of the cluster and combine them. Alternatively, you can see all map statistics in xref:management-center:monitor-imdg:monitor-dds.adoc#managing-maps[Hazelcast Management Center].
 
 == Getting Statistics about a Specific Map Entry
 
@@ -183,12 +183,7 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzInstance.GetMap("capitals");
-capitalcities.put( 1, "Tokyo" );
-capitalcities.put( 2, "Paris" );
-capitalcities.put( 3, "Washington" );
-capitalcities.put( 4, "Ankara" );
-capitalcities.put( 5, "Brussels" );
+
 ----
 --
 
@@ -198,11 +193,8 @@ Node.js::
 [source,javascript]
 ----
 const client = await Client.newHazelcastClient();
-
 const map = await client.getMap('map');
-
 const entryView = await map.getEntryView('key');
-
 console.log(`size in memory  :  ${entry.cost}`);
 console.log(`creationTime    : ${entry.creationTime}`);
 console.log(`expirationTime  : ${entry.expirationTime}`);
@@ -238,12 +230,7 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzInstance.GetMap("capitals")
-capitalcities.Put( 1, "Tokyo" );
-capitalcities.Put( 2, "Paris" );
-capitalcities.Put( 3, "Washington" );
-capitalcities.Put( 4, "Ankara" );
-capitalcities.Put( 5, "Brussels" );
+
 ----
 --
 ====

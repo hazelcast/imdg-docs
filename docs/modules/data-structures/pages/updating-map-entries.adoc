@@ -254,10 +254,24 @@ Go::
 -- 
 [source,go]
 ----
+// error checking is omitted for brevity
+distributedMap, _ := hzClient.GetMap("map")
+entries := []types.Entry{
+	types.NewEntry(1, "John"),
+	types.NewEntry(2, "Jack"),
+	types.NewEntry(3, "David"),
+}
+distributedMap.PutAll(entries)
+size, _ := distributedMap.Size()
+fmt.Println(size)
 
+// error checking is omitted for brevity
+distributedMap, _ := hzClient.GetMap("map")
 ----
 --
 ====
+
+The method `map.replaceAll` is used in this example to modify the entire contents of a map. When you use `map.replaceAll`, all existing entries are affected, but keys with null values are not modified. 
 
 [tabs] 
 ==== 
@@ -428,7 +442,9 @@ Go::
 -- 
 [source,go]
 ----
-studentmap, _ := hzClient.GetMap("studentmap")
+// error checking is omitted for brevity
+studentMap, _ := hzClient.GetMap("studentMap")
+studentMap.RemoveAll(predicate.Equal("GradYear", 2020))
 
 ----
 --
