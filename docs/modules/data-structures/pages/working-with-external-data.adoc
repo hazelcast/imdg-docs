@@ -52,7 +52,7 @@ You have two options for pre-populating your map.
 |The `MapLoader.loadAllKeys()` method is invoked the first time you create or get the map. All cluster members connect to the database and load all their local active partitions. This is a blocking operation; your application will be unable to read from or write to the map until all cluster members have loaded their partitions. 
 
 |LAZY
-|After getting or creating the map, the `MapLoader.loadAllKeys()` method is invoked on a partition-by-partition basis. The first time you use any of the `IMap` methods (e.g. `map.get`) to get a value from a partition, the member that owns that partition will load all entries for that partition only. LAZY is the default mode. 
+|After getting or creating the map, the `MapLoader.loadAllKeys()` method is triggered when you first access a map using one of the <<IMap Operations that Trigger `MapStore` and `MapLoader`>>. LAZY is the default mode. 
 |===
 
 NOTE: If you add indices to your map with the link:{javadocBaseUrl}/javadoc/com/hazelcast/config/IndexConfig.html[IndexConfig^]
@@ -63,7 +63,7 @@ If your implementation of the `MapLoader.loadAllKeys()` method returns a `null` 
 
 Here's the `MapLoader` initialization process in detail: 
 
-. Initialization starts depending on the value of the `initial-mode` property. If it is set to `EAGER`, initialization starts on all partitions as soon as the map is created (i.e. when `getMap` is called).  If it is set to `LAZY`, data is loaded partition by partition when a `map.get` or other operation tries to read an entry from the partition.
+. Initialization starts depending on the value of the `initial-mode` property. If it is set to `EAGER`, initialization starts on all partitions as soon as the map is created (i.e. when `getMap` is called).  If it is set to `LAZY`, data is loaded when a `map.get` or other operation tries to read an entry from the map.
 . Hazelcast calls the `MapLoader.loadAllKeys()` to get all your keys on one of the members.
 . That member distributes keys to all other members in batches.
 . Each member loads values of all its owned keys by calling `MapLoader.loadAll(keys)` for their own keys.
@@ -351,7 +351,7 @@ See the full example https://github.com/hazelcast/hazelcast-code-samples/tree/ma
 
 
 [[map-mapstore]]
-== MapStore and MapLoader Methods Triggered by IMap Operations
+== IMap Operations that Trigger `MapStore` and `MapLoader`
 
 This section summarizes the `IMap` operations that may trigger the `MapStore` or `MapLoader` methods.
 
