@@ -2244,7 +2244,7 @@ When set to -1 then `HazelcastOverloadException` is thrown immediately without a
 |Pause time between each retry cycle of an invocation in milliseconds.
 
 |`hazelcast.client.invocation.timeout.seconds`
-|1000
+|120
 |int
 |Period, in seconds, to give up the invocation when a member in the member list is not reachable.
 
