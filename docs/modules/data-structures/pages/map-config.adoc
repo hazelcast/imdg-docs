@@ -1,26 +1,30 @@
 = Configuring Maps
-:description: Map configuration is part of the overall Hazelcast server configuration. When you create your map, it "inherits" the configuration that is set up on the server. It is important to plan your map configuration ahead of time, as you cannot change the configuration of a map once it is created without restarting your entire cluster.
+:description: Map configuration is part of the overall Hazelcast server configuration. When you create your map, it inherits the configuration that is set up on the server. It is important to plan your map configuration ahead of time, as you cannot change the configuration of a map once it is created without restarting your entire cluster.
 [[map-config]]
 
 {description}
 
 == Hazelcast Map Configuration Defaults
 
-The hazelcast.xml/hazelcast.yaml configuration included with your Hazelcast distribution includes the following default settings for maps. 
+The `hazelcast.xml`/`hazelcast.yaml` configuration included with your Hazelcast distribution includes the following default settings for maps. 
 
 * One synchronous backup
 * Binary in-memory format
 * All other features are disabled
 
+NOTE: To view all possible map settings, refer to the `hazelcast-all.xml` or `hazelcast-all.yaml` file included with your Hazelcast distribution. 
+
 If these settings are sufficient for your environment, you don't need to do anything else. When you create a map, the Hazelcast cluster will apply these settings to your map. 
 
-For details on map backups, refer to the xref:backing-up-maps.adoc[Making My Data Safe] section.
+For details on map backups, refer to xref:backing-up-maps.adoc[].
 
-For details on in-memory format, refer to the xref:setting-data-format.adoc[Setting In-Memory Format] section.
+For details on in-memory format, refer to xref:setting-data-format.adoc[].
 
 == Modifying the Default Configuration
 
-You can create a default configuration for all maps for your environment by modifying the map configuration block named "default" in your hazelcast.xml/hazelcast.yaml file. In the following example, we set expiration timers for map entries. Map entries that are idle for an hour will be marked as eligible for removal if the cluster begins to run out of memory. Any map entry older than six hours will be marked as eligible for removal. (For more on entry expiration, go to xref:managing-map-memory.adoc[Managing Map Memory].) 
+You can create a default configuration for all maps for your environment by modifying the map configuration block named "default" in your `hazelcast.xml`/`hazelcast.yaml` file. In the following example, we set expiration timers for map entries. Map entries that are idle for an hour will be marked as eligible for removal if the cluster begins to run out of memory. Any map entry older than six hours will be marked as eligible for removal. 
+
+For more on entry expiration, go to xref:managing-map-memory.adoc[Managing Map Memory].
 
 
 [tabs] 

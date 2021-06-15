@@ -99,22 +99,22 @@ Methods available within the `MapInterceptor` interface:
 |===
 
 |`interceptGet`
-|Replace returned `map.get` value with new value
+|Replace returned `map.get()` value with new value
 
 |`afterGet`
-|Action to take after `map.get` operation is complete
+|Action to take after `map.get()` operation is complete
 
 |`interceptPut`
-|Replace value in `map.put` with new value
+|Replace value in `map.put()` with new value
 
 |`afterPut`
-|Action to take after `map.put` is complete
+|Action to take after `map.put()` is complete
 
 |`interceptRemove`
 |Collects removed map entry
 
 |`afterRemove`
-|Action to take after `map.remove` is complete
+|Action to take after `map.remove()` is complete
 
 |===
 

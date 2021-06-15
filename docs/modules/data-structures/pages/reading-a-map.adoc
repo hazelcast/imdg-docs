@@ -10,14 +10,14 @@
 You can retrieve map data using the following methods:
 
 * `map.get(K)` - returns the value associated with the specified key
-* `map.values` - returns a collection of all values in the map
-* `map.keySet` - returns a set of all keys in the map
-* `map.entrySet` - returns a set of all key/value pairs in the map
+* `map.values()` - returns a collection of all values in the map
+* `map.keySet()` - returns a set of all keys in the map
+* `map.entrySet()` - returns a set of all key/value pairs in the map
 * `map.containsKey()`  and `map.containsValue()` - checks whether specified key or value is contained in the map and returns a true or false
 
 All of these methods return data to your application without altering the contents of the map itself. 
 
-In the code sample below, we're using the `map.entrySet` method to retrieve the entire contents of the map, then printing out each entry.
+In the code sample below, we're using the `map.entrySet()` method to retrieve the entire contents of the map, then printing out each entry.
 
 (Need code samples of using entrySet for node.js)
 
@@ -108,4 +108,4 @@ In-memory data can be used as a source for a Jet engine pipeline, or as a store 
 
 == Optimizing Data Retrieval
 
-If you are doing frequent `map.get` operations from a relatively static map, you can employ the Near Cache feature to improve performance. Near Cache creates a copy of the map data locally on the client, and all `map.get` operations are executed on the cached data rather than the map in the Hazelcast cluster. The cluster will synchronize the cached data with the cluster data at regular, configured intervals. This solution is most suitable when your maps do not change often and when the map operations are mostly reads. Refer to the xref:performance:near-cache.adoc[Near Cache] section of the documentation for details on operations, configuration, and limitations of this feature.
+If you are doing frequent `map.get()` operations from a relatively static map, you can employ the Near Cache feature to improve performance. Near Cache creates a copy of the map data locally on the client, and all `map.get()` operations are executed on the cached data rather than the map in the Hazelcast cluster. The cluster will synchronize the cached data with the cluster data at regular, configured intervals. This solution is most suitable when your maps do not change often and when the map operations are mostly reads. Refer to the xref:performance:near-cache.adoc[Near Cache] section of the documentation for details on operations, configuration, and limitations of this feature.

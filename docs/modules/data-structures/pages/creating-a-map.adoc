@@ -7,9 +7,9 @@
 
 To create a map, use the `HazelcastInstance.getMap()` method and pass it the name that you want to call your map. If a map with this name already exists, Hazelcast returns that map. Otherwise, Hazelcast creates a new map with the given name.
 
-After creating a map, you can write data to it. The simplest method is the map's `put()` method, which we will use in the following examples. This method takes a key and a value. 
+After creating a map, you can write data to it. The simplest method is the `map.put()` method, which we will use in the following examples. This method takes a key and a value. 
 
-In this example, we create a map called 'captials', which stores the names of capital cities as strings. The key is a unique integer for each entry.
+In this example, we create a map called `captials`, which stores the names of capital cities as strings. The key is a unique integer for each entry.
 
 [tabs] 
 ==== 
@@ -97,11 +97,11 @@ capitalcities.Put( 5, "Brussels" );
 
 == Adding Data to A Map
 
-In the example code above, we not only created a map, but we added data to it using the `map.put` method. This method returns the old value of the map entry upon completion. For a new map, of course, this value will be null. 
+In the example code above, we not only created a map, but we added data to it using the `map.put()` method. This method returns the old value of the map entry upon completion. For a new map, of course, this value will be null. 
 
-An alternative is to use the `map.set` method. This method adds the data to the map, but does not return the old value. If you do not need the value - for example, if you are performing a bulk load operation - you will improve the performance of the operation by using the  `map.set` method. 
+An alternative is to use the `map.set()` method. This method adds the data to the map, but does not return the old value. If you do not need the value - for example, if you are performing a bulk load operation - you will improve the performance of the operation by using the  `map.set()` method. 
 
-(Need client syntax for map.set for Java, C++, C Sharp, nodejs, Python)
+(Need client syntax for map.set for Java, C++, C Sharp, Python)
 
 [tabs] 
 ==== 

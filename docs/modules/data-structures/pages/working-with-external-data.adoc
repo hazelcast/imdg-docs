@@ -63,7 +63,7 @@ If your implementation of the `MapLoader.loadAllKeys()` method returns a `null` 
 
 Here's the `MapLoader` initialization process in detail: 
 
-. Initialization starts depending on the value of the `initial-mode` property. If it is set to `EAGER`, initialization starts on all partitions as soon as the map is created (i.e. when `getMap` is called).  If it is set to `LAZY`, data is loaded when a `map.get` or other operation tries to read an entry from the map.
+. Initialization starts depending on the value of the `initial-mode` property. If it is set to `EAGER`, initialization starts on all partitions as soon as the map is created (i.e. when `map.get()` is called).  If it is set to `LAZY`, data is loaded when a `map.get()` or other operation tries to read an entry from the map.
 . Hazelcast calls the `MapLoader.loadAllKeys()` to get all your keys on one of the members.
 . That member distributes keys to all other members in batches.
 . Each member loads values of all its owned keys by calling `MapLoader.loadAll(keys)` for their own keys.
@@ -371,14 +371,14 @@ is called, it triggers the `MapLoader.loadAllKeys()` method.
 * putAsync()
 * tryPut()
 * putIfAbsent()
-|These methods are used to put entries to the map. Because `map.put` returns the old value, these methods will call the `MapLoader.load(Object)` method if the entry is not found in memory, to load the old value from the external data store. If write-through persistence is enabled, they also call the `MapStore.store(Object, Object)` method for each entry to write the new value to the external data store.
+|These methods are used to put entries to the map. Because `map.put()` returns the old value, these methods will call the `MapLoader.load(Object)` method if the entry is not found in memory, to load the old value from the external data store. If write-through persistence is enabled, they also call the `MapStore.store(Object, Object)` method for each entry to write the new value to the external data store.
 
 |* set()
 * setAsync()
 |These methods put an entry into the map without returning the old value. If write-through persistence is enabled, they call the `MapStore.store(Object,Object) method to write the entry to write the value to the external data store.
 
 |remove()
-|This method removes the mapping for a key from the map if it is present. Because `map.remove` returns the old value, this method will call the `MapLoader.load(Object)` if the entry is not found in memory, to load the value from the external data store. It also calls the `MapStore.delete(Object)` method if write-through persistence is enabled, to remove the value from the external data store.
+|This method removes the mapping for a key from the map if it is present. Because `map.remove()` returns the old value, this method will call the `MapLoader.load(Object)` if the entry is not found in memory, to load the value from the external data store. It also calls the `MapStore.delete(Object)` method if write-through persistence is enabled, to remove the value from the external data store.
 
 |* removeAll()
 * delete()
