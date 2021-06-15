@@ -229,9 +229,7 @@ C++::
 [source,cpp]
 ----
 idPersonMap->put(1, hazelcast::client::hazelcast_json_value("{ \"name\": \"John\", \"age\": 35 }")).get();
-
 idPersonMap->put(2, hazelcast::client::hazelcast_json_value("{ \"name\": \"Jane\", \"age\": 24 }")).get();
-
 idPersonMap->put(3, hazelcast::client::hazelcast_json_value("{ \"name\": \"Trey\", \"age\": 17 }")).get();
 ----
 --
@@ -242,9 +240,7 @@ C Sharp::
 [source,cs]
 ----
 idPersonMap.put(1, new HazelcastJsonValue("{ \"name\": \"John\", \"age\": 35 }"));
-
 idPersonMap.put(2, new HazelcastJsonValue("{ \"name\": \"Jane\", \"age\": 24 }"));
-
 idPersonMap.put(3, new HazelcastJsonValue("{ \"name\": \"Trey\", \"age\": 17 }"));
 ----
 --
@@ -254,14 +250,13 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const people = [
-  { name: "John", "age": 35 },
-  { name: "Jane", "age": 24 },
-  { name: "Trey", "age": 17 }
-];
-await idPersonMap.putAll(people.map((person, index) => {
-  return [index, new HazelcastJsonValue(JSON.stringify(person))];
-}));
+const person1 = new HazelcastJsonValue(JSON.stringify({ name: "John", "age": 35 }));
+const person2 = new HazelcastJsonValue(JSON.stringify({ name: "Jane", "age": 24 }));
+const person3 = new HazelcastJsonValue(JSON.stringify({ name: "Trey", "age": 17 }));
+
+await idPersonMap.put(0, new HazelcastJsonValue(JSON.stringify(person1)));
+await idPersonMap.put(1, new HazelcastJsonValue(JSON.stringify(person2)));
+await idPersonMap.put(2, new HazelcastJsonValue(JSON.stringify(person3)));
 ----
 --
 Python:: 
@@ -274,9 +269,7 @@ person2 = '{ \"name\": \"Jane\", \"age\": 24 }'
 person3 = '{ \"name\": \"Trey\", \"age\": 17 }'
 
 id_person_map.put(1, HazelcastJsonValue(person1))
-
 id_person_map.put(2, HazelcastJsonValue(person2))
-
 id_person_map.put(3, HazelcastJsonValue(person3))
 ----
 --
