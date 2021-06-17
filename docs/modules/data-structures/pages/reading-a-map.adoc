@@ -39,10 +39,9 @@ C++::
 -- 
 [source,cpp]
 ----
-    for (const auto &entry : my_map->entry_set<int, std::string>().get()) {
-        std::cout << entry.first << " " << entry.second << std::endl;
-    }
-
+for (const auto &entry : my_map->entry_set<int, std::string>().get()) {
+    std::cout << entry.first << ' ' << entry.second << std::endl;
+}
 ----
 --
 
@@ -64,7 +63,9 @@ Node.js::
 -- 
 [source,javascript]
 ----
-const capitalcities = await hzClient.getMap('capitals');
+for(const [key, value] of await idPersonMap.entrySet()){
+    console.log('key:', key, 'value:', value);
+}
 
 ----
 --
@@ -94,17 +95,15 @@ for _, entry := range entries {
 ====
 NOTE: The set returned by this method is not in any particular order. Because the map is distributed across multiple Hazelcast nodes, the set will be assembled in the order in which cluster members respond to the request. 
 
-someting here about external data, cache miss, etc. 
-
 == Queries
 
 A map query allows you to retrieve a subset of the map data that matches one or more criteria. You specify this criteria in a predicate. Hazelcast provides two query formats (Criteria API and SQL-like Predicates) to embed in your application code, as well as direct SQL query support. 
 
 Hazelcast runs queries as a distributed process. You can read the details of query operations and formatting in the xref:query:distributed-query.adoc[Distributed Query] section of the documentation.
 
-== Reading Data into Pipelines
+== Reading Data into Streaming Pipelines
 
-In-memory data can be used as a source for a Jet engine pipeline, or as a store for enrichment data. In this case, the instructions for data retrieval are part of the Jet pipline code. Refer to the Jet engine documentation for details on using in-memory maps as either pipeline sources or as enrichment sources. 
+If you’re building a data processing pipeline, you can use the Jet API to read data from an in-memory map and process it for use cases such as enrichment or analytics. An in-memory map can serve as the source for the data to be processed by the pipeline - for example, a collection of operational statistics amassed over time. A map can also provide enrichment data - for example, a set of standards against which the collected statistics are compared. Refer to the Stream Processing Engine documentation for details on how to use pipelines to read from in-memory maps.  
 
 == Optimizing Data Retrieval
 

@@ -9,7 +9,7 @@
 
 == In-Memory Backups
 
-An in-memory backup protects your data if a Hazelcast cluster member goes off-line. As with the active map, backup data is partitioned and distributed among cluster members. We discuss partitioning operations in detail in xref:operations:data-partitioning.adoc[How Data Is Partitioned], but will provide a brief overview here. 
+An in-memory backup protects your data if a Hazelcast cluster member goes off-line. As with the active map, backup data is partitioned and distributed among cluster members. We discuss partitioning operations in detail in xref:overview:data-partitioning.adoc[How Data Is Partitioned], but will provide a brief overview here. 
 
 When you write an entry to a map, Hazelcast assigns that entry to a specific partition based on a hash of the entry key. Partitions are distributed as evenly as possible across all cluster members  so that memory utilization is balanced across the cluster. 
 

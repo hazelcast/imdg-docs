@@ -21,6 +21,127 @@ Pessimistic locking locks the map entry until you are finished with it.
 
 To perform pessimistic locking, use the map's `lock()` and `unlock()` methods.
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
+[source,java]
+----
+include::{javasource}/dds/map/PessimisticUpdateMember.java[tag=pum]
+----
+--
+C++:: 
++ 
+-- 
+[source,cpp]
+----
+IMap capitalcities = hzClient.getMap("capitals");
+capitalcities.put( 1, "Tokyo" );
+capitalcities.put( 2, "Paris" );
+capitalcities.put( 3, "Washington" );
+capitalcities.put( 4, "Ankara" );
+capitalcities.put( 5, "Brussels" );
+----
+--
+
+C Sharp:: 
++ 
+-- 
+[source,cs]
+----
+var capitalcities = hzClient.GetMap("capitals");
+capitalcities.put( 1, "Tokyo" );
+capitalcities.put( 2, "Paris" );
+capitalcities.put( 3, "Washington" );
+capitalcities.put( 4, "Ankara" );
+capitalcities.put( 5, "Brussels" );
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+class ValueClass {
+    constructor() {
+        this.amount = 0;
+        this.factoryId = 1;
+        this.classId = 1;
+    }
+
+    readPortable(reader) {
+        this.amount = reader.readInt('amount');
+    }
+
+    writePortable(writer) {
+        writer.writeInt('amount', this.amount);
+    }
+}
+
+function portableFactory(classId) {
+    if (classId === 1) {
+        return new ValueClass();
+    }
+    return null;
+}
+
+
+const client = await Client.newHazelcastClient({
+    serialization: {
+        portableFactories: {
+            1: portableFactory
+        }
+    }
+});
+const map = await client.getMap('map');
+const key = '1';
+await map.put(key, new ValueClass());
+console.log('Starting');
+for(let i = 0; i < 1000; i++){
+    await map.lock(key);
+    try {
+        const value = await map.get(key);
+        value.amount++;
+        await map.put(key, value);
+    } catch (error) {
+        await map.unlock(key);
+    }
+}
+console.log('Finished! Result = ', (await map.get(key)).amount);
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+capital_cities = hz_client.get_map("capitals").blocking()
+capital_cities.put(1, "Tokyo")
+capital_cities.put(2, "Paris")
+capital_cities.put(3, "Washington")
+capital_cities.put(4, "Ankara")
+capital_cities.put(5, "Brussels")
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+capitalcities, _ := hzClient.GetMap("capitals")
+capitalcities.Put( 1, "Tokyo" );
+capitalcities.Put( 2, "Paris" );
+capitalcities.Put( 3, "Washington" );
+capitalcities.Put( 4, "Ankara" );
+capitalcities.Put( 5, "Brussels" );
+----
+--
+====
+
 [source,java]
 ----
 include::{javasource}/dds/map/PessimisticUpdateMember.java[tag=pum]
