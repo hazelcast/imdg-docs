@@ -36,12 +36,26 @@ C++::
 -- 
 [source,cpp]
 ----
-IMap capitalcities = hzClient.getMap("capitals");
-capitalcities.put( 1, "Tokyo" );
-capitalcities.put( 2, "Paris" );
-capitalcities.put( 3, "Washington" );
-capitalcities.put( 4, "Ankara" );
-capitalcities.put( 5, "Brussels" );
+auto hz = hazelcast::new_client().get();
+auto map = hz.get_map( "map" ).get();
+std::string key("1");
+map->put<std::string, int>(key, 5).get();
+std::cout << "Starting\n";
+for (int k = 0;k < 1000; ++k) {
+    map->lock(key).get();
+    try {
+        auto value = map->get<std::string, int>(key).get();
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        map->put(key, value).get();
+        map->unlock(key).get();
+    } catch (...) {
+            map->unlock(key).get();
+    }
+}
+std::cout << "Finished! Result = " << map->get<std::string, int>(key).get() << std::endl;
+
+
+
 ----
 --
 
@@ -118,12 +132,24 @@ Python::
 -- 
 [source,python]
 ----
-capital_cities = hz_client.get_map("capitals").blocking()
-capital_cities.put(1, "Tokyo")
-capital_cities.put(2, "Paris")
-capital_cities.put(3, "Washington")
-capital_cities.put(4, "Ankara")
-capital_cities.put(5, "Brussels")
+client = hazelcast.HazelcastClient()
+distributed_map = client.get_map("map").blocking()
+
+key = "1"
+distributed_map.put(key, 0)
+
+print("Starting")
+
+for i in range(1000):
+    distributed_map.lock(key)
+    try:
+        value = distributed_map.get(key)
+        value += 1
+        distributed_map.put(key, value)
+    finally:
+        distributed_map.unlock(key)
+
+print("Finished! Result =", distributed_map.get(key))
 
 ----
 --
@@ -132,12 +158,22 @@ Go::
 -- 
 [source,go]
 ----
-capitalcities, _ := hzClient.GetMap("capitals")
-capitalcities.Put( 1, "Tokyo" );
-capitalcities.Put( 2, "Paris" );
-capitalcities.Put( 3, "Washington" );
-capitalcities.Put( 4, "Ankara" );
-capitalcities.Put( 5, "Brussels" );
+hzClient, _ := hazelcast.StartNewClient()
+ctx := context.TODO()
+myMap, _ := hz.GetMap(ctx, "my-map")
+key := "1"
+myMap.Put(ctx, key, 1)
+fmt.Println("Starting")
+lockCtx := myMap.NewLockContext(ctx)
+for k := 0; k < 1000; k++ {
+	myMap.Lock(lockCtx, key)
+	value, _ := myMap.Get(lockCtx, key)
+	intValue := value.(int64) + 1
+	myMap.Put(lockCtx, key, intValue)
+	myMap.Unlock(lockCtx, key)
+}
+value, _ := myMap.Get(lockCtx, key)
+fmt.Println("Finished! Result =", value)
 ----
 --
 ====

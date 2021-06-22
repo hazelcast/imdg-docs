@@ -220,7 +220,17 @@ C++::
 -- 
 [source,cpp]
 ----
-
+// Start the Hazelcast Client and connect to an already running Hazelcast Cluster on 127.0.0.1
+auto hz_client = hazelcast::new_client().get();
+// Get the Distributed Map from Cluster.
+auto map = hz_client.get_map("map").get();
+std::unordered_map<int, std::string> entries{{1, "John"}, {2, "Jack"}, {3, "David"}};
+map->put_all(entries).get();
+std::cout << map->get<int, std::string>(1).get() << std::endl;
+//prints jack
+std::cout << map->get<int, std::string>(2).get() << std::endl;
+//prints david
+std::cout << map->get<int, std::string>(1).get() << std::endl;
 ----
 --
 
@@ -252,7 +262,16 @@ Python::
 -- 
 [source,python]
 ----
+client = hazelcast.HazelcastClient()
+distributed_map = client.get_map("map").blocking()
+distributed_map.put_all({
+    1: "John",
+    2: "Jack",
+    3: "David"
+})
 
+# Size should be 3
+print(distributed_map.size())
 ----
 --
 Go:: 
@@ -362,8 +381,10 @@ C++::
 -- 
 [source,cpp]
 ----
-student_map->remove_all(
-        hazelcast::client::query::equal_predicate(hz_client, "gradYear", 2020)).get();
+auto map = hz_client.get_map("studentmap").get();
+map->remove_all(hazelcast::client::query::equal_predicate(hz_client, "GradYear", 2020));
+
+
 
 ----
 --
@@ -373,7 +394,7 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var studentmap = hzClient.GetMap("studentmap");
+
 
 ----
 --
@@ -393,7 +414,7 @@ Python::
 -- 
 [source,python]
 ----
-studentmap = hzClient.get_map("studentmap").blocking()
+map.removeAll() is not available for Python clients
 
 ----
 --
