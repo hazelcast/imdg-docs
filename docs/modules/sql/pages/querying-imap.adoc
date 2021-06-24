@@ -122,7 +122,8 @@ Whether you can query nested fields in this object depends on how your map entri
 
 - For xref:serialization:implementing-portable-serialization.adoc[`Portable`] objects, you do not need to add the object's class to the classpath of the member, unless you want to use parameterized queries to compare one object against another.
 
-For example, with `Portable` objects, you could run the following queries without adding the `payCheckInfo` class to the member's classpath:
+For example, with `Portable` objects, you could run the following queries without adding the `PayCheckInfo` class to the member's classpath:
+
 [source,sql]
 ----
 SELECT paycheckInfo FROM employee WHERE employee.age > 10
