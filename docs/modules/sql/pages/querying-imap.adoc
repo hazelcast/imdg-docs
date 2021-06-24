@@ -102,7 +102,8 @@ int ageToCompare = 30;
 sql.execute("SELECT name FROM employee WHERE employee.age > ?", ageToCompare);
 ----
 
-In this `Employee` object, the last value is an instance of a `payCheckInfo` class. Here is the structure of that class:
+In this `Employee` object, the last value is an instance of a `PayCheckInfo` class. Here is the structure of that class:
+
 
 [cols="1,1"]
 |===
