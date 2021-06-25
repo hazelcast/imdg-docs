@@ -33,7 +33,6 @@ NOTE: The `MapStore` interface extends the `MapLoader` interface. Therefore, all
 
 == Loading Data From Your External Store
 
-[[Read-Through Persistence]]
 === Read-Through Persistence
 
 When you have MapLoader implemented, a `map.get()` triggers the `load()` method if the requested entry does not exist in memory. The MapLoader retrieves the requested entry, hands it to Hazelcast, which adds it to the in-memory map. This automatic loading is called read-through persistence.
@@ -170,7 +169,7 @@ class ProcessingStore implements MapStore<Integer, Employee>, PostProcessingMapS
 NOTE: Please note that if you are using post-processing in combination with xref:computing:entry-processor.adoc[Entry Processors], post-processed values will not be carried to in-memory backups.
 
 
-== Configuring Hazelcast to use your`MapStore` Implementation
+== Configuring Hazelcast to use your `MapStore` Implementation
 
 Once you've created your `MapStore` implementation, you need to configure your map to use it. 
 
@@ -287,9 +286,7 @@ which is described in the previous section.
 
 
 NOTE: For a list of all `IMap` methods that trigger the `MapLoader` methods, see <<map-mapstore, MapStore and MapLoader Methods Triggered by IMap Operations>>
-|===
 
-[[accessing-a-database-using-properties]]
 === Accessing a Database Using `Properties`
 
 You can prepare your own `MapLoader` to access a database such as Cassandra and MongoDB. For this, you can first declaratively specify the database properties in your `hazelcast.xml` configuration file and then implement the `MapLoaderLifecycleSupport` interface to pass those properties.
