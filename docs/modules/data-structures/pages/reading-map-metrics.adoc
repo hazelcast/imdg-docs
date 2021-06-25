@@ -196,7 +196,20 @@ C Sharp::
 -- 
 [source,cs]
 ----
+await using var client = await HazelcastClientFactory.StartNewClientAsync();
+await using var map = await client.GetMapAsync<string, string>("map");
+var entry = await map.GetEntryViewAsync("key");
 
+Console.WriteLine($"Size in memory  : {entry.Cost}");
+Console.WriteLine($"Creation time   : {entry.CreationTime}");
+Console.WriteLine($"Expiration time : {entry.ExpirationTime}");
+Console.WriteLine($"Number of hits  : {entry.Hits}");
+Console.WriteLine($"Last access time: {entry.LastAccessTime}");
+Console.WriteLine($"Last update time: {entry.LastUpdateTime}");
+Console.WriteLine($"Last update time: {entry.LastUpdateTime}");
+Console.WriteLine($"Version         : {entry.Version}");
+Console.WriteLine($"Key             : {entry.Key}");
+Console.WriteLine($"Value           : {entry.Value}");
 ----
 --
 

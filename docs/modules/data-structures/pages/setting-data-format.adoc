@@ -1,5 +1,5 @@
 = Setting In-Memory Format of Map Entries
-:description: The in-memory format you set to store your data can have a significant impact on the performance of your application. When data is moved between a client and the Hazelcast cluster, or between cluster members, it is always in serialized (binary) format. Depending on use case, it may be more efficient to store the data in that serialiized format, either on-heap or off-heap, or deserialize it back to the original object format.
+:description: The in-memory format you set to store your data can have a significant impact on the performance of your application. When data is moved between a client and the Hazelcast cluster, or between cluster members, it is always in serialized (binary) format. Depending on your use case, it may be more efficient to store the data in that serialiized format, either on-heap or off-heap, or deserialize it back to the original object format.
 
 [[setting-in-memory-format]]
 
@@ -59,13 +59,13 @@ hazelcast:
 ====
 
 [[using-high-density-memory-store-with-map]]
-== Using High-Density Memory Store with Map
+== Storing Map Entries Off-Heap with High Density Memory Store (HDMS)
 
 [navy]*Hazelcast IMDG Enterprise HD*
 
 Hazelcast instances run within Java Virtual Machines (JVMs). JVMs use a process called Garbage Collection (GC) to manage memory utilization. GC is an interrupting process, and the larger the heap, the longer GC takes to complete. This interruption could cause your application to pause for tens of seconds (even minutes for really large heaps), badly affecting your application performance and response times. To avoid the GC delay, most JVMs are implemented with a maximum size of 4 to 8 GB. 
 
-The Hazelcast High-Density Memory Store overcomes the limitation of garbage collection, allowing you to deploy fewer cluster members with much larger memory configuratoins. Instead of relying on the Java garbage collection, Hazelcast stores the data off-heap and performs the necessary memory management and cleanup. Data stored using HDMS is kept in binary format.
+The Hazelcast High-Density Memory Store (HDMS) overcomes the limitation of garbage collection, allowing you to deploy fewer cluster members with much larger memory configuratoins. Instead of relying on the Java garbage collection, Hazelcast stores the data off-heap and performs the necessary memory management and cleanup. Data stored using HDMS is kept in binary format.
 
 You can configure a map to use HDMS by setting the in-memory format to `NATIVE`. The following snippet is the declarative configuration example.
 

@@ -141,7 +141,12 @@ C Sharp::
 -- 
 [source,cs]
 ----
-var capitalcities = hzClient.GetMap("capitals");
+await using var capitalCities = await client.GetMapAsync<int, string>("capitals");
+await capitalCities.SetAsync(1, "Tokyo");
+await capitalCities.SetAsync(2, "Paris");
+await capitalCities.SetAsync(3, "Washington");
+await capitalCities.SetAsync(4, "Ankara");
+await capitalCities.SetAsync(5, "Brussels");
 
 ----
 --

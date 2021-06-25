@@ -239,7 +239,12 @@ C Sharp::
 -- 
 [source,cs]
 ----
+await using var client = await HazelcastClientFactory.StartNewClientAsync();
+await using var map = await client.GetMapAsync<int, string>("map");
+await map.SetAllAsync(new Dictionary<int, string> { { 1, "John" }, { 2, "Jack" }, { 3, "David" } });
 
+// Size should be 3
+Console.WriteLine(await map.GetSizeAsync());
 ----
 --
 
@@ -394,7 +399,8 @@ C Sharp::
 -- 
 [source,cs]
 ----
-
+await using var map = await client.GetMapAsync<int, Student>("studentMap");
+await map.RemoveAllAsync(Predicates.EqualTo(nameof(Student.GradYear), 2020));
 
 ----
 --
