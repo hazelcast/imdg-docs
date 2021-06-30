@@ -4,7 +4,7 @@ version: '4.2'
 display_version: '4.2'
 asciidoc:
   attributes:
-    full-version: '4.2'
+    full-version: '4.2.1'
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
