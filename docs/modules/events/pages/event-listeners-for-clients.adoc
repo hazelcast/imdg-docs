@@ -23,7 +23,7 @@ for more information.
 Follow the below links to learn how to configure the event listeners on other
 Hazelcast clients:
 
-* https://hazelcast.github.io/hazelcast-csharp-client/4.0.1/doc/events.html[.NET client^]
+* http://hazelcast.github.io/hazelcast-csharp-client/4.1.0/doc/events.html[.NET client^]
 * https://github.com/hazelcast/hazelcast-cpp-client/blob/master/Reference_Manual.md#75-distributed-events[C++ client^]
 * https://github.com/hazelcast/hazelcast-nodejs-client/blob/master/DOCUMENTATION.md#85-distributed-events[Node.js client^]
 * https://hazelcast.readthedocs.io/en/stable/using_python_client_with_hazelcast_imdg.html#distributed-events[Python client^]
@@ -31,13 +31,62 @@ Hazelcast clients:
 
 Note that you can simply add a listener to your client that you already configured
 and registered on the member side. You do not need to configure the listener on the client.
-Assuming that you implemented a listener for a map, .e.g., `MyListener` on the member side,
-see the following example for a Java client:
+In the following example, the member side has implemented the listener `MyListener`. To run that listener on the client, use `addEntryListener` in your client codee. 
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
 [source,java]
 ----
 IMap<Object, Object> map = client.getMap("mymap");
 map.addEntryListener(new MyListener(), true);
 ----
+--
+C++:: 
++
+--
+[source,cpp]
+----
+
+
+----
+--
+
+C Sharp:: 
++
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+
+----
+--
+====
 
 As you see, no configuration is needed.

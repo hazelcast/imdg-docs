@@ -5,9 +5,8 @@
 
 == Listeners
 
-Hazelcast offers two methods for monitoring map activity. `MapListener` allows you to define actions that are triggered based on activity on any entry in the map. `EventListener` allows you to define actions based on activity taken on a specific map entry or set of map entries. You'll use predicates to define the entries to be monitored for activity.
+Hazelcast offers two methods for monitoring map activity. `MapListener` allows you to define actions that are triggered based on activity on any entry in the map. `EventListener` allows you to define actions based on activity taken on a specific map entry or set of map entries. You 'll use predicates to define the entries to be monitored for activity.
 
-NOTE: Listeners are a server-side feature. Because these operations run within the Hazelcast cluster natively, the interfaces that perform these functions are only available in Java.
 
 == Listening to an Entire Map
 
@@ -21,36 +20,130 @@ If you want to listen to changes to all map entries, see xref:events:object-even
 
 The easiest way to explain this is through an example. We are going to listen for changes made to the map entry for an employee with the surname "smith". First, let's create the `Employee` class.
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
 [source,java]
 ----
 include::{javasource}/dds/map/Employee.java[tag=emp]
 ----
+--
+C++:: 
++
+--
+[source,cpp]
+----
+
+
+----
+--
+
+C Sharp:: 
++
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+
+----
+--
+====
+
 
 Then, let's create a listener that tracks the `ADDED`, `UPDATED` and `REMOVED` entry events with the `surname` predicate.
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
 [source,java]
 ----
 include::{javasource}/dds/map/ListenerWithPredicate.java[tag=lwp]
 ----
+--
+C++:: 
++
+--
+[source,cpp]
+----
+
+
+----
+--
+
+C Sharp:: 
++
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+
+----
+--
+====
+
 
 NOTE: See xref:query:how-distributed-query-works.adoc[How Distributed Query Works] for more information on creating predicates. 
 
-The next code sample modifies the map entry for Smith, which will trigger the listener. 
-
-[source,java]
-----
-include::{javasource}/dds/map/Modify.java[tag=modify]
-----
-
-
-When you first run the class `ListenerWithPredicate` and then run `Modify`, an output similar to the one below appears.
+When the listener is running, a change to any record with the name `smith` will display output similar to the one below. 
 
 ```
 entryAdded:EntryEvent {Address[192.168.178.10]:5702} key=1,oldValue=null,
 value=Person{name= smith }, event=ADDED, by Member [192.168.178.10]:5702
 ```
 
-The Modify code triggered the listener, which then printed the system output. You can replace the `System.out.println` with any code that you want to run omly when the specified map event occurs. 
+In our example, we're sending an event log to the system output. You can replace this action with any code you want to run when the specified map event occurs. 
 
 NOTE: The default backwards-compatible event publishing strategy only publishes `UPDATED` events when map entries are updated to a value that matches the predicate with which the listener was registered. This implies that when using the default event publishing strategy, your listener is not notified about an entry whose value is updated from one that matches the predicate to a new value that does not match the predicate.
 

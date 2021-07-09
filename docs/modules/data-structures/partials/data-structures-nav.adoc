@@ -11,7 +11,6 @@
 *** xref:data-structures:working-with-external-data.adoc[]
 *** xref:data-structures:locking-maps.adoc[]
 *** xref:data-structures:listening-for-map-entries.adoc[]
-*** xref:data-structures:intercepting-map-entries.adoc[]
 *** xref:data-structures:reading-map-metrics.adoc[]
 ** xref:data-structures:queue.adoc[]
 ** xref:data-structures:priority-queue.adoc[]
