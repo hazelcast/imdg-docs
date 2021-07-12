@@ -11,7 +11,7 @@ NOTE: Hazelcast versions prior to 4.0 used the `EntryListener` interface to moni
 
 Here are the listener sub-interfaces for `MapListener`. 
 
-cols=["1,1"]
+[cols="1,1"]
 |===
 | `EntryAddedListener`
 |Triggered when an entry is added to the map.
