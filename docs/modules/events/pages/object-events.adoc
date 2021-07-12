@@ -6,7 +6,7 @@
 You can listen to map-level or entry-based events using the listeners provided by the Hazelcast's eventing framework. To listen to these events, you will 
 implement `MapListener`. This interface provide both map-level and entry-level listeners. A map-level event is triggered by a map-level operation, e.g. `IMap.clear()` or `IMap.evictAll()`. An entry-based event is triggered by operations that affect a specific entry, e.g., `IMap.remove()` or `IMap.evict()`.
 
-NOTE: Hazelcast versions prior to 4.0 used the `EntryListener` interface to monitor entry-level events. While this interface is still available for backwards-compatibility reasons, you should use `MapListener` and its associated operations when writing new listeners. 
+NOTE: Hazelcast versions prior to 4.0 used the `EntryListener` interface to monitor entry-level events. While this interface is still available for backwards-compatibility reasons, you should use `MapListener` and its associated operations when writing new listeners for map events. 
 
 
 Here are the listener sub-interfaces for `MapListener`. 
@@ -45,6 +45,7 @@ for the entries). If your listener implements both this one and `EntryEvictedLis
 
 |`MapPartitionLostListener`
 |Triggered when the owner and all backups of a partition are lost for a specific map. See the <<listening-for-lost-map-partitions, Listening for Lost Map Partitions section>> for details.
+|===
 
 === Catching a Map Event
 
