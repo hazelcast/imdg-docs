@@ -389,7 +389,7 @@ mapConfig.setMetadataPolicy(MetadataPolicy.OFF);
 
 == Other Methods to Add Data
 
-If you are working with an external system of record e.g. a database, Hazelcast provides a mechanism for automatically loading data from that system into an in-memory map, then keeping that external database synchronized with any changes to the in-memory store. This feature is described fully in the xref:working-with-external-data.adoc[Working with External Data] page.
+If you are working with an external system of record e.g. a database, Hazelcast provides a mechanism for automatically loading data from that system into an in-memory map, then keeping that external database synchronized with any changes to the in-memory store. This feature is described fully in the xref:working-with-external-data.adoc[] page.
 
 A map can also be a sink for Hazelcast's Jet processing engine. In this case, Jet creates the map and performs the `map.put` operations for data as it is processed. Refer to the Jet engine documententation for details on using in-memory storage as a data sink.
 
@@ -398,13 +398,11 @@ A map can also be a sink for Hazelcast's Jet processing engine. In this case, Je
 
 You can do a lot more with maps than simply writing data to them. Explore the following topics to find out what else you can do with maps:
 
-- xref:reading-a-map.adoc[Reading Map Data]
-- xref:updating-map-entries.adoc[Updating Map Entries]
-- xref:backing-up-maps.adoc[Making Your Map Data Safe]
-- xref:locking-maps.adoc[Locking Maps]
-- xref:managing-map-memory.adoc[Managing Map Memory]
-- xref:working-with-external-data.adoc[Working with External Data]
-- xref:reading-map-metrics.adoc[Reading Map Metrics]
-- xref:listening-for-map-entries.adoc[Listening to Map Entries with Predicates]
-- xref:intercepting-map-entries.adoc[Intercepting Map Entries]
-
+- xref:reading-a-map.adoc[]
+- xref:updating-map-entries.adoc[]
+- xref:backing-up-maps.adoc[]
+- xref:locking-maps.adoc[]
+- xref:managing-map-memory.adoc[]
+- xref:working-with-external-data.adoc[]
+- xref:reading-map-metrics.adoc[]
+- xref:listening-for-map-entries.adoc[]

@@ -31,7 +31,7 @@ Hazelcast clients:
 
 Note that you can simply add a listener to your client that you already configured
 and registered on the member side. You do not need to configure the listener on the client.
-In the following example, the member side has implemented the listener `MyListener`. To run that listener on the client, use `addEntryListener` in your client codee. 
+In the following example, the member side has implemented the listener `MyListener`. To run that listener on the client, use `addEntryListener` in your client code. 
 
 [tabs] 
 ==== 
