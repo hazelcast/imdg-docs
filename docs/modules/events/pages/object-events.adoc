@@ -40,7 +40,7 @@ for the entries). If your listener implements both this one and `EntryEvictedLis
 |`MapClearedListener`
 |Triggered when all the entries of a map are removed using the `map.clear()` method.
 
-|`MapEvictedListener
+|`MapEvictedListener`
 |Triggered when all the entries of a map are removed using the `map.evictAll()` method.
 
 |`MapPartitionLostListener`
@@ -54,18 +54,151 @@ such as `EntryAddedListener` or `MapClearedListener`.
 
 Let's take a look at the following class example.
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
 [source,java]
 ----
 include::{javasource}/distributedevents/Listen.java[tag=listen]
+
 ----
+--
+C++:: 
++
+--
+[source,cpp]
+----
+
+
+----
+--
+
+C Sharp:: 
++
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+// error handling is omitted for brevity
+	ctx := context.TODO()
+	client, _ := hazelcast.StartNewClient(ctx)
+	entryListenerConfig := hazelcast.MapEntryListenerConfig{
+		IncludeValue: true,
+	}
+	m, _ := client.GetMap(ctx, "somemap")
+	entryListenerConfig.NotifyEntryAdded(true)
+	entryListenerConfig.NotifyEntryRemoved(true)
+	entryListenerConfig.NotifyEntryUpdated(true)
+	entryListenerConfig.NotifyEntryEvicted(true)
+	entryListenerConfig.NotifyEntryLoaded(true)
+
+	m.AddEntryListener(ctx, entryListenerConfig, func(event *hazelcast.EntryNotified) {
+		switch event.EventType {
+		case hazelcast.EntryAdded:
+			fmt.Println("Entry Added:", event)
+		case hazelcast.EntryRemoved:
+			fmt.Println("Entry Removed:", event)
+		case hazelcast.EntryUpdated:
+			fmt.Println("Entry Updated:", event)
+		case hazelcast.EntryEvicted:
+			fmt.Println("Entry Remove:", event)
+		case hazelcast.EntryLoaded:
+			fmt.Println("Entry Loaded:", event)
+		}
+	})
+----
+--
+====
 
 
 Now, let's perform some modifications on the map entries using the following example code.
 
+[tabs] 
+==== 
+Java:: 
++ 
+--
 [source,java]
 ----
 include::{javasource}/distributedevents/ModifyMap.java[tag=modify]
+
 ----
+--
+C++:: 
++
+--
+[source,cpp]
+----
+
+
+----
+--
+
+C Sharp:: 
++
+-- 
+[source,cs]
+----
+
+----
+--
+
+Node.js:: 
++ 
+-- 
+[source,javascript]
+----
+
+----
+--
+Python:: 
++ 
+-- 
+[source,python]
+----
+
+----
+--
+Go:: 
++ 
+-- 
+[source,go]
+----
+	// performing modifications on the map entries
+	key := strconv.Itoa(int(time.Now().Unix()))
+	m.Put(ctx, key, "1")
+	m.Put(ctx, key, "2")
+	m.Delete(ctx, key)
+
+----
+--
+====
 
 
 If you execute the `Listen` class and then the `Modify` class, you get the following output

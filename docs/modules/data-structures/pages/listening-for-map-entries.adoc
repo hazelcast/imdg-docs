@@ -18,6 +18,7 @@ If you want to listen to changes to all map entries, see xref:events:object-even
 [[listening-to-map-entries-with-predicates]]
 
 
+
 The easiest way to explain this is through an example. We are going to listen for changes made to the map entry for an employee with the surname "smith". First, let's create the `Employee` class.
 
 [tabs] 
@@ -128,6 +129,36 @@ Go::
 -- 
 [source,go]
 ----
+func main() {
+	// error handling is omitted for brevity
+	ctx := context.TODO()
+	client, _ := hazelcast.StartNewClient(ctx)
+	entryListenerConfig := hazelcast.MapEntryListenerConfig{
+		IncludeValue: true,
+		Predicate:    predicate.Equal("surname", "Smith"),
+	}
+	m, _ := client.GetMap(ctx, "somemap")
+	entryListenerConfig.NotifyEntryAdded(true)
+	entryListenerConfig.NotifyEntryRemoved(true)
+	entryListenerConfig.NotifyEntryUpdated(true)
+	entryListenerConfig.NotifyEntryEvicted(true)
+	entryListenerConfig.NotifyEntryLoaded(true)
+
+	m.AddEntryListener(ctx, entryListenerConfig, func(event *hazelcast.EntryNotified) {
+		switch event.EventType {
+		case hazelcast.EntryAdded:
+			fmt.Println("Entry Added:", event)
+		case hazelcast.EntryRemoved:
+			fmt.Println("Entry Removed:", event)
+		case hazelcast.EntryUpdated:
+			fmt.Println("Entry Updated:", event)
+		case hazelcast.EntryEvicted:
+			fmt.Println("Entry Remove:", event)
+		case hazelcast.EntryLoaded:
+			fmt.Println("Entry Loaded:", event)
+		}
+	})
+
 
 ----
 --
