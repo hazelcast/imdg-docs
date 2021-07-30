@@ -1675,7 +1675,7 @@ XML::
 <hazelcast>
     ...
     <map name="myMap">
-        <per-entry-stats-enabled>true</per-entry-statistics-enabled>
+        <per-entry-stats-enabled>true</per-entry-stats-enabled>
     </map>
     ...
 </hazelcast>
@@ -1689,7 +1689,7 @@ YAML::
 hazelcast:
   map:
     myMap:
-      per-entry-statistics-enabled: true
+      per-entry-stats-enabled: true
 ----
 ====
 
