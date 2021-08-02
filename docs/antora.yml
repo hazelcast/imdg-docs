@@ -6,6 +6,8 @@ asciidoc:
   attributes:
     full-version: '4.2.1'
     javasource: ROOT:example$
+    # Used for links to Management Center and search results
+    page-latest-supported-mc: 4.2021.06
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
     javadocBaseUrl: https://docs.hazelcast.org/docs/
