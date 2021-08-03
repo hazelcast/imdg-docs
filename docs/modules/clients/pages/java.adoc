@@ -2301,6 +2301,11 @@ Note that this is meant to be enabled only if diagnostics is enabled, since curr
 | bool
 | Enables the xref:management:metrics.adoc[metrics collection] if set to `true`, disables it otherwise. Note that the preferred way for
 controlling this setting is xref:management:metrics.adoc#metrics-configuration[Metrics Configuration].
+When it is `true` you can monitor metrics ofthe clients that are connected to your Hazelcast 
+cluster, using Hazelcast Management Center. See the
+xref:management-center:monitor-imdg:monitor-clients.adoc[Monitoring Clients section^]
+in the Hazelcast Management Center Reference Manual for more information.
+
 
 |`hazelcast.client.metrics.jmx.enabled`
 | true
@@ -2355,17 +2360,20 @@ the client tries to connect to the members in the given order.
 |false
 |bool
 |If set to `true`, it enables collecting the client statistics and sending them to the cluster.
-When it is `true` you can monitor the clients that are connected to your Hazelcast cluster,
-using Hazelcast Management Center. See the
-xref:management-center:monitor-imdg:monitor-clients.adoc[Monitoring Clients section^]
-in the Hazelcast Management Center Reference Manual for more information.
+Deprecated since 4.0. Use "hazelcast.client.metrics.enabled" instead. 
+Setting this enables Metrics since 4.0. If both this and "hazelcast.client.metrics.enabled"
+are configured, this is ignored.
+Note that since this is replaced with hazelcast.client.metrics.enabled. The default behaviour
+of the future is also changed. This feature is enabled by default. 
+
 
 |`hazelcast.client.statistics.period.seconds`
 |3
 |int
 |Period in seconds the client statistics are collected and sent to the cluster.
-See the xref:management-center:monitor-imdg:monitor-clients.adoc[Monitoring Clients section]
-in the Hazelcast Management Center Reference Manual for more information on the client statistics.
+Deprecated since 4.0. Use "hazelcast.client.metrics.collection.frequency" instead. 
+The value set here is used as "hazelcast.client.metrics.collection.frequency".
+If both this and "hazelcast.client.metrics.collection.frequency" are configured, this is ignored.
 |===
 
 == Using High-Density Memory Store with Java Client
