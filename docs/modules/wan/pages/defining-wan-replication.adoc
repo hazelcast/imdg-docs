@@ -1,167 +1,132 @@
-= Configuring WAN Replication
+= Defining WAN Replication
 
-WAN Replication is defined and configured using the `wan-replication` configuration
-element as can be seen in the above examples.
+Hazelcast supports two different operation modes of WAN Replication:
 
-In this section you learn how to establish the connection between WAN
-replicated clusters and configure the behavior of WAN replication mechanism.
+* **Active-Passive:** This mode is mostly used for failover scenarios where you want to replicate an active cluster to one
+  or more passive clusters, for the purpose of maintaining a backup.
+* **Active-Active:** Every cluster is equal, each cluster replicates to all other clusters. This is normally used to connect
+  different clients to different clusters for the sake of the shortest path between client and server.
 
-For establishing the connection, you have the following options:
+There are two different ways of defining the WAN replication endpoints:
 
-* using static endpoints (when you want to provide the IP addresses of target IMDG members)
-* using Discovery SPI (when you want to target IMDG members on various cloud infrastructures)
-+
-You can use only one of these (not both) when defining a single WAN publisher.
+* Static endpoints
+* Discovery SPI
 
-The examples in this section uses Hazelcast's built-in WAN replication implementation.
-This implementation meets most of your WAN replication needs and is configured using the
-`batch-publisher` element, which you will see in the below examples. Hazelcast also allows you
-to build your own implementation; see the xref:advanced-features.adoc#defining-custom-wr[Advanced Features section]
-for details in case you need more custom configurations.
+You can use at most one of these when defining a single WAN publisher.
 
-Please see also the xref:clusters:advanced-network-configuration.adoc#setting-up-wan-endpoints-configuration[Setting Up WAN Endpoints Configuration section]
-for the examples that use advanced network configuration to set up, for example, security features such as
-TLS and mutual authentication for your WAN replicated clusters.
+== Defining WAN Replication Using Static Endpoints
 
-The default settings for WAN Replication configuration suit most use cases. If, however, you have specific needs or if you
-would like to fine-tune the behavior of WAN Replication for your application, see the
-xref:tuning.adoc[Fine-Tuning WAN Replication section].
+Below is an example of declarative configuration of WAN Replication from New York cluster to target the London cluster:
 
-Let's see how we configure a simple WAN replication using the static endpoints and Discovery SPI, and
-then let's see the configuration details of Hazelcast's built-in WAN replication implementation.
-
-[[wanbatchreplication-static-endpoints]]
-== Using the Static Endpoints
-
-This is most suitable when the endpoints have static IP addresses which will not change for
-the duration of the lifecycle of the source cluster. You will then list these addresses in the WAN publisher
-configuration and WAN Replication will try to keep a stable connection to each of those.
-
-Below is an example of declarative configuration of WAN Replication between two Hazelcast clusters. Here, we show the
-configuration that is needed on the source ("active") cluster. In most cases, the target ("passive") cluster does not
-need any kind of configuration and configuring the source cluster is enough for WAN Replication to function normally.
-
-Here, we show the simplest working configurations to replicate to a target cluster with the cluster-name `london`.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
+[source,xml,options="nowrap"]
 ----
 <hazelcast>
     ...
-    <wan-replication name="london-wan-rep">
-        <batch-publisher>
-            <cluster-name>london</cluster-name>
-            <publisher-id>londonID</publisher-id>
-            <target-endpoints>10.3.5.1:5701, 10.3.5.2:5701</target-endpoints>
-        </batch-publisher>
+    <wan-replication name="my-wan-cluster-batch">
+        <wan-publisher group-name="london">
+            <class-name>com.hazelcast.enterprise.wan.replication.WanBatchReplication</class-name>
+            <queue-full-behavior>THROW_EXCEPTION</queue-full-behavior>
+            <queue-capacity>1000</queue-capacity>
+            <properties>
+                <property name="batch.size">500</property>
+                <property name="batch.max.delay.millis">1000</property>
+                <property name="snapshot.enabled">false</property>
+                <property name="response.timeout.millis">60000</property>
+                <property name="ack.type">ACK_ON_OPERATION_COMPLETE</property>
+                <property name="endpoints">10.3.5.1:5701, 10.3.5.2:5701</property>
+                <property name="group.password">london-pass</property>
+                <property name="discovery.period">20</property>
+                <property name="executorThreadCount">2</property>
+            </properties>
+        </wan-publisher>
+        <wan-consumer>
+            <class-name>com.hazelcast.enterprise.wan.replication.YourWanConsumer</class-name>
+            <persist-wan-replicated-data>false</persist-wan-replicated-data>
+            <properties>
+                <property name="host">192.168.2.66</property>
+                <property name="vpn.name">YOUR_VPN_NAME</property>
+                <property name="username">admin</property>
+                <property name="password">YOUR_PASSWORD</property>
+                <property name="queue.name">Q/hz/clusterA</property>
+            </properties>
+        </wan-consumer>
     </wan-replication>
-
-    <map name="replicatedMap">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </map>
-
-    <cache name="replicatedCache">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </cache>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
---
-[source,yaml]
-----
-hazelcast:
-  wan-replication:
-    london-wan-rep:
-      batch-publisher:
-        londonID:
-          cluster-name: london
-          target-endpoints: 10.3.5.1:5701, 10.3.5.2:5701
-  map:
-    replicatedMap:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
-  cache:
-    replicatedCache:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
-----
---
+The `wan-publisher` element is used to configure the target cluster, i.e., to define how WAN events are sent to a specific endpoint. As mentioned above just before the configuration example, the endpoint can be a different cluster defined by static IP's or discovered using a cloud discovery mechanism. The `wan-publisher` element has the following attributes:
 
-Java::
-+
+* `group-name`: Specifies the target cluster's group name for authentication on the target endpoint. It is mandatory to set this attribute.
+* `publisher-id`: Specifies the publisher ID used for identifying the publisher. Setting this ID may be useful when the target group names are not unique for all of the WAN replication publishers in a single WAN replication scheme. It is optional to set this attribute. If this ID is not specified, the `group-name` is used as a publisher ID.
+
+And, the following are definitions of the configuration elements within `wan-publisher`:
+
+* `name`: Name of your WAN Replication. This name is referenced in IMap or ICache configuration when you add WAN Replication for these data structures (using the element `wan-replication-ref` in the configuration of IMap or ICache).
+* `class-name`: Name of the class implementation for the WAN replication.
+* `queue-full-behavior`: Policy to be applied when WAN Replication event queues are full. See the xref:queue-full-behavior.adoc[Queue Full Behavior section].
+* `queue-capacity`: Size of the queue of events. Its default value is 10000. See the xref:queue-capacity.adoc[Queue Capacity section].
+* `batch.size`: Maximum size of events that are sent to the target cluster in a single batch. Its default value is 500. See the xref:batch-size.adoc[Batch Size section].
+* `batch.max.delay.millis`: Maximum amount of time, in milliseconds, to be waited before sending a batch of events in case `batch.size` is not reached. Its default value is 1000 milliseconds. See the xref:batch-max-delay.adoc[Batch Maximum Delay section].
+* `snapshot.enabled`: When set to `true`, only the latest events (based on key) are selected and sent in a batch. Its default value is `false`.
+* `response.timeout.millis`: Time, in milliseconds, to be waited for the acknowledgment of a sent WAN event to target cluster. Its default value is 60000 milliseconds. See the xref:response-timeout.adoc[Response Timeout section].
+* `ack.type`: Acknowledgment type for each target cluster. See the xref:ack-types.adoc[Acknowledgment Types section.
+* `endpoints`: IP addresses and ports of the cluster members for which the WAN replication is implemented. These endpoints are not necessarily the entire target cluster and WAN does not perform the discovery of other members in the target cluster. It only expects that these IP addresses (or at least some of them) are available.
+* `group.password`: Configures target cluster's group password.
+
+The `wan-consumer` is used to configure the processing of the WAN events received from a target cluster. You can configure certain behavior when processing the incoming WAN events or even configure your own implementation for a WAN consumer. A custom WAN consumer allows you to define a custom processing logic and is usually used in combination with a custom WAN publisher. A custom consumer is optional and you may simply omit defining it which will cause the default processing logic to be used. It has the following sub-elements:
+
+* `class-name`: Name of the class implementing a custom WAN consumer (`WanReplicationConsumer`). If you don't define a class name, the default processing logic for incoming WAN events is used.
+* `properties`: Properties for the custom WAN consumer. These properties are accessible when initializing the WAN consumer. You can define the host, username and password for the host, name of the queue to be polled by the consumer, etc.
+* `persist-wan-replicated-data`: When set to `true`, an incoming event over WAN replication can be persisted to a database for example, otherwise it is not persisted. Default value is `true`.
+
+Other relevant properties are:
+
+* `discovery.period`: Period in seconds in which WAN tries to reestablish connections to failed endpoints. Default is 10 seconds.
+* `executorThreadCount`: The number of threads that the `WanBatchReplication` executor has. The executor is used to send WAN events to the endpoints and ideally you want to have one thread per endpoint. If this property is omitted and you have specified the `endpoints` property, this is the case. If necessary you can manually define the number of threads that the executor uses. Once the executor has been initialized there is thread affinity between the discovered endpoints and the executor threads - all events for a single endpoint go through a single executor thread, preserving event order. It is important to determine which number of executor threads is a good value. Failure to do so can lead to performance issues - either contention on a too small number of threads or wasted threads that are not performing any work.
+
+And the following is the equivalent programmatic configuration snippet:
+
 [source,java]
 ----
 include::{javasource}/wan/ExampleWANReplicationConfiguration.java[tag=wrc]
 ----
-====
 
-We can see that we have configured the map named `replicatedMap` and cache named `replicatedCache` to
-replicate to the cluster named `london` on two endpoints - `10.3.5.1:5701, 10.3.5.2:5701`. The `london` cluster
-might have more members than these two but only these two will receive WAN events and forward them to other
-members in the `london` cluster or to other clusters if WAN event forwarding is enabled.
-Please notice that the WAN Replication configuration is referenced in map and cache configuration by name, here
-`london-wan-rep`.
+Using this configuration, the cluster running in New York replicates to Tokyo and London. The Tokyo and London clusters should
+have similar configurations if you want to run in Active-Active mode.
 
-The default settings for WAN Replication will suit most use cases. If, however, you have specific needs or if you
-would like to fine-tune the behavior of WAN Replication for your application, please refer to the
-xref:tuning.adoc[Fine-Tuning WAN Replication section] section for more information.
+If the New York and London cluster configurations contain the `wan-replication` element and the Tokyo cluster does not, it means
+New York and London are active endpoints and Tokyo is a passive endpoint.
 
-[[wanbatchreplication-discovery-spi]]
-== Using the Discovery SPI
+== Defining WAN Replication Using Discovery SPI
 
-In addition to defining target cluster endpoints with static IP addresses,
-you can configure WAN to work with the Discovery SPI and determine the endpoint IP addresses at runtime.
-It may be suitable when you don't know the list of static IP addresses of the target cluster at
-startup time or in cases when the list of available target endpoints is subject to change during the lifecycle of the
-source cluster.
+In addition to defining target cluster endpoints with static IP addresses, you can configure WAN to work with the discovery SPI and determine the endpoint IP addresses at runtime. This allows you to use WAN with endpoints on various cloud infrastructures (such as Amazon EC2 or GCP Compute) where the IP address is not known in advance. Typically you use a readily available discovery SPI plugin such as https://github.com/hazelcast/hazelcast-aws[Hazelcast AWS EC2 discovery plugin], https://github.com/hazelcast/hazelcast-gcp[Hazelcast GCP discovery plugin], or similar. For more advanced cases, you can provide your own discovery SPI implementation with custom logic for determining the WAN target endpoints such as looking up the endpoints in some service registry or even reading the endpoint addresses from a file.
 
-In relation to the above, using the Discovery SPI allows you to use WAN with endpoints on various cloud
-infrastructures (such as Amazon EC2 or GCP Compute) where
-the IP address is not known in advance. Typically you use a readily available Discovery SPI plugin such as
-https://github.com/hazelcast/hazelcast-aws[Hazelcast AWS discovery plugin^],
-https://github.com/hazelcast/hazelcast-azure[Hazelcast Azure discovery plugin^],
-https://github.com/hazelcast/hazelcast-gcp[Hazelcast GCP discovery plugin^], or similar.
-You can store the list of IP addresses in those infrastructures and use these plugins
-to read from that list.
+NOTE: When using the discovery SPI, WAN always connects to the public address of the members returned by the discovery SPI implementation. This is opposite to the cluster membership mechanism using the discovery SPI where a member connects to a different member in the same cluster through its private address. Should you prefer for WAN to use the private address of the discovered member as well, please use the `discovery.useEndpointPrivateAddress` publisher property (see below).
 
-For more advanced cases, you can provide your own xref:extending-hazelcast:discovery-spi.adoc[Discovery SPI] implementation with custom logic for
-determining the WAN target endpoints such as looking up the endpoints in some service registry or even
-reading the endpoint addresses from a file.
 
-NOTE: When using the Discovery SPI, WAN always connects to the public address of the members returned by
-the Discovery SPI implementation. This is opposite to the cluster membership mechanism using
-the Discovery SPI where a member connects to a different member in the same cluster through its private address.
-Should you prefer for WAN to use the private address of the discovered member as well,
-please use the `use-endpoint-private-address` publisher element, described in the following paragraphs.
+Following is an example of setting up the WAN replication with the EC2 discovery plugin. You must have the https://github.com/hazelcast/hazelcast-aws[Hazelcast AWS EC2 discovery plugin] on the classpath.
 
-The following is an example of setting up the WAN replication with the AWS discovery plugin.
-Note that you must have `hazelcast-all` (or `hazelcast-aws`) JAR on the classpath.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <wan-replication name="london-wan-rep">
-        <batch-publisher>
-            <cluster-name>london</cluster-name>
-            <publisher-id>londonID</publisher-id>
+    <wan-replication name="my-wan-cluster-batch">
+        <wan-publisher group-name="london">
+            <class-name>com.hazelcast.enterprise.wan.replication.WanBatchReplication</class-name>
+            <queue-full-behavior>THROW_EXCEPTION</queue-full-behavior>
+            <queue-capacity>1000</queue-capacity>
+            <properties>
+                <property name="batch.size">500</property>
+                <property name="batch.max.delay.millis">1000</property>
+                <property name="snapshot.enabled">false</property>
+                <property name="response.timeout.millis">60000</property>
+                <property name="ack.type">ACK_ON_OPERATION_COMPLETE</property>
+                <property name="group.password">london-pass</property>
+                <property name="discovery.period">20</property>
+                <property name="maxEndpoints">5</property>
+                <property name="executorThreadCount">5</property>
+            </properties>
             <discovery-strategies>
                 <discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">
                     <properties>
@@ -178,84 +143,37 @@ XML::
                     </properties>
                 </discovery-strategy>
             </discovery-strategies>
-        </batch-publisher>
+        </wan-publisher>
     </wan-replication>
-
-    <map name="replicatedMap">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </map>
-
-    <cache name="replicatedCache">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </cache>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
---
-[source,yaml]
-----
-hazelcast:
-  wan-replication:
-    london-wan-rep:
-      batch-publisher:
-        londonID:
-          cluster-name: london
-          discovery-strategies:
-            discovery-strategy:
-              - enabled: true
-                class: com.hazelcast.aws.AwsDiscoveryStrategy
-                properties:
-                  access-key: test-access-key
-                  secret-key: test-secret-key
-                  region: test-region
-                  iam-role: test-iam-role
-                  host-header: ec2.test-host-header
-                  security-group-name: test-security-group-name
-                  tag-key: test-tag-key
-                  tag-value: test-tag-value
-                  connection-timeout-seconds: 10
-                  hz-port: 5701
-----
---
+The `hz-port` property defines the port or the port range on which the target endpoint is running. The default port range 5701-5708 is used if this property is not defined. This is needed because the Amazon API which the AWS plugin uses does not provide the port on which Hazelcast is running, only the IP address. For some other discovery SPI implementations, this might not be necessary and it might discover the port as well, e.g., by looking up in a service registry.
 
-Java::
-+
-[source,java]
-----
-include::{javasource}/wan/ExampleWANReplicationDiscoveryConfiguration.java[tag=wrdc]
-----
-====
+The other properties are the same as when using the `aws` element. In case of EC2 discovery you can configure the WAN replication using the `aws` element. You may use either of these, but not both at the same time.
 
-The `hz-port` property defines the port or the port range on which the target endpoint is running.
-The default port range 5701-5708 is used if this property is not defined.
-This is needed because the Amazon API which the AWS plugin uses does not provide
-the port on which Hazelcast is running, only the IP address. For some other Discovery SPI implementations,
-this might not be necessary and it might discover the port as well, e.g., by looking up in a service registry.
-
-The other properties are the same as when using the `aws` element. In case of AWS discovery you can configure
-the WAN replication using the `aws` element. You may use either the `discovery-strategies` or `aws`
-element, but not both at the same time.
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
 [source,xml]
 ----
 <hazelcast>
     ...
-    <wan-replication name="london-wan-rep">
-        <batch-publisher>
-            <cluster-name>london</cluster-name>
-            <publisher-id>londonID</publisher-id>
-            <use-endpoint-private-address>false</use-endpoint-private-address>
+    <wan-replication name="my-wan-cluster-batch">
+        <wan-publisher group-name="london">
+            <class-name>com.hazelcast.enterprise.wan.replication.WanBatchReplication</class-name>
+            <queue-full-behavior>THROW_EXCEPTION</queue-full-behavior>
+            <queue-capacity>1000</queue-capacity>
+            <properties>
+                <property name="batch.size">500</property>
+                <property name="batch.max.delay.millis">1000</property>
+                <property name="snapshot.enabled">false</property>
+                <property name="response.timeout.millis">60000</property>
+                <property name="ack.type">ACK_ON_OPERATION_COMPLETE</property>
+                <property name="group.password">london-pass</property>
+                <property name="discovery.period">20</property>
+                <property name="discovery.useEndpointPrivateAddress">false</property>
+                <property name="maxEndpoints">5</property>
+                <property name="executorThreadCount">5</property>
+            </properties>
             <aws enabled="true">
                 <access-key>my-access-key</access-key>
                 <secret-key>my-secret-key</secret-key>
@@ -265,184 +183,22 @@ XML::
                 <tag-value>hz-members</tag-value>
                 <hz-port>5701</hz-port>
             </aws>
-        </batch-publisher>
+        </wan-publisher>
     </wan-replication>
-
-    <map name="replicatedMap">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </map>
-
-    <cache name="replicatedCache">
-        <wan-replication-ref name="london-wan-rep"/>
-        ...
-    </cache>
     ...
 </hazelcast>
 ----
---
 
-YAML::
-+
-[source,yaml]
+See the <<aws-element, aws element>> and the <<configuring-client-for-aws, Configuring Client for AWS>> sections for the descriptions of above AWS configuration elements. The following are the definitions of additional configuration properties:
+
+* `discovery.period`: Period in seconds in which WAN tries to discover new endpoints and reestablish connections to failed endpoints. Default is 10 seconds.
+* `maxEndpoints`: Maximum number of endpoints that WAN connects to when using a discovery mechanism to define endpoints. Default is `Integer.MAX_VALUE`. This property has no effect when static endpoint IPs are defined using the `endpoints` property.
+* `executorThreadCount`: Number of threads that the `WanBatchReplication` executor has. The executor is used to send WAN events to the endpoints and ideally you want to have one thread per endpoint. If this property is omitted and you have specified the `endpoints` property, this is the case. If, on the other hand, you are using WAN with the discovery SPI and you have not specified this property, the executor is sized to the initial number of discovered endpoints. This can lead to performance issues if the number of endpoints changes in the future - either contention on a too small number of threads or wasted threads that are not performing any work. To prevent this you can manually define the executor thread count. Once the executor has been initialized there is thread affinity between the discovered endpoints and the executor threads - all events for a single endpoint go through a single executor thread, preserving event order.
+* `discovery.useEndpointPrivateAddress`: Determines whether the WAN connection manager should connect to the endpoint on the private address returned by the discovery SPI. By default this property is `false` which means the WAN connection manager always uses the public address.
+
+You can also define the WAN publisher with discovery SPI using the programmatic configuration:
+
+[source,java]
 ----
-hazelcast:
-  wan-replication:
-    london-wan-rep:
-      batch-publisher:
-        londonID:
-          cluster-name: london
-          use-endpoint-private-address: false
-          aws:
-            enabled: true
-              access-key: my-access-key
-              secret-key: my-secret-key
-              region: us-west-1
-              security-group-name: hazelcast-sg
-              tag-key: type
-              tag-value: hz-members
-              hz-port: 5701
-  map:
-    replicatedMap:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
-  cache:
-    replicatedCache:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
+include::{javasource}/wan/ExampleWANReplicationDiscoveryConfiguration.java[tag=wrdc]
 ----
-====
-
-See the following for the configurations of WAN replications in other cloud infrastructures
-that are supported by Discovery SPI:
-
-* https://github.com/hazelcast/hazelcast-azure/blob/master/README.md#configuration-for-wan-replication-target-cluster-discovery[Microsoft Azure^]
-* https://github.com/hazelcast/hazelcast-gcp/blob/master/README.md#configuration[Google Cloud Platform (GCP)^]
-* https://github.com/hazelcast/hazelcast-kubernetes#configuration[Kubernetes^]
-* https://github.com/hazelcast/hazelcast-openshift#wan-replication[OpenShift^]
-* https://github.com/hazelcast/hazelcast-eureka#hazelcast-configuration[Eureka^]
-* https://github.com/hazelcast/hazelcast-jclouds/blob/master/README.md#discovering-members-with-jclouds[jclouds®^]
-* https://github.com/bitsofinfo/hazelcast-etcd-discovery-spi/blob/master/README.md#usage[etcd^]
-* https://github.com/bitsofinfo/hazelcast-consul-discovery-spi#usage[Consul^]
-* https://github.com/hazelcast/hazelcast-zookeeper/blob/master/README.md#configuration[Zookeeper^]
-* https://github.com/jkutner/hazelcast-heroku-discovery/blob/master/README.md#configuration[Heroku^]
-
-[[wanbatchreplication-implementation]]
-== Using the Built-In WAN Batch Publisher 
-
-Hazelcast IMDG offers the built-in WAN batch publisher implementation for WAN replication.
-
-As you see in the above configuration examples, this implementation is specified simply by using
-the `batch-publisher` element (in the declarative configuration) or the `WanBatchPublisherConfig`
-class (in the programmatic configuration) when defining a WAN replication publisher.
-
-The WAN batch publisher transmits WAN events (map and cache updates) between clusters in batches. It waits until:
-
-* a pre-defined number of replication events are generated, (see the xref:tuning.adoc#batch-size[Batch Size section])
-* or a pre-defined amount of time is passed (see the xref:tuning.adoc#batch-maximum-delay[Batch Maximum Delay section]).
-
-Here is a declarative example on using and configuring `batch-publisher`:
-
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
-[source,xml]
-----
-<hazelcast>
-    <wan-replication name="london-wan-rep">
-        <batch-publisher>
-            <cluster-name>london</cluster-name>
-            ...
-        </batch-publisher>
-    </wan-replication>
-
-    <map name="replicatedMap">
-        <wan-replication-ref name="london-wan-rep"/>
-    </map>
-
-    <cache name="replicatedCache">
-        <wan-replication-ref name="london-wan-rep"/>
-    </cache>
-</hazelcast>
-----
---
-
-YAML::
-+
-[source,yaml]
-----
-hazelcast:
-  wan-replication:
-    london-wan-rep:
-      batch-publisher:
-        cluster-name: london
-        ...
-  map:
-    replicatedMap:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
-  cache:
-    replicatedCache:
-      wan-replication-ref:
-        london-wan-rep:
-          ...
-----
-====
-
-Above, you notice that we have configured the instance to replicate a map and a cache to a target cluster
-with the cluster name `london`. WAN Replication will check that this cluster name matches during connection
-establishment to each endpoint. This does not serve as a security measure though. This serves only to prevent
-misconfiguration where the source cluster would mistakenly replicate to the wrong cluster and as an attempt to
-detect and prevent loops where the same WAN event would be infinitely forwarded between the same clusters.
-
-The `wan-replication` configuration element defines a single WAN replication scheme. Hazelcast maps and caches
-are configured to replicate to a single WAN replication scheme and different maps and different caches can be
-configured to replicate to different WAN replication schemes. Simply put, a WAN replication scheme may be viewed
-as several target clusters and different Hazelcast structures can replicate to different target clusters
-simultaneously. As such, a single WAN replication scheme can contain multiple WAN replication publishers.
-It has the following essential sub-elements and attributes:
-
-* `name`: Name of your WAN replication scheme. This name is referenced in IMap or ICache configuration when you want
-to enable WAN Replication for these data structures (using the element `wan-replication-ref` in the configuration
-of IMap or ICache).
-* `batch-publisher`: Enables use of a WAN publisher which uses the built-in WAN replication implementation.
-It defines how to connect to the target cluster and how WAN events are sent to a specific target
-endpoint. As mentioned above, just before the configuration example, the target endpoints can be a different cluster
-defined by static IPs or discovered using a cloud discovery mechanism.
-
-The `batch-publisher` has the following sub-elements:
-
-* `cluster-name`: Sets the cluster name used as an endpoint cluster name for authentication
-on the target endpoint. If there is no separate publisher ID element defined, this cluster name
-is also used as a WAN publisher ID. This ID is then used for identifying the publisher in a
-WAN replication scheme. It is mandatory to set this attribute.
-* `publisher-id`: Sets the publisher ID used to identify the publisher in a WAN replication scheme.
-Setting this ID may be useful when the `wan-replication` element contains multiple WAN publishers and the
-cluster names are not unique for all of the WAN replication publishers in a single WAN replication scheme.
-It is optional to set this attribute. If this ID is not specified, the `cluster-name` is used as a publisher ID.
-* `target-endpoints`: IP addresses and ports of the cluster members for which the WAN replication is implemented.
-It is enough to specify some of the member IP/ports available in the target cluster, i.e., you don’t need to
-provide the IP/ports of all members in there. WAN does not perform the discovery of other members in the target cluster;
-it only expects that the IP addresses you provide are available.
-* `sync`: Configuration for the WAN sync mechanism. See the xref:advanced-features.adoc#synchronizing-wan-clusters[Synchronizing WAN Clusters section].
-* `discovery-strategies`: Set its `enabled` attribute to true for discovery in various cloud infrastructures.
-You can define multiple discovery strategies using the `discovery-strategy` sub-element and its elements.
-See the <<wanbatchreplication-discovery-spi, Using the Discovery SPI section>> for this and the below elements.
-* `aws`: Configuration for discovery strategy for Amazon EC2 discovery plugin.
-* `gcp`: Configuration for discovery strategy for Google cloud platform discovery plugin.
-* `azure`: Configuration for discovery strategy for Microsoft Azure discovery plugin.
-* `kubernetes`: Configuration for discovery strategy for Kubernetes discovery plugin.
-* `eureka`: Configuration for discovery strategy for Eureka discovery plugin.
-
-Using this configuration, the cluster replicates to a cluster with the name `london`.
-The `london` cluster should have a similar configuration if you want to run in Active-Active mode.
-
-You can achieve various WAN topologies using different configurations on different clusters. For instance,
-if the New York and London cluster configurations contain the `wan-replication` element and the Tokyo cluster
-does not, it might mean that the New York and London clusters are active endpoints and Tokyo is a passive endpoint.
-

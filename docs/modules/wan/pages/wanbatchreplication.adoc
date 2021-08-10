@@ -1,0 +1,12 @@
+= WanBatchReplication Implementation
+
+Hazelcast offers `WanBatchReplication` implementation for the WAN replication.
+
+As you see in the above configuration examples, this implementation is configured using the `class-name` element (in the declarative configuration) or the method `setClassName` (in the programmatic configuration).
+
+The implementation `WanBatchReplication` waits until:
+
+* a pre-defined number of replication events are generated, (see the xref:batch-size.adoc[Batch Size section])
+* or a pre-defined amount of time is passed (see the xref:batch-maximum-delay.adoc[Batch Maximum Delay section]).
+
+NOTE: `WanNoDelayReplication` implementation has been removed. You can still achieve this behavior by setting the batch size to `1` while configuring your WAN replication.
