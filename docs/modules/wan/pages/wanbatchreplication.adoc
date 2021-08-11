@@ -7,6 +7,6 @@ As you see in the above configuration examples, this implementation is configure
 The implementation `WanBatchReplication` waits until:
 
 * a pre-defined number of replication events are generated, (see the xref:batch-size.adoc[Batch Size section])
-* or a pre-defined amount of time is passed (see the xref:batch-maximum-delay.adoc[Batch Maximum Delay section]).
+* or a pre-defined amount of time is passed (see the xref:batch-max-delay.adoc[Batch Maximum Delay section]).
 
 NOTE: `WanNoDelayReplication` implementation has been removed. You can still achieve this behavior by setting the batch size to `1` while configuring your WAN replication.
