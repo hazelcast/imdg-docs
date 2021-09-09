@@ -148,7 +148,7 @@ creates and uses the `customers` map and queue.
 include::{javasource}/GettingStartedMember.java[tag=startmember]
 ----
 +
-* Run this `GettingStarted` class a second time to get the second member
+* Run the above code for the second time to get the second member
 started. The members form a cluster and the output is similar to the following.
 +
 ```
