@@ -11,7 +11,7 @@ In order to support these features, a serialized Portable object contains
 meta information like the version and the concrete location of the each field in the binary data.
 This way, Hazelcast navigates in the `byte[]` and deserializes only
 the required field without actually deserializing the whole object.
-This improves the Query performance.
+This improves the query performance.
 
 With multi-version support, you can have two cluster members where
 each has different versions of the same object. Hazelcast stores both

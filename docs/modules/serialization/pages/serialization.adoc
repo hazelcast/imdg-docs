@@ -1,26 +1,61 @@
 = Serialization
+:description: Before data can be sent over a network between cluster members and/or clients, that data must be serialized into raw bytes. Hazelcast has many serialization methods to choose from, depending on which Hazelcast topology you are using and what you plan on doing with your data.
 
-Hazelcast needs to serialize the Java objects that you put into Hazelcast because
-Hazelcast is a distributed system. The data and its replicas are
-stored in different partitions on multiple cluster members.
-The data you need may not be present on the local member, and in that case,
-Hazelcast retrieves that data from another member. This requires serialization.
+{description}
 
-Serialization is used in the following cases:
+== Serialization in Client/Server Mode
 
-* Adding key/value objects to a map
-* Putting items in a queue/set/list
-* Sending a runnable using an executor service
-* Processing an entry within a map
-* Locking an object
-* Sending a message to a topic
+In xref:overview:topology.adoc[client/server mode], you can serialize your data on the client side and/or the xref:ROOT:glossary.adoc#member[member] (server) side.
 
-Hazelcast optimizes the serialization for the basic types and their array types
-with its built-in serializers. By default, you cannot override this behavior; however,
-Hazelcast offers a way to override them using a configuration option,
-see the xref:overriding-built-in-serializers.adoc[Overriding the Default Serializers section].
+If you just want to store data on members, clients can handle serialization without the members needing to know how to do so. For example, you can serialize data as JSON and add it to a map. Then you can later request that information and deserialize on the client.
 
-Hazelcast's built-in serializers can handle the following types:
+However, in the following cases, you must configure members to be able to serialize and deserialize your data:
+
+[cols="a,a,a"]
+
+|===
+|Case|Reason|Exceptions
+
+|When the data structure's values are xref:data-structures:map.adoc#setting-in-memory-format[stored as objects].
+|Members must be able to serialize or deserialize the object to send it to other members/clients or receive it from other members/clients. 
+|
+
+|When you want to xref:computing:entry-processor.adoc[process map entries] or use an xref:computing:executor-service.adoc[executor service].
+|Members need to serialize the tasks.
+|When using the Java client, you can configure map entries with xref:implementing-portable-serialization.adoc[`Portable`] serialization, in which case you don't need to configure serialization for map entries on the member. For details, see xref:clusters:accessing-domain-objects.adoc[].
+
+|When you use SQL to run xref:sql:querying-imap.adoc#using-parameterized-queries[parameterized queries] on nested objects.
+|Members need to deserialize underlying objects to be able to read nested fields.
+|You can query nested fields whose values are primitives because these data types are serialized by Hazelcast by default. See <<data-types-with-built-in-serialization, Data Types with Built-In Serialization>>.
+|===
+
+=== Serialization Options for Clients
+
+For a full list of serialization options, see xref:comparing-interfaces.adoc[].
+
+== Serialization in Embedded Mode
+
+In xref:overview:topology.adoc[embedded mode] data is partitioned across members in a cluster. As a result, each member must be able to serialize and deserialize all data in the cluster in order to send and receive it. For example:
+
+- Adding key/value objects to a map
+
+- Putting items in a queue/set/list
+
+- Sending a runnable using an executor service
+
+- Processing an entry within a map
+
+- Locking an object
+
+- Sending a message to a topic
+
+=== Serialization Options for Members
+
+For a full list of serialization options, see xref:comparing-interfaces.adoc[].
+
+== Data Types with Built-In Serialization
+
+By default, Hazelcast optimizes the serialization for the following data types. You do not need to serialize or deserialize these types yourself:
 
 * `Byte`, `Boolean`, `Character`, `Short`, `Integer`, `Long`, `Float`, `Double`, `String`, `UUID`
 * `byte[]`, `boolean[]`, `char[]`, `short[]`, `int[]`, `long[]`, `float[]`, `double[]`, `String[]`
@@ -28,5 +63,4 @@ Hazelcast's built-in serializers can handle the following types:
 `ConcurrentSkipListMap/Set`, `ConcurrentHashMap`, `LinkedHashMap/Set`, `TreeMap/Set`, `ArrayDeque`, `LinkedBlockingQueue`,
 `ArrayBlockingQueue`, `PriorityBlockingQueue`, `PriorityQueue`, `DelayQueue`, `SynchronousQueue`, `LinkedTransferQueue`
 
-Hazelcast optimizes all of the above object types. You do not need to worry about their (de)serializations.
-
+If you would rather implement your own serialization for these types, see xref:overriding-built-in-serializers.adoc[Overriding the Default Serializers].

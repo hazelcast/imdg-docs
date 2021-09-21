@@ -3,11 +3,12 @@
 The table below provides a comparison between the interfaces listed in the previous section
 to help you in deciding which interface to use in your applications.
 
-[cols="3,3a,4a"]
+[cols="3m,4a,3a,4a"]
 |===
-| Serialization Interface| Advantages| Drawbacks
+| Serialization Interface| Supported Clients|Advantages| Disadvantages
 
 | Serializable
+| Members and Java clients
 | * A standard and basic Java interface
 
 * Requires no implementation
@@ -15,62 +16,57 @@ to help you in deciding which interface to use in your applications.
 
 * More space occupancy
 
-* Not supported by Native clients
-
 | Externalizable
+| Members and Java clients
 | * A standard Java interface
 
-* More CPU and memory usage efficient than Serializable
+* More CPU and memory usage efficient than `Serializable`
 | * Serialization interface must be implemented
 
-* Not supported by Native clients
-
 | DataSerializable
-| * More CPU and memory usage efficient than Serializable
+| Members and Java clients
+| * More CPU and memory usage efficient than `Serializable`
 | * Specific to Hazelcast
 
-*  Not supported by Native clients
-
 | IdentifiedDataSerializable
-| * More CPU and memory usage efficient than Serializable
+| Members and all clients
+| * More CPU and memory usage efficient than `Serializable`
 
 * Reflection is not used during deserialization
 
-* Supported by all Native Clients
 | * Specific to Hazelcast
 
-* Serialization interface must be implemented
+* You must implement this serialization interface
 
 * A Factory and configuration must be implemented
 
 | Portable
-| * More CPU and memory usage efficient than Serializable
+| Members and all clients
+| * More CPU and memory usage efficient than `Serializable`
 
 * Reflection is not used during deserialization
 
 * Versioning is supported
 
-* Partial deserialization is supported during Queries
+* Faster queries than `Custom Serialization` thanks to partial deserialization support during queries
 
-* Supported by all Native Clients
 | * Specific to Hazelcast
 
-* Serialization interface must be implemented
+* You must implement this serialization interface
 
 * A Factory and configuration must be implemented
 
 * Class definition is also sent with data but stored only once per class
 
 | Custom Serialization
+|Members and all clients
 | * Does not require class to implement an interface
 
-* Convenient and flexible
+* Can be based on `StreamSerializer` `ByteArraySerializer`
 
-* Can be based on StreamSerializer ByteArraySerializer
-|* Serialization interface must be implemented
+|* You must implement your own serializer
 
-* Plug in and configuration is required
+* Slower queries compared to `Portable` because partial deserialization is not supported for queries
+
+* Requires a plugin and configuration
 |===
-
-
-Let's dig into the details of the above serialization mechanisms in the following sections.
