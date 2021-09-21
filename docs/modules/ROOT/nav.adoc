@@ -33,8 +33,6 @@ include::integrated-clustering:partial$integrated-clustering-nav.adoc[]
 
 include::storage:partial$storage-nav.adoc[]
 
-* xref:striim-cdc.adoc[Database CDC Integration Using Striim Hot Cache]
-
 include::clients:partial$clients-nav.adoc[]
 
 include::serialization:partial$serialization-nav.adoc[]
@@ -65,6 +63,7 @@ include::network-partitioning:partial$network-partitioning-nav.adoc[]
 * xref:licenses.adoc[Appendix D: License Questions]
 * xref:phone-homes.adoc[Appendix E: Phone Homes]
 * xref:faq.adoc[Appendix F: Frequently Asked Questions]
+* xref:list-of-hazelcast-metrics.adoc[Appendix G: List of Hazelcast Metrics]
 * xref:glossary.adoc[Glossary]
 
 

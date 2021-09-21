@@ -12,6 +12,9 @@ by default, but the number of metrics grows as more features and data structures
 This is because every data structure provides its own metrics.
 For example, if there are two IMaps used in a cluster, both IMaps produce their metrics on every member.
 
+NOTE: See the xref:ROOT:list-of-hazelcast-metrics.adoc[List of Hazelcast Metrics appendix] for the full list
+of metrics with their descriptions.
+
 [[metrics-configuration]]
 == Configuring Metrics
 
