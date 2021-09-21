@@ -5,3 +5,4 @@
 ** xref:query:aggregations.adoc[]
 ** xref:query:projections.adoc[]
 ** xref:query:continuous-query-cache.adoc[]
+** xref:data-structures:preventing-out-of-memory.adoc[]

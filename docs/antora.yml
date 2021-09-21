@@ -1,9 +1,16 @@
 name: imdg
-title: Hazelcast IMDG
-version: 5.0-SNAPSHOT
+title: IMDG
+# Version in the URL
+version: '5.0-SNAPSHOT'
+# Version in the version selector
+display_version: '5.0-SNAPSHOT'
+# Displays a banner to inform users that this is a prerelease version 
 prerelease: true
 asciidoc:
   attributes:
+    # Used as a variable in the docs for things like download links
+    full-version: '5.0-SNAPSHOT'
+    # Path to example code
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
