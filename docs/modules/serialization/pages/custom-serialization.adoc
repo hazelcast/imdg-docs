@@ -178,7 +178,7 @@ XML::
     ...
     <serialization>
         <serializers>
-            <serializer type-class="Employee">EmployeeByteArraySerializer</serializer>
+            <serializer type-class="EmployeeSS">EmployeeByteArraySerializer</serializer>
         </serializers>
     </serialization>
     ...
@@ -193,7 +193,7 @@ YAML::
 hazelcast:
   serialization:
     serializers:
-      - type-class: Employee
+      - type-class: EmployeeSS
         class-name: EmployeeByteArraySerializer
 ----
 ====
