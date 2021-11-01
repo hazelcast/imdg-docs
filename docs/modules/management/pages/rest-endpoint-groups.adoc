@@ -245,3 +245,7 @@ for more information on the `advanced-network` element.
 When you enable or disable a REST endpoint group, all the endpoints in that group
 are enabled or disabled, respectively. For the examples above, we disabled the endpoints
 belonging to the `HEALTH_CHECK` endpoint group.
+
+IMPORTANT: REST client does not check xref:security:native-client-security#permissions[permissions], that you may configure for the other clients.
+If you set permissions for the REST API, keep in mind that they will not be enforced.
+
