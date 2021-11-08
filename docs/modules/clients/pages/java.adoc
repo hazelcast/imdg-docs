@@ -100,57 +100,6 @@ This single member behaves as a gateway to the other members.
 For any operation requested from the client, it redirects the request to the relevant member and
 returns the response back to the client returned from that member.
 
-=== Handling Failures
-
-There are two main failure cases and configurations you can perform to achieve proper behavior.
-
-**Handling Client Connection Failure:**
-
-While the client is trying to connect initially to one of the members in the
-`ClientNetworkConfig.addressList`, all the members might be not available.
-Instead of giving up, throwing an exception and stopping the client,
-the client retries to connect as configured which is described in the
-<<configuring-client-connection-retry, Configuring Client Connection Retry section>>.
-
-The client executes each operation through the already established connection to the cluster.
-If this connection(s) disconnects or drops, the client tries to reconnect as configured.
-
-**Handling Retry-able Operation Failure:**
-
-While sending the requests to related members, operations can fail due to various reasons.
-Read-only operations are retried by default. If you want to enable retry for the other operations,
-you can set the `redoOperation` to `true`. See the <<enabling-redo-operation, Enabling Redo Operation section>>.
-
-You can set a timeout for retrying the operations sent to a member.
-This can be provided by using the property `hazelcast.client.invocation.timeout.seconds` in `ClientProperties`.
-The client retries an operation within this given period, of course, if it is a read-only operation or
-you enabled the `redoOperation` as stated in the above paragraph.
-This timeout value is important when there is a failure resulted by either of the following causes:
-
-* Member throws an exception.
-* Connection between the client and member is closed.
-* Client's heartbeat requests are timed out.
-
-See the <<client-system-properties, Client System Properties section>>
-for the description of the `hazelcast.client.invocation.timeout.seconds` property.
-
-When any failure happens between a client and member
-(such as an exception on the member side or connection issues), an operation is retried if:
-
-* it is certain that it has not run on the member yet
-* or if it is idempotent such as a read-only operation, i.e., retrying does not have a side effect.
-
-If it is not certain whether the operation has run on the member,
-then the non-idempotent operations are not retried.
-However, as explained in the first paragraph of this section,
-you can force all client operations to be retried (`redoOperation`)
-when there is a failure between the client and member.
-But in this case, you should know that some operations may run multiple times causing conflicts.
-For example, assume that your client sent a `queue.offer` operation to the member and
-then the connection is lost. Since there will be no respond for this operation,
-you will not know whether it has run on the member or not. If you enabled `redoOperation`,
-that `queue.offer` operation may rerun and this causes the same objects to be offered twice in the member's queue.
-
 === Using Supported Distributed Data Structures
 
 Most of the Distributed Data Structures are supported by the Java client.
@@ -1949,6 +1898,64 @@ You can also configure it within the Spring context, as shown below:
     </hz:client-failover>
 </beans>
 ----
+
+== Handling Failures
+
+There are three main failure cases and configurations you can perform to achieve proper behavior.
+
+**Handling Client Connection Failure:**
+
+While the client is trying to connect initially to one of the members in the
+`ClientNetworkConfig.addressList`, all the members might be not available.
+Instead of giving up, throwing an exception and stopping the client,
+the client retries to connect as configured which is described in the
+<<configuring-client-connection-retry, Configuring Client Connection Retry section>>.
+
+The client executes each operation through the already established connection to the cluster.
+If this connection(s) disconnects or drops, the client tries to reconnect as configured.
+
+**Handling Unresponsive Connections**
+
+It is possible for a connection to be open, but unresponsive, due to several scenarios like JVM pauses or TCP half-open sockets. If this occurs, a client which already has an open connection to that member will *not* be able to tell that the member is unresponsive because the connection is still open and no errors are received from the member side. Client operations will stay in-flight, potentially indefinitely, in this scenario. To avoid this, Hazelcast provides <<java-client-failure-detectors, Client Failure Detectors>> to mark members which appear to be unresponsive or down. Once the member is marked as suspect by the client, operations will fail as expected.
+
+**Handling Retry-able Operation Failure:**
+
+While sending the requests to related members, operations can fail due to various reasons.
+Read-only operations are retried by default. If you want to enable retry for the other operations,
+you can set the `redoOperation` to `true`. See the <<enabling-redo-operation, Enabling Redo Operation section>>.
+
+You can set a timeout for retrying the operations sent to a member.
+This can be provided by using the property `hazelcast.client.invocation.timeout.seconds` in `ClientProperties`.
+The client retries an operation within this given period if it is a read-only operation or
+you enabled the `redoOperation` as stated in the above paragraph.
+This timeout value is relevant only when there is a failure of the following types:
+
+* Member throws an exception
+* Connection between the client and member is closed
+* Client's heartbeat requests are timed out
+
+Unresponsive connections, described in the previous section, are one case where it may not be possible
+to retry via invocation timeout due to the failure not being detectable.
+
+See the <<client-system-properties, Client System Properties section>>
+for the description of the `hazelcast.client.invocation.timeout.seconds` property.
+
+When any failure happens between a client and member
+(such as an exception on the member side or connection issues), an operation is retried if:
+
+* it is certain that it has not run on the member yet
+* or if it is idempotent such as a read-only operation, i.e., retrying does not have a side effect.
+
+If it is not certain whether the operation has run on the member,
+then the non-idempotent operations are not retried.
+However, as explained in the first paragraph of this section,
+you can force all client operations to be retried (`redoOperation`)
+when there is a failure between the client and member.
+But in this case, you should know that some operations may run multiple times causing conflicts.
+For example, assume that your client sent a `queue.offer` operation to the member and
+then the connection is lost. Since there will be no respond for this operation,
+you will not know whether it has run on the member or not. If you enabled `redoOperation`,
+that `queue.offer` operation may rerun and this causes the same objects to be offered twice in the member's queue.
 
 == Java Client Failure Detectors
 
