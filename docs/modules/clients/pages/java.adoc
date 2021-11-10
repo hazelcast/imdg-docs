@@ -1916,7 +1916,7 @@ If this connection(s) disconnects or drops, the client tries to reconnect as con
 
 **Handling Unresponsive Connections**
 
-It is possible for a connection to be open, but unresponsive, due to several scenarios like JVM pauses or TCP half-open sockets. If this occurs, a client which already has an open connection to that member will *not* be able to tell that the member is unresponsive because the connection is still open and no errors are received from the member side. Client operations will stay in-flight, potentially indefinitely, in this scenario. To avoid this, Hazelcast provides <<java-client-failure-detectors, Client Failure Detectors>> to mark members which appear to be unresponsive or down. Once the member is marked as suspect by the client, operations will fail as expected.
+It is possible for a connection to be open, but unresponsive, due to several scenarios like JVM pauses or TCP half-open sockets. If this occurs, a client which already has an open connection to that member will *not* be able to tell that the member is unresponsive because the connection is still open and no errors are received from the member side. Client operations will stay in-flight, potentially indefinitely, in this scenario. To avoid this, Hazelcast provides <<java-client-failure-detectors, Client Failure Detectors>> to mark members which appear to be unresponsive or down. Clients will stop sending requests to members which are marked by the failure detector. Depending upon which <<java-client-operation-mode, operation mode>> the client is configured to use, it may also attempt to send requests via other members it is aware of.
 
 **Handling Retry-able Operation Failure:**
 
@@ -1932,10 +1932,7 @@ This timeout value is relevant only when there is a failure of the following typ
 
 * Member throws an exception
 * Connection between the client and member is closed
-* Client's heartbeat requests are timed out
-
-Unresponsive connections, described in the previous section, are one case where it may not be possible
-to retry via invocation timeout due to the failure not being detectable.
+* <<java-client-failure-detectors, Client Failure Detectors>> detect a member is unresponsive
 
 See the <<client-system-properties, Client System Properties section>>
 for the description of the `hazelcast.client.invocation.timeout.seconds` property.
