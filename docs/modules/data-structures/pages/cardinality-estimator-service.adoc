@@ -1,4 +1,3 @@
-
 = Cardinality Estimator Service
 [[cardinality-estimator]]
 
