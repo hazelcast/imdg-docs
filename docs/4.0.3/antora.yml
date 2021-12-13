@@ -1,8 +1,0 @@
-name: imdg
-title: IMDG
-version: 4.0
-display_version: '4.0'
-asciidoc:
-  attributes:
-    full-version: '4.0.3'  
-    page-ghissue: https://github.com/hazelcast/hazelcast-docs/issues/new
