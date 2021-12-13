@@ -6,16 +6,9 @@ content:
   - url: .
     branches: HEAD
     start_path: docs
-  - url: https://github.com/hazelcast/management-center-docs
-    branches: [main]
-    tags: [v*]
-    start_path: docs
-  - url: https://github.com/hazelcast/management-center-docs
-    branches: [archive]
-    start_paths: docs/*
 ui: 
   bundle:
-    url: https://github.com/hazelcast/hazelcast-docs-ui/releases/download/v1.5.1/ui-bundle.zip #../hazelcast-docs-ui/build/ui-bundle.zip
+    url: https://github.com/hazelcast/hazelcast-docs-ui/releases/latest/download/ui-bundle.zip #../hazelcast-docs-ui/build/ui-bundle.zip
     snapshot: true
 asciidoc:
   attributes:

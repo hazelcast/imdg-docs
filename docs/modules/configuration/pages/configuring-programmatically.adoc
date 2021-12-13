@@ -45,7 +45,7 @@ To retrieve all existing Hazelcast members, use the following:
 Hazelcast.getAllHazelcastInstances();
 ```
 
-NOTE: Hazelcast performs schema validation through the file `hazelcast-config-{page-component-display-version}.xsd`
+NOTE: Hazelcast performs schema validation through the file `hazelcast-config-{full-version}.xsd`
 which comes with your Hazelcast libraries. Hazelcast throws a meaningful exception if there
 is an error in the declarative or programmatic configuration.
 

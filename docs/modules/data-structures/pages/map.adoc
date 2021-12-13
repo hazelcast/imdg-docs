@@ -1142,7 +1142,7 @@ mapStoreConfig.setFactoryImplementation( new MapStoreFactory<Object, Object>() {
 
 To initialize the `MapLoader` implementation with the given map name, configuration
 properties and the Hazelcast instance, implement the
-https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/map/MapLoaderLifecycleSupport.html[`MapLoaderLifecycleSupport` interface^]
+https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/map/MapLoaderLifecycleSupport.html[`MapLoaderLifecycleSupport` interface^]
 which is described in the previous section.
 
 [[initializing-map-on-startup]]
@@ -1794,7 +1794,7 @@ as this ensures that the map interceptor can be removed reliably.
 
 The IMap API has two methods for adding and removing an interceptor to the map:
 `addInterceptor` and `removeInterceptor`. See also the
-https://docs.hazelcast.org/docs/{page-component-version}/javadoc/com/hazelcast/map/MapInterceptor.html[`MapInterceptor` interface^]
+https://docs.hazelcast.org/docs/{full-version}/javadoc/com/hazelcast/map/MapInterceptor.html[`MapInterceptor` interface^]
 to learn about the methods used to intercept the changes in a map.
 
 The following is an example usage.
