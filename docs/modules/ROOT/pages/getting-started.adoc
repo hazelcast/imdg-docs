@@ -237,23 +237,64 @@ Go::
 +
 [source,go]
 ----
-//Installation notes: Run the following command
-//go get github.com/hazelcast/hazelcast-go-client
+package main
 
-import "github.com/hazelcast/hazelcast-go-client"
+import (
+	"context"
+	"fmt"
+	"log"
 
-func mapSampleRun() {
-	// Start the client and connect to the cluster
-	hz, _ := hazelcast.NewClient()
+	"github.com/hazelcast/hazelcast-go-client"
+)
+
+// Installation note: Run following command
+// go get github.com/hazelcast/hazelcast-go-client
+
+func main() {
+	ShutdownProperly := func(ctx context.Context, hz *hazelcast.Client, err error) {
+		errSd := hz.Shutdown(ctx)
+		switch {
+		case err != nil && errSd == nil:
+			log.Fatal(fmt.Errorf("%v", err))
+		case err != nil && errSd != nil:
+			log.Fatal(fmt.Errorf("%v; %v", err, errSd))
+		}
+	}
+
+	ctx := context.TODO()
+
+	// Create a new Hazelcast client
+	hz, err := hazelcast.StartNewClient(ctx)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	// Create a Distributed Map in the cluster
-	mp, _ := hz.GetMap("myDistributedMap")
-	//Standard Put and Get
-	mp.Put("1", "John")
-	mp.Put("2", "Mary")
-	mp.Put("3", "Jane")
+	mp, err := hz.GetMap(ctx, "myDistributedMap")
+	if err != nil {
+		ShutdownProperly(ctx, hz, err)
+	}
+
+	// Standard Put and Get
+	_, err = mp.Put(ctx, "1", "John")
+	if err != nil {
+		ShutdownProperly(ctx, hz, err)
+	}
+	_, err = mp.Put(ctx, "2", "Mary")
+	if err != nil {
+		ShutdownProperly(ctx, hz, err)
+	}
+	_, err = mp.Put(ctx, "3", "Jane")
+	if err != nil {
+		ShutdownProperly(ctx, hz, err)
+	}
+
 	// Shutdown the client
-	hz.Shutdown()
-} 
+	err = hz.Shutdown(ctx)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
 ----
 ====
 
