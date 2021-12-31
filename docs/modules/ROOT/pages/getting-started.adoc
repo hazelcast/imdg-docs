@@ -263,7 +263,7 @@ func main() {
 		}
 	}(ctx)
 
-	mp, err := hz.GetMap(ctx, "my-distributed-map")
+	mp, err := hz.GetMap(ctx, "myDistributedMap")
 	if err != nil {
 		log.Fatalf("Could not create a map, %v", err)
 	}
