@@ -240,10 +240,10 @@ Go::
 package main
 
 import (
-	"context"
-	"log"
+    "context"
+    "log"
 
-	"github.com/hazelcast/hazelcast-go-client"
+    "github.com/hazelcast/hazelcast-go-client"
 )
 
 // Installation note: Run following command
