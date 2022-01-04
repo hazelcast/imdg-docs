@@ -241,6 +241,7 @@ package main
 
 import (
     "context"
+    "fmt"
     "log"
 
     "github.com/hazelcast/hazelcast-go-client"
@@ -254,29 +255,29 @@ func main() {
 
     hz, err := hazelcast.StartNewClient(ctx)
     if err != nil {
-        log.Fatal(err)
+        panic(fmt.Errorf("starting the client: %w", err))
     }
 
     defer hz.Shutdown(ctx)
 
-    mp, err := hz.GetMap(ctx, "myDistributedMap")
+    mp, err := hz.GetMap(ctx, "my-distributed-map")
     if err != nil {
-        log.Fatal(err)
+        panic(fmt.Errorf("trying to get a map: %w", err))
     }
 
-    _, err = mp.Put(ctx, "1", "John")
+    _, err = mp.Put(ctx, 1, "John")
     if err != nil {
-        log.Fatal(err)
+        panic(fmt.Errorf("trying to put to map: %w", err))
     }
 
-    _, err = mp.Put(ctx, "2", "Mary")
+    _, err = mp.Put(ctx, 2, "Mary")
     if err != nil {
-        log.Fatal(err)
+        panic(fmt.Errorf("trying to put to map: %w", err))
     }
 
-    _, err = mp.Put(ctx, "3", "Jane")
+    _, err = mp.Put(ctx, 3, "Jane")
     if err != nil {
-        log.Fatal(err)
+        panic(fmt.Errorf("trying to put to map: %w", err))
     }
 }
 
