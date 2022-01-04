@@ -250,34 +250,34 @@ import (
 // go get github.com/hazelcast/hazelcast-go-client
 
 func main() {
-	ctx := context.TODO()
+    ctx := context.TODO()
 
-	hz, err := hazelcast.StartNewClient(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
+    hz, err := hazelcast.StartNewClient(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
 
     defer hz.Shutdown(ctx)
 
-	mp, err := hz.GetMap(ctx, "myDistributedMap")
-	if err != nil {
-		log.Fatal(err)
-	}
+    mp, err := hz.GetMap(ctx, "myDistributedMap")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	_, err = mp.Put(ctx, "1", "John")
-	if err != nil {
-		log.Fatal(err)
-	}
+    _, err = mp.Put(ctx, "1", "John")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	_, err = mp.Put(ctx, "2", "Mary")
-	if err != nil {
-		log.Fatal(err)
-	}
+    _, err = mp.Put(ctx, "2", "Mary")
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	_, err = mp.Put(ctx, "3", "Jane")
-	if err != nil {
-		log.Fatal(err)
-	}
+    _, err = mp.Put(ctx, "3", "Jane")
+    if err != nil {
+        log.Fatal(err)
+    }
 }
 
 ----
