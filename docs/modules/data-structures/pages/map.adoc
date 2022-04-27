@@ -900,11 +900,12 @@ interface are also available on the `MapStore` interface.
 include::{javasource}/dds/map/PersonMapStore.java[tag=personms]
 ----
 
-During the initial loading process, the `MapStore` interface uses
-a different thread to the partition threads that are used by the ExecutorService.
+During the initial loading process, the `MapStore` interface uses an ExecutorService thread, not a partition thread, in order to avoid affecting ongoing partition operations. After the initial loading process, the `IMap.get()` and `IMap.put()` methods use a partition thread.
 
-After the initial loading process, the `IMap.get()` and `IMap.put()`
-methods use a partition thread.
+NOTE: Each member receives an instance of the `MapStore` implementation, which means that multiple threads can access it at the same time. If you use multiple threads to access shared state in a `MapStore` implementation,  you need to make sure that the implementation is thread safe.
+
+NOTE: `MapStore` or `MapLoader` implementations should not use Hazelcast Map/Queue/MultiMap/List/Set operations. Your implementation should
+only work with your data store. Otherwise, you may get into deadlock situations.
 
 NOTE: To monitor the `MapLoader` instance for each loaded entry,
 use the `EntryLoadedListener` interface. See the
