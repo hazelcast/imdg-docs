@@ -180,7 +180,7 @@ will try write through and other optimizations even though the system is concurr
 |int
 |Maximum allowed deviation for a member-to-member heartbeats.
 
-|`hazelcast.diagnostics.member-heartbeat.seconds`
+|`hazelcast.diagnostics.member-heartbeat.period.seconds`
 |10
 |long
 |Period for which the MemberHeartbeats plugin of the diagnostics tool runs.
