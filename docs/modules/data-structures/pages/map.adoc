@@ -317,6 +317,8 @@ size and selected policy.
 
 The following is an example declarative configuration for map eviction.
 
+NOTE: Some map entries are not always evicted or expired according to their `time-to-live` or `max-idle-seconds` configurations. To fix this issue, you must set the `per-entry-stats-enabled` property to `true`. For details about this issue, see the link:https://github.com/hazelcast/hazelcast/pull/19483[pull request on GitHub].
+
 [tabs] 
 ==== 
 XML:: 
