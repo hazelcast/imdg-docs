@@ -961,12 +961,12 @@ define which members they can trust. The clients also have their keyStores and
 members have their trustStores so that the members can
 know which clients they can trust: see the xref:security:tls-ssl.adoc#mutual-authentication[Mutual Authentication section].
 
-==== Configuring Hazelcast Cloud
+==== Configuring {hazelcast-cloud}
 
 You can connect your Java client to a Hazelcast cluster which is hosted on
-https://hazelcast.com/products/cloud/[Hazelcast Cloud^].
-For this, you simply enable the Hazelcast Cloud and specify the cluster's discovery token provided by
-Hazelcast Cloud while creating the cluster; this allows the Hazelcast cluster to discover your clients.
+https://hazelcast.com/products/cloud/[{hazelcast-cloud}^].
+For this, you simply enable the {hazelcast-cloud} and specify the cluster's discovery token provided by
+{hazelcast-cloud} while creating the cluster; this allows the Hazelcast cluster to discover your clients.
 See the following example configurations.
 
 Declarative Configuration:
@@ -1016,10 +1016,10 @@ networkConfig.setSSLConfig(new SSLConfig().setEnabled(true));
 HazelcastInstance client = HazelcastClient.newHazelcastClient(config);
 ----
 
-Hazelcast Cloud is disabled for the Java client, by default (`enabled` attribute is `false`).
+{hazelcast-cloud} is disabled for the Java client, by default (`enabled` attribute is `false`).
 
-See this Hazelcast Cloud https://hazelcast.com/products/cloud/[web page^]
-for more information on Hazelcast Cloud.
+See this {hazelcast-cloud} https://hazelcast.com/products/cloud/[web page^]
+for more information.
 
 NOTE: Since this is a REST based discovery, you need to enable the REST listener service.
 See the xref:management:rest-endpoint-groups.adoc[Using the REST Endpoint Groups section] on how to enable REST endpoints.
@@ -2185,7 +2185,7 @@ The table below lists the client configuration properties with their description
 |`hazelcast.client.cloud.discovery.token`
 |
 |long
-|Token to use when discovering the cluster via Hazelcast Cloud.
+|Token to use when discovering the cluster via {hazelcast-cloud}.
 
 |`hazelcast.client.concurrent.window.ms`
 |100
