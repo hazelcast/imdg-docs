@@ -4,7 +4,7 @@ version: '3.12'
 display_version: '3.12'
 asciidoc:
   attributes:
-    full-version: '3.12.12'
+    full-version: '3.12.13'
     javasource: ROOT:example$
     page-toclevels: 1
     page-ghissue: https://github.com/hazelcast/imdg-docs/issues/new
