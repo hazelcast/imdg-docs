@@ -337,11 +337,7 @@ On top of this, Hazelcast 4.0 introduced new features not available in 3.x and
 removed some features that were present in 3.x. Because of these changes
 it is not possible to maintain the "illusion" of connecting to a 4.x cluster with a 3.x member.
 
-The general suggestion on approaching the migration of clients between 3.x and 4.x clusters is shown in the image below.
-
-image:ROOT:client-migration.png[Client migration scenario]
-
-As shown, the 3.x clients should stay connected to the 3.12 cluster and
+The general suggestion on approaching the migration of clients between 3.x and 4.x clusters is that the 3.x clients should stay connected to the 3.12 cluster and
 the 4.x clients should stay connected to the 4.0/4.1 cluster. The migration tool
 ensures that the data between 3.12 and 4.0/4.1 members is in-sync. You can then
 gradually transfer applications from the 3.x clients to applications using 4.x clients.
