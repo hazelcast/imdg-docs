@@ -4,7 +4,7 @@ version: '4.2'
 display_version: '4.2'
 asciidoc:
   attributes:
-    full-version: '4.2.7'
+    full-version: '4.2.8'
     javasource: ROOT:example$
     # Used for links to Management Center and search results
     page-latest-supported-mc: 4.2021.06
