@@ -155,7 +155,7 @@ string functions, and special functions.
 | Result
 
 |`ABS(number)`
-|Aboslute value of the argument
+|Absolute value of the argument
 |`ABS(-5)`
 |`5`
 

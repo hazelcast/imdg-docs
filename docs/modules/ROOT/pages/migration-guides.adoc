@@ -256,7 +256,7 @@ and creating more litter for the GC to clean up.
 **Issues when replicating keys and values of specific classes:**
 
 Hazelcast 4.0 introduced the support for serializing some additional JDK classes with a
-predicatable serialized format:
+predictable serialized format:
 
 * `CopyOnWriteArrayList`
 * `HashMap`, `ConcurrentSkipListMap`, `ConcurrentHashMap`, `LinkedHashMap`, `TreeMap`
