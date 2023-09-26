@@ -147,7 +147,7 @@ Hazelcast offers several features for backing up your in-memory maps to files lo
 
 NOTE: The Hot Restart Persistence feature only works in the case of complete cluster failure. If a single cluster member fails, then resumes operations, the in-memory backups and subsequent data redistribution (as described in xref:overview:data-partitioning.adoc[How Data is Partitioned]) ensures uninterrupted availability of your data.
 
-* Map Loader/Map Store - This feature provides for automatic write-through of map changes to an external data store, and automatic loading of data from that external data store when an application calls a map. Although this can function as a data safety feature, the primary purpose of Map Loader/Map Store is to maintain synchronization between a system of record and the in-memory map. We cover this feature in detail in xref:working-with-external-data.doc[Working with External Data]. 
+* Map Loader/Map Store - This feature provides for automatic write-through of map changes to an external data store, and automatic loading of data from that external data store when an application calls a map. Although this can function as a data safety feature, the primary purpose of Map Loader/Map Store is to maintain synchronization between a system of record and the in-memory map. We cover this feature in detail in xref:working-with-external-data.adoc[Working with External Data]. 
 
 NOTE: MapLoader will only retrieve data from an external store if it does not already exist in memory. Because this requires communication between the cluster and an external system, the latency for retrieving data is relatively high. For optimal performance, use in-memory backups as your primary data protection method. 
 
