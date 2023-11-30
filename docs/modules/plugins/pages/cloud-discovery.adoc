@@ -26,7 +26,7 @@ You can easily configure your Hazelcast member/client to use EC2/ECS discovery b
 (or `hazelcast-aws`) JAR on your classpath and enabling AWS in your Hazelcast configuration.
 
 See the
-https://github.com/hazelcast/hazelcast-aws[Hazelcast AWS Plugin documentation^]
+https://docs.hazelcast.com/hazelcast/latest/deploy/deploying-on-aws[Hazelcast AWS Plugin documentation^]
 for more details.
 
 [[hazelcast-cloud-discovery-plugins-azure]]
