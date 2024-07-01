@@ -58,6 +58,7 @@ XML::
             <interface>10.10.0.*</interface>
             <interface>10.10.3.*</interface>
             <interface>10.10.5.*</interface>
+        </member-group>
     </partition-group>
 </hazelcast>
 ----
