@@ -1,4 +1,4 @@
-= Hazelcast Overview
+= Hazelcast IMDG Overview
 [[hazelcast-overview]]
 
 Hazelcast is an open source In-Memory Data Grid (IMDG).
