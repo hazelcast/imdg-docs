@@ -50,21 +50,21 @@ CacheManager cacheManager = caching.getCacheManager();
 When using both Hazelcast-specific features and JCache, a `HazelcastInstance` might be already available to your JCache configuration. By configuring an instance name in `hazelcast.xml` in the classpath root, the `CacheManager` locates the existing instance by name and reuses it.
 
 * `hazelcast.xml`:
-+  
++
 [source,xml]
 ----
 <hazelcast>
     ...
     <instance-name>hz-member-1</instance-name>
-    ...  
+    ...
 </hazelcast>
 ----
-+  
++
 * `HazelcastInstance` & `CacheManager` startup:
 +
 [source,java]
 ----
-// start hazelcast, configured with default hazelcast.xml 
+// start hazelcast, configured with default hazelcast.xml
 HazelcastInstance hz = Hazelcast.newHazelcastInstance();
 // start the default CacheManager -- it locates the default hazelcast.xml configuration
 // and identify the existing HazelcastInstance by its name
@@ -99,7 +99,7 @@ Note that if the Hazelcast configuration file does specify an instance name, the
 ==== Reusing an Existing Named `HazelcastInstance`
 
 Assuming a `HazelcastInstance` named `hc-instance` is already started, it can be used as the `HazelcastInstance` to back a `CacheManager`:
- 
+
 * By using the instance's name as the `CacheManager`'s `URI`:
 +
 [source,java]
@@ -130,7 +130,7 @@ To apply configuration scope you can do either one of the following:
 * use directly the configuration path as the `CacheManager`'s `URI`.
 
 If both `HazelcastCachingProvider#HAZELCAST_CONFIG_LOCATION` property is set and the `CacheManager` `URI` resolves to a valid config file location, then the property value is used to obtain the configuration for the `HazelcastInstance` the first time a `CacheManager` is created for the given `URI`.
- 
+
 Here is an example of using configuration scope:
 
 [source,java]
@@ -258,7 +258,7 @@ CachingProvider cachingProvider = Caching.getCachingProvider();
 
 // Create Properties instance pointing to a named HazelcastInstance
 Properties properties = new Properties();
-properties.setProperty( HazelcastCachingProvider.HAZELCAST_INSTANCE_NAME, 
+properties.setProperty( HazelcastCachingProvider.HAZELCAST_INSTANCE_NAME,
      instanceName );
 
 URI cacheManagerName = new URI( "my-cache-manager" );
@@ -282,7 +282,7 @@ CachingProvider cachingProvider = Caching.getCachingProvider();
 
 // Create Properties instance pointing to a named HazelcastInstance
 Properties properties = new Properties();
-properties.setProperty( HazelcastCachingProvider.HAZELCAST_INSTANCE_NAME, 
+properties.setProperty( HazelcastCachingProvider.HAZELCAST_INSTANCE_NAME,
      instanceName );
 
 URI cacheManagerName = new URI( "my-cache-manager" );
@@ -323,12 +323,13 @@ When an existing `HazelcastInstance` object is available, it can be passed to th
 HazelcastInstance instance = Hazelcast.newHazelcastInstance();
 
 Properties properties = new Properties();
-properties.put( HazelcastCachingProvider.HAZELCAST_INSTANCE_ITSELF, 
+properties.put( HazelcastCachingProvider.HAZELCAST_INSTANCE_ITSELF,
      instance );
 
 CachingProvider cachingProvider = Caching.getCachingProvider();
 // cacheManager initialized for uri will be bound to instance
 CacheManager cacheManager = cachingProvider.getCacheManager(uri, classLoader, properties);
+----
 
 == Namespacing
 
@@ -727,11 +728,11 @@ You can specify the full class name of custom `EvictionPolicyComparator`
 in the `<eviction>` tag through `comparator-class-name` or `comparator-bean` attributes in Hazelcast
 configuration files:
 
-[tabs] 
-==== 
-XML:: 
-+ 
--- 
+[tabs]
+====
+XML::
++
+--
 [source,xml]
 ----
 <hazelcast>
