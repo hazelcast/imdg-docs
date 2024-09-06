@@ -8,5 +8,6 @@ asciidoc:
     javasource: ROOT:example$
     page-toclevels: 1
     javadocBaseUrl: https://docs.hazelcast.org/docs/
+    mc-docs: https://docs.hazelcast.org/docs/management-center/latest/manual/html/
 nav:
 - modules/ROOT/nav.adoc
