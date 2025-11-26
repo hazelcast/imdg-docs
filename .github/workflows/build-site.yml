@@ -8,6 +8,6 @@ on:
 
 jobs:
   dispatch:
-    uses: hazelcast/hz-docs/.github/workflows/build-site-workflow.yml@master
+    uses: hazelcast/hz-docs/.github/workflows/build-site-workflow.yml@main
     secrets:
       netlify_build_hook_id: ${{ secrets.NETLIFY_BUILD_HOOK_ID }}
